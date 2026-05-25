@@ -1,0 +1,1599 @@
+openapi: 3.0.0
+info:
+  title: TeamPro API
+  description: Polar TeamPro API documentation
+  version: 1.1.0
+  contact:
+    name: Support
+    url: 'https://www.polar.com/en/developers'
+    email: b2bhelpdesk@polar.com
+  license:
+    name: License Agreement
+    url: 'https://www.polar.com/en/legal/polar-api-agreement'
+servers:
+  - url: https://teampro.api.polar.com/
+tags:
+  - name: Team
+    description: Endpoints for getting teams and team details.
+  - name: Team training sessions
+    description: Endpoints for getting team training sessions and details.
+  - name: Player training sessions
+    description: "Endpoints for getting players training session and details.
+<aside class='notice'>
+Only training sessions that are done during time the player has been linked to team roster will be visible here.
+</aside>"
+paths:
+  /v1/teams:
+    get:
+      tags:
+        - Team
+      summary: Get teams.
+      parameters:
+        - name: pagination
+          description: Pagination parameters
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/paginationQuery'
+      responses:
+        '200':
+          description: List of teams.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    description: List of teams.
+                    items:
+                      $ref: '#/components/schemas/team'
+                  page:
+                    $ref: '#/components/schemas/paginationResponse'
+      security:
+        - OAuth2:
+            - team_read
+  /v1/teams/{team_id}:
+    get:
+      tags:
+        - Team
+      summary: Get team details.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team id to get.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Response containing team details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/teamDetails'
+        '404':
+          description: Given team_id doesn't match any of user's teams.
+      security:
+        - OAuth2:
+            - team_read
+  /v1/teams/{team_id}/sport-profiles:
+    get:
+      tags:
+        - Team
+      summary: Get team sport profiles.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team ID for retrieving the team's sport profiles.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Response containing team sport profiles.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/teamSportProfile'
+        '404':
+          description: Given team_id doesn't match any of user's teams.
+      security:
+        - OAuth2:
+            - team_read
+  /v1/teams/{team_id}/training_sessions:
+    get:
+      tags:
+        - Team training sessions
+      summary: Get team training sessions.
+      parameters:
+        - name: team_id
+          in: path
+          description: Team whose training session are returned.
+          required: true
+          schema:
+            type: string
+        - name: since
+          in: query
+          description: Return training sessions having record_start_time greater than <since>.
+          required: false
+          schema:
+            type: string
+            format: date-time
+          example: '2018-04-14T00:00:00'
+        - name: until
+          in: query
+          description: Return training sessions having record_start_time less than <until>
+          required: false
+          schema:
+            type: string
+            format: date-time
+          example: '2018-05-14T00:00:00'
+        - name: pagination
+          description: Pagination parameters
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/paginationQuery'
+      responses:
+        '200':
+          description: Teams training sessions.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    description: List of team training sessions.
+                    items:
+                      $ref: '#/components/schemas/trainingSession'
+                  page:
+                    $ref: '#/components/schemas/paginationResponse'
+        '404':
+          description: Given team_id doesn't match any of users's teams.
+      security:
+        - OAuth2:
+            - team_read
+  /v1/teams/training_sessions/{training_session_id}:
+    get:
+      tags:
+        - Team training sessions
+      summary: Get team training session details.
+      parameters:
+        - name: training_session_id
+          in: path
+          description: Training session id.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Training session details as JSON.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/trainingSessionDetails'
+        '404':
+          description: Given training_session_id doesn't match any of user's training sessions.
+      security:
+        - OAuth2:
+            - team_read
+  /v1/players/{player_id}/training_sessions:
+    get:
+      tags:
+        - Player training sessions
+      summary: Get player training sessions.
+      parameters:
+        - name: player_id
+          in: path
+          description: Player id
+          required: true
+          schema:
+            type: string
+        - name: since
+          in: query
+          description: Return training sessions having start_time greater than [since].
+          required: false
+          schema:
+            type: string
+            format: date-time
+          example: '2018-04-14T00:00:00'
+        - name: until
+          in: query
+          description: Return training sessions having start_time less than [until].
+          required: false
+          schema:
+            type: string
+            format: date-time
+          example: '2018-05-14T00:00:00'
+        - name: type
+          in: query
+          description: Return all, individual or team training sessions.
+          required: false
+          schema:
+            type: string
+            enum:
+              - ALL
+              - TEAM
+              - INDIVIDUAL
+        - name: pagination
+          description: Pagination parameters
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/paginationQuery'
+      responses:
+        '200': # status code
+          description: Response containing list of player training sessions.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    description: List of player training sessions.
+                    items:
+                      $ref: '#/components/schemas/playerTrainingSession'
+                  page:
+                    $ref: '#/components/schemas/paginationResponse'
+        '404':
+          description: Given player_id doesn't match any of user's players.
+      security:
+        - OAuth2:
+            - team_read
+  /v1/training_sessions/{player_session_id}:
+    get:
+      tags:
+        - Player training sessions
+      summary: Get player training session details.
+      parameters:
+        - name: player_session_id
+          in: path
+          description: Players' training session id.
+          required: true
+          schema:
+            type: string
+        - name: samples
+          in: query
+          description: Include requested samples in response. Possible values are "all" or comma-separated list from "distance", "location", "hr", "speed", "cadence", "altitude", "forward_acceleration", "rr".
+          required: false
+          schema:
+            type: string
+          example: 'distance,location,hr'
+      responses:
+        '200':
+          description: Player training session as JSON.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/playerTrainingSessionDetails'
+        '404':
+          description: Given player_session_id doesn't match any of user's training sessions.
+      security:
+        - OAuth2:
+            - team_read
+  /v1/training_sessions/{player_session_id}/session_summary:
+    get:
+      tags:
+        - Player training sessions
+      summary: Get player team training session trimmed values.
+      parameters:
+        - name: player_session_id
+          in: path
+          description: Players' training session id.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Player team training session trimmed values as JSON.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/playerTeamTrainingSessionDetails'
+        '404':
+          description: Given player_session_id doesn't match any of user's training sessions.
+      security:
+        - OAuth2:
+            - team_read
+  /v1/training_sessions/{player_session_id}/phase_summaries:
+    get:
+      tags:
+        - Player training sessions
+      summary: Get player team training session phase summaries.
+      parameters:
+        - name: player_session_id
+          in: path
+          description: Players' training session id.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of player team training phase summaries.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    description: List of player team training phase summaries.
+                    items:
+                      $ref: '#/components/schemas/playerTeamTrainingSessionPhaseSummary'
+        '404':
+          description: Given player_session_id doesn't match any of user's training sessions.
+      security:
+        - OAuth2:
+            - team_read
+components:
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: 'https://auth.polar.com/oauth/authorize'
+          tokenUrl: 'https://auth.polar.com/oauth/token'
+          scopes:
+            team_read: Allows read access to user's data
+  schemas:
+    marker:
+      type: object
+      description: Training session marker.i
+      properties:
+        start_time:
+          type: string
+          description: Start time of the marker
+          format: date-time
+          example: 2017-04-14T09:20:06
+        end_time:
+          type: string
+          description: End time of the marker
+          format: date-time
+          example: 2017-04-14T09:50:06
+        marker_type:
+          type: string
+          description: Marker type
+          example: PHASE
+          enum:
+            - PHASE
+            - NOTE
+            - RECOVERY
+        name:
+          type: string
+          example: 'Intervals'
+          description: Marker name
+        note:
+          type: string
+          example: 'Cooling down'
+          description: Marker note
+    paginationResponse:
+      type: object
+      description: >-
+        Pagination info in response. Model contains info about response
+        element count and paging.
+      properties:
+        per_page:
+          type: integer
+          example: 20
+          description: Items per page
+        total_elements:
+          type: integer
+          example: 2
+          description: Total number of items
+        page_number:
+          type: integer
+          example: 0
+          description: Number of the current page
+        total_pages:
+          type: integer
+          example: 1
+          description: Total number of pages
+    paginationQuery:
+      type: object
+      description: >-
+        Endpoints that return multiple items are paginated to
+        20 items by default. To request next page, use page
+        parameter in request. Total number of elements and
+        pages are returned in response in `page` property,
+        see [paginationResponse](#tocSpaginationresponse).
+      properties:
+        page:
+          type: integer
+          example: 3
+          description: Page number, starting from 0
+        per_page:
+          type: integer
+          example: 20
+          description: Number of elements to be returned per page. Value must be between 1 and 100.
+      example: "?page=3&per_page=20"
+    participant:
+      type: object
+      description: Training session participant.
+      properties:
+        player_id:
+          type: string
+          example: 'ZmozZxkr'
+          description: Player id
+        player_number:
+          type: integer
+          format: int32
+          example: 12
+          description: Player number
+        role:
+          type: string
+          example: 'Midfielder'
+          description: Player role
+        player_session_id:
+          type: string
+          example: 'wp9DQ9ln'
+          description: Player training session id
+    player:
+      type: object
+      description: Player data.
+      properties:
+        player_id:
+          type: string
+          example: 'ZmozZxkr'
+          description: Player id
+        player_number:
+          type: integer
+          format: int32
+          example: 12
+          description: Player number
+        role:
+          type: string
+          example: 'Midfielder'
+          description: Player role
+        first_name:
+          type: string
+          example: 'John'
+          description: Player first name
+        last_name:
+          type: string
+          example: 'Doe'
+          description: Player last name
+    playerTrainingSession:
+      type: object
+      description: >-
+        Player training session data used in
+        [player training session listing](#list-player-training-sessions).
+      properties:
+        id:
+          type: string
+          example: 'wp9DQ9ln'
+          description: Player training session id
+        type:
+          type: string
+          example: "TEAM"
+          description: >-
+            Type of the training session. `TEAM` for team training session and
+            `INDIVIDUAL` for players' personal training session.
+          enum:
+            - TEAM
+            - INDIVIDUAL
+        created:
+          type: string
+          description: Time when the training session is created
+          format: date-time
+          example: '2017-04-13T21:06:58Z'
+        modified:
+          type: string
+          description: Last time modified
+          format: date-time
+          example: '2017-04-13T21:06:58Z'
+        sport:
+          type: string
+          description: Sport type
+          example: SOCCER
+        name:
+          type: string
+          description: Training session name
+          example: Rowing
+        feeling:
+          type: string
+          description: Training session feeling
+          enum:
+            - BAD
+            - NOT_GOOD
+            - OKAY
+            - GREAT
+            - AWESOME
+          example: AWESOME
+        note:
+          type: string
+          description: Training session note
+          example: Awesome training.
+        latitude:
+          type: number
+          description: Start latitude of the training session
+          example: 55.67336654663086
+        longitude:
+          type: number
+          description: Start longitude of the training session
+          example: 12.49395084381104
+        start_time:
+          type: string
+          description: Start time of the training session
+          format: date-time
+          example: '2017-04-14T09:20:06'
+        stop_time:
+          type: string
+          description: End time of the training session
+          format: date-time
+          example: '2017-04-14T09:50:06'
+        duration_ms:
+          type: number
+          description: Duration in milliseconds
+          example: 180000
+        timezone_offset:
+          type: integer
+          description: Timezone offset for training session
+          example: 120
+    playerTrainingSessionDetails:
+      type: object
+      description: Detailed info about player training session.
+      properties:
+        id:
+          type: string
+          example: 'wp9DQ9ln'
+          description: Player training session id
+        type:
+          type: string
+          example: "TEAM"
+          description: >-
+            Type of the training session. `TEAM` for team training session and
+            `INDIVIDUAL` for players personal training session.
+          enum:
+            - TEAM
+            - INDIVIDUAL
+        created:
+          type: string
+          description: Time when the training session is created
+          format: date-time
+          example: '2017-04-13T21:06:58Z'
+        modified:
+          type: string
+          description: Time when the training session is modified last
+          format: date-time
+          example: '2017-04-13T21:06:58Z'
+        name:
+          type: string
+          description: Training session name
+          example: Rowing
+        feeling:
+          type: string
+          description: Training session feeling
+          enum:
+            - BAD
+            - NOT_GOOD
+            - OKAY
+            - GREAT
+            - AWESOME
+          example: AWESOME
+        note:
+          type: string
+          description: Training session note
+          example: Awesome training.
+        latitude:
+          type: number
+          description: Start latitude of the training session
+          example: 55.67336654663086
+        longitude:
+          type: number
+          description: Start longitude of the training session
+          example: 12.49395084381104
+        start_time:
+          type: string
+          description: Start time of the training session
+          format: date-time
+          example: '2017-04-14T09:20:06'
+        stop_time:
+          type: string
+          description: End time of the training session
+          format: date-time
+          example: '2017-04-14T09:50:06'
+        duration_ms:
+          type: number
+          description: Duration in milliseconds
+          example: 180000
+        calories:
+          type: number
+          description: Training session calorie consumption in kilocalories
+          example: 601
+        distance_meters:
+          type: number
+          description: Distance in meters
+          example: 6566.0
+        training_load:
+          type: number
+          description: Training load of the training session
+          example: 78
+        training_benefit:
+          type: string
+          description: Training benefit of the training session
+          example: BASIC_TRAINING
+          enum:
+            - NONE
+            - RECOVERY_TRAINING
+            - BASIC_TRAINING
+            - BASIC_TRAINING_LONG
+            - BASIC_AND_STEADY_STATE_TRAINING
+            - BASIC_AND_STEADY_STATE_TRAINING_LONG
+            - STEADY_STATE_TRAINING
+            - STEADY_STATE_AND_BASIC_TRAINING
+            - STEADY_STATE_AND_BASIC_TRAINING_LONG
+            - STEADY_STATE_TRAINING_PLUS
+            - STEADY_STATE_AND_TEMPO_TRAINING
+            - TEMPO_AND_STEADY_STATE_TRAINING
+            - TEMPO_TRAINING
+            - TEMPO_TRAINING_PLUS
+            - TEMPO_AND_MAXIMUM_TRAINING
+            - MAXIMUM_TRAINING
+            - MAXIMUM_AND_TEMPO_TRAINING
+            - MAXIMUM_TRAINING_PLUS
+        cardio_load:
+          type: number
+          description: Cardio load of the training session
+          example: 27.3
+        muscle_load:
+          type: number
+          description: Muscle load of the training session
+          example: 34
+        recovery_time_ms:
+          type: number
+          description: Recovery time in milliseconds
+          example: 480277990
+        fat_percentage:
+          type: integer
+          description: Fat percentage
+          example: 28
+        carbo_percentage:
+          type: integer
+          description: Carbohydrate percentage
+          example: 44
+        protein_percentage:
+          type: integer
+          description: Protein percentage
+          example: 30
+        heart_rate_max:
+          type: integer
+          description: Maximum heart rate of the training session
+          example: 96
+        heart_rate_avg:
+          type: integer
+          description: Average heart rate of the training session
+          example: 79
+        sport:
+          type: string
+          description: Sport type
+          example: SOCCER
+        running_index:
+          type: integer
+          description: Running index value from training session
+          example: 28
+        ascent:
+          type: number
+          example: 46.3
+          description: Ascent in meters
+        descent:
+          type: number
+          description: Descent in meters
+          example: 12.5
+        walking_duration_ms:
+          type: number
+          description: Walking duration in milliseconds
+          example: 180000
+        walking_distance_meters:
+          type: number
+          description: Walking distance in meters
+          example: 6566.0
+        sprint_counter:
+          type: integer
+          description: Sprint count.
+          example: 12
+        product:
+          type: string
+          description: Product used to save the training session
+          example: "Polar Pro"
+        samples:
+          type: object
+          $ref: '#/components/schemas/trainingSessionSamples'
+        rr_intervals:
+          type: array
+          items:
+            type: integer
+          example: [ 485,483,null,800,483,486,483,null,950,281 ]
+          description: List of rr-intervals.
+    playerTeamTrainingSessionDetails:
+      type: object
+      description: Detailed info about player's team training session.
+      properties:
+        player_session_id:
+          type: string
+          example: 'wp9DQ9ln'
+          description: Player training session id
+        created:
+          type: string
+          description: Time when the training session is added to team training session
+          format: date-time
+          example: '2017-04-13T21:06:58Z'
+        modified:
+          type: string
+          description: Time when the team training session is modified last
+          format: date-time
+          example: '2017-04-13T21:06:58Z'
+        trimmed_start_time:
+          type: string
+          description: Start time of the team training session - local time
+          format: date-time
+          example: '2017-04-14T09:20:06'
+        duration_ms:
+          type: number
+          description: Duration of the team training session in milliseconds
+          example: 180000
+        distance_meters:
+          type: number
+          description: Distance of the training session in meters
+          example: 6566.0
+        kilo_calories:
+          type: number
+          description: Calorie consumption of the training session in kilocalories
+          example: 601
+        heart_rate_max:
+          type: integer
+          description: Maximum heart rate of the training session
+          example: 160
+        heart_rate_avg:
+          type: integer
+          description: Average heart rate of the training session
+          example: 120
+        heart_rate_min:
+          type: integer
+          description: Minimum heart rate of the training session
+          example: 55
+        heart_rate_max_percent:
+          type: integer
+          description: Maximum heart rate percent of the training session
+          example: 96
+        heart_rate_avg_percent:
+          type: integer
+          description: Average heart rate percent of the training session
+          example: 79
+        heart_rate_min_percent:
+          type: integer
+          description: Minimum heart rate percent of the training session
+          example: 55
+        sprint_counter:
+          type: integer
+          description: Sprint count of the training session.
+          example: 12
+        speed_avg_kmh:
+          type: integer
+          description: Average speed of the training session
+          example: 7.9
+        speed_max_kmh:
+          type: integer
+          description: Maximum speed of the training session
+          example: 18.4
+        cadence_avg:
+          type: integer
+          description: Average cadence of the training session
+          example: 60
+        cadence_max:
+          type: integer
+          description: Maximum cadence of the training session
+          example: 100
+        training_load:
+          type: number
+          description: Training load of the training session
+          example: 180
+        cardio_load:
+          type: number
+          description: Cardio load of the training session
+          example: 27.3
+        muscle_load:
+          type: number
+          description: Muscle load of the training session
+          example: 34
+        heart_rate_zones:
+          type: array
+          description: List of heart rate zones.
+          items:
+            $ref: '#/components/schemas/heart_rate_zone'
+        speed_zones_kmh:
+          type: array
+          description: List of speed zones.
+          items:
+            $ref: '#/components/schemas/speed_zone_kmh'
+        acceleration_zones_ms2:
+          type: array
+          description: List of acceleration zones.
+          items:
+            $ref: '#/components/schemas/acceleration_zone_ms2'
+        power_zones:
+          type: array
+          description: List of power zones.
+          items:
+            $ref: '#/components/schemas/power_zone'
+        out_of_heart_rate_zones:
+          type: string
+          example: PT4S
+          description: Time duration spent outside zones ISO 8601
+        out_of_speed_zones:
+          type: number
+          example: 222
+          description: Distance in meters outside zones
+        out_of_power_zones:
+          type: string
+          example: PT4.2S
+          description: Time duration spent outside zones ISO 8601
+        minimum_rr:
+          type: integer
+          description: Minimum RR interval
+          example: 200
+        average_rr:
+          type: integer
+          description: Average RR interval
+          example: 250
+        maximum_rr:
+          type: integer
+          description: Maximum RR interval
+          example: 300
+        rmssd:
+          type: integer
+          description: RMSSD value
+          example: 50
+        cardio_load_interpretation:
+          type: integer
+          description: Cardio load interpretation
+          example: 1
+        muscle_load_interpretation:
+          type: integer
+          description: Muscle load interpretation
+          example: 2
+    playerTeamTrainingSessionPhaseSummary:
+      type: object
+      description: Detailed info about player's team training session phase.
+      properties:
+        player_session_id:
+          type: string
+          example: 'wp9DQ9ln'
+          description: Player training session id
+        created:
+          type: string
+          description: Time when the training session is added to team training session
+          format: date-time
+          example: '2017-04-13T21:06:58Z'
+        modified:
+          type: string
+          description: Time when the team training session is modified last
+          format: date-time
+          example: '2017-04-13T21:06:58Z'
+        trimmed_start_time:
+          type: string
+          description: Start time of the team training session - local time
+          format: date-time
+          example: '2017-04-14T09:20:06'
+        duration_ms:
+          type: number
+          description: Duration of the team training session in milliseconds
+          example: 180000
+        distance_meters:
+          type: number
+          description: Distance of the training session in meters
+          example: 6566.0
+        kilo_calories:
+          type: number
+          description: Calorie consumption of the training session in kilocalories
+          example: 601
+        heart_rate_max:
+          type: integer
+          description: Maximum heart rate of the training session
+          example: 160
+        heart_rate_avg:
+          type: integer
+          description: Average heart rate of the training session
+          example: 120
+        heart_rate_min:
+          type: integer
+          description: Minimum heart rate of the training session
+          example: 55
+        heart_rate_max_percent:
+          type: integer
+          description: Maximum heart rate percent of the training session
+          example: 96
+        heart_rate_avg_percent:
+          type: integer
+          description: Average heart rate percent of the training session
+          example: 79
+        heart_rate_min_percent:
+          type: integer
+          description: Minimum heart rate percent of the training session
+          example: 55
+        sprint_counter:
+          type: integer
+          description: Sprint count of the training session.
+          example: 12
+        speed_avg_kmh:
+          type: integer
+          description: Average speed of the training session
+          example: 7.9
+        speed_max_kmh:
+          type: integer
+          description: Maximum speed of the training session
+          example: 18.4
+        cadence_avg:
+          type: integer
+          description: Average cadence of the training session
+          example: 60
+        cadence_max:
+          type: integer
+          description: Maximum cadence of the training session
+          example: 100
+        training_load:
+          type: number
+          description: Training load of the training session
+          example: 180
+        cardio_load:
+          type: number
+          description: Cardio load of the training session
+          example: 27.5
+        muscle_load:
+          type: number
+          description: Muscle load of the training session
+          example: 34
+        heart_rate_zones:
+          type: array
+          description: List of heart rate zones.
+          items:
+            $ref: '#/components/schemas/heart_rate_zone'
+        speed_zones_kmh:
+          type: array
+          description: List of speed zones.
+          items:
+            $ref: '#/components/schemas/speed_zone_kmh'
+        acceleration_zones_ms2:
+          type: array
+          description: List of acceleration zones.
+          items:
+            $ref: '#/components/schemas/acceleration_zone_ms2'
+        power_zones:
+          type: array
+          description: List of power zones.
+          items:
+            $ref: '#/components/schemas/power_zone'
+        out_of_heart_rate_zones:
+          type: string
+          example: PT4S
+          description: Time duration spent outside zones ISO 8601
+        out_of_speed_zones:
+          type: number
+          example: 222
+          description: Distance in meters outside zones
+        out_of_power_zones:
+          type: string
+          example: PT4.2S
+          description: Time duration spent outside zones ISO 8601
+        minimum_rr:
+          type: integer
+          description: Minimum RR interval
+          example: 200
+        average_rr:
+          type: integer
+          description: Average RR interval
+          example: 250
+        maximum_rr:
+          type: integer
+          description: Maximum RR interval
+          example: 300
+        rmssd:
+          type: integer
+          description: RMSSD value
+          example: 50
+        cardio_load_interpretation:
+          type: integer
+          description: Cardio load interpretation
+          example: 1
+        muscle_load_interpretation:
+          type: integer
+          description: Muscle load interpretation
+          example: 2
+    heart_rate_zone:
+      type: object
+      properties:
+        index:
+          type: integer
+          example: 1
+          description: Zone list index
+        lower_limit:
+          type: integer
+          example: 110
+          description: Lower heart-rate boundary of the zone
+        higher_limit:
+          type: integer
+          example: 130
+          description: Upper heart-rate boundary of the zone
+        in_zone:
+          type: string
+          example: PT4S
+          description: Time duration spent in the zone ISO 8601
+      description: Heart-rate zone information
+    speed_zone_kmh:
+      type: object
+      properties:
+        index:
+          type: integer
+          example: 1
+          description: Zone list index
+        lower_limit:
+          type: integer
+          example: 3
+          description: Lower speed boundary of the zone
+        higher_limit:
+          type: integer
+          example: 7
+          description: Upper speed boundary of the zone
+        in_zone_meters:
+          type: number
+          example: 222
+          description: Distance in meters in the zone
+      description: Speed zone information
+    power_zone:
+      type: object
+      properties:
+        index:
+          type: integer
+          example: 1
+          description: Zone list index
+        lower_limit:
+          type: integer
+          example: 3
+          description: Lower power boundary of the zone
+        higher_limit:
+          type: integer
+          example: 7
+          description: Upper power boundary of the zone
+        in_zone:
+          type: string
+          example: PT4.2S
+          description: Time duration spent in the zone ISO 8601
+        in_zone_muscle_load:
+          type: number
+          example: 333
+          description: Muscle load in the zone
+      description: Power zone information
+    acceleration_zone_ms2:
+      type: object
+      properties:
+        limit:
+          type: integer
+          example: -3
+          description: Lower acceleration boundary of the zone in m/s2
+        counter:
+          type: number
+          example: 22
+          description: Acceleration count of current acceleration zone
+      description: Acceleration zone information
+    team:
+      type: object
+      description: Basic info of team used in listing.
+      properties:
+        id:
+          type: string
+          example: 'wMYz6L4w'
+          description: Team id
+        name:
+          type: string
+          example: 'Team1'
+          description: Team name
+        organisation:
+          type: string
+          example: 'Organisation1'
+          description: Organisation name
+        created:
+          type: string
+          description: Time when the team is created
+          format: date-time
+          example: '2017-04-13T21:06:58Z'
+        modified:
+          type: string
+          description: Last time modified
+          format: date-time
+          example: '2017-04-13T21:06:58Z'
+    teamDetails:
+      type: object
+      description: Detailed team data.
+      properties:
+        id:
+          type: string
+          example: 'wMYz6L4w'
+          description: Team id
+        name:
+          type: string
+          example: 'Team1'
+          description: Team name
+        organisation:
+          type: string
+          example: 'Organisation1'
+          description: Organisation name
+        created:
+          type: string
+          description: Time when the team is created
+          format: date-time
+          example: '2017-04-13T21:06:58Z'
+        modified:
+          type: string
+          description: Last time modified
+          format: date-time
+          example: '2017-04-13T21:06:58Z'
+        players:
+          type: array
+          description: Team players
+          items:
+            $ref: '#/components/schemas/player'
+        sport_profiles:
+          type: array
+          description: Team sport profiles
+          items:
+            $ref: '#/components/schemas/teamSportProfile'
+
+    trainingSession:
+      type: object
+      description: >-
+        Team training session data used in
+        [team training session listing](#get-team-training-sessions).
+      properties:
+        id:
+          type: string
+          example: 'R8rMB4j7'
+          description: Training session id
+        team_id:
+          type: string
+          example: 'wMYz6L4w'
+          description: Team id
+        name:
+          type: string
+          description: Training session name
+          example: Match against Brazil national team
+        type:
+          type: string
+          description: Training session type
+          example: MATCH
+          enum:
+            - TRAINING
+            - DRILL
+            - TEST
+            - GAME
+            - MATCH
+            - STRENGTH AND CONDITION
+            - OTHER
+        note:
+          type: string
+          description: Notes from training session
+          example: Game started very well, but we lost 0-8
+        created:
+          type: string
+          description: Time when the training session is created
+          format: date-time
+          example: '2017-04-13T21:06:58Z'
+        modified:
+          type: string
+          description: Last time modified
+          format: date-time
+          example: '2017-04-13T21:06:58Z'
+        record_start_time:
+          type: string
+          description: Training session record start time
+          format: date-time
+          example: '2017-04-14T09:17:22'
+        record_end_time:
+          type: string
+          description: Training session record end time
+          format: date-time
+          example: '2017-04-14T09:56:47'
+        start_time:
+          type: string
+          description: Training session start time
+          format: date-time
+          example: '2017-04-14T09:20:06'
+        end_time:
+          type: string
+          description: Training session end time
+          format: date-time
+          example: '2017-04-14T09:50:06'
+        latitude:
+          type: number
+          description: Start latitude of the training session
+          example: 55.67336654663086
+        longitude:
+          type: number
+          description: Start longitude of the training session
+          example: 12.49395084381104
+        sport:
+          type: string
+          description: Sport type
+          example: SOCCER
+    trainingSessionDetails:
+      type: object
+      description: Team training session details.
+      properties:
+        id:
+          type: string
+          example: 'R8rMB4j7'
+          description: Training session id
+        team_id:
+          type: string
+          example: 'wMYz6L4w'
+          description: Team id
+        name:
+          type: string
+          description: Training session name
+          example: Match against Brazil national team
+        type:
+          type: string
+          description: Training session type
+          example: MATCH
+        note:
+          type: string
+          description: Notes from training session
+          example: Game started very well, but we lost 0-8
+        created:
+          type: string
+          description: Time when the training session is created
+          format: date-time
+          example: '2017-04-13T21:06:58Z'
+        modified:
+          type: string
+          description: Last time modified
+          format: date-time
+          example: '2017-04-13T21:06:58Z'
+        record_start_time:
+          type: string
+          description: Training session record start time
+          format: date-time
+          example: '2017-04-14T09:17:22'
+        record_end_time:
+          type: string
+          description: Training session record end time
+          format: date-time
+          example: '2017-04-14T09:56:47'
+        start_time:
+          type: string
+          description: Training session start time
+          format: date-time
+          example: '2017-04-14T09:20:06'
+        end_time:
+          type: string
+          description: Training session end time
+          format: date-time
+          example: '2017-04-14T09:50:06'
+        latitude:
+          type: number
+          description: Start latitude of the training session
+          example: 55.67336654663086
+        longitude:
+          type: number
+          description: Start longitude of the training session
+          example: 12.49395084381104
+        sport:
+          type: string
+          description: Sport type
+          example: SOCCER
+        arena:
+          type: string
+          description: Game arena
+          example: Valby old stadium Denmark
+        distance:
+          type: number
+          description: Distance of the training session in meters
+          example: 6566.0
+        kilocalories:
+          type: number
+          description: Calorie consumption of the training session in kilocalories
+          example: 601
+        training_load:
+          type: number
+          description: Training load of the training session
+          example: 78
+        heart_rate_average:
+          type: number
+          description: Average heart rate of the training session
+          example: 79
+        cardio_load:
+          type: number
+          description: Cardio load of the training session
+          example: 27.2
+        cardio_load_interpretation:
+          type: number
+          description: Cardio load interpretation of the training session
+          example: 3
+        participants:
+          type: array
+          items:
+            $ref: '#/components/schemas/participant'
+        markers:
+          type: array
+          items:
+            $ref: '#/components/schemas/marker'
+        heart_rate_zones:
+          type: array
+          description: List of heart rate zones.
+          items:
+            $ref: '#/components/schemas/team_training_heart_rate_zone'
+        speed_zones_kmh:
+          type: array
+          description: List of speed zones.
+          items:
+            $ref: '#/components/schemas/team_training_speed_zone_kmh'
+        power_zones:
+          type: array
+          description: List of power zones.
+          items:
+            $ref: '#/components/schemas/team_training_power_zone'
+    team_training_heart_rate_zone:
+      type: object
+      properties:
+        index:
+          type: integer
+          example: 1
+          description: Zone list index
+        lower_limit:
+          type: integer
+          example: 110
+          description: Lower heart-rate boundary of the zone
+        higher_limit:
+          type: integer
+          example: 130
+          description: Upper heart-rate boundary of the zone
+        in_zone:
+          type: string
+          example: PT4S
+          description: Time duration spent in the zone ISO 8601
+        in_zone_meters:
+          type: number
+          example: 222
+          description: Distance in meters in the zone
+      description: Heart-rate zone information
+    team_training_speed_zone_kmh:
+      type: object
+      properties:
+        index:
+          type: integer
+          example: 1
+          description: Zone list index
+        lower_limit:
+          type: integer
+          example: 3
+          description: Lower speed boundary of the zone
+        higher_limit:
+          type: integer
+          example: 7
+          description: Upper speed boundary of the zone
+        in_zone:
+          type: string
+          example: PT4.2S
+          description: Time duration spent in the zone ISO 8601
+        in_zone_meters:
+          type: number
+          example: 222
+          description: Distance in meters in the zone
+      description: Speed zone information
+    team_training_power_zone:
+      type: object
+      properties:
+        index:
+          type: integer
+          example: 1
+          description: Zone list index
+        lower_limit:
+          type: integer
+          example: 3
+          description: Lower power boundary of the zone
+        higher_limit:
+          type: integer
+          example: 7
+          description: Upper power boundary of the zone
+        in_zone:
+          type: string
+          example: PT4.2S
+          description: Time duration spent in the zone ISO 8601
+        in_zone_muscle_load:
+          type: number
+          example: 333
+          description: Muscle load in the zone
+      description: Power zone information
+    trainingSessionSamples:
+      type: object
+      description: >-
+        Sample model contains two properties, `fields` and `values`.
+        `Fields` contains list of sample types which are available in `values`.
+        `Values` contains list of sample value lists. Each sample value list has
+        duration as first item which tells the record time (from the beginning
+        of the training) of the samples. Next values in array contains the sample
+        value itself.
+      properties:
+        fields:
+          type: array
+          description: List of sample types which are present in `values` property.
+          items:
+            type: string
+            enum:
+              - time: Timestamp of sample in ISO 8601 string format, starting from 0.
+              - distance: Total distance moved in meters, double.
+              - hr: Heart rate, double.
+              - speed: Current speed, double.
+              - cadence: Current cadence, double.
+              - lat: Location latitude coordinate, double.
+              - lon: Location longitude coordinate, double.
+              - altitude: Location altitude, double.
+              - forward_acceleration: Forward acceleration, double.
+              - power: Current power, integer.
+
+          example: [ "time", "distance", "hr", "speed", "cadence", "lat", "lon", "altitude", "forward_acceleration", "power" ]
+        values:
+          type: array
+          description: List of sample value lists.
+          items:
+            type: array
+            items: { }
+          example: [ [ "PT0S",0.0,94.0,0.0,0,55.67336654663086,12.49395084381104,null,0.0 ],[ "PT0.1S",0.0,null,0.0,0,null,null,null,null,0.04 ],[ "PT0.2S",0.0,null,0.0,0,null,null,null,null,-0.02, 125 ] ]
+    teamSportProfile:
+      type: object
+      description: >-
+        Team sport profile
+      properties:
+        sport:
+          type: string
+          description: Sport type
+          example: SOCCER
+        created:
+            type: string
+            description: Time when the sport profile was created
+            format: date-time
+            example: '2025-05-16T11:52:54Z'
+        modified:
+          type: string
+          description: Time when the sport profile was last modified
+          format: date-time
+          example: '2025-05-16T11:52:54Z'
+        sprint_threshold_type:
+          type: string
+          description: Sprint threshold type
+          example: ACCELERATION
+          enum:
+          - ACCELERATION
+          - SPEED
+        sprint_threshold:
+          type: number
+          description: Sprint threshold
+          example: 2.8
+        gps_state:
+          type: string
+          description: GPS state
+          example: ON_NORMAL
+          enum:
+            - OFF
+            - ON_NORMAL
+            - ON_LONG
+            - GPS_ON_10_HZ
+            - GPS_ON_MEDIUM
+        muscle_load_setting:
+          type: string
+          description: Is muscle load enabled
+          example: ON
+          enum:
+            - OFF
+            - ON
+        heart_rate_zone_type:
+          type: string
+          description: Heart rate zone type
+          example: THRESHOLD
+          enum:
+            - DEFAULT
+            - FREE
+            - THRESHOLD
+        speed_zone_type:
+          type: string
+          description: Speed zone type
+          example: FREE
+          enum:
+            - DEFAULT
+            - FREE
+        power_zone_type:
+          type: string
+          description: Power zone type
+          example: DEFAULT
+          enum:
+            - DEFAULT
+            - FREE
+        zones:
+          $ref: '#/components/schemas/sportProfileZones'
+        acceleration_zones:
+          $ref: '#/components/schemas/sportProfileAccelerationZones'
+    sportProfileZones:
+      description: Sport zones created for the sport profile
+      properties:
+        heart_rate:
+          type: array
+          description: Heart rate zones in beats per minute if sport profile has them.
+          example: [
+            { "lower_limit": 100.0, "higher_limit": 120.0 },
+            { "lower_limit": 120.0, "higher_limit": 140.0 },
+            { "lower_limit": 140.0, "higher_limit": 160.0 },
+            { "lower_limit": 160.0, "higher_limit": 180.0 },
+            { "lower_limit": 180.0, "higher_limit": 200.0 }
+          ]
+          items:
+            $ref: '#/components/schemas/sportProfileZone'
+        speed:
+          type: array
+          description: Speed zones in kilometers per hour if sport profile has them.
+          example: [
+            { "lower_limit": 10.0, "higher_limit": 12.0 },
+            { "lower_limit": 12.0, "higher_limit": 15.0 },
+            { "lower_limit": 15.0, "higher_limit": 17.1 },
+            { "lower_limit": 17.1, "higher_limit": 20.0 },
+            { "lower_limit": 20.0, "higher_limit": 399.0 }
+          ]
+          items:
+            $ref: '#/components/schemas/sportProfileZone'
+        power:
+          type: array
+          description: Power zones in watts if sport profile has them.
+          example: [
+            { "lower_limit": 70.0, "higher_limit": 85.0 },
+            { "lower_limit": 85.0, "higher_limit": 100.0 },
+            { "lower_limit": 100.0, "higher_limit": 130.0 },
+            { "lower_limit": 130.0, "higher_limit": 180.0 },
+            { "lower_limit": 180.0, "higher_limit": 400.0 }
+          ]
+          items:
+            $ref: '#/components/schemas/sportProfileZone'
+    sportProfileZone:
+      description: Single sport profile zone
+      properties:
+        lower_limit:
+          type: number
+          description: Lower limit of the zone (inclusive)
+        higher_limit:
+          type: number
+          description: Higher limit of the zone (exclusive)
+    sportProfileAccelerationZones:
+      description: Acceleration zones for the sport profile
+      properties:
+        free_acceleration_zones:
+          type: boolean
+          description: Free acceleration zones in use
+          example: true
+        acceleration_zones:
+          type: array
+          description: List of four acceleration zone thresholds from lowest to highest.
+          example: [ 0.5, 1.0, 2.0, 3.0 ]
+          items:
+            type: number
+        deceleration_zones:
+          type: array
+          description: List of four deceleration zone thresholds from lowest to highest.
+          example: [ -0.5, -1.0, -2.0, -3.0 ]
+          items:
+            type: number
