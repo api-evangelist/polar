@@ -1,0 +1,483 @@
+asyncapi: 2.6.0
+info:
+  title: Polar AccessLink Webhooks
+  version: '1.0.0'
+  description: |
+    AsyncAPI description of the webhook (push notification) surface exposed by
+    the Polar AccessLink API. When a partner application has registered a
+    webhook through the AccessLink REST API (`POST /v3/webhooks`), Polar
+    delivers an HTTP POST request with a JSON body to the partner's configured
+    callback URL whenever new user data of a subscribed event type becomes
+    available.
+
+    Every webhook payload (including the `PING` verification message) is signed
+    using Hash-based message authentication code (HMAC SHA-256). The signature
+    is delivered in the `Polar-Webhook-Signature` HTTP header and computed with
+    the `signature_secret_key` returned from the webhook creation call. The
+    secret key is only returned once at creation time and cannot be retrieved
+    later.
+
+    Subscribers must respond to every notification (including `PING`) with HTTP
+    `200 OK`. Webhooks are automatically deactivated after seven (7) consecutive
+    days of unsuccessful delivery attempts. Only one webhook configuration is
+    allowed per partner client.
+
+    The supported event types are exactly those listed in the AccessLink
+    OpenAPI `webhookType` enum: `EXERCISE`, `SLEEP`, `CONTINUOUS_HEART_RATE`,
+    `SLEEP_WISE_CIRCADIAN_BEDTIME`, `SLEEP_WISE_ALERTNESS`, `ACTIVITY_SUMMARY`,
+    `PHYSICAL_INFORMATION`, plus the `PING` verification message that
+    AccessLink sends when a webhook URL is created or updated.
+  contact:
+    name: Polar AccessLink API
+    url: https://www.polar.com/accesslink-api/
+  license:
+    name: Polar API Limited License Agreement
+    url: https://www.polar.com/en/legal/polar-api-agreement
+  externalDocs:
+    description: Polar AccessLink API documentation
+    url: https://www.polar.com/accesslink-api/
+
+defaultContentType: application/json
+
+servers:
+  partner-callback:
+    url: '{partnerWebhookUrl}'
+    protocol: https
+    description: |
+      Partner-hosted HTTPS endpoint registered via `POST /v3/webhooks`. Polar
+      AccessLink sends webhook notifications to this URL as HTTP POST requests.
+    variables:
+      partnerWebhookUrl:
+        description: HTTPS URL configured by the partner when creating the webhook.
+        default: https://myapp.example.com/acl_webhook
+
+channels:
+  partner-webhook-callback:
+    description: |
+      The single callback URL registered with AccessLink that receives all
+      subscribed event notifications and the `PING` verification message.
+    publish:
+      operationId: receivePolarWebhook
+      summary: Receive a Polar AccessLink webhook notification.
+      description: |
+        Polar AccessLink publishes an HTTP POST request with a JSON body to the
+        partner callback URL. The body discriminates on the `event` property
+        and may be any of the supported payload shapes. Receivers must respond
+        with HTTP `200 OK`.
+      bindings:
+        http:
+          type: request
+          method: POST
+          bindingVersion: '0.3.0'
+      message:
+        oneOf:
+          - $ref: '#/components/messages/ExerciseEvent'
+          - $ref: '#/components/messages/SleepEvent'
+          - $ref: '#/components/messages/ContinuousHeartRateEvent'
+          - $ref: '#/components/messages/SleepWiseCircadianBedtimeEvent'
+          - $ref: '#/components/messages/SleepWiseAlertnessEvent'
+          - $ref: '#/components/messages/ActivitySummaryEvent'
+          - $ref: '#/components/messages/PhysicalInformationEvent'
+          - $ref: '#/components/messages/PingEvent'
+
+components:
+  messages:
+    ExerciseEvent:
+      name: ExerciseEvent
+      title: Exercise webhook event
+      summary: New exercise (training session) data is available for the user.
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/WebhookHeaders'
+      payload:
+        $ref: '#/components/schemas/WebhookPayloadExercise'
+      examples:
+        - name: exercise-example
+          summary: Example EXERCISE webhook payload.
+          payload:
+            event: EXERCISE
+            user_id: 475
+            entity_id: aQlC83
+            timestamp: '2018-05-15T14:22:24Z'
+            url: https://www.polaraccesslink.com/v3/exercises/aQlC83
+
+    SleepEvent:
+      name: SleepEvent
+      title: Sleep webhook event
+      summary: New sleep data is available for the user.
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/WebhookHeaders'
+      payload:
+        $ref: '#/components/schemas/WebhookPayloadSleep'
+      examples:
+        - name: sleep-example
+          summary: Example SLEEP webhook payload.
+          payload:
+            event: SLEEP
+            user_id: 475
+            date: '2019-12-31'
+            timestamp: '2018-05-15T14:22:24Z'
+            url: https://www.polaraccesslink.com/v3/users/sleep/2019-12-31
+
+    ContinuousHeartRateEvent:
+      name: ContinuousHeartRateEvent
+      title: Continuous heart rate webhook event
+      summary: New continuous heart rate data is available for the user.
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/WebhookHeaders'
+      payload:
+        $ref: '#/components/schemas/WebhookPayloadContinuousHeartRate'
+      examples:
+        - name: continuous-heart-rate-example
+          summary: Example CONTINUOUS_HEART_RATE webhook payload.
+          payload:
+            event: CONTINUOUS_HEART_RATE
+            user_id: 475
+            date: '2022-09-30'
+            timestamp: '2018-05-15T14:22:24Z'
+            url: https://www.polaraccesslink.com/v3/users/continuous-heart-rate/2022-09-30
+
+    SleepWiseCircadianBedtimeEvent:
+      name: SleepWiseCircadianBedtimeEvent
+      title: SleepWise circadian bedtime webhook event
+      summary: New SleepWise circadian bedtime data is available for the user.
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/WebhookHeaders'
+      payload:
+        $ref: '#/components/schemas/WebhookPayloadCircadianBedtime'
+      examples:
+        - name: circadian-bedtime-example
+          summary: Example SLEEP_WISE_CIRCADIAN_BEDTIME webhook payload.
+          payload:
+            event: SLEEP_WISE_CIRCADIAN_BEDTIME
+            user_id: 475
+            from: '2022-09-30'
+            to: '2022-10-02'
+            timestamp: '2022-10-02T14:22:24Z'
+            url: https://www.polaraccesslink.com/v3/users/sleepwise/circadian-bedtime/date?from=2022-09-30&to=2022-10-02
+
+    SleepWiseAlertnessEvent:
+      name: SleepWiseAlertnessEvent
+      title: SleepWise alertness webhook event
+      summary: New SleepWise alertness data is available for the user.
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/WebhookHeaders'
+      payload:
+        $ref: '#/components/schemas/WebhookPayloadAlertness'
+      examples:
+        - name: alertness-example
+          summary: Example SLEEP_WISE_ALERTNESS webhook payload.
+          payload:
+            event: SLEEP_WISE_ALERTNESS
+            user_id: 475
+            from: '2022-09-30'
+            to: '2022-10-02'
+            timestamp: '2022-10-02T14:22:24Z'
+            url: https://www.polaraccesslink.com/v3/users/sleepwise/alertness/date?from=2022-09-30&to=2022-10-02
+
+    ActivitySummaryEvent:
+      name: ActivitySummaryEvent
+      title: Activity summary webhook event
+      summary: New daily activity summary data is available for the user.
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/WebhookHeaders'
+      payload:
+        $ref: '#/components/schemas/WebhookPayloadActivitySummary'
+      examples:
+        - name: activity-summary-example
+          summary: Example ACTIVITY_SUMMARY webhook payload.
+          payload:
+            event: ACTIVITY_SUMMARY
+            user_id: 475
+            date: '2022-09-30'
+            timestamp: '2022-10-02T14:22:24Z'
+            url: https://www.polaraccesslink.com/v3/users/activities/2022-09-30
+
+    PhysicalInformationEvent:
+      name: PhysicalInformationEvent
+      title: Physical information webhook event
+      summary: New physical information data is available for the user.
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/WebhookHeaders'
+      payload:
+        $ref: '#/components/schemas/WebhookPayloadPhysicalInformation'
+      examples:
+        - name: physical-information-example
+          summary: Example PHYSICAL_INFORMATION webhook payload.
+          payload:
+            event: PHYSICAL_INFORMATION
+            user_id: 475
+            timestamp: '2025-12-31T14:22:24Z'
+            url: https://www.polaraccesslink.com/v3/users/physical-info
+
+    PingEvent:
+      name: PingEvent
+      title: Webhook PING verification event
+      summary: |
+        AccessLink sends a `PING` message as HTTP POST to the callback URL when
+        a webhook is created or its URL is modified. The receiver must respond
+        with `200 OK` for the webhook to be created or updated.
+      contentType: application/json
+      headers:
+        $ref: '#/components/schemas/WebhookHeaders'
+      payload:
+        $ref: '#/components/schemas/WebhookPing'
+      examples:
+        - name: ping-example
+          summary: Example PING verification payload.
+          payload:
+            event: PING
+            timestamp: '2018-05-15T14:22:24Z'
+
+  schemas:
+    WebhookHeaders:
+      type: object
+      description: |
+        HTTP headers sent by Polar AccessLink with every webhook delivery,
+        including the PING verification message.
+      properties:
+        Polar-Webhook-Signature:
+          type: string
+          description: |
+            HMAC SHA-256 signature of the raw JSON request body, computed with
+            the `signature_secret_key` returned at webhook creation time.
+            Receivers must recompute and compare this signature to verify that
+            the request originated from Polar AccessLink.
+
+    WebhookEventType:
+      type: string
+      enum:
+        - EXERCISE
+        - SLEEP
+        - CONTINUOUS_HEART_RATE
+        - SLEEP_WISE_CIRCADIAN_BEDTIME
+        - SLEEP_WISE_ALERTNESS
+        - ACTIVITY_SUMMARY
+        - PHYSICAL_INFORMATION
+      description: |
+        Subscribable webhook event type. Mirrors the `webhookType` enum in the
+        Polar AccessLink OpenAPI specification. The additional `PING` value is
+        used by the verification message and is not separately subscribable.
+
+    WebhookPayloadExercise:
+      type: object
+      description: Payload for the EXERCISE webhook event.
+      properties:
+        event:
+          type: string
+          enum: [EXERCISE]
+          description: Type of available data.
+        user_id:
+          type: integer
+          format: int64
+          example: 475
+          description: Id of the user who has new data.
+        entity_id:
+          type: string
+          example: aQlC83
+          description: Hashed id of the available exercise.
+        timestamp:
+          type: string
+          format: date-time
+          example: '2018-05-15T14:22:24Z'
+          description: Time when the webhook notification is sent.
+        url:
+          type: string
+          format: uri
+          example: https://www.polaraccesslink.com/v3/exercises/aQlC83
+          description: Url to the new available data.
+
+    WebhookPayloadSleep:
+      type: object
+      description: Payload for the SLEEP webhook event.
+      properties:
+        event:
+          type: string
+          enum: [SLEEP]
+          description: Type of available data.
+        user_id:
+          type: integer
+          format: int64
+          example: 475
+          description: Id of the user who has new data.
+        date:
+          type: string
+          example: '2019-12-31'
+          description: Date of the available sleep data.
+        timestamp:
+          type: string
+          format: date-time
+          example: '2018-05-15T14:22:24Z'
+          description: Time when the webhook notification is sent.
+        url:
+          type: string
+          format: uri
+          example: https://www.polaraccesslink.com/v3/users/sleep/2019-12-31
+          description: Url to the new available data.
+
+    WebhookPayloadContinuousHeartRate:
+      type: object
+      description: Payload for the CONTINUOUS_HEART_RATE webhook event.
+      properties:
+        event:
+          type: string
+          enum: [CONTINUOUS_HEART_RATE]
+          description: Type of available data.
+        user_id:
+          type: integer
+          format: int64
+          example: 475
+          description: Id of the user who has new data.
+        date:
+          type: string
+          example: '2022-09-30'
+          description: Date of the available continuous heart rate data.
+        timestamp:
+          type: string
+          format: date-time
+          example: '2018-05-15T14:22:24Z'
+          description: Time when the webhook notification is sent.
+        url:
+          type: string
+          format: uri
+          example: https://www.polaraccesslink.com/v3/users/continuous-heart-rate/2022-09-30
+          description: Url to the new available data.
+
+    WebhookPayloadCircadianBedtime:
+      type: object
+      description: Payload for the SLEEP_WISE_CIRCADIAN_BEDTIME webhook event.
+      properties:
+        event:
+          type: string
+          enum: [SLEEP_WISE_CIRCADIAN_BEDTIME]
+          description: Type of available data.
+        user_id:
+          type: integer
+          format: int64
+          example: 475
+          description: Id of the user who has new data.
+        from:
+          type: string
+          example: '2022-09-30'
+          description: Start date of the available circadian bedtime data.
+        to:
+          type: string
+          example: '2022-10-02'
+          description: End date of the available circadian bedtime data.
+        timestamp:
+          type: string
+          format: date-time
+          example: '2022-10-02T14:22:24Z'
+          description: Time when the webhook notification is sent.
+        url:
+          type: string
+          format: uri
+          example: https://www.polaraccesslink.com/v3/users/sleepwise/circadian-bedtime/date?from=2022-09-30&to=2022-10-02
+          description: Url to the new available data.
+
+    WebhookPayloadAlertness:
+      type: object
+      description: Payload for the SLEEP_WISE_ALERTNESS webhook event.
+      properties:
+        event:
+          type: string
+          enum: [SLEEP_WISE_ALERTNESS]
+          description: Type of available data.
+        user_id:
+          type: integer
+          format: int64
+          example: 475
+          description: Id of the user who has new data.
+        from:
+          type: string
+          example: '2022-09-30'
+          description: Start date of the available alertness data.
+        to:
+          type: string
+          example: '2022-10-02'
+          description: End date of the available alertness data.
+        timestamp:
+          type: string
+          format: date-time
+          example: '2022-10-02T14:22:24Z'
+          description: Time when the webhook notification is sent.
+        url:
+          type: string
+          format: uri
+          example: https://www.polaraccesslink.com/v3/users/sleepwise/alertness/date?from=2022-09-30&to=2022-10-02
+          description: Url to the new available data.
+
+    WebhookPayloadActivitySummary:
+      type: object
+      description: Payload for the ACTIVITY_SUMMARY webhook event.
+      properties:
+        event:
+          type: string
+          enum: [ACTIVITY_SUMMARY]
+          description: Type of available data.
+        user_id:
+          type: integer
+          format: int64
+          example: 475
+          description: Id of the user who has new data.
+        date:
+          type: string
+          example: '2022-09-30'
+          description: Date of the available activity summary data.
+        timestamp:
+          type: string
+          format: date-time
+          example: '2022-10-02T14:22:24Z'
+          description: Time when the webhook notification is sent.
+        url:
+          type: string
+          format: uri
+          example: https://www.polaraccesslink.com/v3/users/activities/2022-09-30
+          description: Url to the new available data.
+
+    WebhookPayloadPhysicalInformation:
+      type: object
+      description: Payload for the PHYSICAL_INFORMATION webhook event.
+      properties:
+        event:
+          type: string
+          enum: [PHYSICAL_INFORMATION]
+          description: Type of available data.
+        user_id:
+          type: integer
+          format: int64
+          example: 475
+          description: Id of the user who has new data.
+        timestamp:
+          type: string
+          format: date-time
+          example: '2025-12-31T14:22:24Z'
+          description: Time when the webhook notification is sent.
+        url:
+          type: string
+          format: uri
+          example: https://www.polaraccesslink.com/v3/users/physical-info
+          description: Url to the new available data.
+
+    WebhookPing:
+      type: object
+      description: |
+        AccessLink sends a PING message as HTTP POST to the callback URL when
+        creating a new webhook or modifying an existing one. The receiver must
+        respond with `200 OK` or the webhook is not created/modified.
+      properties:
+        event:
+          type: string
+          enum: [PING]
+          description: Only possible value is PING for the verification message.
+        timestamp:
+          type: string
+          format: date-time
+          example: '2018-05-15T14:22:24Z'
+          description: Time when the webhook ping is sent.
