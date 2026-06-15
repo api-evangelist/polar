@@ -28,12 +28,16 @@ apis:
     type: CodeExamples
   - url: https://www.polar.com/en/legal/polar-api-agreement
     type: TermsOfService
-  description: The Polar Open AccessLink API gives partners structured OAuth2-based access to Polar Flow user
-    data — training sessions, daily activity, continuous heart rate, sleep, Nightly Recharge, Cardio Load,
-    SleepWise alertness and circadian bedtime, Elixir biosensing (ECG, SpO2, skin and body temperature,
-    skin contacts), exercise files in FIT/TCX/GPX format, and webhooks for real-time notifications when
-    new user data is available. Operates against https://www.polaraccesslink.com/ with both transactional
-    (data discarded after retrieval) and non-transactional endpoints.
+  - url: graphql/polar-graphql.md
+    type: GraphQL
+  description: The Polar Open AccessLink API gives partners structured OAuth2-based
+    access to Polar Flow user data — training sessions, daily activity, continuous
+    heart rate, sleep, Nightly Recharge, Cardio Load, SleepWise alertness and circadian
+    bedtime, Elixir biosensing (ECG, SpO2, skin and body temperature, skin contacts),
+    exercise files in FIT/TCX/GPX format, and webhooks for real-time notifications
+    when new user data is available. Operates against https://www.polaraccesslink.com/
+    with both transactional (data discarded after retrieval) and non-transactional
+    endpoints.
 - aid: polar:polar-teampro-api
   name: Polar TeamPro API
   tags:
@@ -56,10 +60,11 @@ apis:
     type: Portal
   - url: https://www.polar.com/en/legal/polar-api-agreement
     type: TermsOfService
-  description: The Polar TeamPro API exposes team and player training data captured by the Polar Team Pro
-    system. Endpoints return teams, sport profiles, team and player training sessions with date-range filters,
-    detailed per-session metrics (heart rate, speed, power, acceleration), session summaries and phase
-    summaries. OAuth2 authorization-code flow with the team_read scope. Rate limited to 1 request/second
+  description: The Polar TeamPro API exposes team and player training data captured
+    by the Polar Team Pro system. Endpoints return teams, sport profiles, team and
+    player training sessions with date-range filters, detailed per-session metrics
+    (heart rate, speed, power, acceleration), session summaries and phase summaries.
+    OAuth2 authorization-code flow with the team_read scope. Rate limited to 1 request/second
     with a 100-request burst allowance.
 - aid: polar:polar-ble-sdk
   name: Polar BLE SDK
@@ -83,11 +88,12 @@ apis:
   - url: https://github.com/polarofficial/create-mobile-app-for-polar-sensors
     name: Mobile App Starter for Polar Sensors
     type: CodeExamples
-  description: The Polar BLE SDK enables iOS and Android applications to stream live data from Polar sensors
-    over Bluetooth Low Energy. Supports H10, H9, Verity Sense, OH1, Ignite 3, Polar 360/Loop, Vantage V3,
-    Vantage M3, Grit X2 Pro, Grit X2, Pacer Pro, and Pacer. Streams heart rate, ECG, accelerometer, PPG,
-    gyroscope, magnetometer, and PPI data. iOS 14.0+ (Swift) and Android minSdk 24 (Kotlin/Java) with
-    RxJava/RxSwift for asynchronous operations.
+  description: The Polar BLE SDK enables iOS and Android applications to stream live
+    data from Polar sensors over Bluetooth Low Energy. Supports H10, H9, Verity Sense,
+    OH1, Ignite 3, Polar 360/Loop, Vantage V3, Vantage M3, Grit X2 Pro, Grit X2, Pacer
+    Pro, and Pacer. Streams heart rate, ECG, accelerometer, PPG, gyroscope, magnetometer,
+    and PPI data. iOS 14.0+ (Swift) and Android minSdk 24 (Kotlin/Java) with RxJava/RxSwift
+    for asynchronous operations.
 name: Polar
 tags:
 - Fitness
@@ -181,23 +187,33 @@ common:
   type: Documentation
 - type: Features
   data:
-  - Polar AccessLink API with OAuth2 access to Polar Flow user training, activity, sleep, and biosensing data
-  - Continuous heart rate (5-minute samples), Nightly Recharge, SleepWise alertness, and circadian bedtime endpoints
+  - Polar AccessLink API with OAuth2 access to Polar Flow user training, activity,
+    sleep, and biosensing data
+  - Continuous heart rate (5-minute samples), Nightly Recharge, SleepWise alertness,
+    and circadian bedtime endpoints
   - Cardio Load training-impulse calculation across days and months
   - Elixir biosensing endpoints — ECG, SpO2, body and skin temperature, skin contacts
   - Exercise downloads in JSON, FIT, TCX, and GPX formats
-  - Webhook subscriptions for real-time delivery of new training, activity, and sleep data
-  - Transactional endpoints (data is discarded after commit) and non-transactional persistent endpoints
+  - Webhook subscriptions for real-time delivery of new training, activity, and sleep
+    data
+  - Transactional endpoints (data is discarded after commit) and non-transactional
+    persistent endpoints
   - Polar TeamPro API for coaches with team and player training session data
-  - OAuth2 authorization-code flow with team_read scope for TeamPro and accesslink.read_all for AccessLink
+  - OAuth2 authorization-code flow with team_read scope for TeamPro and accesslink.read_all
+    for AccessLink
   - Partner registration and OAuth credential management at admin.polaraccesslink.com
-  - Polar BLE SDK for iOS (Swift) and Android (Kotlin/Java) streaming live HR, ECG, ACC, PPG, gyro, magnetometer, PPI
-  - Supported sensors include H10, H9, Verity Sense, OH1, Polar 360/Loop, Vantage V3, Vantage M3, Grit X2 Pro, Pacer Pro
-  - Heart-rate monitoring pioneer — first wireless wearable HR monitor (Sport Tester PE 2000, 1982)
+  - Polar BLE SDK for iOS (Swift) and Android (Kotlin/Java) streaming live HR, ECG,
+    ACC, PPG, gyro, magnetometer, PPI
+  - Supported sensors include H10, H9, Verity Sense, OH1, Polar 360/Loop, Vantage
+    V3, Vantage M3, Grit X2 Pro, Pacer Pro
+  - Heart-rate monitoring pioneer — first wireless wearable HR monitor (Sport Tester
+    PE 2000, 1982)
   - Google Fit and Apple HealthKit integration paths for consumer data sharing
-  - Dynamic rate limiting on AccessLink based on registered user count (15-minute and 24-hour windows)
+  - Dynamic rate limiting on AccessLink based on registered user count (15-minute
+    and 24-hour windows)
   - TeamPro API rate limit of 1 request/second with 100-request burst
-  - Polar Flow ecosystem (web at flow.polar.com plus iOS, Android, and Huawei mobile apps)
+  - Polar Flow ecosystem (web at flow.polar.com plus iOS, Android, and Huawei mobile
+    apps)
   sources:
   - https://www.polar.com/en
   - https://www.polar.com/en/developers
@@ -208,15 +224,18 @@ common:
 created: '2026-05-25T00:00:00.000Z'
 modified: '2026-05-30'
 position: Providing
-description: Polar Electro Oy (operating as Polar Global) is a Finnish sports and fitness technology company
-  founded in 1977 and headquartered in Kempele, Finland. Polar invented the first wireless wearable heart
-  rate monitor — the Sport Tester PE 2000 in 1982 — and remains one of the longest-standing brands in
-  consumer heart rate sensing, GPS sports watches, and fitness wearables. The Polar device portfolio
-  includes the H10 and H9 chest straps, the Verity Sense and OH1 optical sensors, the Polar 360 and Loop
-  fitness bands, and the Vantage, Grit X, Pacer, Ignite, and Unite watch lines, along with a dedicated
-  equine sensor line. Developers access Polar data through the Polar AccessLink API for consumer Polar Flow
-  data, the Polar TeamPro API for team and player training sessions, and the open-source Polar BLE SDK for
-  iOS and Android applications that stream live sensor data over Bluetooth Low Energy.
+description: Polar Electro Oy (operating as Polar Global) is a Finnish sports and
+  fitness technology company founded in 1977 and headquartered in Kempele, Finland.
+  Polar invented the first wireless wearable heart rate monitor — the Sport Tester
+  PE 2000 in 1982 — and remains one of the longest-standing brands in consumer heart
+  rate sensing, GPS sports watches, and fitness wearables. The Polar device portfolio
+  includes the H10 and H9 chest straps, the Verity Sense and OH1 optical sensors,
+  the Polar 360 and Loop fitness bands, and the Vantage, Grit X, Pacer, Ignite, and
+  Unite watch lines, along with a dedicated equine sensor line. Developers access
+  Polar data through the Polar AccessLink API for consumer Polar Flow data, the Polar
+  TeamPro API for team and player training sessions, and the open-source Polar BLE
+  SDK for iOS and Android applications that stream live sensor data over Bluetooth
+  Low Energy.
 maintainers:
 - FN: Kin Lane
   email: info@apievangelist.com

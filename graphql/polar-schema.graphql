@@ -1,0 +1,1100 @@
+"""
+Polar GraphQL Schema
+Polar is a creator monetization platform for newsletters and digital products.
+Conceptual schema derived from Polar REST API (https://api.polar.sh/openapi.json).
+"""
+
+# ─── Scalars ─────────────────────────────────────────────────────────────────
+
+scalar DateTime
+scalar UUID
+scalar JSON
+scalar URL
+scalar EmailAddress
+scalar Decimal
+
+# ─── Enums ────────────────────────────────────────────────────────────────────
+
+enum ProductType {
+  DIGITAL
+  PHYSICAL
+  SUBSCRIPTION
+}
+
+enum SubscriptionStatus {
+  INCOMPLETE
+  INCOMPLETE_EXPIRED
+  TRIALING
+  ACTIVE
+  PAST_DUE
+  CANCELED
+  UNPAID
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  REFUNDED
+  PARTIALLY_REFUNDED
+  DISPUTED
+}
+
+enum BenefitType {
+  DOWNLOADABLE
+  LICENSE_KEY
+  DISCORD
+  GITHUB_REPOSITORY
+  ADS
+  CUSTOM
+  NEWSLETTER
+}
+
+enum CurrencyCode {
+  USD
+  EUR
+  GBP
+  CAD
+  AUD
+  JPY
+}
+
+enum SortOrder {
+  ASC
+  DESC
+}
+
+enum WebhookEventType {
+  ORDER_CREATED
+  ORDER_UPDATED
+  ORDER_REFUNDED
+  SUBSCRIPTION_CREATED
+  SUBSCRIPTION_UPDATED
+  SUBSCRIPTION_CANCELED
+  SUBSCRIPTION_REVOKED
+  BENEFIT_GRANTED
+  BENEFIT_REVOKED
+  PRODUCT_CREATED
+  PRODUCT_UPDATED
+  CUSTOMER_CREATED
+  CUSTOMER_UPDATED
+  CHECKOUT_CREATED
+  CHECKOUT_UPDATED
+  CHECKOUT_SUCCEEDED
+  CHECKOUT_FAILED
+  PAYOUT_CREATED
+  PAYOUT_PAID
+}
+
+enum CheckoutStatus {
+  OPEN
+  EXPIRED
+  SUCCEEDED
+  FAILED
+}
+
+enum PayoutStatus {
+  PENDING
+  IN_TRANSIT
+  PAID
+  FAILED
+  CANCELED
+}
+
+enum DiscountType {
+  PERCENTAGE
+  FIXED
+}
+
+enum LicenseKeyStatus {
+  GRANTED
+  REVOKED
+  DISABLED
+}
+
+enum NotificationType {
+  EMAIL
+  WEBHOOK
+}
+
+enum OrganizationRole {
+  OWNER
+  ADMIN
+  MEMBER
+}
+
+enum MetricInterval {
+  HOUR
+  DAY
+  WEEK
+  MONTH
+  YEAR
+}
+
+enum FileType {
+  DOWNLOADABLE
+  ORGANIZATION_AVATAR
+  PRODUCT_MEDIA
+}
+
+enum FileServiceType {
+  S3
+}
+
+# ─── Interfaces ───────────────────────────────────────────────────────────────
+
+interface Node {
+  id: UUID!
+}
+
+interface Timestamped {
+  createdAt: DateTime!
+  modifiedAt: DateTime
+}
+
+# ─── Core Types ───────────────────────────────────────────────────────────────
+
+"""A Polar creator organization or team account."""
+type Organization implements Node & Timestamped {
+  id: UUID!
+  name: String!
+  slug: String!
+  avatarUrl: URL
+  bio: String
+  website: URL
+  email: EmailAddress
+  twitterUsername: String
+  isPersonal: Boolean!
+  featureSettings: OrganizationFeatureSettings!
+  subscriptionSettings: OrganizationSubscriptionSettings!
+  members(first: Int, after: String): MemberConnection!
+  products(first: Int, after: String, filter: ProductFilter): ProductConnection!
+  subscriptions(first: Int, after: String, filter: SubscriptionFilter): SubscriptionConnection!
+  orders(first: Int, after: String, filter: OrderFilter): OrderConnection!
+  customers(first: Int, after: String, filter: CustomerFilter): CustomerConnection!
+  benefits(first: Int, after: String): BenefitConnection!
+  metrics(interval: MetricInterval!, startDate: DateTime!, endDate: DateTime!): OrganizationMetrics!
+  webhookEndpoints(first: Int, after: String): WebhookEndpointConnection!
+  discounts(first: Int, after: String): DiscountConnection!
+  payouts(first: Int, after: String): PayoutConnection!
+  createdAt: DateTime!
+  modifiedAt: DateTime
+}
+
+"""Feature flags and settings for an organization."""
+type OrganizationFeatureSettings {
+  issueFundingEnabled: Boolean!
+  subscriptionsEnabled: Boolean!
+  articlesEnabled: Boolean!
+}
+
+"""Subscription configuration for an organization."""
+type OrganizationSubscriptionSettings {
+  allowMultipleSubscriptions: Boolean!
+  prorationBehavior: String!
+}
+
+"""A Polar user account."""
+type User implements Node & Timestamped {
+  id: UUID!
+  username: String!
+  email: EmailAddress!
+  avatarUrl: URL
+  profile: UserProfile
+  organizations: [OrganizationMember!]!
+  createdAt: DateTime!
+  modifiedAt: DateTime
+}
+
+"""Extended profile data for a user."""
+type UserProfile {
+  bio: String
+  website: URL
+  twitterUsername: String
+  gravatar: URL
+}
+
+"""A user's membership in an organization."""
+type OrganizationMember implements Node & Timestamped {
+  id: UUID!
+  user: User!
+  organization: Organization!
+  role: OrganizationRole!
+  createdAt: DateTime!
+  modifiedAt: DateTime
+}
+
+"""A product offered on Polar."""
+type Product implements Node & Timestamped {
+  id: UUID!
+  name: String!
+  description: String
+  isArchived: Boolean!
+  isRecurring: Boolean!
+  type: ProductType!
+  organization: Organization!
+  prices: [ProductPrice!]!
+  benefits: [Benefit!]!
+  medias: [ProductMedia!]!
+  checkoutUrl: URL
+  createdAt: DateTime!
+  modifiedAt: DateTime
+}
+
+"""A price tier for a product."""
+type ProductPrice implements Node & Timestamped {
+  id: UUID!
+  product: Product!
+  priceCurrency: CurrencyCode!
+  priceAmount: Int!
+  isArchived: Boolean!
+  recurringInterval: String
+  createdAt: DateTime!
+  modifiedAt: DateTime
+}
+
+"""Media asset attached to a product."""
+type ProductMedia implements Node & Timestamped {
+  id: UUID!
+  product: Product!
+  file: File!
+  createdAt: DateTime!
+  modifiedAt: DateTime
+}
+
+"""A customer who has purchased or subscribed."""
+type Customer implements Node & Timestamped {
+  id: UUID!
+  email: EmailAddress!
+  name: String
+  organization: Organization!
+  externalId: String
+  metadata: JSON
+  orders(first: Int, after: String): OrderConnection!
+  subscriptions(first: Int, after: String): SubscriptionConnection!
+  benefits: [CustomerBenefitGrant!]!
+  createdAt: DateTime!
+  modifiedAt: DateTime
+}
+
+"""A customer's active subscription."""
+type Subscription implements Node & Timestamped {
+  id: UUID!
+  status: SubscriptionStatus!
+  customer: Customer!
+  product: Product!
+  productPrice: ProductPrice!
+  organization: Organization!
+  currentPeriodStart: DateTime!
+  currentPeriodEnd: DateTime!
+  cancelAtPeriodEnd: Boolean!
+  canceledAt: DateTime
+  startedAt: DateTime
+  endedAt: DateTime
+  discount: Discount
+  metadata: JSON
+  createdAt: DateTime!
+  modifiedAt: DateTime
+}
+
+"""A completed purchase order."""
+type Order implements Node & Timestamped {
+  id: UUID!
+  status: OrderStatus!
+  customer: Customer!
+  product: Product!
+  productPrice: ProductPrice!
+  organization: Organization!
+  subscription: Subscription
+  amount: Int!
+  taxAmount: Int!
+  currency: CurrencyCode!
+  billingReason: String
+  billingAddress: Address
+  discount: Discount
+  items: [OrderLineItem!]!
+  refunds: [Refund!]!
+  metadata: JSON
+  createdAt: DateTime!
+  modifiedAt: DateTime
+}
+
+"""A line item within an order."""
+type OrderLineItem implements Node {
+  id: UUID!
+  order: Order!
+  label: String!
+  amount: Int!
+  currency: CurrencyCode!
+}
+
+"""A refund issued for an order."""
+type Refund implements Node & Timestamped {
+  id: UUID!
+  order: Order!
+  amount: Int!
+  currency: CurrencyCode!
+  reason: String
+  createdAt: DateTime!
+  modifiedAt: DateTime
+}
+
+"""A benefit that can be granted to customers."""
+type Benefit implements Node & Timestamped {
+  id: UUID!
+  type: BenefitType!
+  description: String!
+  selectable: Boolean!
+  deletable: Boolean!
+  organization: Organization!
+  properties: BenefitProperties!
+  grants(first: Int, after: String): BenefitGrantConnection!
+  createdAt: DateTime!
+  modifiedAt: DateTime
+}
+
+"""Union of all benefit property shapes."""
+union BenefitProperties =
+    DownloadableBenefitProperties
+  | LicenseKeyBenefitProperties
+  | DiscordBenefitProperties
+  | GitHubRepositoryBenefitProperties
+  | AdsBenefitProperties
+  | CustomBenefitProperties
+  | NewsletterBenefitProperties
+
+"""Properties for a downloadable file benefit."""
+type DownloadableBenefitProperties {
+  files: [File!]!
+}
+
+"""Properties for a license key benefit."""
+type LicenseKeyBenefitProperties {
+  prefix: String
+  expires: LicenseKeyExpiry
+  activations: LicenseKeyActivations
+}
+
+"""Expiry configuration for a license key."""
+type LicenseKeyExpiry {
+  ttl: Int!
+  timeframe: String!
+}
+
+"""Activation limits for a license key."""
+type LicenseKeyActivations {
+  limit: Int!
+  enableUserAdmin: Boolean!
+}
+
+"""Properties for a Discord role benefit."""
+type DiscordBenefitProperties {
+  guildId: String!
+  roleId: String!
+  guildToken: String
+}
+
+"""Properties for a GitHub repository access benefit."""
+type GitHubRepositoryBenefitProperties {
+  repositoryOwner: String!
+  repositoryName: String!
+  permission: String!
+}
+
+"""Properties for an advertisement slot benefit."""
+type AdsBenefitProperties {
+  imageHeight: Int!
+  imageWidth: Int!
+}
+
+"""Properties for a custom benefit."""
+type CustomBenefitProperties {
+  note: String
+}
+
+"""Properties for a newsletter access benefit."""
+type NewsletterBenefitProperties {
+  note: String
+}
+
+"""A record of a benefit granted to a customer."""
+type CustomerBenefitGrant implements Node & Timestamped {
+  id: UUID!
+  benefit: Benefit!
+  customer: Customer!
+  subscription: Subscription
+  order: Order
+  isGranted: Boolean!
+  grantedAt: DateTime
+  revokedAt: DateTime
+  properties: JSON
+  createdAt: DateTime!
+  modifiedAt: DateTime
+}
+
+"""A checkout session for purchasing a product."""
+type Checkout implements Node & Timestamped {
+  id: UUID!
+  status: CheckoutStatus!
+  url: URL!
+  product: Product!
+  productPrice: ProductPrice!
+  organization: Organization!
+  customer: Customer
+  customerEmail: EmailAddress
+  customerName: String
+  amount: Int
+  taxAmount: Int
+  currency: CurrencyCode
+  discount: Discount
+  expiresAt: DateTime!
+  successUrl: URL
+  embedOrigin: URL
+  customFieldData: JSON
+  metadata: JSON
+  createdAt: DateTime!
+  modifiedAt: DateTime
+}
+
+"""A discount code or promotion."""
+type Discount implements Node & Timestamped {
+  id: UUID!
+  name: String!
+  code: String
+  type: DiscountType!
+  amount: Int
+  basisPoints: Int
+  currency: CurrencyCode
+  startsAt: DateTime
+  endsAt: DateTime
+  maxRedemptions: Int
+  redemptionsCount: Int!
+  organization: Organization!
+  products: [Product!]!
+  createdAt: DateTime!
+  modifiedAt: DateTime
+}
+
+"""A license key issued to a customer."""
+type LicenseKey implements Node & Timestamped {
+  id: UUID!
+  key: String!
+  status: LicenseKeyStatus!
+  benefit: Benefit!
+  customer: Customer!
+  organization: Organization!
+  expiresAt: DateTime
+  activations: [LicenseKeyActivation!]!
+  validationsCount: Int!
+  lastValidatedAt: DateTime
+  createdAt: DateTime!
+  modifiedAt: DateTime
+}
+
+"""A single activation of a license key."""
+type LicenseKeyActivation implements Node & Timestamped {
+  id: UUID!
+  licenseKey: LicenseKey!
+  label: String!
+  meta: JSON
+  createdAt: DateTime!
+  modifiedAt: DateTime
+}
+
+"""An uploaded file asset."""
+type File implements Node & Timestamped {
+  id: UUID!
+  name: String!
+  path: String!
+  mimeType: String!
+  size: Int!
+  sizeReadable: String!
+  storageVersion: String
+  checksumEtag: String
+  checksumSha256Base64: String
+  checksumSha256Hex: String
+  isUploaded: Boolean!
+  service: FileServiceType!
+  version: String
+  publicUrl: URL
+  download: FileDownload
+  createdAt: DateTime!
+  modifiedAt: DateTime
+}
+
+"""A presigned download link for a file."""
+type FileDownload {
+  url: URL!
+  headers: JSON
+  expiresAt: DateTime!
+}
+
+"""A webhook endpoint registered to receive events."""
+type WebhookEndpoint implements Node & Timestamped {
+  id: UUID!
+  url: URL!
+  secret: String
+  format: String!
+  organization: Organization!
+  events: [WebhookEventType!]!
+  deliveries(first: Int, after: String): WebhookDeliveryConnection!
+  createdAt: DateTime!
+  modifiedAt: DateTime
+}
+
+"""A single webhook event delivery record."""
+type WebhookDelivery implements Node & Timestamped {
+  id: UUID!
+  webhookEndpoint: WebhookEndpoint!
+  httpCode: Int
+  succeeded: Boolean!
+  eventType: WebhookEventType!
+  payload: JSON!
+  createdAt: DateTime!
+  modifiedAt: DateTime
+}
+
+"""A payout of earnings to a creator."""
+type Payout implements Node & Timestamped {
+  id: UUID!
+  status: PayoutStatus!
+  organization: Organization!
+  currency: CurrencyCode!
+  amount: Int!
+  feeAmount: Int!
+  platformFeeAmount: Int!
+  periodStart: DateTime!
+  periodEnd: DateTime!
+  paidAt: DateTime
+  createdAt: DateTime!
+  modifiedAt: DateTime
+}
+
+"""A postal or billing address."""
+type Address {
+  line1: String
+  line2: String
+  city: String
+  state: String
+  postalCode: String
+  country: String!
+}
+
+"""Aggregated analytics and revenue metrics for an organization."""
+type OrganizationMetrics {
+  revenue: MetricSeries!
+  orders: MetricSeries!
+  subscriptions: MetricSeries!
+  newSubscribers: MetricSeries!
+  churned: MetricSeries!
+  activeSubscribers: MetricPoint!
+  mrr: MetricPoint!
+  arr: MetricPoint!
+  cumulativeRevenue: MetricPoint!
+}
+
+"""A time-series data set for a single metric."""
+type MetricSeries {
+  periods: [MetricDataPoint!]!
+  total: Float!
+}
+
+"""A single data point within a metric time series."""
+type MetricDataPoint {
+  timestamp: DateTime!
+  value: Float!
+}
+
+"""A single scalar metric value."""
+type MetricPoint {
+  value: Float!
+  currency: CurrencyCode
+}
+
+# ─── Connection / Pagination Types ───────────────────────────────────────────
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type ProductConnection {
+  edges: [ProductEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type ProductEdge {
+  cursor: String!
+  node: Product!
+}
+
+type SubscriptionConnection {
+  edges: [SubscriptionEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type SubscriptionEdge {
+  cursor: String!
+  node: Subscription!
+}
+
+type OrderConnection {
+  edges: [OrderEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type OrderEdge {
+  cursor: String!
+  node: Order!
+}
+
+type CustomerConnection {
+  edges: [CustomerEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type CustomerEdge {
+  cursor: String!
+  node: Customer!
+}
+
+type BenefitConnection {
+  edges: [BenefitEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type BenefitEdge {
+  cursor: String!
+  node: Benefit!
+}
+
+type BenefitGrantConnection {
+  edges: [BenefitGrantEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type BenefitGrantEdge {
+  cursor: String!
+  node: CustomerBenefitGrant!
+}
+
+type WebhookEndpointConnection {
+  edges: [WebhookEndpointEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type WebhookEndpointEdge {
+  cursor: String!
+  node: WebhookEndpoint!
+}
+
+type WebhookDeliveryConnection {
+  edges: [WebhookDeliveryEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type WebhookDeliveryEdge {
+  cursor: String!
+  node: WebhookDelivery!
+}
+
+type DiscountConnection {
+  edges: [DiscountEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type DiscountEdge {
+  cursor: String!
+  node: Discount!
+}
+
+type PayoutConnection {
+  edges: [PayoutEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type PayoutEdge {
+  cursor: String!
+  node: Payout!
+}
+
+type MemberConnection {
+  edges: [MemberEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type MemberEdge {
+  cursor: String!
+  node: OrganizationMember!
+}
+
+type LicenseKeyConnection {
+  edges: [LicenseKeyEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type LicenseKeyEdge {
+  cursor: String!
+  node: LicenseKey!
+}
+
+# ─── Filter Input Types ───────────────────────────────────────────────────────
+
+input ProductFilter {
+  isArchived: Boolean
+  isRecurring: Boolean
+  type: ProductType
+  query: String
+}
+
+input SubscriptionFilter {
+  status: SubscriptionStatus
+  customerId: UUID
+  productId: UUID
+  query: String
+  startDateAfter: DateTime
+  startDateBefore: DateTime
+}
+
+input OrderFilter {
+  status: OrderStatus
+  customerId: UUID
+  productId: UUID
+  subscriptionId: UUID
+  query: String
+  dateAfter: DateTime
+  dateBefore: DateTime
+}
+
+input CustomerFilter {
+  query: String
+  externalId: String
+}
+
+# ─── Mutation Input Types ─────────────────────────────────────────────────────
+
+input CreateProductInput {
+  organizationId: UUID!
+  name: String!
+  description: String
+  prices: [ProductPriceInput!]!
+  benefitIds: [UUID!]
+  mediaFileIds: [UUID!]
+}
+
+input ProductPriceInput {
+  priceCurrency: CurrencyCode!
+  priceAmount: Int!
+  recurringInterval: String
+}
+
+input UpdateProductInput {
+  name: String
+  description: String
+  isArchived: Boolean
+}
+
+input CreateCheckoutInput {
+  productPriceId: UUID!
+  customerEmail: EmailAddress
+  customerName: String
+  discountCode: String
+  successUrl: URL
+  embedOrigin: URL
+  metadata: JSON
+}
+
+input CreateWebhookEndpointInput {
+  organizationId: UUID!
+  url: URL!
+  events: [WebhookEventType!]!
+  format: String
+}
+
+input UpdateWebhookEndpointInput {
+  url: URL
+  events: [WebhookEventType!]
+  format: String
+}
+
+input CreateDiscountInput {
+  organizationId: UUID!
+  name: String!
+  code: String
+  type: DiscountType!
+  amount: Int
+  basisPoints: Int
+  currency: CurrencyCode
+  startsAt: DateTime
+  endsAt: DateTime
+  maxRedemptions: Int
+  productIds: [UUID!]
+}
+
+input UpdateCustomerInput {
+  name: String
+  email: EmailAddress
+  externalId: String
+  metadata: JSON
+}
+
+input CreateCustomerInput {
+  organizationId: UUID!
+  email: EmailAddress!
+  name: String
+  externalId: String
+  metadata: JSON
+}
+
+input CancelSubscriptionInput {
+  cancelAtPeriodEnd: Boolean!
+}
+
+input ValidateLicenseKeyInput {
+  key: String!
+  activationId: UUID
+  label: String
+  meta: JSON
+  benefitId: UUID
+  organizationId: UUID
+}
+
+input UpdateOrganizationInput {
+  name: String
+  bio: String
+  website: URL
+  email: EmailAddress
+  twitterUsername: String
+}
+
+# ─── Mutation Payload Types ───────────────────────────────────────────────────
+
+type ProductPayload {
+  product: Product
+  errors: [FieldError!]
+}
+
+type CheckoutPayload {
+  checkout: Checkout
+  errors: [FieldError!]
+}
+
+type WebhookEndpointPayload {
+  webhookEndpoint: WebhookEndpoint
+  errors: [FieldError!]
+}
+
+type DiscountPayload {
+  discount: Discount
+  errors: [FieldError!]
+}
+
+type CustomerPayload {
+  customer: Customer
+  errors: [FieldError!]
+}
+
+type SubscriptionPayload {
+  subscription: Subscription
+  errors: [FieldError!]
+}
+
+type LicenseKeyValidationPayload {
+  valid: Boolean!
+  licenseKey: LicenseKey
+  activation: LicenseKeyActivation
+  errors: [FieldError!]
+}
+
+type OrganizationPayload {
+  organization: Organization
+  errors: [FieldError!]
+}
+
+type DeletePayload {
+  success: Boolean!
+  errors: [FieldError!]
+}
+
+"""A field-level validation error."""
+type FieldError {
+  field: String
+  message: String!
+  code: String
+}
+
+# ─── Root Types ───────────────────────────────────────────────────────────────
+
+type Query {
+  """Retrieve the authenticated user."""
+  me: User
+
+  """Look up an organization by slug."""
+  organization(slug: String!): Organization
+
+  """Look up an organization by ID."""
+  organizationById(id: UUID!): Organization
+
+  """List all organizations the current user belongs to."""
+  myOrganizations: [Organization!]!
+
+  """Retrieve a single product by ID."""
+  product(id: UUID!): Product
+
+  """List products for an organization."""
+  products(
+    organizationId: UUID!
+    first: Int
+    after: String
+    filter: ProductFilter
+  ): ProductConnection!
+
+  """Retrieve a single order by ID."""
+  order(id: UUID!): Order
+
+  """List orders for an organization."""
+  orders(
+    organizationId: UUID!
+    first: Int
+    after: String
+    filter: OrderFilter
+  ): OrderConnection!
+
+  """Retrieve a single subscription by ID."""
+  subscription(id: UUID!): Subscription
+
+  """List subscriptions for an organization."""
+  subscriptions(
+    organizationId: UUID!
+    first: Int
+    after: String
+    filter: SubscriptionFilter
+  ): SubscriptionConnection!
+
+  """Retrieve a single customer by ID."""
+  customer(id: UUID!): Customer
+
+  """List customers for an organization."""
+  customers(
+    organizationId: UUID!
+    first: Int
+    after: String
+    filter: CustomerFilter
+  ): CustomerConnection!
+
+  """Retrieve a single benefit by ID."""
+  benefit(id: UUID!): Benefit
+
+  """List benefits for an organization."""
+  benefits(organizationId: UUID!, first: Int, after: String): BenefitConnection!
+
+  """Retrieve a checkout session by ID."""
+  checkout(id: UUID!): Checkout
+
+  """Retrieve a discount by ID."""
+  discount(id: UUID!): Discount
+
+  """List discounts for an organization."""
+  discounts(organizationId: UUID!, first: Int, after: String): DiscountConnection!
+
+  """Retrieve a payout by ID."""
+  payout(id: UUID!): Payout
+
+  """List payouts for an organization."""
+  payouts(organizationId: UUID!, first: Int, after: String): PayoutConnection!
+
+  """Retrieve a webhook endpoint by ID."""
+  webhookEndpoint(id: UUID!): WebhookEndpoint
+
+  """List webhook endpoints for an organization."""
+  webhookEndpoints(organizationId: UUID!, first: Int, after: String): WebhookEndpointConnection!
+
+  """Retrieve a webhook delivery record by ID."""
+  webhookDelivery(id: UUID!): WebhookDelivery
+
+  """Retrieve a license key by ID."""
+  licenseKey(id: UUID!): LicenseKey
+
+  """List license keys for an organization."""
+  licenseKeys(organizationId: UUID!, first: Int, after: String): LicenseKeyConnection!
+
+  """Retrieve a file by ID."""
+  file(id: UUID!): File
+
+  """Retrieve organization analytics metrics."""
+  organizationMetrics(
+    organizationId: UUID!
+    interval: MetricInterval!
+    startDate: DateTime!
+    endDate: DateTime!
+  ): OrganizationMetrics!
+}
+
+type Mutation {
+  """Create a new product."""
+  createProduct(input: CreateProductInput!): ProductPayload!
+
+  """Update an existing product."""
+  updateProduct(id: UUID!, input: UpdateProductInput!): ProductPayload!
+
+  """Archive a product (soft delete)."""
+  archiveProduct(id: UUID!): ProductPayload!
+
+  """Create a new checkout session."""
+  createCheckout(input: CreateCheckoutInput!): CheckoutPayload!
+
+  """Create a new customer."""
+  createCustomer(input: CreateCustomerInput!): CustomerPayload!
+
+  """Update an existing customer."""
+  updateCustomer(id: UUID!, input: UpdateCustomerInput!): CustomerPayload!
+
+  """Delete a customer."""
+  deleteCustomer(id: UUID!): DeletePayload!
+
+  """Cancel a subscription."""
+  cancelSubscription(id: UUID!, input: CancelSubscriptionInput!): SubscriptionPayload!
+
+  """Revoke a benefit grant from a customer."""
+  revokeBenefitGrant(id: UUID!): DeletePayload!
+
+  """Create a webhook endpoint."""
+  createWebhookEndpoint(input: CreateWebhookEndpointInput!): WebhookEndpointPayload!
+
+  """Update a webhook endpoint."""
+  updateWebhookEndpoint(id: UUID!, input: UpdateWebhookEndpointInput!): WebhookEndpointPayload!
+
+  """Delete a webhook endpoint."""
+  deleteWebhookEndpoint(id: UUID!): DeletePayload!
+
+  """Redeliver a webhook event."""
+  redeliverWebhookDelivery(id: UUID!): WebhookEndpointPayload!
+
+  """Create a discount."""
+  createDiscount(input: CreateDiscountInput!): DiscountPayload!
+
+  """Delete a discount."""
+  deleteDiscount(id: UUID!): DeletePayload!
+
+  """Validate a license key."""
+  validateLicenseKey(input: ValidateLicenseKeyInput!): LicenseKeyValidationPayload!
+
+  """Revoke a license key."""
+  revokeLicenseKey(id: UUID!): DeletePayload!
+
+  """Update the authenticated user's organization."""
+  updateOrganization(id: UUID!, input: UpdateOrganizationInput!): OrganizationPayload!
+}
