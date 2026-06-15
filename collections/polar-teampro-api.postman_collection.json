@@ -1,0 +1,1652 @@
+{
+  "item": [
+    {
+      "id": "fe431e3e-9307-4ee9-ac40-4efda8cdcd79",
+      "name": "Team",
+      "description": {
+        "content": "Endpoints for getting teams and team details.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f2f2f0f4-45ce-4e3a-a9da-da29c90c1be3",
+          "name": "Get teams.",
+          "request": {
+            "name": "Get teams.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "teams"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Pagination parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>",
+                  "description": "Pagination parameters"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "team_read"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://auth.polar.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://auth.polar.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ae5ee139-b4db-4744-be6b-de65d632687f",
+              "name": "List of teams.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "3"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"wMYz6L4w\",\n      \"name\": \"Team1\",\n      \"organisation\": \"Organisation1\",\n      \"created\": \"2017-04-13T21:06:58Z\",\n      \"modified\": \"2017-04-13T21:06:58Z\"\n    },\n    {\n      \"id\": \"wMYz6L4w\",\n      \"name\": \"Team1\",\n      \"organisation\": \"Organisation1\",\n      \"created\": \"2017-04-13T21:06:58Z\",\n      \"modified\": \"2017-04-13T21:06:58Z\"\n    }\n  ],\n  \"page\": {\n    \"per_page\": 20,\n    \"total_elements\": 2,\n    \"page_number\": 0,\n    \"total_pages\": 1\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1002e0c4-a3f0-481f-b26e-abd817f322b3",
+          "name": "Get team details.",
+          "request": {
+            "name": "Get team details.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "teams",
+                ":team_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "team_id",
+                  "description": "(Required) Team id to get."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "team_read"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://auth.polar.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://auth.polar.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "86d000c5-5ca9-4d24-9105-c3ec673b4ce2",
+              "name": "Response containing team details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    ":team_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "team_id",
+                      "description": "(Required) Team id to get."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"wMYz6L4w\",\n    \"name\": \"Team1\",\n    \"organisation\": \"Organisation1\",\n    \"created\": \"2017-04-13T21:06:58Z\",\n    \"modified\": \"2017-04-13T21:06:58Z\",\n    \"players\": [\n      {\n        \"player_id\": \"ZmozZxkr\",\n        \"player_number\": 12,\n        \"role\": \"Midfielder\",\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\"\n      },\n      {\n        \"player_id\": \"ZmozZxkr\",\n        \"player_number\": 12,\n        \"role\": \"Midfielder\",\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\"\n      }\n    ],\n    \"sport_profiles\": [\n      {\n        \"sport\": \"SOCCER\",\n        \"created\": \"2025-05-16T11:52:54Z\",\n        \"modified\": \"2025-05-16T11:52:54Z\",\n        \"sprint_threshold_type\": \"ACCELERATION\",\n        \"sprint_threshold\": 2.8,\n        \"gps_state\": \"ON_NORMAL\",\n        \"muscle_load_setting\": \"ON\",\n        \"heart_rate_zone_type\": \"THRESHOLD\",\n        \"speed_zone_type\": \"FREE\",\n        \"power_zone_type\": \"DEFAULT\",\n        \"zones\": {\n          \"heart_rate\": [\n            {\n              \"lower_limit\": 100,\n              \"higher_limit\": 120\n            },\n            {\n              \"lower_limit\": 120,\n              \"higher_limit\": 140\n            },\n            {\n              \"lower_limit\": 140,\n              \"higher_limit\": 160\n            },\n            {\n              \"lower_limit\": 160,\n              \"higher_limit\": 180\n            },\n            {\n              \"lower_limit\": 180,\n              \"higher_limit\": 200\n            }\n          ],\n          \"speed\": [\n            {\n              \"lower_limit\": 10,\n              \"higher_limit\": 12\n            },\n            {\n              \"lower_limit\": 12,\n              \"higher_limit\": 15\n            },\n            {\n              \"lower_limit\": 15,\n              \"higher_limit\": 17.1\n            },\n            {\n              \"lower_limit\": 17.1,\n              \"higher_limit\": 20\n            },\n            {\n              \"lower_limit\": 20,\n              \"higher_limit\": 399\n            }\n          ],\n          \"power\": [\n            {\n              \"lower_limit\": 70,\n              \"higher_limit\": 85\n            },\n            {\n              \"lower_limit\": 85,\n              \"higher_limit\": 100\n            },\n            {\n              \"lower_limit\": 100,\n              \"higher_limit\": 130\n            },\n            {\n              \"lower_limit\": 130,\n              \"higher_limit\": 180\n            },\n            {\n              \"lower_limit\": 180,\n              \"higher_limit\": 400\n            }\n          ]\n        },\n        \"acceleration_zones\": {\n          \"free_acceleration_zones\": true,\n          \"acceleration_zones\": [\n            0.5,\n            1,\n            2,\n            3\n          ],\n          \"deceleration_zones\": [\n            -0.5,\n            -1,\n            -2,\n            -3\n          ]\n        }\n      },\n      {\n        \"sport\": \"SOCCER\",\n        \"created\": \"2025-05-16T11:52:54Z\",\n        \"modified\": \"2025-05-16T11:52:54Z\",\n        \"sprint_threshold_type\": \"ACCELERATION\",\n        \"sprint_threshold\": 2.8,\n        \"gps_state\": \"ON_NORMAL\",\n        \"muscle_load_setting\": \"ON\",\n        \"heart_rate_zone_type\": \"THRESHOLD\",\n        \"speed_zone_type\": \"FREE\",\n        \"power_zone_type\": \"DEFAULT\",\n        \"zones\": {\n          \"heart_rate\": [\n            {\n              \"lower_limit\": 100,\n              \"higher_limit\": 120\n            },\n            {\n              \"lower_limit\": 120,\n              \"higher_limit\": 140\n            },\n            {\n              \"lower_limit\": 140,\n              \"higher_limit\": 160\n            },\n            {\n              \"lower_limit\": 160,\n              \"higher_limit\": 180\n            },\n            {\n              \"lower_limit\": 180,\n              \"higher_limit\": 200\n            }\n          ],\n          \"speed\": [\n            {\n              \"lower_limit\": 10,\n              \"higher_limit\": 12\n            },\n            {\n              \"lower_limit\": 12,\n              \"higher_limit\": 15\n            },\n            {\n              \"lower_limit\": 15,\n              \"higher_limit\": 17.1\n            },\n            {\n              \"lower_limit\": 17.1,\n              \"higher_limit\": 20\n            },\n            {\n              \"lower_limit\": 20,\n              \"higher_limit\": 399\n            }\n          ],\n          \"power\": [\n            {\n              \"lower_limit\": 70,\n              \"higher_limit\": 85\n            },\n            {\n              \"lower_limit\": 85,\n              \"higher_limit\": 100\n            },\n            {\n              \"lower_limit\": 100,\n              \"higher_limit\": 130\n            },\n            {\n              \"lower_limit\": 130,\n              \"higher_limit\": 180\n            },\n            {\n              \"lower_limit\": 180,\n              \"higher_limit\": 400\n            }\n          ]\n        },\n        \"acceleration_zones\": {\n          \"free_acceleration_zones\": true,\n          \"acceleration_zones\": [\n            0.5,\n            1,\n            2,\n            3\n          ],\n          \"deceleration_zones\": [\n            -0.5,\n            -1,\n            -2,\n            -3\n          ]\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88dc5cf2-938f-4b2c-b43e-2f536990abcb",
+              "name": "Given team_id doesn't match any of user's teams.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    ":team_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "team_id",
+                      "description": "(Required) Team id to get."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a6beef85-4bd4-4a18-a016-a5b33503c51f",
+          "name": "Get team sport profiles.",
+          "request": {
+            "name": "Get team sport profiles.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "teams",
+                ":team_id",
+                "sport-profiles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "team_id",
+                  "description": "(Required) Team ID for retrieving the team's sport profiles."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "team_read"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://auth.polar.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://auth.polar.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b8985041-7a93-4266-95a5-51dcf27ca5c7",
+              "name": "Response containing team sport profiles.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    ":team_id",
+                    "sport-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "team_id",
+                      "description": "(Required) Team ID for retrieving the team's sport profiles."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"sport\": \"SOCCER\",\n      \"created\": \"2025-05-16T11:52:54Z\",\n      \"modified\": \"2025-05-16T11:52:54Z\",\n      \"sprint_threshold_type\": \"ACCELERATION\",\n      \"sprint_threshold\": 2.8,\n      \"gps_state\": \"ON_NORMAL\",\n      \"muscle_load_setting\": \"ON\",\n      \"heart_rate_zone_type\": \"THRESHOLD\",\n      \"speed_zone_type\": \"FREE\",\n      \"power_zone_type\": \"DEFAULT\",\n      \"zones\": {\n        \"heart_rate\": [\n          {\n            \"lower_limit\": 100,\n            \"higher_limit\": 120\n          },\n          {\n            \"lower_limit\": 120,\n            \"higher_limit\": 140\n          },\n          {\n            \"lower_limit\": 140,\n            \"higher_limit\": 160\n          },\n          {\n            \"lower_limit\": 160,\n            \"higher_limit\": 180\n          },\n          {\n            \"lower_limit\": 180,\n            \"higher_limit\": 200\n          }\n        ],\n        \"speed\": [\n          {\n            \"lower_limit\": 10,\n            \"higher_limit\": 12\n          },\n          {\n            \"lower_limit\": 12,\n            \"higher_limit\": 15\n          },\n          {\n            \"lower_limit\": 15,\n            \"higher_limit\": 17.1\n          },\n          {\n            \"lower_limit\": 17.1,\n            \"higher_limit\": 20\n          },\n          {\n            \"lower_limit\": 20,\n            \"higher_limit\": 399\n          }\n        ],\n        \"power\": [\n          {\n            \"lower_limit\": 70,\n            \"higher_limit\": 85\n          },\n          {\n            \"lower_limit\": 85,\n            \"higher_limit\": 100\n          },\n          {\n            \"lower_limit\": 100,\n            \"higher_limit\": 130\n          },\n          {\n            \"lower_limit\": 130,\n            \"higher_limit\": 180\n          },\n          {\n            \"lower_limit\": 180,\n            \"higher_limit\": 400\n          }\n        ]\n      },\n      \"acceleration_zones\": {\n        \"free_acceleration_zones\": true,\n        \"acceleration_zones\": [\n          0.5,\n          1,\n          2,\n          3\n        ],\n        \"deceleration_zones\": [\n          -0.5,\n          -1,\n          -2,\n          -3\n        ]\n      }\n    },\n    {\n      \"sport\": \"SOCCER\",\n      \"created\": \"2025-05-16T11:52:54Z\",\n      \"modified\": \"2025-05-16T11:52:54Z\",\n      \"sprint_threshold_type\": \"ACCELERATION\",\n      \"sprint_threshold\": 2.8,\n      \"gps_state\": \"ON_NORMAL\",\n      \"muscle_load_setting\": \"ON\",\n      \"heart_rate_zone_type\": \"THRESHOLD\",\n      \"speed_zone_type\": \"FREE\",\n      \"power_zone_type\": \"DEFAULT\",\n      \"zones\": {\n        \"heart_rate\": [\n          {\n            \"lower_limit\": 100,\n            \"higher_limit\": 120\n          },\n          {\n            \"lower_limit\": 120,\n            \"higher_limit\": 140\n          },\n          {\n            \"lower_limit\": 140,\n            \"higher_limit\": 160\n          },\n          {\n            \"lower_limit\": 160,\n            \"higher_limit\": 180\n          },\n          {\n            \"lower_limit\": 180,\n            \"higher_limit\": 200\n          }\n        ],\n        \"speed\": [\n          {\n            \"lower_limit\": 10,\n            \"higher_limit\": 12\n          },\n          {\n            \"lower_limit\": 12,\n            \"higher_limit\": 15\n          },\n          {\n            \"lower_limit\": 15,\n            \"higher_limit\": 17.1\n          },\n          {\n            \"lower_limit\": 17.1,\n            \"higher_limit\": 20\n          },\n          {\n            \"lower_limit\": 20,\n            \"higher_limit\": 399\n          }\n        ],\n        \"power\": [\n          {\n            \"lower_limit\": 70,\n            \"higher_limit\": 85\n          },\n          {\n            \"lower_limit\": 85,\n            \"higher_limit\": 100\n          },\n          {\n            \"lower_limit\": 100,\n            \"higher_limit\": 130\n          },\n          {\n            \"lower_limit\": 130,\n            \"higher_limit\": 180\n          },\n          {\n            \"lower_limit\": 180,\n            \"higher_limit\": 400\n          }\n        ]\n      },\n      \"acceleration_zones\": {\n        \"free_acceleration_zones\": true,\n        \"acceleration_zones\": [\n          0.5,\n          1,\n          2,\n          3\n        ],\n        \"deceleration_zones\": [\n          -0.5,\n          -1,\n          -2,\n          -3\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fea8ae6e-25c7-4af1-b50f-41aa4374cdce",
+              "name": "Given team_id doesn't match any of user's teams.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    ":team_id",
+                    "sport-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "team_id",
+                      "description": "(Required) Team ID for retrieving the team's sport profiles."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "5516d774-b221-4d79-af31-d0e1978fe0fd",
+      "name": "Team training sessions",
+      "description": {
+        "content": "Endpoints for getting team training sessions and details.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cd49cfae-d445-42de-bb24-f441ce2ec485",
+          "name": "Get team training sessions.",
+          "request": {
+            "name": "Get team training sessions.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "teams",
+                ":team_id",
+                "training_sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<dateTime>",
+                  "description": "Return training sessions having record_start_time greater than <since>."
+                },
+                {
+                  "disabled": false,
+                  "key": "until",
+                  "value": "<dateTime>",
+                  "description": "Return training sessions having record_start_time less than <until>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Pagination parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>",
+                  "description": "Pagination parameters"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "team_id",
+                  "description": "(Required) Team whose training session are returned."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "team_read"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://auth.polar.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://auth.polar.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "69554d13-b462-44ca-857c-0fef3dc607c2",
+              "name": "Teams training sessions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    ":team_id",
+                    "training_sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "2018-04-14T00:00:00"
+                    },
+                    {
+                      "key": "until",
+                      "value": "2018-05-14T00:00:00"
+                    },
+                    {
+                      "key": "page",
+                      "value": "3"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "team_id",
+                      "description": "(Required) Team whose training session are returned."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"R8rMB4j7\",\n      \"team_id\": \"wMYz6L4w\",\n      \"name\": \"Match against Brazil national team\",\n      \"type\": \"MATCH\",\n      \"note\": \"Game started very well, but we lost 0-8\",\n      \"created\": \"2017-04-13T21:06:58Z\",\n      \"modified\": \"2017-04-13T21:06:58Z\",\n      \"record_start_time\": \"2017-04-14T09:17:22\",\n      \"record_end_time\": \"2017-04-14T09:56:47\",\n      \"start_time\": \"2017-04-14T09:20:06\",\n      \"end_time\": \"2017-04-14T09:50:06\",\n      \"latitude\": 55.67336654663086,\n      \"longitude\": 12.49395084381104,\n      \"sport\": \"SOCCER\"\n    },\n    {\n      \"id\": \"R8rMB4j7\",\n      \"team_id\": \"wMYz6L4w\",\n      \"name\": \"Match against Brazil national team\",\n      \"type\": \"MATCH\",\n      \"note\": \"Game started very well, but we lost 0-8\",\n      \"created\": \"2017-04-13T21:06:58Z\",\n      \"modified\": \"2017-04-13T21:06:58Z\",\n      \"record_start_time\": \"2017-04-14T09:17:22\",\n      \"record_end_time\": \"2017-04-14T09:56:47\",\n      \"start_time\": \"2017-04-14T09:20:06\",\n      \"end_time\": \"2017-04-14T09:50:06\",\n      \"latitude\": 55.67336654663086,\n      \"longitude\": 12.49395084381104,\n      \"sport\": \"SOCCER\"\n    }\n  ],\n  \"page\": {\n    \"per_page\": 20,\n    \"total_elements\": 2,\n    \"page_number\": 0,\n    \"total_pages\": 1\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2fec6141-9334-4eee-aad0-ff6afd74229f",
+              "name": "Given team_id doesn't match any of users's teams.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    ":team_id",
+                    "training_sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "2018-04-14T00:00:00"
+                    },
+                    {
+                      "key": "until",
+                      "value": "2018-05-14T00:00:00"
+                    },
+                    {
+                      "key": "page",
+                      "value": "3"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "team_id",
+                      "description": "(Required) Team whose training session are returned."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2c8409a5-67db-4a21-b925-3798f1c09fb3",
+          "name": "Get team training session details.",
+          "request": {
+            "name": "Get team training session details.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "teams",
+                "training_sessions",
+                ":training_session_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "training_session_id",
+                  "description": "(Required) Training session id."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "team_read"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://auth.polar.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://auth.polar.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5be1a9cd-0c57-483e-9cfc-861840b98f0b",
+              "name": "Training session details as JSON.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    "training_sessions",
+                    ":training_session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "training_session_id",
+                      "description": "(Required) Training session id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"R8rMB4j7\",\n    \"team_id\": \"wMYz6L4w\",\n    \"name\": \"Match against Brazil national team\",\n    \"type\": \"MATCH\",\n    \"note\": \"Game started very well, but we lost 0-8\",\n    \"created\": \"2017-04-13T21:06:58Z\",\n    \"modified\": \"2017-04-13T21:06:58Z\",\n    \"record_start_time\": \"2017-04-14T09:17:22\",\n    \"record_end_time\": \"2017-04-14T09:56:47\",\n    \"start_time\": \"2017-04-14T09:20:06\",\n    \"end_time\": \"2017-04-14T09:50:06\",\n    \"latitude\": 55.67336654663086,\n    \"longitude\": 12.49395084381104,\n    \"sport\": \"SOCCER\",\n    \"arena\": \"Valby old stadium Denmark\",\n    \"distance\": 6566,\n    \"kilocalories\": 601,\n    \"training_load\": 78,\n    \"heart_rate_average\": 79,\n    \"cardio_load\": 27.2,\n    \"cardio_load_interpretation\": 3,\n    \"participants\": [\n      {\n        \"player_id\": \"ZmozZxkr\",\n        \"player_number\": 12,\n        \"role\": \"Midfielder\",\n        \"player_session_id\": \"wp9DQ9ln\"\n      },\n      {\n        \"player_id\": \"ZmozZxkr\",\n        \"player_number\": 12,\n        \"role\": \"Midfielder\",\n        \"player_session_id\": \"wp9DQ9ln\"\n      }\n    ],\n    \"markers\": [\n      {\n        \"start_time\": \"2017-04-14T09:20:06\",\n        \"end_time\": \"2017-04-14T09:50:06\",\n        \"marker_type\": \"PHASE\",\n        \"name\": \"Intervals\",\n        \"note\": \"Cooling down\"\n      },\n      {\n        \"start_time\": \"2017-04-14T09:20:06\",\n        \"end_time\": \"2017-04-14T09:50:06\",\n        \"marker_type\": \"PHASE\",\n        \"name\": \"Intervals\",\n        \"note\": \"Cooling down\"\n      }\n    ],\n    \"heart_rate_zones\": [\n      {\n        \"index\": 1,\n        \"lower_limit\": 110,\n        \"higher_limit\": 130,\n        \"in_zone\": \"PT4S\",\n        \"in_zone_meters\": 222\n      },\n      {\n        \"index\": 1,\n        \"lower_limit\": 110,\n        \"higher_limit\": 130,\n        \"in_zone\": \"PT4S\",\n        \"in_zone_meters\": 222\n      }\n    ],\n    \"speed_zones_kmh\": [\n      {\n        \"index\": 1,\n        \"lower_limit\": 3,\n        \"higher_limit\": 7,\n        \"in_zone\": \"PT4.2S\",\n        \"in_zone_meters\": 222\n      },\n      {\n        \"index\": 1,\n        \"lower_limit\": 3,\n        \"higher_limit\": 7,\n        \"in_zone\": \"PT4.2S\",\n        \"in_zone_meters\": 222\n      }\n    ],\n    \"power_zones\": [\n      {\n        \"index\": 1,\n        \"lower_limit\": 3,\n        \"higher_limit\": 7,\n        \"in_zone\": \"PT4.2S\",\n        \"in_zone_muscle_load\": 333\n      },\n      {\n        \"index\": 1,\n        \"lower_limit\": 3,\n        \"higher_limit\": 7,\n        \"in_zone\": \"PT4.2S\",\n        \"in_zone_muscle_load\": 333\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c2eff00-6d5d-450e-9bbc-6148a145fd51",
+              "name": "Given training_session_id doesn't match any of user's training sessions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    "training_sessions",
+                    ":training_session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "training_session_id",
+                      "description": "(Required) Training session id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "6b84efee-115b-4a3a-95c1-73f76d801955",
+      "name": "Player training sessions",
+      "description": {
+        "content": "Endpoints for getting players training session and details. <aside class='notice'> Only training sessions that are done during time the player has been linked to team roster will be visible here. </aside>",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5bde221b-4630-49bb-824e-b47d6d303550",
+          "name": "Get player training sessions.",
+          "request": {
+            "name": "Get player training sessions.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "players",
+                ":player_id",
+                "training_sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<dateTime>",
+                  "description": "Return training sessions having start_time greater than [since]."
+                },
+                {
+                  "disabled": false,
+                  "key": "until",
+                  "value": "<dateTime>",
+                  "description": "Return training sessions having start_time less than [until]."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Return all, individual or team training sessions."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Pagination parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>",
+                  "description": "Pagination parameters"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "player_id",
+                  "description": "(Required) Player id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "team_read"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://auth.polar.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://auth.polar.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6f38548f-3507-44ac-a53b-869b41b1ae62",
+              "name": "Response containing list of player training sessions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "players",
+                    ":player_id",
+                    "training_sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "2018-04-14T00:00:00"
+                    },
+                    {
+                      "key": "until",
+                      "value": "2018-05-14T00:00:00"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "3"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "player_id",
+                      "description": "(Required) Player id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"wp9DQ9ln\",\n      \"type\": \"TEAM\",\n      \"created\": \"2017-04-13T21:06:58Z\",\n      \"modified\": \"2017-04-13T21:06:58Z\",\n      \"sport\": \"SOCCER\",\n      \"name\": \"Rowing\",\n      \"feeling\": \"AWESOME\",\n      \"note\": \"Awesome training.\",\n      \"latitude\": 55.67336654663086,\n      \"longitude\": 12.49395084381104,\n      \"start_time\": \"2017-04-14T09:20:06\",\n      \"stop_time\": \"2017-04-14T09:50:06\",\n      \"duration_ms\": 180000,\n      \"timezone_offset\": 120\n    },\n    {\n      \"id\": \"wp9DQ9ln\",\n      \"type\": \"TEAM\",\n      \"created\": \"2017-04-13T21:06:58Z\",\n      \"modified\": \"2017-04-13T21:06:58Z\",\n      \"sport\": \"SOCCER\",\n      \"name\": \"Rowing\",\n      \"feeling\": \"AWESOME\",\n      \"note\": \"Awesome training.\",\n      \"latitude\": 55.67336654663086,\n      \"longitude\": 12.49395084381104,\n      \"start_time\": \"2017-04-14T09:20:06\",\n      \"stop_time\": \"2017-04-14T09:50:06\",\n      \"duration_ms\": 180000,\n      \"timezone_offset\": 120\n    }\n  ],\n  \"page\": {\n    \"per_page\": 20,\n    \"total_elements\": 2,\n    \"page_number\": 0,\n    \"total_pages\": 1\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "158c77ce-cea6-46d5-8a04-86c155ce2254",
+              "name": "Given player_id doesn't match any of user's players.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "players",
+                    ":player_id",
+                    "training_sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "2018-04-14T00:00:00"
+                    },
+                    {
+                      "key": "until",
+                      "value": "2018-05-14T00:00:00"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "3"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "player_id",
+                      "description": "(Required) Player id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a93e4dff-5e9c-4c45-a9d6-93758c2fc96a",
+          "name": "Get player training session details.",
+          "request": {
+            "name": "Get player training session details.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "training_sessions",
+                ":player_session_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "samples",
+                  "value": "<string>",
+                  "description": "Include requested samples in response. Possible values are \"all\" or comma-separated list from \"distance\", \"location\", \"hr\", \"speed\", \"cadence\", \"altitude\", \"forward_acceleration\", \"rr\"."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "player_session_id",
+                  "description": "(Required) Players' training session id."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "team_read"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://auth.polar.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://auth.polar.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "422bc454-e6f7-4b9b-9ee9-9c95cb930be4",
+              "name": "Player training session as JSON.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "training_sessions",
+                    ":player_session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "samples",
+                      "value": "distance,location,hr"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "player_session_id",
+                      "description": "(Required) Players' training session id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"wp9DQ9ln\",\n    \"type\": \"TEAM\",\n    \"created\": \"2017-04-13T21:06:58Z\",\n    \"modified\": \"2017-04-13T21:06:58Z\",\n    \"name\": \"Rowing\",\n    \"feeling\": \"AWESOME\",\n    \"note\": \"Awesome training.\",\n    \"latitude\": 55.67336654663086,\n    \"longitude\": 12.49395084381104,\n    \"start_time\": \"2017-04-14T09:20:06\",\n    \"stop_time\": \"2017-04-14T09:50:06\",\n    \"duration_ms\": 180000,\n    \"calories\": 601,\n    \"distance_meters\": 6566,\n    \"training_load\": 78,\n    \"training_benefit\": \"BASIC_TRAINING\",\n    \"cardio_load\": 27.3,\n    \"muscle_load\": 34,\n    \"recovery_time_ms\": 480277990,\n    \"fat_percentage\": 28,\n    \"carbo_percentage\": 44,\n    \"protein_percentage\": 30,\n    \"heart_rate_max\": 96,\n    \"heart_rate_avg\": 79,\n    \"sport\": \"SOCCER\",\n    \"running_index\": 28,\n    \"ascent\": 46.3,\n    \"descent\": 12.5,\n    \"walking_duration_ms\": 180000,\n    \"walking_distance_meters\": 6566,\n    \"sprint_counter\": 12,\n    \"product\": \"Polar Pro\",\n    \"samples\": {\n      \"fields\": [\n        \"[object Object]\",\n        \"[object Object]\"\n      ],\n      \"values\": [\n        [],\n        []\n      ]\n    },\n    \"rr_intervals\": [\n      7874,\n      1885\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "06665d98-fefe-455b-bbe3-f50f87e1cbab",
+              "name": "Given player_session_id doesn't match any of user's training sessions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "training_sessions",
+                    ":player_session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "samples",
+                      "value": "distance,location,hr"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "player_session_id",
+                      "description": "(Required) Players' training session id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e536d334-0367-4574-a8cf-f3eb03c97984",
+          "name": "Get player team training session trimmed values.",
+          "request": {
+            "name": "Get player team training session trimmed values.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "training_sessions",
+                ":player_session_id",
+                "session_summary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "player_session_id",
+                  "description": "(Required) Players' training session id."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "team_read"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://auth.polar.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://auth.polar.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3d356f56-689a-4c88-8d16-e9cc5a8acbb9",
+              "name": "Player team training session trimmed values as JSON.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "training_sessions",
+                    ":player_session_id",
+                    "session_summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "player_session_id",
+                      "description": "(Required) Players' training session id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"player_session_id\": \"wp9DQ9ln\",\n    \"created\": \"2017-04-13T21:06:58Z\",\n    \"modified\": \"2017-04-13T21:06:58Z\",\n    \"trimmed_start_time\": \"2017-04-14T09:20:06\",\n    \"duration_ms\": 180000,\n    \"distance_meters\": 6566,\n    \"kilo_calories\": 601,\n    \"heart_rate_max\": 160,\n    \"heart_rate_avg\": 120,\n    \"heart_rate_min\": 55,\n    \"heart_rate_max_percent\": 96,\n    \"heart_rate_avg_percent\": 79,\n    \"heart_rate_min_percent\": 55,\n    \"sprint_counter\": 12,\n    \"speed_avg_kmh\": 322,\n    \"speed_max_kmh\": 7553,\n    \"cadence_avg\": 60,\n    \"cadence_max\": 100,\n    \"training_load\": 180,\n    \"cardio_load\": 27.3,\n    \"muscle_load\": 34,\n    \"heart_rate_zones\": [\n      {\n        \"index\": 1,\n        \"lower_limit\": 110,\n        \"higher_limit\": 130,\n        \"in_zone\": \"PT4S\"\n      },\n      {\n        \"index\": 1,\n        \"lower_limit\": 110,\n        \"higher_limit\": 130,\n        \"in_zone\": \"PT4S\"\n      }\n    ],\n    \"speed_zones_kmh\": [\n      {\n        \"index\": 1,\n        \"lower_limit\": 3,\n        \"higher_limit\": 7,\n        \"in_zone_meters\": 222\n      },\n      {\n        \"index\": 1,\n        \"lower_limit\": 3,\n        \"higher_limit\": 7,\n        \"in_zone_meters\": 222\n      }\n    ],\n    \"acceleration_zones_ms2\": [\n      {\n        \"limit\": -3,\n        \"counter\": 22\n      },\n      {\n        \"limit\": -3,\n        \"counter\": 22\n      }\n    ],\n    \"power_zones\": [\n      {\n        \"index\": 1,\n        \"lower_limit\": 3,\n        \"higher_limit\": 7,\n        \"in_zone\": \"PT4.2S\",\n        \"in_zone_muscle_load\": 333\n      },\n      {\n        \"index\": 1,\n        \"lower_limit\": 3,\n        \"higher_limit\": 7,\n        \"in_zone\": \"PT4.2S\",\n        \"in_zone_muscle_load\": 333\n      }\n    ],\n    \"out_of_heart_rate_zones\": \"PT4S\",\n    \"out_of_speed_zones\": 222,\n    \"out_of_power_zones\": \"PT4.2S\",\n    \"minimum_rr\": 200,\n    \"average_rr\": 250,\n    \"maximum_rr\": 300,\n    \"rmssd\": 50,\n    \"cardio_load_interpretation\": 1,\n    \"muscle_load_interpretation\": 2\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "67723896-4e47-48fa-aa39-6f1492b51fe1",
+              "name": "Given player_session_id doesn't match any of user's training sessions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "training_sessions",
+                    ":player_session_id",
+                    "session_summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "player_session_id",
+                      "description": "(Required) Players' training session id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eddcec06-6c18-48e1-aaf5-0bd211343729",
+          "name": "Get player team training session phase summaries.",
+          "request": {
+            "name": "Get player team training session phase summaries.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "training_sessions",
+                ":player_session_id",
+                "phase_summaries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "player_session_id",
+                  "description": "(Required) Players' training session id."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "team_read"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://auth.polar.com/oauth/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://auth.polar.com/oauth/authorize"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4f1cf0bb-e5f1-4d2c-b7ba-e7223ab6ffb0",
+              "name": "List of player team training phase summaries.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "training_sessions",
+                    ":player_session_id",
+                    "phase_summaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "player_session_id",
+                      "description": "(Required) Players' training session id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"player_session_id\": \"wp9DQ9ln\",\n      \"created\": \"2017-04-13T21:06:58Z\",\n      \"modified\": \"2017-04-13T21:06:58Z\",\n      \"trimmed_start_time\": \"2017-04-14T09:20:06\",\n      \"duration_ms\": 180000,\n      \"distance_meters\": 6566,\n      \"kilo_calories\": 601,\n      \"heart_rate_max\": 160,\n      \"heart_rate_avg\": 120,\n      \"heart_rate_min\": 55,\n      \"heart_rate_max_percent\": 96,\n      \"heart_rate_avg_percent\": 79,\n      \"heart_rate_min_percent\": 55,\n      \"sprint_counter\": 12,\n      \"speed_avg_kmh\": 5960,\n      \"speed_max_kmh\": 2148,\n      \"cadence_avg\": 60,\n      \"cadence_max\": 100,\n      \"training_load\": 180,\n      \"cardio_load\": 27.5,\n      \"muscle_load\": 34,\n      \"heart_rate_zones\": [\n        {\n          \"index\": 1,\n          \"lower_limit\": 110,\n          \"higher_limit\": 130,\n          \"in_zone\": \"PT4S\"\n        },\n        {\n          \"index\": 1,\n          \"lower_limit\": 110,\n          \"higher_limit\": 130,\n          \"in_zone\": \"PT4S\"\n        }\n      ],\n      \"speed_zones_kmh\": [\n        {\n          \"index\": 1,\n          \"lower_limit\": 3,\n          \"higher_limit\": 7,\n          \"in_zone_meters\": 222\n        },\n        {\n          \"index\": 1,\n          \"lower_limit\": 3,\n          \"higher_limit\": 7,\n          \"in_zone_meters\": 222\n        }\n      ],\n      \"acceleration_zones_ms2\": [\n        {\n          \"limit\": -3,\n          \"counter\": 22\n        },\n        {\n          \"limit\": -3,\n          \"counter\": 22\n        }\n      ],\n      \"power_zones\": [\n        {\n          \"index\": 1,\n          \"lower_limit\": 3,\n          \"higher_limit\": 7,\n          \"in_zone\": \"PT4.2S\",\n          \"in_zone_muscle_load\": 333\n        },\n        {\n          \"index\": 1,\n          \"lower_limit\": 3,\n          \"higher_limit\": 7,\n          \"in_zone\": \"PT4.2S\",\n          \"in_zone_muscle_load\": 333\n        }\n      ],\n      \"out_of_heart_rate_zones\": \"PT4S\",\n      \"out_of_speed_zones\": 222,\n      \"out_of_power_zones\": \"PT4.2S\",\n      \"minimum_rr\": 200,\n      \"average_rr\": 250,\n      \"maximum_rr\": 300,\n      \"rmssd\": 50,\n      \"cardio_load_interpretation\": 1,\n      \"muscle_load_interpretation\": 2\n    },\n    {\n      \"player_session_id\": \"wp9DQ9ln\",\n      \"created\": \"2017-04-13T21:06:58Z\",\n      \"modified\": \"2017-04-13T21:06:58Z\",\n      \"trimmed_start_time\": \"2017-04-14T09:20:06\",\n      \"duration_ms\": 180000,\n      \"distance_meters\": 6566,\n      \"kilo_calories\": 601,\n      \"heart_rate_max\": 160,\n      \"heart_rate_avg\": 120,\n      \"heart_rate_min\": 55,\n      \"heart_rate_max_percent\": 96,\n      \"heart_rate_avg_percent\": 79,\n      \"heart_rate_min_percent\": 55,\n      \"sprint_counter\": 12,\n      \"speed_avg_kmh\": 7255,\n      \"speed_max_kmh\": 5424,\n      \"cadence_avg\": 60,\n      \"cadence_max\": 100,\n      \"training_load\": 180,\n      \"cardio_load\": 27.5,\n      \"muscle_load\": 34,\n      \"heart_rate_zones\": [\n        {\n          \"index\": 1,\n          \"lower_limit\": 110,\n          \"higher_limit\": 130,\n          \"in_zone\": \"PT4S\"\n        },\n        {\n          \"index\": 1,\n          \"lower_limit\": 110,\n          \"higher_limit\": 130,\n          \"in_zone\": \"PT4S\"\n        }\n      ],\n      \"speed_zones_kmh\": [\n        {\n          \"index\": 1,\n          \"lower_limit\": 3,\n          \"higher_limit\": 7,\n          \"in_zone_meters\": 222\n        },\n        {\n          \"index\": 1,\n          \"lower_limit\": 3,\n          \"higher_limit\": 7,\n          \"in_zone_meters\": 222\n        }\n      ],\n      \"acceleration_zones_ms2\": [\n        {\n          \"limit\": -3,\n          \"counter\": 22\n        },\n        {\n          \"limit\": -3,\n          \"counter\": 22\n        }\n      ],\n      \"power_zones\": [\n        {\n          \"index\": 1,\n          \"lower_limit\": 3,\n          \"higher_limit\": 7,\n          \"in_zone\": \"PT4.2S\",\n          \"in_zone_muscle_load\": 333\n        },\n        {\n          \"index\": 1,\n          \"lower_limit\": 3,\n          \"higher_limit\": 7,\n          \"in_zone\": \"PT4.2S\",\n          \"in_zone_muscle_load\": 333\n        }\n      ],\n      \"out_of_heart_rate_zones\": \"PT4S\",\n      \"out_of_speed_zones\": 222,\n      \"out_of_power_zones\": \"PT4.2S\",\n      \"minimum_rr\": 200,\n      \"average_rr\": 250,\n      \"maximum_rr\": 300,\n      \"rmssd\": 50,\n      \"cardio_load_interpretation\": 1,\n      \"muscle_load_interpretation\": 2\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38f6dccf-25ec-44a7-859a-817dc0b6a475",
+              "name": "Given player_session_id doesn't match any of user's training sessions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "training_sessions",
+                    ":player_session_id",
+                    "phase_summaries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "player_session_id",
+                      "description": "(Required) Players' training session id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://teampro.api.polar.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "47e8b72b-f2bc-4f28-bf76-8f88b8cdd0ca",
+    "name": "TeamPro API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Polar TeamPro API documentation\n\nContact Support:\n Name: Support\n Email: b2bhelpdesk@polar.com",
+      "type": "text/plain"
+    }
+  }
+}

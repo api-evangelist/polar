@@ -1,0 +1,343 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TeamPro API",
+    "version": "1.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Team",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get teams.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://teampro.api.polar.com/v1/teams",
+            "params": [
+              {
+                "name": "pagination",
+                "value": "",
+                "type": "query",
+                "description": "Pagination parameters"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://auth.polar.com/oauth/authorize",
+              "accessTokenUrl": "https://auth.polar.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get teams."
+        },
+        {
+          "info": {
+            "name": "Get team details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://teampro.api.polar.com/v1/teams/:team_id",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "Team id to get."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://auth.polar.com/oauth/authorize",
+              "accessTokenUrl": "https://auth.polar.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get team details."
+        },
+        {
+          "info": {
+            "name": "Get team sport profiles.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://teampro.api.polar.com/v1/teams/:team_id/sport-profiles",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "Team ID for retrieving the team's sport profiles."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://auth.polar.com/oauth/authorize",
+              "accessTokenUrl": "https://auth.polar.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get team sport profiles."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Team training sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get team training sessions.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://teampro.api.polar.com/v1/teams/:team_id/training_sessions",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "Team whose training session are returned."
+              },
+              {
+                "name": "since",
+                "value": "2018-04-14T00:00:00",
+                "type": "query",
+                "description": "Return training sessions having record_start_time greater than <since>."
+              },
+              {
+                "name": "until",
+                "value": "2018-05-14T00:00:00",
+                "type": "query",
+                "description": "Return training sessions having record_start_time less than <until>"
+              },
+              {
+                "name": "pagination",
+                "value": "",
+                "type": "query",
+                "description": "Pagination parameters"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://auth.polar.com/oauth/authorize",
+              "accessTokenUrl": "https://auth.polar.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get team training sessions."
+        },
+        {
+          "info": {
+            "name": "Get team training session details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://teampro.api.polar.com/v1/teams/training_sessions/:training_session_id",
+            "params": [
+              {
+                "name": "training_session_id",
+                "value": "",
+                "type": "path",
+                "description": "Training session id."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://auth.polar.com/oauth/authorize",
+              "accessTokenUrl": "https://auth.polar.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get team training session details."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Player training sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get player training sessions.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://teampro.api.polar.com/v1/players/:player_id/training_sessions",
+            "params": [
+              {
+                "name": "player_id",
+                "value": "",
+                "type": "path",
+                "description": "Player id"
+              },
+              {
+                "name": "since",
+                "value": "2018-04-14T00:00:00",
+                "type": "query",
+                "description": "Return training sessions having start_time greater than [since]."
+              },
+              {
+                "name": "until",
+                "value": "2018-05-14T00:00:00",
+                "type": "query",
+                "description": "Return training sessions having start_time less than [until]."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Return all, individual or team training sessions."
+              },
+              {
+                "name": "pagination",
+                "value": "",
+                "type": "query",
+                "description": "Pagination parameters"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://auth.polar.com/oauth/authorize",
+              "accessTokenUrl": "https://auth.polar.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get player training sessions."
+        },
+        {
+          "info": {
+            "name": "Get player training session details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://teampro.api.polar.com/v1/training_sessions/:player_session_id",
+            "params": [
+              {
+                "name": "player_session_id",
+                "value": "",
+                "type": "path",
+                "description": "Players' training session id."
+              },
+              {
+                "name": "samples",
+                "value": "distance,location,hr",
+                "type": "query",
+                "description": "Include requested samples in response. Possible values are \"all\" or comma-separated list from \"distance\", \"location\", \"hr\", \"speed\", \"cadence\", \"altitude\", \"forward_acceleration\", \"rr\"."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://auth.polar.com/oauth/authorize",
+              "accessTokenUrl": "https://auth.polar.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get player training session details."
+        },
+        {
+          "info": {
+            "name": "Get player team training session trimmed values.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://teampro.api.polar.com/v1/training_sessions/:player_session_id/session_summary",
+            "params": [
+              {
+                "name": "player_session_id",
+                "value": "",
+                "type": "path",
+                "description": "Players' training session id."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://auth.polar.com/oauth/authorize",
+              "accessTokenUrl": "https://auth.polar.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get player team training session trimmed values."
+        },
+        {
+          "info": {
+            "name": "Get player team training session phase summaries.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://teampro.api.polar.com/v1/training_sessions/:player_session_id/phase_summaries",
+            "params": [
+              {
+                "name": "player_session_id",
+                "value": "",
+                "type": "path",
+                "description": "Players' training session id."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://auth.polar.com/oauth/authorize",
+              "accessTokenUrl": "https://auth.polar.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get player team training session phase summaries."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

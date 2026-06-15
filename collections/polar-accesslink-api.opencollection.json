@@ -1,0 +1,2084 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Polar AccessLink API",
+    "version": "v3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Exercises",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List exercises",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/exercises",
+            "params": [
+              {
+                "name": "samples",
+                "value": "",
+                "type": "query",
+                "description": "Return all sample data for this exercise."
+              },
+              {
+                "name": "zones",
+                "value": "",
+                "type": "query",
+                "description": "Return all zones data for this exercise."
+              },
+              {
+                "name": "route",
+                "value": "",
+                "type": "query",
+                "description": "Return all route data for this exercise."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List users exercises available in AccessLink. Only Exercises uploaded to Flow in the last 30 days are returned. Only exercises that have been uploaded to Flow after the user is registered with your client will be returned. Use samples and zones query parameters to return optional samples and zone information of the exercises.\nTraining Load Pro data will be included in the exercise object if the exercise is recorded with a specific wrist unit model,  please check [compatible devices](https://www."
+        },
+        {
+          "info": {
+            "name": "Get exercise",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/exercises/:exerciseId",
+            "params": [
+              {
+                "name": "exerciseId",
+                "value": "",
+                "type": "path",
+                "description": "Hashed exercise id."
+              },
+              {
+                "name": "samples",
+                "value": "",
+                "type": "query",
+                "description": "Return all sample data for this exercise."
+              },
+              {
+                "name": "zones",
+                "value": "",
+                "type": "query",
+                "description": "Return all zones data for this exercise."
+              },
+              {
+                "name": "route",
+                "value": "",
+                "type": "query",
+                "description": "Return all route data for this exercise."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get users exercise using hashed id. Only Exercises uploaded to Flow in the last 30 days are available. Only exercises that have been uploaded to Flow after the user is registered with your client will be available. Use samples and zones query parameters to return optional samples and zone information of the exercise."
+        },
+        {
+          "info": {
+            "name": "Get exercise FIT",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/exercises/:exerciseId/fit",
+            "params": [
+              {
+                "name": "exerciseId",
+                "value": "",
+                "type": "path",
+                "description": "Hashed exercise id."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "FIT file for users exercise. Only Exercises uploaded to Flow in the last 30 days are available. Only exercises that have been uploaded to Flow after the user is registered with your client will be available. See [FIT sport mappings in appendix](#sport-type-mapping-in-fit-files)."
+        },
+        {
+          "info": {
+            "name": "Get exercise TCX",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/exercises/:exerciseId/tcx",
+            "params": [
+              {
+                "name": "exerciseId",
+                "value": "",
+                "type": "path",
+                "description": "Hashed exercise id."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "TCX file for users exercise without an AccessLink \"transaction\". Only Exercises uploaded to Flow in the last 30 days are available. Only exercises that have been uploaded to Flow after the user is registered with your client will be available."
+        },
+        {
+          "info": {
+            "name": "Get exercise GPX",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/exercises/:exerciseId/gpx",
+            "params": [
+              {
+                "name": "exerciseId",
+                "value": "",
+                "type": "path",
+                "description": "Hashed exercise id."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "GPX file for users exercise without an AccessLink \"transaction\". Only Exercises uploaded to Flow in the last 30 days are available. Only exercises that have been uploaded to Flow after the user is registered with your client will be available."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Register user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.polaraccesslink.com/v3/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Once partner has been authorized by user, partner must register the user before being able to access its data. API user-id and Polar User Id (polar-user-id) are interchangeable terms."
+        },
+        {
+          "info": {
+            "name": "Get user information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id",
+            "params": [
+              {
+                "name": "user-id",
+                "value": "475",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List user basic information.\nNote: Although it is possible to get users weight and height from this resource, the [get physical info](#get-physical-info) should be used instead."
+        },
+        {
+          "info": {
+            "name": "Delete user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id",
+            "params": [
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "When partner wishes no longer to receive user data, user can be de-registered. This will revoke the access token authorized by user."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Physical info",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get user's physical info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/physical-info",
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve user's physical information."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Pull notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/notifications",
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get list of available exercises and activities for users"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Exercises (deprecated)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/exercise-transactions",
+            "params": [
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Check for new training data and create a new transaction if found. Only data uploaded to Flow in the last 30 days will be available. Only data that has been uploaded to Flow after the user is registered with your client will be available."
+        },
+        {
+          "info": {
+            "name": "List exercises",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/exercise-transactions/:transaction-id",
+            "params": [
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction identifier"
+              },
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "After successfully initiating a transaction, training sessions included within it can be retrieved with the provided transactionId."
+        },
+        {
+          "info": {
+            "name": "Commit transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/exercise-transactions/:transaction-id",
+            "params": [
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction identifier"
+              },
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "After successfully retrieving training session data within a transaction, partners are expected to commit the transaction."
+        },
+        {
+          "info": {
+            "name": "Get exercise summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/exercise-transactions/:transaction-id/exercises/:exercise-id",
+            "params": [
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              },
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction identifier"
+              },
+              {
+                "name": "exercise-id",
+                "value": "",
+                "type": "path",
+                "description": "Exercise identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve training session summary data"
+        },
+        {
+          "info": {
+            "name": "Get FIT",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/exercise-transactions/:transaction-id/exercises/:exercise-id/fit",
+            "params": [
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              },
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction identifier"
+              },
+              {
+                "name": "exercise-id",
+                "value": "",
+                "type": "path",
+                "description": "Exercise identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve exercise in FIT format. See [FIT sport mappings in appendix](#sport-type-mapping-in-fit-files)."
+        },
+        {
+          "info": {
+            "name": "Get GPX",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/exercise-transactions/:transaction-id/exercises/:exercise-id/gpx",
+            "params": [
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              },
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction identifier"
+              },
+              {
+                "name": "exercise-id",
+                "value": "",
+                "type": "path",
+                "description": "Exercise identifier"
+              },
+              {
+                "name": "includePauseTimes",
+                "value": "",
+                "type": "query",
+                "description": "Whether to add pauses as part of the route. Default is false."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve training session summary data in GPX format"
+        },
+        {
+          "info": {
+            "name": "Get heart rate zones",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/exercise-transactions/:transaction-id/exercises/:exercise-id/heart-rate-zones",
+            "params": [
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              },
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction identifier"
+              },
+              {
+                "name": "exercise-id",
+                "value": "",
+                "type": "path",
+                "description": "Exercise identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve heart rate zones in training session"
+        },
+        {
+          "info": {
+            "name": "Get available samples",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/exercise-transactions/:transaction-id/exercises/:exercise-id/samples",
+            "params": [
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              },
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction identifier"
+              },
+              {
+                "name": "exercise-id",
+                "value": "",
+                "type": "path",
+                "description": "Exercise identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve list of links to available samples in training session"
+        },
+        {
+          "info": {
+            "name": "Get samples",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/exercise-transactions/:transaction-id/exercises/:exercise-id/samples/:type-id",
+            "params": [
+              {
+                "name": "type-id",
+                "value": "",
+                "type": "path",
+                "description": "Sample type id"
+              },
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              },
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction identifier"
+              },
+              {
+                "name": "exercise-id",
+                "value": "",
+                "type": "path",
+                "description": "Exercise identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve sample data of given type"
+        },
+        {
+          "info": {
+            "name": "Get TCX",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/exercise-transactions/:transaction-id/exercises/:exercise-id/tcx",
+            "params": [
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              },
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction identifier"
+              },
+              {
+                "name": "exercise-id",
+                "value": "",
+                "type": "path",
+                "description": "Exercise identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve exercise in TCX format"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Daily activity (deprecated)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/activity-transactions",
+            "params": [
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Initiate activity transaction.\nCheck for new activity summaries and create a new transaction if found.\nOnly data uploaded to Flow in the last 30 days will be available.\nOnly data that has been uploaded to Flow after the user is registered with your client will be available."
+        },
+        {
+          "info": {
+            "name": "List activities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/activity-transactions/:transaction-id",
+            "params": [
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction identifier"
+              },
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List new activity data.\nAfter successfully initiating a transaction, activity summaries included within it can be retrieved with the provided transactionId."
+        },
+        {
+          "info": {
+            "name": "Commit transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/activity-transactions/:transaction-id",
+            "params": [
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction identifier"
+              },
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "After successfully retrieving activity summary data within a transaction, partners are expected to commit the transaction."
+        },
+        {
+          "info": {
+            "name": "Get activity summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/activity-transactions/:transaction-id/activities/:activity-id",
+            "params": [
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              },
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction identifier"
+              },
+              {
+                "name": "activity-id",
+                "value": "",
+                "type": "path",
+                "description": "Activity summary identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get activity summary"
+        },
+        {
+          "info": {
+            "name": "Get step samples",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/activity-transactions/:transaction-id/activities/:activity-id/step-samples",
+            "params": [
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              },
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction identifier"
+              },
+              {
+                "name": "activity-id",
+                "value": "",
+                "type": "path",
+                "description": "Activity summary identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get activity step samples. Example data can be seen from [appendix](#activity-step-time-series)."
+        },
+        {
+          "info": {
+            "name": "Get zone samples",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/activity-transactions/:transaction-id/activities/:activity-id/zone-samples",
+            "params": [
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              },
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction identifier"
+              },
+              {
+                "name": "activity-id",
+                "value": "",
+                "type": "path",
+                "description": "Activity summary identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get activity zone samples. Example data can be seen from [appendix](#activity-zone-time-series)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Daily activity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List activities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/activities",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start date in format YYYY-MM-DD. If not given, defaults to 28 days ago."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End date in format YYYY-MM-DD. If not given, defaults to today."
+              },
+              {
+                "name": "steps",
+                "value": "",
+                "type": "query",
+                "description": "include steps samples for activity summary."
+              },
+              {
+                "name": "activity_zones",
+                "value": "",
+                "type": "query",
+                "description": "include activity zones samples for activity summary."
+              },
+              {
+                "name": "inactivity_stamps",
+                "value": "",
+                "type": "query",
+                "description": "include inactivity stamps for activity summary."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List users activities available in AccessLink. When no date range is given, activities from the last 28 days are returned. When `from` is given, activities for the specified date range are returned. From date cannot be older than 365 days from today and the maximum range between from and to is 28 days."
+        },
+        {
+          "info": {
+            "name": "Get activity for given date",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/activities/:date",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Date in format YYYY-MM-DD."
+              },
+              {
+                "name": "steps",
+                "value": "",
+                "type": "query",
+                "description": "include steps samples for activity summary."
+              },
+              {
+                "name": "activity_zones",
+                "value": "",
+                "type": "query",
+                "description": "include activity zones samples for activity summary."
+              },
+              {
+                "name": "inactivity_stamps",
+                "value": "",
+                "type": "query",
+                "description": "include inactivity stamps for activity summary."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get users activity for given date. Date cannot be older than 365 days from today."
+        },
+        {
+          "info": {
+            "name": "List activity samples",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/activities/samples",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start date in format YYYY-MM-DD. If not given, defaults to 28 days ago."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End date in format YYYY-MM-DD. If not given, defaults to today."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List users activity samples available in AccessLink. When no date range is given, activity samples from the last 28 days are returned. When `from` is given, activity samples for the specified date range are returned. From date cannot be older than 365 days from today and the maximum range between from and to is 28 days."
+        },
+        {
+          "info": {
+            "name": "Get activity samples for given date",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/activities/samples/:date",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Date in format YYYY-MM-DD."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get users activity samples for given date. Date cannot be older than 365 days from today."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Physical info (deprecated)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/physical-information-transactions",
+            "params": [
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Initiate physical info transaction.\nCheck for new physical info and create a new transaction if found."
+        },
+        {
+          "info": {
+            "name": "List physical infos",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/physical-information-transactions/:transaction-id",
+            "params": [
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction identifier"
+              },
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List new physical info data.\nAfter successfully initiating a transaction, physical infos included within it can be retrieved with the provided transactionId."
+        },
+        {
+          "info": {
+            "name": "Commit transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/physical-information-transactions/:transaction-id",
+            "params": [
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction identifier"
+              },
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "After successfully retrieving physical information within a transaction, partners are expected to commit the transaction."
+        },
+        {
+          "info": {
+            "name": "Get physical info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/physical-information-transactions/:transaction-id/physical-informations/:physical-info-id",
+            "params": [
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              },
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction identifier"
+              },
+              {
+                "name": "physical-info-id",
+                "value": "",
+                "type": "path",
+                "description": "Physical information identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get physical info entity data"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/webhooks",
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Returns created webhook if exists."
+        },
+        {
+          "info": {
+            "name": "Create webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.polaraccesslink.com/v3/webhooks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create new webhook.\n\nWhen creating webhook the AccessLink sends a ping message to the url in request body. The ping message must be answered with 200 OK or otherwise the webhook is not created.\n\nCreated webhook is by default in activated state and will send push notifications about subscribed events. Webhook will be automatically deactivated if push notifications have not been successful for a period of seven (7) days.\n**Note!** Save the *signature_secret_key* from response since this is the onl"
+        },
+        {
+          "info": {
+            "name": "Activate webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.polaraccesslink.com/v3/webhooks/activate",
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Activate deactivated webhook. Activation is successful if the configured webhook url returns HTTP status 200 (OK) for the issued ping request."
+        },
+        {
+          "info": {
+            "name": "Deactivate webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.polaraccesslink.com/v3/webhooks/deactivate",
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Deactivate activated webhook. Deactivated webhook does not push notifications about subscribed events."
+        },
+        {
+          "info": {
+            "name": "Update webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://www.polaraccesslink.com/v3/webhooks/:webhook-id",
+            "params": [
+              {
+                "name": "webhook-id",
+                "value": "",
+                "type": "path",
+                "description": "Webhook id to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Edit webhook event types and/or url.\n\nWhen updating webhook url the AccessLink sends a ping message to the new address. The ping message must be answered with 200 OK or otherwise the webhook is not updated."
+        },
+        {
+          "info": {
+            "name": "Delete webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://www.polaraccesslink.com/v3/webhooks/:webhook-id",
+            "params": [
+              {
+                "name": "webhook-id",
+                "value": "",
+                "type": "path",
+                "description": "Webhook id to delete"
+              }
+            ],
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Delete webhook by id."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Sleep",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List nights",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/sleep",
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List sleep data of user for the last 28 days."
+        },
+        {
+          "info": {
+            "name": "Get Sleep",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/sleep/:date",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Date of sleep as ISO-8601 date string, example: \"2020-01-01\""
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Users sleep data for given date."
+        },
+        {
+          "info": {
+            "name": "Get available sleep times",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/sleep/available",
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get the dates with sleep start and end times, where user has sleep data available in the last 28 days."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Nightly Recharge",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Nightly Recharges",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/nightly-recharge",
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List Nightly Recharge data of user for the last 28 days."
+        },
+        {
+          "info": {
+            "name": "Get Nightly Recharge",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/nightly-recharge/:date",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Date of Nightly Recharge as ISO-8601 date string, example: \"2020-01-01\""
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get Users Nightly Recharge data for given date."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Continuous Heart Rate",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Continuous Heart rate samples",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/continuous-heart-rate/:date",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Date of Continuous Heart Rate as ISO-8601 date string, example: \"2022-01-01\""
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get users continuous heart rate values for given date. <a href=\"https://support.polar.com/en/support/the_what_and_how_of_polars_continuous_heart_rate\"> Supported devices </a>"
+        },
+        {
+          "info": {
+            "name": "Get Continuous Heart rate samples with range",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/continuous-heart-rate",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive start date of range as ISO-8601 date string, example: \"2022-01-01\""
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive end date of range as ISO-8601 date string, example: \"2022-01-28\""
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get users continuous heart rate values for given date range. <a href=\"https://support.polar.com/en/support/the_what_and_how_of_polars_continuous_heart_rate\"> Supported devices </a>"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Cardio load",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List cardio loads",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/cardio-load",
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns cardio load data for the last 28 days. The response list contains cardio load objects for every day in the range, even if values cannot be calculated — in that case the cardio load status is represented as LOAD_STATUS_NOT_AVAILABLE."
+        },
+        {
+          "info": {
+            "name": "Get cardio load by date",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/cardio-load/:date",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Date as ISO-8601 date string, example: \"2022-01-01\""
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns cardio load data for selected date."
+        },
+        {
+          "info": {
+            "name": "Get cardio load by date range",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/cardio-load/date",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive as ISO-8601 date string, example: \"2022-01-01\""
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive as ISO-8601 date string, example: \"2022-01-01\""
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns cardio load data for selected date range. The response list contains cardio load objects for every day between range even if the cardio load values cannot be calculated, in this case the cardio load status is represented as LOAD_STATUS_NOT_AVAILABLE."
+        },
+        {
+          "info": {
+            "name": "Get historical data by days",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/cardio-load/period/days/:days",
+            "params": [
+              {
+                "name": "days",
+                "value": "",
+                "type": "path",
+                "description": "Period of days."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns historical cardio load data for selected period of days counting from current date."
+        },
+        {
+          "info": {
+            "name": "Get historical data by months",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/cardio-load/period/months/:months",
+            "params": [
+              {
+                "name": "months",
+                "value": "",
+                "type": "path",
+                "description": "Period of months."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Returns historical cardio load data for selected period of months counting from current date."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SleepWise&trade;",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Alertness period data (last 28 days)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/sleepwise/alertness",
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get user's alertness period data for the last 28 days. <a href=\"https://support.polar.com/en/polar-sleepwise\"> Supported devices </a>"
+        },
+        {
+          "info": {
+            "name": "Alertness period data (date range)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/sleepwise/alertness/date",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive start date of range as ISO-8601 date string, example: \"2022-01-01\""
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive end date of range as ISO-8601 date string, example: \"2022-01-28\""
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get user's alertness period data for given date range. Maximum date range between from and to cannot be more than 28 days. <a href=\"https://support.polar.com/en/polar-sleepwise\"> Supported devices </a>"
+        },
+        {
+          "info": {
+            "name": "Circadian bedtime period data (last 28 days)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/sleepwise/circadian-bedtime",
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get user's circadian bedtime period data for the last 28 days. <a href=\"https://support.polar.com/en/polar-sleepwise\"> Supported devices </a>"
+        },
+        {
+          "info": {
+            "name": "Circadian bedtime period data (date range)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/sleepwise/circadian-bedtime/date",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive start date of range as ISO-8601 date string, example: \"2022-01-01\""
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive end date of range as ISO-8601 date string, example: \"2022-01-28\""
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get user's circadian bedtime period data for given date range. Maximum date range between from and to cannot be more than 28 days. <a href=\"https://support.polar.com/en/polar-sleepwise\"> Supported devices </a>"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Elixir&trade; Biosensing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Body temperature data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/biosensing/bodytemperature",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive start date of range as ISO-8601 date string, example: \"2023-10-01\""
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive end date of range as ISO-8601 date string, example: \"2023-10-28\""
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get user's body temperature data for last 28 days or for given date range. Maximum date range between from and to cannot be more than 28 days."
+        },
+        {
+          "info": {
+            "name": "Sleep skin temperature data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/biosensing/skintemperature",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive start date of range as ISO-8601 date string, example: \"2023-10-01\""
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive end date of range as ISO-8601 date string, example: \"2023-10-28\""
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get user's sleep skin temperature data for last 28 days or for given date range. Maximum date range between from and to cannot be more than 28 days."
+        },
+        {
+          "info": {
+            "name": "Skin contacts data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/biosensing/skincontacts",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive start date of range as ISO-8601 date string, example: \"2023-10-01\""
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive end date of range as ISO-8601 date string, example: \"2023-10-28\""
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get user's skin contacts data for last 28 days or for given date range. Maximum date range between from and to cannot be more than 28 days."
+        },
+        {
+          "info": {
+            "name": "Wrist ECG test result data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/biosensing/ecg",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive start date of range as ISO-8601 date string, example: \"2023-10-01\""
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive end date of range as ISO-8601 date string, example: \"2023-10-28\""
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get user's wrist ECG test result data for last 28 days or for given date range. Maximum date range between from and to cannot be more than 28 days."
+        },
+        {
+          "info": {
+            "name": "SpO2 test result data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/biosensing/spo2",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive start date of range as ISO-8601 date string, example: \"2023-10-01\""
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive end date of range as ISO-8601 date string, example: \"2023-10-28\""
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get user's SpO2 test result data for last 28 days or for given date range. Maximum date range between from and to cannot be more than 28 days."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
