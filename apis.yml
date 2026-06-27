@@ -84,7 +84,7 @@ apis:
     type: Documentation
   - url: https://github.com/polarofficial/polar-ble-sdk
     name: Polar BLE SDK (iOS + Android)
-    type: SDK
+    type: SDKs
   - url: https://github.com/polarofficial/create-mobile-app-for-polar-sensors
     name: Mobile App Starter for Polar Sensors
     type: CodeExamples
@@ -127,16 +127,16 @@ common:
   type: Documentation
 - url: https://admin.polaraccesslink.com/
   name: AccessLink Partner Admin Console
-  type: SignUp
+  type: Signup
 - url: https://www.polar.com/en/business/sdk
   name: Polar SDK
-  type: SDK
+  type: SDKs
 - url: https://github.com/polarofficial
   name: Polar Official GitHub
   type: GitHubOrganization
 - url: https://github.com/polarofficial/polar-ble-sdk
   name: Polar BLE SDK
-  type: SDK
+  type: SDKs
 - url: https://github.com/polarofficial/accesslink-example-python
   name: AccessLink Python Example
   type: CodeExamples
