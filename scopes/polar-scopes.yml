@@ -1,0 +1,29 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/polar-accesslink-api-openapi.yml, openapi/polar-teampro-api-openapi.yml
+schemes:
+- name: OAuth2
+  source: openapi/polar-accesslink-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://flow.polar.com/oauth2/authorization
+    tokenUrl: https://polarremote.com/v2/oauth2/token
+- name: OAuth2
+  source: openapi/polar-teampro-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://auth.polar.com/oauth/authorize
+    tokenUrl: https://auth.polar.com/oauth/token
+scopes:
+- scope: accesslink.read_all
+  description: Allows read access to user's data
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/polar-accesslink-api-openapi.yml
+- scope: team_read
+  description: Allows read access to user's data
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/polar-teampro-api-openapi.yml
