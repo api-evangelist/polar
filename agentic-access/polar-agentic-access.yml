@@ -1,0 +1,890 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/polar-accesslink-api-openapi.yml, openapi/polar-teampro-api-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 70
+  by_action_class:
+    connected: 57
+    acting: 13
+  by_consequence:
+    read: 57
+    write: 13
+  human_in_the_loop_required: 0
+operations:
+- path: /v3/exercises
+  method: get
+  operationId: listExercisesWithoutTransaction
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/exercises/{exerciseId}
+  method: get
+  operationId: getExerciseWithoutTransaction
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/exercises/{exerciseId}/fit
+  method: get
+  operationId: getExerciseFitWithoutTransaction
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/exercises/{exerciseId}/tcx
+  method: get
+  operationId: getExerciseTcxWithoutTransaction
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/exercises/{exerciseId}/gpx
+  method: get
+  operationId: getExerciseGpxWithoutTransaction
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users
+  method: post
+  operationId: registerUser
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - accesslink.read_all
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/users/{user-id}
+  method: get
+  operationId: getUserInformation
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/{user-id}
+  method: delete
+  operationId: deleteUser
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - accesslink.read_all
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/users/physical-info
+  method: get
+  operationId: getUserPhysicalInformation
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/notifications
+  method: get
+  operationId: list
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/{user-id}/exercise-transactions
+  method: post
+  operationId: createExerciseTransaction
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - accesslink.read_all
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/users/{user-id}/exercise-transactions/{transaction-id}
+  method: get
+  operationId: listExercises
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/{user-id}/exercise-transactions/{transaction-id}
+  method: put
+  operationId: commitExerciseTransaction
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - accesslink.read_all
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/users/{user-id}/exercise-transactions/{transaction-id}/exercises/{exercise-id}
+  method: get
+  operationId: getExerciseSummary
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/{user-id}/exercise-transactions/{transaction-id}/exercises/{exercise-id}/fit
+  method: get
+  operationId: getFit
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/{user-id}/exercise-transactions/{transaction-id}/exercises/{exercise-id}/gpx
+  method: get
+  operationId: getGpx
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/{user-id}/exercise-transactions/{transaction-id}/exercises/{exercise-id}/heart-rate-zones
+  method: get
+  operationId: getHeartRateZones
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/{user-id}/exercise-transactions/{transaction-id}/exercises/{exercise-id}/samples
+  method: get
+  operationId: getAvailableSamples
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/{user-id}/exercise-transactions/{transaction-id}/exercises/{exercise-id}/samples/{type-id}
+  method: get
+  operationId: getSamples
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/{user-id}/exercise-transactions/{transaction-id}/exercises/{exercise-id}/tcx
+  method: get
+  operationId: getTcx
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/{user-id}/activity-transactions
+  method: post
+  operationId: createActivityTransaction
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - accesslink.read_all
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/users/{user-id}/activity-transactions/{transaction-id}
+  method: get
+  operationId: listActivities
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/{user-id}/activity-transactions/{transaction-id}
+  method: put
+  operationId: commitActivityTransaction
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - accesslink.read_all
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/users/{user-id}/activity-transactions/{transaction-id}/activities/{activity-id}
+  method: get
+  operationId: getActivitySummary
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/{user-id}/activity-transactions/{transaction-id}/activities/{activity-id}/step-samples
+  method: get
+  operationId: getStepSamples
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/{user-id}/activity-transactions/{transaction-id}/activities/{activity-id}/zone-samples
+  method: get
+  operationId: getZoneSamples
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/activities
+  method: get
+  operationId: listActivitiesWithoutTransaction
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/activities/{date}
+  method: get
+  operationId: getActivityWithoutTransaction
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/activities/samples
+  method: get
+  operationId: listActivitySamplesWithoutTransaction
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/activities/samples/{date}
+  method: get
+  operationId: getActivitySamplesWithoutTransaction
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/{user-id}/physical-information-transactions
+  method: post
+  operationId: createPhysicalInfoTransaction
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - accesslink.read_all
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/users/{user-id}/physical-information-transactions/{transaction-id}
+  method: get
+  operationId: listPhysicalInfos
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/{user-id}/physical-information-transactions/{transaction-id}
+  method: put
+  operationId: commitPhysicalInfoTransaction
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - accesslink.read_all
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/users/{user-id}/physical-information-transactions/{transaction-id}/physical-informations/{physical-info-id}
+  method: get
+  operationId: getPhysicalInfo
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/webhooks
+  method: post
+  operationId: createWebhook
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/webhooks
+  method: get
+  operationId: getWebhook
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/webhooks/activate
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/webhooks/deactivate
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/webhooks/{webhook-id}
+  method: patch
+  operationId: updateWebhook
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/webhooks/{webhook-id}
+  method: delete
+  operationId: deleteWebhook
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v3/users/sleep
+  method: get
+  operationId: listNights
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/sleep/{date}
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/sleep/available
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/nightly-recharge
+  method: get
+  operationId: listNightlyRecharge
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/nightly-recharge/{date}
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/continuous-heart-rate/{date}
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/continuous-heart-rate
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/cardio-load
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/cardio-load/{date}
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/cardio-load/date
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/cardio-load/period/days/{days}
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/cardio-load/period/months/{months}
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/sleepwise/alertness
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/sleepwise/alertness/date
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/sleepwise/circadian-bedtime
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/sleepwise/circadian-bedtime/date
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/biosensing/bodytemperature
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/biosensing/skintemperature
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/biosensing/skincontacts
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/biosensing/ecg
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v3/users/biosensing/spo2
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - accesslink.read_all
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/teams
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - team_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/teams/{team_id}
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - team_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/teams/{team_id}/sport-profiles
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - team_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/teams/{team_id}/training_sessions
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - team_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/teams/training_sessions/{training_session_id}
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - team_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/players/{player_id}/training_sessions
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - team_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/training_sessions/{player_session_id}
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - team_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/training_sessions/{player_session_id}/session_summary
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - team_read
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/training_sessions/{player_session_id}/phase_summaries
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - team_read
+    token:
+      max-ttl: 3600
+    audit: none
