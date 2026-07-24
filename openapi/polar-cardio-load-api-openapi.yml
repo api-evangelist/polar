@@ -1,0 +1,255 @@
+openapi: 3.0.0
+info:
+  description: Polar AccessLink API documentation
+  version: v3
+  title: Polar AccessLink Cardio load API
+  contact:
+    name: Support
+    url: https://www.polar.com/accesslink
+    email: b2bhelpdesk@polar.com
+  license:
+    name: Polar Electro AccessLink Limited License Agreement
+    url: https://www.polar.com/en/legal/polar-api-agreement
+servers:
+- url: https://www.polaraccesslink.com/
+tags:
+- name: Cardio load
+  description: Cardio load is based on training impulse calculation (TRIMP), a commonly accepted and scientifically proven method to quantify training load. Your Cardio load value tells you how much strain your training session put on your cardiovascular system.  The higher the Cardio load, the more strenuous the training session was for the cardiovascular system.  Cardio load is calculated after every workout from your heart rate data and session duration. For more detailed information please check [cardio load](https://support.polar.com/e_manuals/unite/polar-unite-user-manual-english/cardio-load.htm).
+paths:
+  /v3/users/cardio-load:
+    get:
+      tags:
+      - Cardio load
+      summary: List cardio loads
+      description: Returns cardio load data for the last 28 days. The response list contains cardio load objects for every day in the range, even if values cannot be calculated — in that case the cardio load status is represented as LOAD_STATUS_NOT_AVAILABLE.
+      responses:
+        '200':
+          description: List of user cardio loads.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/cardio-load-schema'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/cardio-load/{date}:
+    get:
+      tags:
+      - Cardio load
+      summary: Get cardio load by date
+      description: Returns cardio load data for selected date.
+      parameters:
+      - name: date
+        in: path
+        description: 'Date as ISO-8601 date string, example: "2022-01-01"'
+        required: true
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: Request was successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/cardio-load-schema'
+        '400':
+          description: Invalid request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/cardio-load/date:
+    get:
+      tags:
+      - Cardio load
+      summary: Get cardio load by date range
+      description: Returns cardio load data for selected date range. The response list contains cardio load objects for every day between range even if the cardio load values cannot be calculated, in this case the cardio load status is represented as LOAD_STATUS_NOT_AVAILABLE.
+      parameters:
+      - name: from
+        in: query
+        description: 'Inclusive as ISO-8601 date string, example: "2022-01-01"'
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: to
+        in: query
+        description: 'Inclusive as ISO-8601 date string, example: "2022-01-01"'
+        required: true
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: Request was successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/cardio-load-schema'
+        '400':
+          description: Invalid request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/cardio-load/period/days/{days}:
+    get:
+      tags:
+      - Cardio load
+      summary: Get historical data by days
+      description: Returns historical cardio load data for selected period of days counting from current date.
+      parameters:
+      - name: days
+        in: path
+        description: Period of days.
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 180
+      responses:
+        '200':
+          description: Request was successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/cardio-load-schema'
+        '400':
+          description: Invalid request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/cardio-load/period/months/{months}:
+    get:
+      tags:
+      - Cardio load
+      parameters:
+      - name: months
+        in: path
+        description: Period of months.
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 6
+      summary: Get historical data by months
+      description: Returns historical cardio load data for selected period of months counting from current date.
+      responses:
+        '200':
+          description: Request was successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/cardio-load-schema'
+        '400':
+          description: Invalid request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+components:
+  schemas:
+    cardio-load-schema:
+      description: List of cardio loads.
+      type: array
+      items:
+        $ref: '#/components/schemas/cardio-load'
+    cardio-load-status-enum:
+      description: Text representation of cardio load status.
+      type: string
+      enum:
+      - LOAD_STATUS_NOT_AVAILABLE
+      - DETRAINING
+      - MAINTAINING
+      - PRODUCTIVE
+      - OVERREACHING
+      - RECOVERY_AFTER_OVERREACHING
+      - PRODUCTIVE_DROPPED_FROM_OVERREACHING
+      - PRODUCTIVE_ALMOST_OVERREACHING
+      - UNRECOGNIZED
+    cardio-load-levels:
+      description: Cardio load levels indicate how hard a training session was compared to your session average from the past 90 days.
+      type: object
+      properties:
+        very_low:
+          type: number
+          format: float
+          example: 0.1
+        low:
+          type: number
+          format: float
+          example: 0.1
+        medium:
+          type: number
+          format: float
+          example: 0.1
+        high:
+          type: number
+          format: float
+          example: 0.1
+        very-high:
+          type: number
+          format: float
+          example: 0.1
+    cardio-load:
+      description: Cardio load model.
+      properties:
+        date:
+          type: string
+          format: date
+          description: Date in format YYYY-MM-DD.
+          example: '2023-01-01'
+        cardio_load_status:
+          $ref: '#/components/schemas/cardio-load-status-enum'
+        cardio_load:
+          type: number
+          format: float
+          example: 0.2
+          description: Cardio load (training impulse, TRIMP) shows your cardiac response to a training session.
+        strain:
+          type: number
+          format: float
+          example: 0.3
+          description: Strain shows how much you have strained yourself with training lately. It shows your average daily load from the past 7 days.
+        tolerance:
+          type: number
+          format: float
+          example: 0.4
+          description: Tolerance describes how prepared you are to endure cardio training. It shows your average daily load from the past 28 days.
+        cardio_load_ratio:
+          type: number
+          format: float
+          example: 0.1
+          description: Ratio between strain and tolerance.
+        cardio_load_level:
+          $ref: '#/components/schemas/cardio-load-levels'
+  securitySchemes:
+    Basic:
+      type: http
+      scheme: basic
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://flow.polar.com/oauth2/authorization
+          tokenUrl: https://polarremote.com/v2/oauth2/token
+          scopes:
+            accesslink.read_all: Allows read access to user's data

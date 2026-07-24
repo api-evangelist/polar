@@ -1,0 +1,150 @@
+openapi: 3.0.0
+info:
+  description: Polar AccessLink API documentation
+  version: v3
+  title: Polar AccessLink Cardio load Nightly Recharge API
+  contact:
+    name: Support
+    url: https://www.polar.com/accesslink
+    email: b2bhelpdesk@polar.com
+  license:
+    name: Polar Electro AccessLink Limited License Agreement
+    url: https://www.polar.com/en/legal/polar-api-agreement
+servers:
+- url: https://www.polaraccesslink.com/
+tags:
+- name: Nightly Recharge
+  description: Nightly Recharge&trade; is a recovery measurement that shows how well your body recovers from daily training and stress. It is based on heart rate variability (HRV) and overnight heart rate data. The higher the Nightly Recharge score, the better your body has recovered. For more detailed information please check [Nightly Recharge](https://support.polar.com/e_manuals/unite/polar-unite-user-manual-english/nightly-recharge.htm).
+paths:
+  /v3/users/nightly-recharge:
+    get:
+      tags:
+      - Nightly Recharge
+      summary: List Nightly Recharges
+      operationId: listNightlyRecharge
+      description: List Nightly Recharge data of user for the last 28 days.
+      responses:
+        '200':
+          description: Request was successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/recharges'
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/nightly-recharge/{date}:
+    get:
+      tags:
+      - Nightly Recharge
+      parameters:
+      - name: date
+        in: path
+        description: 'Date of Nightly Recharge as ISO-8601 date string, example: "2020-01-01"'
+        required: true
+        schema:
+          type: string
+      summary: Get Nightly Recharge
+      description: Get Users Nightly Recharge data for given date.
+      responses:
+        '200':
+          description: Request was successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/nightly-recharge'
+        '400':
+          description: Invalid date.
+        '404':
+          description: No data found for date.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+components:
+  schemas:
+    nightly-recharge:
+      type: object
+      properties:
+        polar_user:
+          type: string
+          example: https://www.polaraccesslink/v3/users/1
+          description: Absolute link to user owning the sleep
+        date:
+          type: string
+          format: date
+          description: Result date of the Nightly Recharge
+          example: '2020-01-01'
+        heart_rate_avg:
+          type: integer
+          format: int32
+          example: 70
+          description: Average heart rate as beats per minute (bpm) during a 4-hour period starting at 30 minutes after falling asleep.
+        beat_to_beat_avg:
+          type: integer
+          format: int32
+          example: 816
+          description: Average time in milliseconds (ms) between successive heart beats during a 4-hour period starting at 30 minutes after falling asleep.
+        heart_rate_variability_avg:
+          type: integer
+          format: int32
+          example: 28
+          description: Average variation in the time in milliseconds (ms) between successive heart beats during a 4-hour period starting at 30 minutes after falling asleep. The Heart rate variability is Root Mean Square of Successive Differences (RMSSD) in beat-to-beat intervals.
+        breathing_rate_avg:
+          type: number
+          format: float
+          example: 14.1
+          description: Average breathing rate as breaths per minute (bpm) during a 4-hour period starting at 30 minutes after falling asleep.
+        nightly_recharge_status:
+          type: integer
+          format: int32
+          example: 3
+          description: 'The Nightly Recharge status shows how your body was able to recover from training and stress during the night. Scores for both ANS charge and sleep charge are taken into account. Nightly Recharge status has the following (6-item) scale: very poor (1) – poor (2) – compromised (3) – OK (4) – good (5) – very good (6).'
+        ans_charge:
+          type: number
+          format: float
+          example: 0.0
+          description: ANS stands for autonomic nervous system. ANS charge is formed by measuring heart rate, heart rate variability and breathing rate during roughly the first four hours of your sleep. It is formed comparing your last night to your usual levels from the past 28 days. The scale is from -10.0 to +10.0. Around zero is your usual level.
+        ans_charge_status:
+          type: integer
+          format: int32
+          example: 3
+          description: ANS charge status = much below usual (1) - below usual (2) - usual (3) - above usual (4) - much above usual (5)
+        hrv_samples:
+          type: object
+          example:
+            00:41: 14
+            00:46: 14
+            00:51: 15
+          description: 5-minute average samples of heart rate variability. Unit of samples is milliseconds(ms).
+        breathing_samples:
+          type: object
+          example:
+            00:39: 13.4
+            00:44: 13.5
+            00:49: 13.5
+          description: 5-minute average samples of breathing rate. Unit of samples is breaths per minute (bpm).
+    recharges:
+      type: object
+      properties:
+        recharges:
+          type: array
+          description: List of Nightly Recharge objects
+          items:
+            $ref: '#/components/schemas/nightly-recharge'
+      description: Nightly Recharge list
+  securitySchemes:
+    Basic:
+      type: http
+      scheme: basic
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://flow.polar.com/oauth2/authorization
+          tokenUrl: https://polarremote.com/v2/oauth2/token
+          scopes:
+            accesslink.read_all: Allows read access to user's data

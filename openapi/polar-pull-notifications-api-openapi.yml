@@ -1,0 +1,87 @@
+openapi: 3.0.0
+info:
+  description: Polar AccessLink API documentation
+  version: v3
+  title: Polar AccessLink Cardio load Pull notifications API
+  contact:
+    name: Support
+    url: https://www.polar.com/accesslink
+    email: b2bhelpdesk@polar.com
+  license:
+    name: Polar Electro AccessLink Limited License Agreement
+    url: https://www.polar.com/en/legal/polar-api-agreement
+servers:
+- url: https://www.polaraccesslink.com/
+tags:
+- name: Pull notifications
+  description: This resource allows partners to check if their users have available data for downloading. Use client credentials authentication. Returns object holding list of available data objects.
+paths:
+  /v3/notifications:
+    get:
+      tags:
+      - Pull notifications
+      summary: List
+      description: Get list of available exercises and activities for users
+      operationId: list
+      responses:
+        '200':
+          description: List of available data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/available-user-datas'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/available-user-datas'
+        '204':
+          description: No content when no available data found
+      security:
+      - Basic: []
+components:
+  schemas:
+    available-user-datas:
+      type: object
+      properties:
+        available-user-data:
+          type: array
+          description: List of available user datas.
+          items:
+            $ref: '#/components/schemas/AvailableUserData'
+      description: 'AvailableUserDatas is a container model for AvailableUserData. '
+      xml:
+        name: available-user-datas
+    AvailableUserData:
+      type: object
+      xml:
+        name: available-user-data
+      properties:
+        user-id:
+          type: integer
+          format: int64
+          example: 475
+          description: User identifier who has available data.
+        data-type:
+          type: string
+          example: ACTIVITY_SUMMARY
+          description: Type of available data.
+          enum:
+          - EXERCISE
+          - ACTIVITY_SUMMARY
+          - PHYSICAL_INFORMATION
+        url:
+          type: string
+          example: https://www.polaraccesslink.com/v3/users/475/activity-transactions
+          description: URI pointing to transaction initiation endpoint for user
+      description: Model contains information of the data available.
+  securitySchemes:
+    Basic:
+      type: http
+      scheme: basic
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://flow.polar.com/oauth2/authorization
+          tokenUrl: https://polarremote.com/v2/oauth2/token
+          scopes:
+            accesslink.read_all: Allows read access to user's data

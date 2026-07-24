@@ -1,0 +1,151 @@
+openapi: 3.0.0
+info:
+  description: Polar AccessLink API documentation
+  version: v3
+  title: Polar AccessLink Cardio load Physical info API
+  contact:
+    name: Support
+    url: https://www.polar.com/accesslink
+    email: b2bhelpdesk@polar.com
+  license:
+    name: Polar Electro AccessLink Limited License Agreement
+    url: https://www.polar.com/en/legal/polar-api-agreement
+servers:
+- url: https://www.polaraccesslink.com/
+tags:
+- name: Physical info
+  description: This resource allows partners to access their users' physical information.
+paths:
+  /v3/users/physical-info:
+    get:
+      tags:
+      - Physical info
+      summary: Get user's physical info
+      description: Retrieve user's physical information.
+      operationId: getUserPhysicalInformation
+      responses:
+        '200':
+          description: User's physical information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/physical-info'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/physical-info'
+        '401':
+          description: Unauthorized.
+        '403':
+          description: User has not accepted all mandatory consents.
+        '404':
+          description: User not found.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+components:
+  schemas:
+    physical-info:
+      type: object
+      properties:
+        weight:
+          type: number
+          format: float
+          description: User's weight in kilograms.
+          example: 70.5
+        height:
+          type: number
+          format: float
+          description: User's height in centimeters.
+          example: 175.0
+        created:
+          type: string
+          format: date-time
+          description: Creation timestamp of the physical info.
+          example: '2024-06-01T12:00:00Z'
+        modified:
+          type: string
+          format: date-time
+          description: Last modification timestamp of the physical info.
+          example: '2024-06-10T12:00:00Z'
+        birthday:
+          type: string
+          format: date
+          description: User's date of birth.
+          example: '1990-01-01'
+        gender:
+          type: string
+          description: User's gender.
+          enum:
+          - MALE
+          - FEMALE
+          example: MALE
+        maximum_heart_rate:
+          type: integer
+          format: int32
+          description: User's maximum heart rate.
+          example: 190
+        resting_heart_rate:
+          type: integer
+          format: int32
+          description: User's resting heart rate.
+          example: 60
+        aerobic_threshold:
+          type: integer
+          format: int32
+          description: User's aerobic threshold.
+          example: 140
+        anaerobic_threshold:
+          type: integer
+          format: int32
+          description: User's anaerobic threshold.
+          example: 170
+        vo2_max:
+          type: integer
+          format: int32
+          description: User's VO2 max value.
+          example: 50
+        weight_source:
+          type: string
+          description: Source of the weight information.
+          enum:
+          - SOURCE_DEFAULT
+          - SOURCE_ESTIMATE
+          - SOURCE_USER
+          - SOURCE_MEASURED
+          - SOURCE_KEEP
+          example: SOURCE_USER
+        training_background:
+          type: string
+          description: User's training background.
+          enum:
+          - OCCASIONAL
+          - REGULAR
+          - FREQUENT
+          - HEAVY
+          - SEMI_PRO
+          - PRO
+          example: REGULAR
+        typical_day:
+          type: string
+          description: User's typical day description.
+          enum:
+          - MOSTLY_SITTING
+          - MOSTLY_STANDING
+          - MOSTLY_MOVING
+          example: MOSTLY_MOVING
+        sleep_goal:
+          type: string
+          description: User's sleep goal as ISO 8601 duration.
+          example: PT8H
+  securitySchemes:
+    Basic:
+      type: http
+      scheme: basic
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://flow.polar.com/oauth2/authorization
+          tokenUrl: https://polarremote.com/v2/oauth2/token
+          scopes:
+            accesslink.read_all: Allows read access to user's data

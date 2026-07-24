@@ -1,0 +1,289 @@
+openapi: 3.0.0
+info:
+  description: Polar AccessLink API documentation
+  version: v3
+  title: Polar AccessLink Cardio load Physical info (deprecated) API
+  contact:
+    name: Support
+    url: https://www.polar.com/accesslink
+    email: b2bhelpdesk@polar.com
+  license:
+    name: Polar Electro AccessLink Limited License Agreement
+    url: https://www.polar.com/en/legal/polar-api-agreement
+servers:
+- url: https://www.polaraccesslink.com/
+tags:
+- name: Physical info (deprecated)
+  description: This resource allows partners to access their users' physical information. Whenever some user's physical information changes, new entry containing full physical info is stored to AccessLink. Pull notifications can be used to check if user have new physical information available. Available data presented in section [Schemas](#schemas). <br/><br/> This resource is deprecated. Please use non-transactional [Physical info](#physical-info) instead.
+paths:
+  /v3/users/{user-id}/physical-information-transactions:
+    post:
+      tags:
+      - Physical info (deprecated)
+      summary: Create transaction
+      description: 'Initiate physical info transaction.
+
+        Check for new physical info and create a new transaction if found.'
+      operationId: createPhysicalInfoTransaction
+      parameters:
+      - name: user-id
+        in: path
+        description: User identifier
+        required: true
+        schema:
+          type: integer
+      responses:
+        '201':
+          description: Return link to created transaction containing new physical info data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transaction-location'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/transaction-location'
+        '204':
+          description: No content when there is no new physical info data available.
+        '403':
+          description: User has not accepted all mandatory consents.
+        '401':
+          description: Unauthorized.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/{user-id}/physical-information-transactions/{transaction-id}:
+    get:
+      tags:
+      - Physical info (deprecated)
+      summary: List physical infos
+      description: 'List new physical info data.
+
+        After successfully initiating a transaction, physical infos included within it can be retrieved with the provided transactionId.'
+      operationId: listPhysicalInfos
+      parameters:
+      - name: transaction-id
+        in: path
+        description: Transaction identifier
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: user-id
+        in: path
+        description: User identifier
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Return list of hyperlinks to physical information contained within the transaction.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/physical-informations'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/physical-informations'
+              example:
+                physical-informations:
+                  physical-information:
+                  - https://www.polaraccesslink.com/v3/users/12/physical-information-transactions/12/physical-informations/56
+                  - https://www.polaraccesslink.com/v3/users/12/physical-information-transactions/12/physical-informations/120
+        '204':
+          description: No content when there is no data available.
+        '404':
+          description: No transaction was found with given transaction id.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+    put:
+      tags:
+      - Physical info (deprecated)
+      summary: Commit transaction
+      description: After successfully retrieving physical information within a transaction, partners are expected to commit the transaction.
+      operationId: commitPhysicalInfoTransaction
+      parameters:
+      - name: transaction-id
+        in: path
+        description: Transaction identifier
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: user-id
+        in: path
+        description: User identifier
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Transaction has been committed and data deleted.
+        '204':
+          description: No content when there is no data available.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/{user-id}/physical-information-transactions/{transaction-id}/physical-informations/{physical-info-id}:
+    get:
+      tags:
+      - Physical info (deprecated)
+      summary: Get physical info
+      description: Get physical info entity data
+      operationId: getPhysicalInfo
+      parameters:
+      - name: user-id
+        in: path
+        description: User identifier
+        required: true
+        schema:
+          type: integer
+      - name: transaction-id
+        in: path
+        description: Transaction identifier
+        required: true
+        schema:
+          type: integer
+      - name: physical-info-id
+        in: path
+        description: Physical information identifier
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Physical information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/physical-information'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/physical-information'
+        '204':
+          description: No content when there is no data available.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+components:
+  schemas:
+    physical-information:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 123
+          xml:
+            attribute: true
+          description: Physical information id
+        transaction-id:
+          type: integer
+          format: int64
+          example: 179879
+          xml:
+            attribute: true
+          description: Id of the physical-information-transaction this physical information was transferred in
+        created:
+          type: string
+          example: '2016-04-27T20:11:33.000Z'
+          description: The time physical information was created in AccessLink, in format YYYY-MM-DDTHH:mm:ss.SSSZ
+        polar-user:
+          type: string
+          example: https://www.polaraccesslink/v3/users/1
+          xml:
+            attribute: true
+          description: Absolute link to user owning the activity
+        weight:
+          type: number
+          format: float
+          example: 80
+          description: Weight
+        height:
+          type: number
+          format: float
+          example: 180
+          description: Height
+        maximum-heart-rate:
+          type: integer
+          format: int32
+          example: 160
+          description: Maximum heart rate
+        resting-heart-rate:
+          type: integer
+          format: int32
+          example: 60
+          description: Resting heart rate
+        aerobic-threshold:
+          type: integer
+          format: int32
+          example: 123
+          description: Aerobic threshold
+        anaerobic-threshold:
+          type: integer
+          format: int32
+          example: 123
+          description: Anaerobic threshold
+        vo2-max:
+          type: integer
+          format: int32
+          example: 12
+          description: VO2 max
+        weight-source:
+          type: string
+          example: SOURCE_MEASURED
+          description: Weight source
+          enum:
+          - SOURCE_MEASURED
+          - SOURCE_USER
+      description: User's physical information
+      xml:
+        name: physical-information
+    transaction-location:
+      type: object
+      properties:
+        transaction-id:
+          type: integer
+          format: int64
+          example: 122
+          description: Id of the created transaction
+        resource-uri:
+          type: string
+          format: uri
+          example: https://polaraccesslink.com/v3/users/21/physical-information-transactions/32
+          description: Absolute links to the created transaction
+      description: Contains absolute link to the created transaction.
+      xml:
+        name: transaction-location
+    physical-informations:
+      type: object
+      properties:
+        physical-informations:
+          type: array
+          description: Absolute links to individual physical information within the transaction
+          items:
+            type: string
+          example:
+          - https://www.polaraccesslink.com/v3/users/12/physical-information-transactions/12/physical-informations/56
+          - https://www.polaraccesslink.com/v3/users/12/physical-information-transactions/12/physical-informations/120
+      description: Physical information transaction container
+      xml:
+        name: physical-informations
+  securitySchemes:
+    Basic:
+      type: http
+      scheme: basic
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://flow.polar.com/oauth2/authorization
+          tokenUrl: https://polarremote.com/v2/oauth2/token
+          scopes:
+            accesslink.read_all: Allows read access to user's data

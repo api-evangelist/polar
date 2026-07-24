@@ -1,0 +1,445 @@
+openapi: 3.0.0
+info:
+  description: Polar AccessLink API documentation
+  version: v3
+  title: Polar AccessLink Cardio load Daily activity (deprecated) API
+  contact:
+    name: Support
+    url: https://www.polar.com/accesslink
+    email: b2bhelpdesk@polar.com
+  license:
+    name: Polar Electro AccessLink Limited License Agreement
+    url: https://www.polar.com/en/legal/polar-api-agreement
+servers:
+- url: https://www.polaraccesslink.com/
+tags:
+- name: Daily activity (deprecated)
+  description: This resource allows partners to access their users' daily activity data. During the transfer, the activity data is copied also into the AccessLink database so the end-users cannot change the data that is accessible via AccessLink afterwards. Begin and end of day are determined by the time set on the device used. No timezone information is available. Each transaction will consist of at most 50 activity summaries. Available data presented in section [Schemas](#schemas). Only data that has been uploaded to Flow after the user has been registered to your client will be available. Only data that has been uploaded in the last 28 days will be available. <br/><br/> This resource is deprecated. Please use non-transactional [Daily activity](#daily-activity) instead.
+paths:
+  /v3/users/{user-id}/activity-transactions:
+    post:
+      tags:
+      - Daily activity (deprecated)
+      summary: Create transaction
+      description: 'Initiate activity transaction.
+
+        Check for new activity summaries and create a new transaction if found.
+
+        Only data uploaded to Flow in the last 30 days will be available.
+
+        Only data that has been uploaded to Flow after the user is registered with your client will be available.'
+      operationId: createActivityTransaction
+      parameters:
+      - name: user-id
+        in: path
+        description: User identifier
+        required: true
+        schema:
+          type: integer
+          pattern: '[0-9]+'
+      responses:
+        '201':
+          description: Return link to created transaction containing new activity data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transaction-location'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/transaction-location'
+        '204':
+          description: No content when there is no new activity data available.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/{user-id}/activity-transactions/{transaction-id}:
+    get:
+      tags:
+      - Daily activity (deprecated)
+      summary: List activities
+      description: 'List new activity data.
+
+        After successfully initiating a transaction, activity summaries included within it can be retrieved with the provided transactionId.'
+      operationId: listActivities
+      parameters:
+      - name: transaction-id
+        in: path
+        description: Transaction identifier
+        required: true
+        schema:
+          type: integer
+          format: int64
+          pattern: '[0-9]+'
+      - name: user-id
+        in: path
+        description: User identifier
+        required: true
+        schema:
+          type: integer
+          pattern: '[0-9]+'
+      responses:
+        '200':
+          description: Return list of hyperlinks to activity summaries contained within the transaction.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/activity-log'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/activity-log'
+        '204':
+          description: No content when there is no data available.
+        '404':
+          description: No transaction was found with given transaction id.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+    put:
+      tags:
+      - Daily activity (deprecated)
+      summary: Commit transaction
+      description: After successfully retrieving activity summary data within a transaction, partners are expected to commit the transaction.
+      operationId: commitActivityTransaction
+      parameters:
+      - name: transaction-id
+        in: path
+        description: Transaction identifier
+        required: true
+        schema:
+          type: integer
+          format: int64
+          pattern: '[0-9]+'
+      - name: user-id
+        in: path
+        description: User identifier
+        required: true
+        schema:
+          type: integer
+          pattern: '[0-9]+'
+      responses:
+        '200':
+          description: Transaction has been committed and data deleted.
+        '204':
+          description: No content when there is no data available.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/{user-id}/activity-transactions/{transaction-id}/activities/{activity-id}:
+    get:
+      tags:
+      - Daily activity (deprecated)
+      summary: Get activity summary
+      description: ''
+      operationId: getActivitySummary
+      parameters:
+      - name: user-id
+        in: path
+        description: User identifier
+        required: true
+        schema:
+          type: integer
+      - name: transaction-id
+        in: path
+        description: Transaction identifier
+        required: true
+        schema:
+          type: integer
+      - name: activity-id
+        in: path
+        description: Activity summary identifier
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Return activity summary contained within the transaction.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/activity'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/activity'
+        '204':
+          description: No content when there is no data available.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/{user-id}/activity-transactions/{transaction-id}/activities/{activity-id}/step-samples:
+    get:
+      tags:
+      - Daily activity (deprecated)
+      summary: Get step samples
+      description: Get activity step samples. Example data can be seen from [appendix](#activity-step-time-series).
+      operationId: getStepSamples
+      parameters:
+      - name: user-id
+        in: path
+        description: User identifier
+        required: true
+        schema:
+          type: integer
+      - name: transaction-id
+        in: path
+        description: Transaction identifier
+        required: true
+        schema:
+          type: integer
+      - name: activity-id
+        in: path
+        description: Activity summary identifier
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Return activity step samples.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/activity-step-samples'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/activity-step-samples'
+        '204':
+          description: No content when there is no data available.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/{user-id}/activity-transactions/{transaction-id}/activities/{activity-id}/zone-samples:
+    get:
+      tags:
+      - Daily activity (deprecated)
+      summary: Get zone samples
+      description: Get activity zone samples. Example data can be seen from [appendix](#activity-zone-time-series).
+      operationId: getZoneSamples
+      parameters:
+      - name: user-id
+        in: path
+        description: User identifier
+        required: true
+        schema:
+          type: integer
+      - name: transaction-id
+        in: path
+        description: Transaction identifier
+        required: true
+        schema:
+          type: integer
+      - name: activity-id
+        in: path
+        description: Activity summary identifier
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Return activity zone samples.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/activity-zone-samples'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/activity-zone-samples'
+        '204':
+          description: No content when there is no data available.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+components:
+  schemas:
+    transaction-location:
+      type: object
+      properties:
+        transaction-id:
+          type: integer
+          format: int64
+          example: 122
+          description: Id of the created transaction
+        resource-uri:
+          type: string
+          format: uri
+          example: https://polaraccesslink.com/v3/users/21/physical-information-transactions/32
+          description: Absolute links to the created transaction
+      description: Contains absolute link to the created transaction.
+      xml:
+        name: transaction-location
+    activity-step-samples:
+      type: object
+      properties:
+        date:
+          type: string
+          example: '2022-02-10'
+          description: Activity step sample date
+        interval:
+          type: integer
+          format: int32
+          description: Sample interval in minutes.
+        samples:
+          type: array
+          xml:
+            wrapped: true
+          description: List of individual step sample objects.
+          items:
+            $ref: '#/components/schemas/activity-step-sample'
+      description: Wrapper model for partner step samples.
+      xml:
+        name: activity-step-samples
+    activity-zone-sample:
+      type: object
+      properties:
+        activity-zones:
+          type: array
+          description: List of heart rate zones with duration.
+          items:
+            $ref: '#/components/schemas/DurationZone'
+        time:
+          type: string
+          description: Start time of sample segment.
+      description: Model contains number of steps in certain time period.
+      xml:
+        name: sample
+    activity-log:
+      type: object
+      properties:
+        activity-log:
+          type: array
+          description: Absolute links to individual activity summaries within the transaction
+          items:
+            type: string
+          example:
+          - https://www.polaraccesslink.com/v3/users/12/activity-transactions/34/activities/56
+          - https://www.polaraccesslink.com/v3/users/12/activity-transactions/34/activities/120
+      description: Activity transaction container
+      xml:
+        name: activity-logs
+    activity:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1234
+          xml:
+            attribute: true
+          description: Activity summary id
+        polar-user:
+          type: string
+          example: https://www.polaraccesslink/v3/users/1
+          xml:
+            attribute: true
+          description: Absolute link to user owning the activity
+        transaction-id:
+          type: integer
+          format: int64
+          example: 179879
+          xml:
+            attribute: true
+          description: Id of the activity-transaction this activity was transferred in
+        date:
+          type: string
+          example: '2010-12-31'
+          description: Date when activity summary was recorded, in format YYYY-MM-DD
+        created:
+          type: string
+          example: '2016-04-27T20:11:33.000Z'
+          description: The time activity summary was created in AccessLink, in format YYYY-MM-DDTHH:mm:ss.SSS
+        calories:
+          type: integer
+          format: int32
+          example: 2329
+          description: Total daily calories in kilo calories including BMR
+        active-calories:
+          type: integer
+          format: int32
+          example: 428
+          description: Total daily calories not including BMR. Precise calculation requires that user's physical data is entered into Polar Flow
+        duration:
+          type: string
+          example: PT2H44M
+          description: The time interval as specified in ISO 8601
+        active-steps:
+          type: integer
+          format: int32
+          example: 250
+          description: You could consider this as a kind of activity unit. If you take one step the active-steps should increase by one and any activity comparable to one physical step would also increase the number by one
+      description: Summary of user's daily activity
+      xml:
+        name: activity
+    activity-zone-samples:
+      type: object
+      properties:
+        date:
+          type: string
+          example: '2022-02-10'
+          description: Activity zone sample date
+        interval:
+          type: integer
+          format: int32
+          description: Sample interval in minutes.
+        samples:
+          type: array
+          xml:
+            wrapped: true
+          description: List of individual zone sample objects.
+          items:
+            $ref: '#/components/schemas/activity-zone-sample'
+      description: List containing the times (in zone) in different heart rate zones (i.e. Heart rate between lower and upper values). Zone is null if no zone information available.
+      xml:
+        name: activity-zone-samples
+    DurationZone:
+      type: object
+      xml:
+        name: activity-zones
+      properties:
+        index:
+          type: integer
+          format: int32
+          example: 1
+          xml:
+            attribute: true
+          description: Activity zone index
+        inzone:
+          type: string
+          example: PT51M5S
+          description: Time duration spent in the zone ISO 8601
+      description: Model contains the time spent in certain activity zone.
+    activity-step-sample:
+      type: object
+      properties:
+        steps:
+          type: integer
+          format: int32
+          description: Number of steps in sample segment. If element is null, step samples are not available for current segment.
+        time:
+          type: string
+          example: '12:37:33.000'
+          description: Start time of sample segment.
+      description: Model contains number of steps in certain time period.
+      xml:
+        name: sample
+  securitySchemes:
+    Basic:
+      type: http
+      scheme: basic
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://flow.polar.com/oauth2/authorization
+          tokenUrl: https://polarremote.com/v2/oauth2/token
+          scopes:
+            accesslink.read_all: Allows read access to user's data

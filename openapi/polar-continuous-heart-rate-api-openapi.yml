@@ -1,0 +1,133 @@
+openapi: 3.0.0
+info:
+  description: Polar AccessLink API documentation
+  version: v3
+  title: Polar AccessLink Cardio load Continuous Heart Rate API
+  contact:
+    name: Support
+    url: https://www.polar.com/accesslink
+    email: b2bhelpdesk@polar.com
+  license:
+    name: Polar Electro AccessLink Limited License Agreement
+    url: https://www.polar.com/en/legal/polar-api-agreement
+servers:
+- url: https://www.polaraccesslink.com/
+tags:
+- name: Continuous Heart Rate
+  description: This resource allows partners to access their users' continuous heart rate data. Continuous heart rate is recorded with supported devices when the heart rate tracking is turned on in device settings. Samples are recording in 5 minute intervals. Heart rate samples from training sessions are not available through this resource. Training sessions samples have more precise sampling interval and they can be accessed from the [training data resource](#exercises). <a href="https://support.polar.com/en/support/the_what_and_how_of_polars_continuous_heart_rate">Supported devices</a>
+paths:
+  /v3/users/continuous-heart-rate/{date}:
+    get:
+      tags:
+      - Continuous Heart Rate
+      parameters:
+      - name: date
+        in: path
+        description: 'Date of Continuous Heart Rate as ISO-8601 date string, example: "2022-01-01"'
+        required: true
+        schema:
+          type: string
+          format: date
+      summary: Get Continuous Heart rate samples
+      description: Get users continuous heart rate values for given date. <a href="https://support.polar.com/en/support/the_what_and_how_of_polars_continuous_heart_rate"> Supported devices </a>
+      responses:
+        '200':
+          description: Request was successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/continuous-heartrate'
+        '400':
+          description: Invalid request.
+        '401':
+          description: Unauthorized.
+        '404':
+          description: No data found for date.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/continuous-heart-rate:
+    get:
+      tags:
+      - Continuous Heart Rate
+      parameters:
+      - name: from
+        in: query
+        description: 'Inclusive start date of range as ISO-8601 date string, example: "2022-01-01"'
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: to
+        in: query
+        description: 'Inclusive end date of range as ISO-8601 date string, example: "2022-01-28"'
+        required: true
+        schema:
+          type: string
+          format: date
+      summary: Get Continuous Heart rate samples with range
+      description: Get users continuous heart rate values for given date range. <a href="https://support.polar.com/en/support/the_what_and_how_of_polars_continuous_heart_rate"> Supported devices </a>
+      responses:
+        '200':
+          description: Request was successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/continuous-heartrate'
+        '400':
+          description: Invalid request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+components:
+  schemas:
+    continuous-heartrate:
+      type: object
+      properties:
+        polar_user:
+          type: string
+          example: https://www.polaraccesslink/v3/users/1
+          description: Absolute link to user owning the continuous heart rate samples
+        date:
+          type: string
+          format: date
+          description: Result date of the Continuous Heart Rate
+          example: '2020-01-01'
+        heart_rate_samples:
+          type: array
+          items:
+            type: object
+            properties:
+              heart_rate:
+                type: integer
+                description: Heart rate in beats per minute (bpm).
+              sample_time:
+                type: string
+                description: Measurement time of heart rate in HH:mm:ss format. Device time used for measurement.
+      example:
+        polar_user: https://polaraccesslink.com/v3/users/627139
+        date: '2022-09-12'
+        heart_rate_samples:
+        - heart_rate: 63
+          sample_time: 00:02:08
+        - heart_rate: 62
+          sample_time: 00:07:08
+      description: '5 min average samples of heart rate from the duration of the continuous heart rate measurement. Default  time between samples is 5 minutes. There may be periods with samples more often than every 5 minutes.  Unit of samples is beats per minute (bpm).  '
+  securitySchemes:
+    Basic:
+      type: http
+      scheme: basic
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://flow.polar.com/oauth2/authorization
+          tokenUrl: https://polarremote.com/v2/oauth2/token
+          scopes:
+            accesslink.read_all: Allows read access to user's data

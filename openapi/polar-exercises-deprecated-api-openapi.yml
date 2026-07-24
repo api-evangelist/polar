@@ -1,0 +1,735 @@
+openapi: 3.0.0
+info:
+  description: Polar AccessLink API documentation
+  version: v3
+  title: Polar AccessLink Cardio load Exercises (deprecated) API
+  contact:
+    name: Support
+    url: https://www.polar.com/accesslink
+    email: b2bhelpdesk@polar.com
+  license:
+    name: Polar Electro AccessLink Limited License Agreement
+    url: https://www.polar.com/en/legal/polar-api-agreement
+servers:
+- url: https://www.polaraccesslink.com/
+tags:
+- name: Exercises (deprecated)
+  description: This resource allows partners to access their users' training data. All time values are UTC except start-time. Start-time is the time set on the training computer. Each transaction will consist of at most 50 training sessions. Available data presented in section [Schemas](#schemas). Only data that has been uploaded to Flow after the user has been registered to your client will be available. Only data that has been uploaded in the last 28 days will be available. <br/><br/> This resource is deprecated. Please use non-transactional [Exercises](#exercises) instead.
+paths:
+  /v3/users/{user-id}/exercise-transactions:
+    post:
+      tags:
+      - Exercises (deprecated)
+      summary: Create transaction
+      description: Check for new training data and create a new transaction if found. Only data uploaded to Flow in the last 30 days will be available. Only data that has been uploaded to Flow after the user is registered with your client will be available.
+      operationId: createExerciseTransaction
+      parameters:
+      - name: user-id
+        in: path
+        description: User identifier
+        required: true
+        schema:
+          type: integer
+          pattern: '[0-9]+'
+      responses:
+        '201':
+          description: Return link to created transaction containing new training session data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/transaction-location'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/transaction-location'
+        '204':
+          description: No content when there is no new training session data available.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/{user-id}/exercise-transactions/{transaction-id}:
+    get:
+      tags:
+      - Exercises (deprecated)
+      summary: List exercises
+      description: After successfully initiating a transaction, training sessions included within it can be retrieved with the provided transactionId.
+      operationId: listExercises
+      parameters:
+      - name: transaction-id
+        in: path
+        description: Transaction identifier
+        required: true
+        schema:
+          type: integer
+          format: int64
+          pattern: '[0-9]+'
+      - name: user-id
+        in: path
+        description: User identifier
+        required: true
+        schema:
+          type: integer
+          pattern: '[0-9]+'
+      responses:
+        '200':
+          description: Return list of hyperlinks to training sessions contained within the transaction.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exercises'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/exercises'
+              example:
+                exercises:
+                  exercise:
+                  - https://www.polaraccesslink.com/v3/users/12/exercise-transactions/34/exercises/56
+                  - https://www.polaraccesslink.com/v3/users/12/exercise-transactions/34/exercises/120
+        '204':
+          description: No content when there is no data available.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+    put:
+      tags:
+      - Exercises (deprecated)
+      summary: Commit transaction
+      description: After successfully retrieving training session data within a transaction, partners are expected to commit the transaction.
+      operationId: commitExerciseTransaction
+      parameters:
+      - name: transaction-id
+        in: path
+        description: Transaction identifier
+        required: true
+        schema:
+          type: integer
+          format: int64
+          pattern: '[0-9]+'
+      - name: user-id
+        in: path
+        description: User identifier
+        required: true
+        schema:
+          type: integer
+          pattern: '[0-9]+'
+      responses:
+        '200':
+          description: Transaction has been committed and data deleted.
+        '204':
+          description: No content when there is no data available.
+        '404':
+          description: No transaction was found with given transaction id.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/{user-id}/exercise-transactions/{transaction-id}/exercises/{exercise-id}:
+    get:
+      tags:
+      - Exercises (deprecated)
+      summary: Get exercise summary
+      description: Retrieve training session summary data
+      operationId: getExerciseSummary
+      parameters:
+      - name: user-id
+        in: path
+        description: User identifier
+        required: true
+        schema:
+          type: integer
+      - name: transaction-id
+        in: path
+        description: Transaction identifier
+        required: true
+        schema:
+          type: integer
+      - name: exercise-id
+        in: path
+        description: Exercise identifier
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Exercise summary.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exercise'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/exercise'
+        '204':
+          description: No content when there is no data available.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/{user-id}/exercise-transactions/{transaction-id}/exercises/{exercise-id}/fit:
+    get:
+      tags:
+      - Exercises (deprecated)
+      summary: Get FIT
+      description: Retrieve exercise in FIT format. See [FIT sport mappings in appendix](#sport-type-mapping-in-fit-files).
+      operationId: getFit
+      parameters:
+      - name: user-id
+        in: path
+        description: User identifier
+        required: true
+        schema:
+          type: integer
+      - name: transaction-id
+        in: path
+        description: Transaction identifier
+        required: true
+        schema:
+          type: integer
+      - name: exercise-id
+        in: path
+        description: Exercise identifier
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Return FIT file.
+          content:
+            '*/*':
+              schema:
+                type: string
+        '204':
+          description: No FIT available for exercise.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/{user-id}/exercise-transactions/{transaction-id}/exercises/{exercise-id}/gpx:
+    get:
+      tags:
+      - Exercises (deprecated)
+      summary: Get GPX
+      description: Retrieve training session summary data in GPX format
+      operationId: getGpx
+      parameters:
+      - name: user-id
+        in: path
+        description: User identifier
+        required: true
+        schema:
+          type: integer
+      - name: transaction-id
+        in: path
+        description: Transaction identifier
+        required: true
+        schema:
+          type: integer
+      - name: exercise-id
+        in: path
+        description: Exercise identifier
+        required: true
+        schema:
+          type: integer
+      - name: includePauseTimes
+        in: query
+        description: Whether to add pauses as part of the route. Default is false.
+        required: false
+        schema:
+          type: boolean
+          default: false
+      responses:
+        '200':
+          description: Return training session in GPX (GPS Exchange format).
+          content:
+            application/gpx+xml:
+              schema:
+                type: string
+        '204':
+          description: No content when there is no data available.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/{user-id}/exercise-transactions/{transaction-id}/exercises/{exercise-id}/heart-rate-zones:
+    get:
+      tags:
+      - Exercises (deprecated)
+      summary: Get heart rate zones
+      description: Retrieve heart rate zones in training session
+      operationId: getHeartRateZones
+      parameters:
+      - name: user-id
+        in: path
+        description: User identifier
+        required: true
+        schema:
+          type: integer
+      - name: transaction-id
+        in: path
+        description: Transaction identifier
+        required: true
+        schema:
+          type: integer
+      - name: exercise-id
+        in: path
+        description: Exercise identifier
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Return heart rate zones in training session.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/zones'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/zones'
+        '204':
+          description: No content when there is no data available.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/{user-id}/exercise-transactions/{transaction-id}/exercises/{exercise-id}/samples:
+    get:
+      tags:
+      - Exercises (deprecated)
+      summary: Get available samples
+      description: Retrieve list of links to available samples in training session
+      operationId: getAvailableSamples
+      parameters:
+      - name: user-id
+        in: path
+        description: User identifier
+        required: true
+        schema:
+          type: integer
+      - name: transaction-id
+        in: path
+        description: Transaction identifier
+        required: true
+        schema:
+          type: integer
+      - name: exercise-id
+        in: path
+        description: Exercise identifier
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Return list of hyperlinks to available samples in training session.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/samples'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/samples'
+        '204':
+          description: No content when there is no data available.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/{user-id}/exercise-transactions/{transaction-id}/exercises/{exercise-id}/samples/{type-id}:
+    get:
+      tags:
+      - Exercises (deprecated)
+      summary: Get samples
+      description: Retrieve sample data of given type
+      operationId: getSamples
+      parameters:
+      - name: type-id
+        in: path
+        description: Sample type id
+        required: true
+        schema:
+          type: string
+          format: byte
+          pattern: '[0-9]+'
+      - name: user-id
+        in: path
+        description: User identifier
+        required: true
+        schema:
+          type: integer
+      - name: transaction-id
+        in: path
+        description: Transaction identifier
+        required: true
+        schema:
+          type: integer
+      - name: exercise-id
+        in: path
+        description: Exercise identifier
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Return sample data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sample'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/sample'
+        '204':
+          description: No content when there is no data available.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/{user-id}/exercise-transactions/{transaction-id}/exercises/{exercise-id}/tcx:
+    get:
+      tags:
+      - Exercises (deprecated)
+      summary: Get TCX
+      description: Retrieve exercise in TCX format
+      operationId: getTcx
+      parameters:
+      - name: user-id
+        in: path
+        description: User identifier
+        required: true
+        schema:
+          type: integer
+      - name: transaction-id
+        in: path
+        description: Transaction identifier
+        required: true
+        schema:
+          type: integer
+      - name: exercise-id
+        in: path
+        description: Exercise identifier
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Return gzipped TCX.
+          content:
+            application/vnd.garmin.tcx+xml:
+              schema:
+                type: string
+        '204':
+          description: No TCX available for exercise.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+components:
+  schemas:
+    training-load-pro-load-enum:
+      type: string
+      enum:
+      - UNKNOWN
+      - VERY_LOW
+      - LOW
+      - MEDIUM
+      - HIGH
+      - VERY_HIGH
+      - NOT_AVAILABLE
+    transaction-location:
+      type: object
+      properties:
+        transaction-id:
+          type: integer
+          format: int64
+          example: 122
+          description: Id of the created transaction
+        resource-uri:
+          type: string
+          format: uri
+          example: https://polaraccesslink.com/v3/users/21/physical-information-transactions/32
+          description: Absolute links to the created transaction
+      description: Contains absolute link to the created transaction.
+      xml:
+        name: transaction-location
+    samples:
+      type: object
+      properties:
+        samples:
+          type: array
+          description: List of URIs pointing to single sample type data.
+          items:
+            type: string
+            xml:
+              name: sample
+          example:
+          - https://www.polaraccesslink.com/v3/users/12/exercise-transactions/34/exercises/56/samples/0
+          - https://www.polaraccesslink.com/v3/users/12/exercise-transactions/34/exercises/56/samples/3
+      description: List of URIs pointing to single sample type data.
+      xml:
+        name: samples
+    zone:
+      type: object
+      properties:
+        index:
+          type: integer
+          format: int32
+          example: 1
+          description: Zone list index
+        lower-limit:
+          type: integer
+          format: int32
+          example: 110
+          description: Lower heart-rate boundary of the zone
+        upper-limit:
+          type: integer
+          format: int32
+          example: 130
+          description: Upper heart-rate boundary of the zone
+        in-zone:
+          type: string
+          example: PT4S
+          description: Time duration spent in the zone ISO 8601
+      description: Heart-rate zone information
+      xml:
+        name: zone
+    exercise:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1937529874
+          xml:
+            attribute: true
+          description: Id of the training session
+        upload-time:
+          type: string
+          example: 2008-10-13T10:40:0.000Z
+          xml:
+            attribute: true
+          description: Time of the transfer from wrist unit to Polar database
+        polar-user:
+          type: string
+          example: https://www.polaraccesslink/v3/users/1
+          xml:
+            attribute: true
+          description: Absolute link to Polar user owning the training
+        transaction-id:
+          type: integer
+          format: int64
+          example: 179879
+          xml:
+            attribute: true
+          description: Id of the exercise-transaction this training was transferred in
+        device:
+          type: string
+          example: Polar M400
+          description: Polar product used in training
+        device-id:
+          type: string
+          example: 1111AAAA
+          description: Id of the Polar device
+        start-time:
+          type: string
+          example: '2008-10-13T10:40:02'
+          description: Start time of the training session in local time
+        start-time-utc-offset:
+          type: integer
+          format: int32
+          example: 180
+          description: The offset from UTC (in minutes) when the training session was started
+        duration:
+          type: string
+          example: PT2H44M45S
+          description: The duration of the training session as specified in ISO8601
+        calories:
+          type: integer
+          format: int32
+          example: 530
+          description: Expended calories during training in kilocalories
+        distance:
+          type: number
+          format: float
+          example: 1600.2
+          description: Distance in meters travelled during training
+        heart-rate:
+          $ref: '#/components/schemas/HeartRate'
+        training-load:
+          type: number
+          format: float
+          example: 143.22
+          description: Training load effect to user
+        sport:
+          type: string
+          example: OTHER
+          description: Sport name
+        has-route:
+          type: boolean
+          example: true
+          description: Boolean indicating if the exercise has route data
+        club-id:
+          type: integer
+          format: int64
+          example: 999
+          description: Has value if the exercise is from "Flow For Club", otherwise not printed. Value -1 indicates that there were errors finding the club
+        club-name:
+          type: string
+          example: Polar Club
+          description: Has value if the exercise is from "Flow For Club", otherwise not printed. Value "Ambiguous club location. Please contact support." is printed in case of error (and the club-id is -1).
+        detailed-sport-info:
+          type: string
+          example: RUNNING
+          description: String containing the name of a Polar Flow-compatible sport, if one is set for the exercise.
+        fat-percentage:
+          type: integer
+          format: int32
+          example: 60
+          description: Fat percentage of exercise calories. Has value if the exercise is from training device supporting Energy sources, otherwise not printed.
+        carbohydrate-percentage:
+          type: integer
+          format: int32
+          example: 38
+          description: Carbohydrate percentage of exercise calories. Has value if the exercise is from training device supporting Energy sources, otherwise not printed.
+        protein-percentage:
+          type: integer
+          format: int32
+          example: 2
+          description: Protein percentage of exercise calories. Has value if the exercise is from training device supporting Energy sources, otherwise not printed.
+        running-index:
+          type: integer
+          format: int32
+          example: 51
+          description: <a href="https://support.polar.com/en/support/tips/Running_Index_feature#">  Running index</a> is a score automatically calculated every run based on your  heart rate and speed data collected via GPS or stride sensor.
+        training-load-pro:
+          $ref: '#/components/schemas/training-load-pro-sample'
+      description: Training session summary data
+      xml:
+        name: exercise
+    training-load-pro-rpe-enum:
+      description: Quantifies internal training load of a session.
+      type: string
+      enum:
+      - UNKNOWN
+      - RPE_NONE
+      - RPE_EASY
+      - RPE_LIGHT
+      - RPE_FAIRLY_BRISK
+      - RPE_BRISK
+      - RPE_MODERATE
+      - RPE_FAIRLY_HARD
+      - RPE_HARD
+      - RPE_EXHAUSTING
+      - RPE_EXTREME
+    sample:
+      type: object
+      properties:
+        recording-rate:
+          type: integer
+          format: int32
+          example: 5
+          description: Sample recording rate in seconds. Null when recording rate is not applicable - currently only with RR-data.
+        sample-type:
+          type: string
+          format: byte
+          example: '1'
+          description: Sample type
+        data:
+          type: string
+          example: 0,100,102,97,97,101,103,106,96,89,88,87,98,108,113,112,114,115,118,121,121,121,121,123,117,119,122
+          description: Sample values as a comma-separated list of strings. Can contain null -values which indicate a situation where sensor was offline.
+      description: Training session sample data
+      xml:
+        name: sample
+    HeartRate:
+      type: object
+      properties:
+        average:
+          type: integer
+          format: int32
+          example: 129
+          description: Average heart-rate
+        maximum:
+          type: integer
+          format: int32
+          example: 147
+          description: Maximum heart-rate
+      description: Heart-rate statistics information
+    training-load-pro-sample:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+          description: Date in format YYYY-MM-DD.
+          example: '2023-01-01'
+        cardio-load:
+          type: number
+          format: float
+          description: User cardio load value.
+          example: 1.0
+        muscle-load:
+          type: number
+          format: float
+          description: User muscle load value.
+          example: 1.0
+        perceived-load:
+          type: number
+          format: float
+          description: User perceived load value.
+          example: 1.0
+        cardio-load-interpretation:
+          $ref: '#/components/schemas/training-load-pro-load-enum'
+        muscle-load-interpretation:
+          $ref: '#/components/schemas/training-load-pro-load-enum'
+        perceived-load-interpretation:
+          $ref: '#/components/schemas/training-load-pro-load-enum'
+        user-rpe:
+          $ref: '#/components/schemas/training-load-pro-rpe-enum'
+    zones:
+      type: object
+      properties:
+        zone:
+          type: array
+          description: List of heart rate zones.
+          items:
+            $ref: '#/components/schemas/zone'
+      description: List containing the times (in zone) in different heart rate zones (i.e. Heart rate between lower and upper values). Zone is null if no zone information available.
+      xml:
+        name: zones
+    exercises:
+      type: object
+      properties:
+        exercises:
+          type: array
+          description: Absolute links to individual exercises within the transaction
+          items:
+            type: string
+          example:
+          - https://www.polaraccesslink.com/v3/users/12/exercise-transactions/34/exercises/56
+          - https://www.polaraccesslink.com/v3/users/12/exercise-transactions/34/exercises/120
+      description: Exercise transaction container
+      xml:
+        name: exercises
+  securitySchemes:
+    Basic:
+      type: http
+      scheme: basic
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://flow.polar.com/oauth2/authorization
+          tokenUrl: https://polarremote.com/v2/oauth2/token
+          scopes:
+            accesslink.read_all: Allows read access to user's data

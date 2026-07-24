@@ -1,0 +1,396 @@
+openapi: 3.0.0
+info:
+  description: Polar AccessLink API documentation
+  version: v3
+  title: Polar AccessLink Cardio load SleepWise&trade; API
+  contact:
+    name: Support
+    url: https://www.polar.com/accesslink
+    email: b2bhelpdesk@polar.com
+  license:
+    name: Polar Electro AccessLink Limited License Agreement
+    url: https://www.polar.com/en/legal/polar-api-agreement
+servers:
+- url: https://www.polaraccesslink.com/
+tags:
+- name: SleepWise&trade;
+  description: This resource allows partners to access their users' SleepWise&trade; data. All time values are UTC times. SleepWise&trade; data is calculated for [SleepWise&trade;](https://support.polar.com/en/polar-sleepwise) supported devices when minimum of 5 days of sleep data is available. SleepWise&trade; data consists of alertness periods and circadian bedtime periods.
+paths:
+  /v3/users/sleepwise/alertness:
+    get:
+      tags:
+      - SleepWise&trade;
+      summary: Alertness period data (last 28 days)
+      description: Get user's alertness period data for the last 28 days. <a href="https://support.polar.com/en/polar-sleepwise"> Supported devices </a>
+      responses:
+        '200':
+          description: Request was successful.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/alertness'
+        '204':
+          description: No data found for last 28 days.
+        '400':
+          description: Invalid request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/sleepwise/alertness/date:
+    get:
+      tags:
+      - SleepWise&trade;
+      parameters:
+      - name: from
+        in: query
+        description: 'Inclusive start date of range as ISO-8601 date string, example: "2022-01-01"'
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: to
+        in: query
+        description: 'Inclusive end date of range as ISO-8601 date string, example: "2022-01-28"'
+        required: true
+        schema:
+          type: string
+          format: date
+      summary: Alertness period data (date range)
+      description: Get user's alertness period data for given date range. Maximum date range between from and to cannot be more than 28 days. <a href="https://support.polar.com/en/polar-sleepwise"> Supported devices </a>
+      responses:
+        '200':
+          description: Request was successful.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/alertness'
+        '204':
+          description: No data found for date range.
+        '400':
+          description: Invalid request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/sleepwise/circadian-bedtime:
+    get:
+      tags:
+      - SleepWise&trade;
+      summary: Circadian bedtime period data (last 28 days)
+      description: Get user's circadian bedtime period data for the last 28 days. <a href="https://support.polar.com/en/polar-sleepwise"> Supported devices </a>
+      responses:
+        '200':
+          description: Request was successful.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/circadian-bedtime'
+        '204':
+          description: No data found for last 28 days.
+        '400':
+          description: Invalid request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/sleepwise/circadian-bedtime/date:
+    get:
+      tags:
+      - SleepWise&trade;
+      parameters:
+      - name: from
+        in: query
+        description: 'Inclusive start date of range as ISO-8601 date string, example: "2022-01-01"'
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: to
+        in: query
+        description: 'Inclusive end date of range as ISO-8601 date string, example: "2022-01-28"'
+        required: true
+        schema:
+          type: string
+          format: date
+      summary: Circadian bedtime period data (date range)
+      description: Get user's circadian bedtime period data for given date range. Maximum date range between from and to cannot be more than 28 days. <a href="https://support.polar.com/en/polar-sleepwise"> Supported devices </a>
+      responses:
+        '200':
+          description: Request was successful.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/circadian-bedtime'
+        '204':
+          description: No data found for date range.
+        '400':
+          description: Invalid request.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+components:
+  schemas:
+    alertness:
+      type: object
+      properties:
+        grade:
+          type: number
+          format: double
+          example: 9.9
+          description: Grade
+        grade_validity_seconds:
+          type: integer
+          format: int32
+          example: 57600
+          description: Grade validity seconds
+        grade_type:
+          type: string
+          example: GRADE_TYPE_PRIMARY
+          description: Grade type
+          enum:
+          - GRADE_TYPE_UNKNOWN
+          - GRADE_TYPE_PRIMARY
+          - GRADE_TYPE_ADDITIONAL
+        grade_classification:
+          type: string
+          example: GRADE_CLASSIFICATION_STRONG
+          description: Grade classification
+          enum:
+          - GRADE_CLASSIFICATION_UNKNOWN
+          - GRADE_CLASSIFICATION_WEAK
+          - GRADE_CLASSIFICATION_FAIR
+          - GRADE_CLASSIFICATION_STRONG
+          - GRADE_CLASSIFICATION_EXCELLENT
+        validity:
+          type: string
+          example: VALIDITY_ESTIMATE
+          description: Validity
+          enum:
+          - VALIDITY_UNKNOWN
+          - VALIDITY_RESET
+          - VALIDITY_NOT_VALID
+          - VALIDITY_ESTIMATE
+          - VALIDITY_VALID
+        sleep_inertia:
+          type: string
+          example: SLEEP_INERTIA_MILD
+          description: Sleep inertia
+          enum:
+          - SLEEP_INERTIA_UNKNOWN
+          - SLEEP_INERTIA_NO_INERTIA
+          - SLEEP_INERTIA_MILD
+          - SLEEP_INERTIA_MODERATE
+          - SLEEP_INERTIA_HEAVY
+        sleep_type:
+          type: string
+          example: SLEEP_TYPE_PRIMARY
+          description: Sleep type
+          enum:
+          - SLEEP_TYPE_UNKNOWN
+          - SLEEP_TYPE_PRIMARY
+          - SLEEP_TYPE_SECONDARY
+          - SLEEP_TYPE_ARTIFICIAL
+        result_type:
+          type: string
+          example: ALERTNESS_TYPE_HISTORY
+          description: Result type
+          enum:
+          - ALERTNESS_TYPE_UNKNOWN
+          - ALERTNESS_TYPE_PREDICTION
+          - ALERTNESS_TYPE_HISTORY
+        period_start_time:
+          type: string
+          format: date-time
+          description: Alertness period start time (UTC)
+          example: '2022-11-20T20:52:20'
+        period_end_time:
+          type: string
+          format: date-time
+          description: Alertness period end time (UTC)
+          example: '2022-11-21T19:15:52'
+        sleep_period_start_time:
+          type: string
+          format: date-time
+          description: Sleep period start time (UTC)
+          example: '2022-11-20T20:52:20.57'
+        sleep_period_end_time:
+          type: string
+          format: date-time
+          description: Sleep period end time (UTC)
+          example: '2022-11-21T04:11:20.57'
+        sleep_timezone_offset_minutes:
+          type: integer
+          format: int32
+          example: 120
+          description: Sleep timezone offset minutes
+        hourly_data:
+          type: array
+          description: Alertness hourly data for the alertness period
+          items:
+            $ref: '#/components/schemas/alertness-hourly-data'
+      description: Alertness period data
+      example:
+        grade: 9.9
+        grade_validity_seconds: 57600
+        grade_type: GRADE_TYPE_PRIMARY
+        grade_classification: GRADE_CLASSIFICATION_STRONG
+        validity: VALIDITY_ESTIMATE
+        sleep_inertia: SLEEP_INERTIA_MILD
+        sleep_type: SLEEP_TYPE_PRIMARY
+        result_type: ALERTNESS_TYPE_HISTORY
+        period_start_time: '2022-11-20T20:52:20'
+        period_end_time: '2022-11-21T19:15:52'
+        sleep_period_start_time: '2022-11-20T20:52:20.57'
+        sleep_period_end_time: '2022-11-21T04:11:20.57'
+        sleep_timezone_offset_minutes: 120
+        hourly_data:
+        - validity: VALIDITY_ESTIMATE
+          alertness_level: ALERTNESS_LEVEL_LOW
+          start_time: '2022-11-21T04:12:00'
+          end_time: '2022-11-21T05:00:00'
+    circadian-bedtime:
+      type: object
+      properties:
+        validity:
+          type: string
+          example: VALIDITY_ESTIMATE
+          description: Validity
+          enum:
+          - VALIDITY_UNKNOWN
+          - VALIDITY_RESET
+          - VALIDITY_NOT_VALID
+          - VALIDITY_ESTIMATE
+          - VALIDITY_VALID
+        quality:
+          type: string
+          example: CIRCADIAN_BEDTIME_QUALITY_COMPROMISED
+          description: Quality
+          enum:
+          - CIRCADIAN_BEDTIME_QUALITY_UNKNOWN
+          - CIRCADIAN_BEDTIME_QUALITY_WEAK
+          - CIRCADIAN_BEDTIME_QUALITY_COMPROMISED
+          - CIRCADIAN_BEDTIME_QUALITY_CLEARLY_RECOGNIZABLE
+        result_type:
+          type: string
+          example: CIRCADIAN_BEDTIME_TYPE_HISTORY
+          description: Result type
+          enum:
+          - CIRCADIAN_BEDTIME_TYPE_UNKNOWN
+          - CIRCADIAN_BEDTIME_TYPE_PREDICTION
+          - CIRCADIAN_BEDTIME_TYPE_HISTORY
+        period_start_time:
+          type: string
+          format: date-time
+          description: Circadian bedtime period start time (UTC)
+          example: '2022-11-20T21:18:30'
+        period_end_time:
+          type: string
+          format: date-time
+          description: Circadian bedtime period end time (UTC)
+          example: '2022-11-21T05:18:30'
+        preferred_sleep_period_start_time:
+          type: string
+          format: date-time
+          description: Circadian bedtime preferred sleep period start time (UTC)
+          example: '2022-11-20T21:18:30'
+        preferred_sleep_period_end_time:
+          type: string
+          format: date-time
+          description: Circadian bedtime preferred sleep period end time (UTC)
+          example: '2022-11-21T05:18:30'
+        sleep_gate_start_time:
+          type: string
+          format: date-time
+          description: Circadian bedtime sleep gate (suggested fall a sleep window) start time (UTC)
+          example: '2022-11-20T21:18:30'
+        sleep_gate_end_time:
+          type: string
+          format: date-time
+          description: Circadian bedtime sleep gate (suggested fall a sleep window) end time (UTC)
+          example: '2022-11-21T05:18:30'
+        sleep_timezone_offset_minutes:
+          type: integer
+          format: int32
+          example: 120
+          description: Sleep timezone offset minutes
+      description: Circadian bedtime period data
+      example:
+        validity: VALIDITY_ESTIMATE
+        quality: CIRCADIAN_BEDTIME_QUALITY_COMPROMISED
+        result_type: CIRCADIAN_BEDTIME_TYPE_HISTORY
+        period_start_time: '2022-11-20T21:18:30'
+        period_end_time: '2022-11-21T05:18:30'
+        preferred_sleep_period_start_time: '2022-11-20T21:18:30'
+        preferred_sleep_period_end_time: '2022-11-21T05:18:30'
+        sleep_gate_start_time: '2022-11-20T21:03:30'
+        sleep_gate_end_time: '2022-11-20T21:33:30'
+        sleep_timezone_offset_minutes: 120
+    alertness-hourly-data:
+      type: object
+      properties:
+        validity:
+          type: string
+          example: VALIDITY_ESTIMATE
+          description: Validity
+          enum:
+          - VALIDITY_UNKNOWN
+          - VALIDITY_RESET
+          - VALIDITY_NOT_VALID
+          - VALIDITY_ESTIMATE
+          - VALIDITY_VALID
+        alertness_level:
+          type: string
+          example: ALERTNESS_LEVEL_VERY_HIGH
+          description: Alertness level
+          enum:
+          - ALERTNESS_LEVEL_UNKNOWN
+          - ALERTNESS_LEVEL_MINIMAL
+          - ALERTNESS_LEVEL_VERY_LOW
+          - ALERTNESS_LEVEL_LOW
+          - ALERTNESS_LEVEL_HIGH
+          - ALERTNESS_LEVEL_VERY_HIGH
+        start_time:
+          type: string
+          format: date-time
+          description: Alertness period start time (UTC)
+          example: '2022-11-21T04:00:00'
+        end_time:
+          type: string
+          format: date-time
+          description: Alertness period end time (UTC)
+          example: '2022-11-21T05:00:00'
+      description: Hourly data for the alertness period
+  securitySchemes:
+    Basic:
+      type: http
+      scheme: basic
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://flow.polar.com/oauth2/authorization
+          tokenUrl: https://polarremote.com/v2/oauth2/token
+          scopes:
+            accesslink.read_all: Allows read access to user's data

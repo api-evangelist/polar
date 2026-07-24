@@ -1,0 +1,218 @@
+openapi: 3.0.0
+info:
+  description: Polar AccessLink API documentation
+  version: v3
+  title: Polar AccessLink Cardio load Users API
+  contact:
+    name: Support
+    url: https://www.polar.com/accesslink
+    email: b2bhelpdesk@polar.com
+  license:
+    name: Polar Electro AccessLink Limited License Agreement
+    url: https://www.polar.com/en/legal/polar-api-agreement
+servers:
+- url: https://www.polaraccesslink.com/
+tags:
+- name: Users
+  description: This resource provides all the necessary functions to manage users.
+paths:
+  /v3/users:
+    post:
+      tags:
+      - Users
+      summary: Register user
+      description: Once partner has been authorized by user, partner must register the user before being able to access its data. API user-id and Polar User Id (polar-user-id) are interchangeable terms.
+      operationId: registerUser
+      responses:
+        '200':
+          description: User's base information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/user'
+        '204':
+          description: No content when user with given userId is not found.
+        '409':
+          description: User already registered to partner or duplicated member-id.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+      requestBody:
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/register'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/register'
+        required: true
+  /v3/users/{user-id}:
+    get:
+      tags:
+      - Users
+      summary: Get user information
+      description: 'List user basic information.
+
+        Note: Although it is possible to get users weight and height from this resource, the [get physical info](#get-physical-info) should be used instead.'
+      operationId: getUserInformation
+      parameters:
+      - name: user-id
+        in: path
+        description: User identifier
+        required: true
+        example: 475
+        schema:
+          type: integer
+          format: int64
+          pattern: '[0-9]+'
+      responses:
+        '200':
+          description: User's base information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/user'
+        '204':
+          description: No content when user with given userId is not found.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+    delete:
+      tags:
+      - Users
+      summary: Delete user
+      description: When partner wishes no longer to receive user data, user can be de-registered. This will revoke the access token authorized by user.
+      operationId: deleteUser
+      parameters:
+      - name: user-id
+        in: path
+        description: User identifier
+        required: true
+        schema:
+          type: integer
+          format: int64
+          pattern: '[0-9]+'
+      responses:
+        '204':
+          description: will be returned when user is successfully de-registered.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+components:
+  schemas:
+    user:
+      type: object
+      properties:
+        polar-user-id:
+          type: integer
+          format: int64
+          example: 2278512
+          xml:
+            attribute: true
+          description: User's id in Polar database
+        member-id:
+          type: string
+          example: i09u9ujj
+          description: User's identifier in partner's database
+        registration-date:
+          type: string
+          format: date-time
+          example: '2011-10-14T12:50:37.000Z'
+          description: Timestamp marked when ACCEPTED
+        first-name:
+          type: string
+          example: Eka
+          description: User's first name
+        last-name:
+          type: string
+          example: Toka
+          description: User's surname
+        birthdate:
+          type: string
+          example: '1985-09-06'
+          description: User's birthdate as YYYY-MM-DD
+        gender:
+          type: string
+          example: MALE
+          description: User's sex
+          enum:
+          - MALE
+          - FEMALE
+        weight:
+          type: number
+          format: float
+          example: 66
+          description: User's weight in kg
+        height:
+          type: number
+          format: float
+          example: 170
+          description: Users height in centimeters
+        extra-info:
+          type: array
+          xml:
+            name: extra-info
+            wrapped: true
+          description: List containing answers given by the user to a number of partner-specific questions. Extra-info is null if there are no required fields defined by the partner.
+          items:
+            $ref: '#/components/schemas/UserExtraInfo'
+      description: User's basic information
+      xml:
+        name: user
+    UserExtraInfo:
+      type: object
+      xml:
+        name: extra-info
+      properties:
+        value:
+          type: string
+          example: '2'
+          description: Value provided by the customer
+        index:
+          type: integer
+          format: int32
+          example: 0
+          xml:
+            attribute: true
+          description: Item index
+        name:
+          type: string
+          example: number-of-children
+          xml:
+            attribute: true
+          description: Name of the extra info asked from customer
+      description: User's answers to the custom extra-info fields requested by partners
+    register:
+      type: object
+      required:
+      - member-id
+      properties:
+        member-id:
+          type: string
+          example: User_id_999
+          description: Partner's custom identifier for user.
+      description: Model for registering user to partner.
+      xml:
+        name: register
+  securitySchemes:
+    Basic:
+      type: http
+      scheme: basic
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://flow.polar.com/oauth2/authorization
+          tokenUrl: https://polarremote.com/v2/oauth2/token
+          scopes:
+            accesslink.read_all: Allows read access to user's data

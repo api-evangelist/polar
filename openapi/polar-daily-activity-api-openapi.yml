@@ -1,0 +1,354 @@
+openapi: 3.0.0
+info:
+  description: Polar AccessLink API documentation
+  version: v3
+  title: Polar AccessLink Cardio load Daily activity API
+  contact:
+    name: Support
+    url: https://www.polar.com/accesslink
+    email: b2bhelpdesk@polar.com
+  license:
+    name: Polar Electro AccessLink Limited License Agreement
+    url: https://www.polar.com/en/legal/polar-api-agreement
+servers:
+- url: https://www.polaraccesslink.com/
+tags:
+- name: Daily activity
+  description: This resource allows partners to access their users' daily activity data. Webhooks are used to notify partners when new data is available.
+paths:
+  /v3/users/activities:
+    get:
+      tags:
+      - Daily activity
+      summary: List activities
+      description: List users activities available in AccessLink. When no date range is given, activities from the last 28 days are returned. When `from` is given, activities for the specified date range are returned. From date cannot be older than 365 days from today and the maximum range between from and to is 28 days.
+      operationId: listActivitiesWithoutTransaction
+      parameters:
+      - name: from
+        in: query
+        description: Start date in format YYYY-MM-DD. If not given, defaults to 28 days ago.
+        required: false
+        schema:
+          type: string
+          format: date
+          example: '2023-01-01'
+      - name: to
+        in: query
+        description: End date in format YYYY-MM-DD. If not given, defaults to today.
+        required: false
+        schema:
+          type: string
+          format: date
+          example: '2023-01-28'
+      - name: steps
+        in: query
+        description: include steps samples for activity summary.
+        required: false
+        schema:
+          type: boolean
+      - name: activity_zones
+        in: query
+        description: include activity zones samples for activity summary.
+        required: false
+        schema:
+          type: boolean
+      - name: inactivity_stamps
+        in: query
+        description: include inactivity stamps for activity summary.
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: List of extended daily activities with all samples.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/array-of-activity-summary-with-all-samples'
+        '400':
+          description: Invalid or too old date. Cannot be older than 365 days.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/activities/{date}:
+    get:
+      tags:
+      - Daily activity
+      summary: Get activity for given date
+      description: Get users activity for given date. Date cannot be older than 365 days from today.
+      operationId: getActivityWithoutTransaction
+      parameters:
+      - name: date
+        in: path
+        description: Date in format YYYY-MM-DD.
+        required: true
+        schema:
+          type: string
+          format: date
+      - name: steps
+        in: query
+        schema:
+          type: boolean
+        description: include steps samples for activity summary.
+      - name: activity_zones
+        in: query
+        schema:
+          type: boolean
+        description: include activity zones samples for activity summary.
+      - name: inactivity_stamps
+        in: query
+        schema:
+          type: boolean
+        description: include inactivity stamps for activity summary.
+      responses:
+        '200':
+          description: Extended activity summaries with all samples.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/activity-summary-with-all-samples'
+        '204':
+          description: No content when no activity found for given date.
+        '403':
+          description: User has not accepted all mandatory consents.
+        '401':
+          description: Unauthorized.
+        '400':
+          description: Invalid or too old date. Cannot be older than 365 days.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/activities/samples:
+    get:
+      tags:
+      - Daily activity
+      summary: List activity samples
+      description: List users activity samples available in AccessLink. When no date range is given, activity samples from the last 28 days are returned. When `from` is given, activity samples for the specified date range are returned. From date cannot be older than 365 days from today and the maximum range between from and to is 28 days.
+      operationId: listActivitySamplesWithoutTransaction
+      parameters:
+      - name: from
+        in: query
+        description: Start date in format YYYY-MM-DD. If not given, defaults to 28 days ago.
+        required: false
+        schema:
+          type: string
+          format: date
+          example: '2023-01-01'
+      - name: to
+        in: query
+        description: End date in format YYYY-MM-DD. If not given, defaults to today.
+        required: false
+        schema:
+          type: string
+          format: date
+          example: '2023-01-31'
+      responses:
+        '200':
+          description: List of users activity samples.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/array-of-activity-day-with-samples'
+        '400':
+          description: Invalid or too old date. Cannot be older than 365 days.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/activities/samples/{date}:
+    get:
+      tags:
+      - Daily activity
+      summary: Get activity samples for given date
+      description: Get users activity samples for given date. Date cannot be older than 365 days from today.
+      operationId: getActivitySamplesWithoutTransaction
+      parameters:
+      - name: date
+        in: path
+        description: Date in format YYYY-MM-DD.
+        required: true
+        schema:
+          type: string
+          format: date
+      responses:
+        '200':
+          description: Activity samples for given date.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/activity-day-with-samples'
+        '204':
+          description: No content when no activity samples found for given date.
+        '403':
+          description: User has not accepted all mandatory consents.
+        '401':
+          description: Unauthorized.
+        '400':
+          description: Invalid or too old date. Cannot be older than 365 days.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+components:
+  schemas:
+    activity-zone-samples2:
+      type: object
+      properties:
+        samples:
+          type: array
+          description: List of activity zones samples.
+          items:
+            $ref: '#/components/schemas/activity-zone-sample2'
+    array-of-activity-day-with-samples:
+      type: array
+      items:
+        $ref: '#/components/schemas/activity-day-with-samples'
+      description: Array of activity days with samples. Each item in the array contains a summary of the activity for a specific day, including all samples.
+      xml:
+        name: activity-day-with-samples
+    activity-summary-with-all-samples:
+      type: object
+      properties:
+        start_time:
+          type: string
+          example: '2025-08-13T08:15:30'
+          description: Start time of the activity in UTC
+        end_time:
+          type: string
+          example: '2025-08-13T23:59:59'
+          description: End time of the activity in UTC
+        active_duration:
+          type: string
+          example: PT3H11M
+          description: The duration of the activity in ISO8601 format
+        inactive_duration:
+          type: string
+          example: PT18H23M30S
+          description: The duration of the inactivity in ISO8601 format
+        daily_activity:
+          type: number
+          format: float
+          example: 89.1
+          description: Daily activity score / percentage
+        calories:
+          type: integer
+          format: int32
+          example: 2500
+          description: Total calories burned during the day
+        active_calories:
+          type: integer
+          format: int32
+          example: 1500
+          description: Active calories burned during the day, excluding BMR
+        steps:
+          type: integer
+          format: int32
+          example: 8823
+          description: Total number of steps taken during the day
+        inactivity_alert_count:
+          type: integer
+          format: int32
+          example: 1
+          description: Number of inactivity alerts received during the day
+        distance_from_steps:
+          type: number
+          format: float
+          example: 4590.53
+          description: Distance covered based on steps taken, in meters
+        samples:
+          $ref: '#/components/schemas/activity-day-with-samples'
+      description: Activity days with all samples.
+      xml:
+        name: activity-summary-with-all-samples
+    activity-step-sample2:
+      type: object
+      properties:
+        steps:
+          type: integer
+          format: int32
+          description: Number of steps in sample segment.
+        timestamp:
+          type: string
+          example: 2025-08-14T00:02
+          description: Start time of sample segment.
+      description: Model contains number of steps in certain time period.
+    activity-steps2:
+      type: object
+      properties:
+        interval_ms:
+          type: integer
+          format: int32
+          description: Sample interval in milliseconds.
+        total_steps:
+          type: integer
+          format: int32
+          description: Total number of steps in activity day.
+        samples:
+          type: array
+          items:
+            $ref: '#/components/schemas/activity-step-sample2'
+          description: List of individual step sample objects.
+      description: Activity step samples for a day. Contains total number of steps and list of individual step samples with time and number of steps in that time period. Note that consecutive repeated (same steps count) samples are filtered out from the list to reduce the payload size. If time between two consecutive samples is larger than interval_ms, one or more samples have been filtered out.
+    array-of-activity-summary-with-all-samples:
+      type: array
+      items:
+        $ref: '#/components/schemas/activity-summary-with-all-samples'
+      description: Array of activity summaries with all samples. Each item in the array contains a summary of the activity for a specific day, including all samples.
+      xml:
+        name: activity-summary-with-all-samples
+    activity-zone-sample2:
+      type: object
+      properties:
+        zone:
+          type: string
+          description: Activity zone type.
+          enum:
+          - SEDENTARY
+          - LIGHT
+          - SLEEP
+          - MODERATE
+          - VIGOROUS
+        timestamp:
+          type: string
+          example: '2025-08-14T00:08:30'
+    activity-day-with-samples:
+      type: object
+      properties:
+        date:
+          type: string
+          example: '2022-02-10'
+          description: Activity day date
+        steps:
+          $ref: '#/components/schemas/activity-steps2'
+        activity_zones:
+          $ref: '#/components/schemas/activity-zone-samples2'
+        inactivity_stamps:
+          type: array
+          items:
+            type: object
+            properties:
+              stamp:
+                type: string
+                example: 2022-02-10T16:04
+                description: time of inactivity stamp
+      description: Activity day samples.
+      xml:
+        name: activity-day-with-samples
+  securitySchemes:
+    Basic:
+      type: http
+      scheme: basic
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://flow.polar.com/oauth2/authorization
+          tokenUrl: https://polarremote.com/v2/oauth2/token
+          scopes:
+            accesslink.read_all: Allows read access to user's data

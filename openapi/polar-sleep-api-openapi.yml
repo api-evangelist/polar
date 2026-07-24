@@ -1,0 +1,261 @@
+openapi: 3.0.0
+info:
+  description: Polar AccessLink API documentation
+  version: v3
+  title: Polar AccessLink Cardio load Sleep API
+  contact:
+    name: Support
+    url: https://www.polar.com/accesslink
+    email: b2bhelpdesk@polar.com
+  license:
+    name: Polar Electro AccessLink Limited License Agreement
+    url: https://www.polar.com/en/legal/polar-api-agreement
+servers:
+- url: https://www.polaraccesslink.com/
+tags:
+- name: Sleep
+  description: Sleep endpoints support [Polar Sleep Plus&trade;](https://www.polar.com/en/smart-coaching/polar-sleep-plus) and [Sleep Plus Stages&trade;](https://www.polar.com/en/smart-coaching/sleep-plus-stages). Available data is presented in section [Schemas](#schemas).
+paths:
+  /v3/users/sleep:
+    get:
+      tags:
+      - Sleep
+      summary: List nights
+      operationId: listNights
+      description: List sleep data of user for the last 28 days.
+      responses:
+        '200':
+          description: Request was successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/nights'
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/sleep/{date}:
+    get:
+      tags:
+      - Sleep
+      parameters:
+      - name: date
+        in: path
+        description: 'Date of sleep as ISO-8601 date string, example: "2020-01-01"'
+        required: true
+        schema:
+          type: string
+      summary: Get Sleep
+      description: Get Users sleep data for given date.
+      responses:
+        '200':
+          description: Request was successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sleep'
+        '400':
+          description: Invalid date.
+        '404':
+          description: No data found for date.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/sleep/available:
+    get:
+      tags:
+      - Sleep
+      summary: Get available sleep times
+      description: Get the dates with sleep start and end times, where user has sleep data available in the last 28 days.
+      responses:
+        '200':
+          description: Request was successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/available-sleeps'
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+components:
+  schemas:
+    available-sleeps:
+      type: object
+      properties:
+        available:
+          type: array
+          description: List of available sleep data
+          items:
+            $ref: '#/components/schemas/available-sleep'
+    available-sleep:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+          description: Result date of the sleep
+          example: '2020-01-01'
+        start_time:
+          type: string
+          format: date-time
+          description: Start timestamp of the sleep as ISO-8601 datetime string
+          example: '2020-01-01T00:39:07+03:00'
+        end_time:
+          type: string
+          format: date-time
+          description: End timestamp of the sleep as ISO-8601 datetime string
+          example: '2020-01-01T09:39:07+03:00'
+    nights:
+      type: object
+      properties:
+        nights:
+          type: array
+          description: List of sleep objects
+          items:
+            $ref: '#/components/schemas/sleep'
+      description: Sleep list
+    sleep:
+      type: object
+      properties:
+        polar_user:
+          type: string
+          example: https://www.polaraccesslink/v3/users/1
+          description: Absolute link to user owning the sleep
+        date:
+          type: string
+          format: date
+          description: Result date of the sleep
+          example: '2020-01-01'
+        sleep_start_time:
+          type: string
+          format: date-time
+          description: Start timestamp of the sleep as ISO-8601 datetime string
+          example: '2020-01-01T00:39:07+03:00'
+        sleep_end_time:
+          type: string
+          format: date-time
+          description: End timestamp of the sleep as ISO-8601 datetime string
+          example: '2020-01-01T09:19:37+03:00'
+        device_id:
+          type: string
+          description: Id of the device the sleep was measured with
+          example: 1111AAAA
+        continuity:
+          type: number
+          format: float
+          example: 2.1
+          description: Continuity is an estimate of how continuous the sleep was on a scale of 1.0 – 5.0, where 5.0 reflects uninterrupted sleep. The lower the value the more fragmented the sleep was.
+        continuity_class:
+          type: integer
+          format: int32
+          example: 2
+          description: Verbal assessments of sleep continuity Very continuous sleep (5) Continuous sleep (4) Fairly continuous sleep (3) Fairly fragmented sleep (2) Fragmented sleep (1)
+        light_sleep:
+          type: integer
+          format: int32
+          example: 1000
+          description: Total time in seconds spent in light sleep stage between when you fell asleep and when you woke up. Corresponds to N1+ N2 according to AASM classification.
+        deep_sleep:
+          type: integer
+          format: int32
+          example: 1000
+          description: Total time in seconds spent in the deep sleep stage between when you fell asleep and when you woke up. Corresponds to N3 according to AASM classification.
+        rem_sleep:
+          type: integer
+          format: int32
+          example: 1000
+          description: Total time in seconds spent in REM sleep stage between when you fell asleep and when you woke up. REM stands for rapid eye movement.
+        unrecognized_sleep_stage:
+          type: integer
+          format: int32
+          example: 1000
+          description: Total time in seconds spent in unrecognised sleep stage. Sometimes it's impossible to recognize sleep stages. This might happen when, for example, the wrist strap is not tight enough, or if you sleep on your hand.
+        sleep_score:
+          type: integer
+          format: int32
+          example: 80
+          description: Sleep score summarizes the amount and quality of your sleep into a single number on a scale of 1 – 100. Sleep score tells you how well you slept compared to the indicators of a good night's sleep based on the current sleep science. It consists of six components; sleep time, long interruptions, continuity, actual sleep, REM sleep, and deep sleep.
+        total_interruption_duration:
+          type: integer
+          format: int32
+          example: 1000
+          description: The total time in seconds you spent awake between when you fell asleep and when you woke up.
+        sleep_charge:
+          type: integer
+          format: int32
+          example: 3
+          description: 'Sleep score compared to your usual level from the past 28 days.Scale: much below usual (1) – below usual (2) – usual (3) – above usual (4) – much above usual(5).'
+        sleep_goal:
+          type: integer
+          format: int32
+          example: 28800
+          description: Time goal in seconds for sleep selected by user. A default value of the setting is based on age-related sleep duration recommendations.
+        sleep_rating:
+          type: integer
+          format: int32
+          example: 3
+          description: 'Numeric value given by user for representing the quality of sleep. Selection scale: Very poorly(1), poorly(2), ok(3), well(4), very well(5). 0 means no value is given.'
+        short_interruption_duration:
+          type: integer
+          format: int32
+          example: 500
+          description: Total time in seconds of short interruptions. Short interruption is interruption in sleep of less than 90 seconds.
+        long_interruption_duration:
+          type: integer
+          format: int32
+          example: 300
+          description: Total time in seconds of long interruptions. Long interruption is interruption in sleep of 90 seconds or more.
+        sleep_cycles:
+          type: integer
+          format: int32
+          example: 6
+          description: Number of sleep cycles.
+        group_duration_score:
+          type: number
+          format: float
+          example: 100.0
+          description: 'Sleep score consists of six components that are grouped under three themes. Score for sleep duration theme looks at your sleep time compared to your ‘preferred sleep time’ setting and the age-related duration recommendations. Group duration score ranges from 1.0 to 100.0. It is interpreted as textual feedback: poor, moderate or good amount.'
+        group_solidity_score:
+          type: number
+          format: float
+          example: 75.0
+          description: 'Sleep score consists of six components that are grouped under three themes. Score for sleep solidity theme is the average of the component scores of long interruptions, continuity and actual sleep. Group solidity score ranges from 1.0 to 100.0. It is interpreted as textual feedback: poor, moderate or good solidity.'
+        group_regeneration_score:
+          type: number
+          format: float
+          example: 54.2
+          description: 'Sleep score consists of six components that are grouped under three themes. Score for regeneration theme is the average of the scores of REM sleep and deep sleep. Group regeneration score ranges from 1.0 to 100.0. It is interpreted as textual feedback: poor, moderate or good regeneration'
+        hypnogram:
+          type: object
+          example:
+            00:39: 2
+            00:50: 3
+            01:23: 5
+          description: 'The time span between when you fell asleep and when you woke up is classified into light, deep or REM sleep, or unrecognised or wake in 30-s epochs.
+
+
+            0 = WAKE, 1 = REM, 2 = LIGHTER NON-REM, 3 = LIGHT NON-REM, 4 = DEEP NON-REM, 5 = UNKNOWN (eg. due to bad skin contact).'
+        heart_rate_samples:
+          type: object
+          example:
+            00:41: 76
+            00:46: 77
+            00:51: 76
+          description: 5 min average samples of heart rate from the duration of the sleep. Default time between samples is 5 minutes. There may be periods with samples more often than every 5 minutes. Unit of samples is beats per minute (bpm).
+  securitySchemes:
+    Basic:
+      type: http
+      scheme: basic
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://flow.polar.com/oauth2/authorization
+          tokenUrl: https://polarremote.com/v2/oauth2/token
+          scopes:
+            accesslink.read_all: Allows read access to user's data

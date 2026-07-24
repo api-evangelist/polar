@@ -1,0 +1,473 @@
+openapi: 3.0.0
+info:
+  description: Polar AccessLink API documentation
+  version: v3
+  title: Polar AccessLink Cardio load Exercises API
+  contact:
+    name: Support
+    url: https://www.polar.com/accesslink
+    email: b2bhelpdesk@polar.com
+  license:
+    name: Polar Electro AccessLink Limited License Agreement
+    url: https://www.polar.com/en/legal/polar-api-agreement
+servers:
+- url: https://www.polaraccesslink.com/
+tags:
+- name: Exercises
+  description: Resources for getting information about exercise. These endpoints do not require an active transaction, but they use hashed id.
+paths:
+  /v3/exercises:
+    get:
+      tags:
+      - Exercises
+      summary: List exercises
+      description: 'List users exercises available in AccessLink. Only Exercises uploaded to Flow in the last 30 days are returned. Only exercises that have been uploaded to Flow after the user is registered with your client will be returned. Use samples and zones query parameters to return optional samples and zone information of the exercises.
+
+        Training Load Pro data will be included in the exercise object if the exercise is recorded with a specific wrist unit model,  please check [compatible devices](https://www.polar.com/en/smart-coaching/training-load-pro) for more information.'
+      operationId: listExercisesWithoutTransaction
+      parameters:
+      - name: samples
+        in: query
+        description: Return all sample data for this exercise.
+        required: false
+        schema:
+          type: boolean
+      - name: zones
+        in: query
+        description: Return all zones data for this exercise.
+        required: false
+        schema:
+          type: boolean
+      - name: route
+        in: query
+        description: Return all route data for this exercise.
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: List of users exercises.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exercisesHashId'
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/exercises/{exerciseId}:
+    get:
+      tags:
+      - Exercises
+      summary: Get exercise
+      description: Get users exercise using hashed id. Only Exercises uploaded to Flow in the last 30 days are available. Only exercises that have been uploaded to Flow after the user is registered with your client will be available. Use samples and zones query parameters to return optional samples and zone information of the exercise.
+      operationId: getExerciseWithoutTransaction
+      parameters:
+      - name: exerciseId
+        in: path
+        description: Hashed exercise id.
+        required: true
+        schema:
+          type: string
+      - name: samples
+        in: query
+        description: Return all sample data for this exercise.
+        required: false
+        schema:
+          type: boolean
+      - name: zones
+        in: query
+        description: Return all zones data for this exercise.
+        required: false
+        schema:
+          type: boolean
+      - name: route
+        in: query
+        description: Return all route data for this exercise.
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Exercise information.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exerciseHashId'
+        '404':
+          description: Exercise not found.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/exercises/{exerciseId}/fit:
+    get:
+      tags:
+      - Exercises
+      summary: Get exercise FIT
+      description: FIT file for users exercise. Only Exercises uploaded to Flow in the last 30 days are available. Only exercises that have been uploaded to Flow after the user is registered with your client will be available. See [FIT sport mappings in appendix](#sport-type-mapping-in-fit-files).
+      parameters:
+      - name: exerciseId
+        in: path
+        description: Hashed exercise id.
+        required: true
+        schema:
+          type: string
+      operationId: getExerciseFitWithoutTransaction
+      responses:
+        '200':
+          description: Return FIT file.
+          content:
+            '*/*':
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: Exercise not found.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/exercises/{exerciseId}/tcx:
+    get:
+      tags:
+      - Exercises
+      summary: Get exercise TCX
+      description: TCX file for users exercise without an AccessLink "transaction". Only Exercises uploaded to Flow in the last 30 days are available. Only exercises that have been uploaded to Flow after the user is registered with your client will be available.
+      parameters:
+      - name: exerciseId
+        in: path
+        description: Hashed exercise id.
+        required: true
+        schema:
+          type: string
+      operationId: getExerciseTcxWithoutTransaction
+      responses:
+        '200':
+          description: Return gzipped TCX.
+          content:
+            application/vnd.garmin.tcx+xml:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: Exercise not found.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/exercises/{exerciseId}/gpx:
+    get:
+      tags:
+      - Exercises
+      summary: Get exercise GPX
+      description: GPX file for users exercise without an AccessLink "transaction". Only Exercises uploaded to Flow in the last 30 days are available. Only exercises that have been uploaded to Flow after the user is registered with your client will be available.
+      parameters:
+      - name: exerciseId
+        in: path
+        description: Hashed exercise id.
+        required: true
+        schema:
+          type: string
+      operationId: getExerciseGpxWithoutTransaction
+      responses:
+        '200':
+          description: Return exercise in GPX (GPS Exchange format).
+          content:
+            application/gpx+xml:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: Exercise not found.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+components:
+  schemas:
+    training-load-pro-load-enum:
+      type: string
+      enum:
+      - UNKNOWN
+      - VERY_LOW
+      - LOW
+      - MEDIUM
+      - HIGH
+      - VERY_HIGH
+      - NOT_AVAILABLE
+    exerciseHashId:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 2AC312F
+          xml:
+            attribute: true
+          description: Hashed id of the training session
+        upload_time:
+          type: string
+          example: '2008-10-13T10:40:02.000Z'
+          xml:
+            attribute: true
+          description: Time of the transfer from wrist unit to Polar database
+        polar_user:
+          type: string
+          example: https://www.polaraccesslink/v3/users/1
+          xml:
+            attribute: true
+          description: Absolute link to Polar user owning the training
+        device:
+          type: string
+          example: Polar M400
+          description: Polar product used in training
+        device_id:
+          type: string
+          example: 1111AAAA
+          description: Id of the Polar device
+        start_time:
+          type: string
+          example: '2008-10-13T10:40:02'
+          description: Start time of the training session in local time
+        start_time_utc_offset:
+          type: integer
+          format: int32
+          example: 180
+          description: The offset from UTC (in minutes) when the training session was started
+        duration:
+          type: string
+          example: PT2H44M
+          description: The duration of the training session as specified in ISO8601
+        calories:
+          type: integer
+          format: int32
+          example: 530
+          description: Expended calories during training in kilocalories
+        distance:
+          type: number
+          format: float
+          example: 1600
+          description: Distance in meters travelled during training
+        heart_rate:
+          $ref: '#/components/schemas/HeartRate'
+        training_load:
+          type: number
+          format: float
+          example: 143.22
+          description: Training load effect to user
+        sport:
+          type: string
+          example: OTHER
+          description: Sport name
+        has_route:
+          type: boolean
+          example: true
+          description: Boolean indicating if the exercise has route data
+        club_id:
+          type: integer
+          format: int64
+          example: 999
+          description: Has value if the exercise is from "Flow For Club", otherwise not printed. Value -1 indicates that there were errors finding the club
+        club_name:
+          type: string
+          example: Polar Club
+          description: Has value if the exercise is from "Flow For Club", otherwise not printed. Value "Ambiguous club location. Please contact support." is printed in case of error (and the club-id is -1).
+        detailed_sport_info:
+          type: string
+          example: WATERSPORTS_WATERSKI
+          description: String containing the name of a Polar Flow-compatible sport, if one is set for the exercise.
+        fat_percentage:
+          type: integer
+          format: int32
+          example: 60
+          description: Fat percentage of exercise calories. Has value if the exercise is from training device supporting Energy sources, otherwise not printed.
+        carbohydrate_percentage:
+          type: integer
+          format: int32
+          example: 38
+          description: Carbohydrate percentage of exercise calories. Has value if the exercise is from training device supporting Energy sources, otherwise not printed.
+        protein_percentage:
+          type: integer
+          format: int32
+          example: 2
+          description: Protein percentage of exercise calories. Has value if the exercise is from training device supporting Energy sources, otherwise not printed.
+        running-index:
+          type: integer
+          format: int32
+          example: 51
+          description: <a href="https://support.polar.com/en/support/tips/Running_Index_feature#"> Running index</a> is a score automatically calculated every run based on your heart rate and speed data collected via GPS or stride sensor.
+        heart_rate_zones:
+          description: Heart rate zones for this exercise. Returned when query parameter 'zones=true' is used.
+          type: array
+          items:
+            $ref: '#/components/schemas/zone'
+        samples:
+          description: List of all samples available for this exercise. Returned when query parameter 'samples=true' is used.
+          type: array
+          items:
+            $ref: '#/components/schemas/sample'
+        route:
+          description: List of all route points/locations available for this exercise. Returned when query parameter 'route=true' is used.
+          type: array
+          items:
+            $ref: '#/components/schemas/location'
+        training_load_pro:
+          $ref: '#/components/schemas/training-load-pro-sample'
+      description: Training session summary data
+    zone:
+      type: object
+      properties:
+        index:
+          type: integer
+          format: int32
+          example: 1
+          description: Zone list index
+        lower-limit:
+          type: integer
+          format: int32
+          example: 110
+          description: Lower heart-rate boundary of the zone
+        upper-limit:
+          type: integer
+          format: int32
+          example: 130
+          description: Upper heart-rate boundary of the zone
+        in-zone:
+          type: string
+          example: PT4S
+          description: Time duration spent in the zone ISO 8601
+      description: Heart-rate zone information
+      xml:
+        name: zone
+    training-load-pro-rpe-enum:
+      description: Quantifies internal training load of a session.
+      type: string
+      enum:
+      - UNKNOWN
+      - RPE_NONE
+      - RPE_EASY
+      - RPE_LIGHT
+      - RPE_FAIRLY_BRISK
+      - RPE_BRISK
+      - RPE_MODERATE
+      - RPE_FAIRLY_HARD
+      - RPE_HARD
+      - RPE_EXHAUSTING
+      - RPE_EXTREME
+    sample:
+      type: object
+      properties:
+        recording-rate:
+          type: integer
+          format: int32
+          example: 5
+          description: Sample recording rate in seconds. Null when recording rate is not applicable - currently only with RR-data.
+        sample-type:
+          type: string
+          format: byte
+          example: '1'
+          description: Sample type
+        data:
+          type: string
+          example: 0,100,102,97,97,101,103,106,96,89,88,87,98,108,113,112,114,115,118,121,121,121,121,123,117,119,122
+          description: Sample values as a comma-separated list of strings. Can contain null -values which indicate a situation where sensor was offline.
+      description: Training session sample data
+      xml:
+        name: sample
+    training-load-pro-sample:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+          description: Date in format YYYY-MM-DD.
+          example: '2023-01-01'
+        cardio-load:
+          type: number
+          format: float
+          description: User cardio load value.
+          example: 1.0
+        muscle-load:
+          type: number
+          format: float
+          description: User muscle load value.
+          example: 1.0
+        perceived-load:
+          type: number
+          format: float
+          description: User perceived load value.
+          example: 1.0
+        cardio-load-interpretation:
+          $ref: '#/components/schemas/training-load-pro-load-enum'
+        muscle-load-interpretation:
+          $ref: '#/components/schemas/training-load-pro-load-enum'
+        perceived-load-interpretation:
+          $ref: '#/components/schemas/training-load-pro-load-enum'
+        user-rpe:
+          $ref: '#/components/schemas/training-load-pro-rpe-enum'
+    HeartRate:
+      type: object
+      properties:
+        average:
+          type: integer
+          format: int32
+          example: 129
+          description: Average heart-rate
+        maximum:
+          type: integer
+          format: int32
+          example: 147
+          description: Maximum heart-rate
+      description: Heart-rate statistics information
+    exercisesHashId:
+      type: array
+      description: List of exercises.
+      items:
+        $ref: '#/components/schemas/exerciseHashId'
+    location:
+      type: object
+      properties:
+        latitude:
+          type: number
+          format: double
+          example: 60.21982833
+          description: The latitude, expressed in degrees.
+        longitude:
+          type: number
+          format: double
+          example: 25.13925
+          description: The longitude, expressed in degrees.
+        time:
+          type: string
+          example: PT210.026S
+          description: The time, expressed as a duration.
+        satellites:
+          type: integer
+          format: int64
+          example: 4
+          description: Satellites. A byte-sized value with a maximum of 63.
+        fix:
+          type: integer
+          format: int64
+          example: 1
+          description: Fix. A byte-sized value with a maximum of three.
+      description: Exercise route point/location.
+      xml:
+        name: location
+  securitySchemes:
+    Basic:
+      type: http
+      scheme: basic
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://flow.polar.com/oauth2/authorization
+          tokenUrl: https://polarremote.com/v2/oauth2/token
+          scopes:
+            accesslink.read_all: Allows read access to user's data

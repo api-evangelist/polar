@@ -1,0 +1,487 @@
+openapi: 3.0.0
+info:
+  description: Polar AccessLink API documentation
+  version: v3
+  title: Polar AccessLink Cardio load Elixir&trade; Biosensing API
+  contact:
+    name: Support
+    url: https://www.polar.com/accesslink
+    email: b2bhelpdesk@polar.com
+  license:
+    name: Polar Electro AccessLink Limited License Agreement
+    url: https://www.polar.com/en/legal/polar-api-agreement
+servers:
+- url: https://www.polaraccesslink.com/
+tags:
+- name: Elixir&trade; Biosensing
+  description: This resource allows partners to access their users' Elixir&trade; Biosensing data. All time values are UTC times. Elixir&trade; Biosensing data consists of body temperature data, sleep skin temperature data, skin contacts data, wrist ECG test report data and SpO2 test report data.
+paths:
+  /v3/users/biosensing/bodytemperature:
+    get:
+      tags:
+      - Elixir&trade; Biosensing
+      parameters:
+      - name: from
+        in: query
+        description: 'Inclusive start date of range as ISO-8601 date string, example: "2023-10-01"'
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: to
+        in: query
+        description: 'Inclusive end date of range as ISO-8601 date string, example: "2023-10-28"'
+        required: false
+        schema:
+          type: string
+          format: date
+      summary: Body temperature data
+      description: Get user's body temperature data for last 28 days or for given date range. Maximum date range between from and to cannot be more than 28 days.
+      responses:
+        '200':
+          description: Request was successful.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/body-temperature-period'
+        '400':
+          description: Invalid request.
+        '401':
+          description: Unauthorized.
+        '204':
+          description: No data found.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/biosensing/skintemperature:
+    get:
+      tags:
+      - Elixir&trade; Biosensing
+      parameters:
+      - name: from
+        in: query
+        description: 'Inclusive start date of range as ISO-8601 date string, example: "2023-10-01"'
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: to
+        in: query
+        description: 'Inclusive end date of range as ISO-8601 date string, example: "2023-10-28"'
+        required: false
+        schema:
+          type: string
+          format: date
+      summary: Sleep skin temperature data
+      description: Get user's sleep skin temperature data for last 28 days or for given date range. Maximum date range between from and to cannot be more than 28 days.
+      responses:
+        '200':
+          description: Request was successful.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/skin-temperature'
+        '400':
+          description: Invalid request.
+        '401':
+          description: Unauthorized.
+        '204':
+          description: No data found.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/biosensing/skincontacts:
+    get:
+      tags:
+      - Elixir&trade; Biosensing
+      parameters:
+      - name: from
+        in: query
+        description: 'Inclusive start date of range as ISO-8601 date string, example: "2023-10-01"'
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: to
+        in: query
+        description: 'Inclusive end date of range as ISO-8601 date string, example: "2023-10-28"'
+        required: false
+        schema:
+          type: string
+          format: date
+      summary: Skin contacts data
+      description: Get user's skin contacts data for last 28 days or for given date range. Maximum date range between from and to cannot be more than 28 days.
+      responses:
+        '200':
+          description: Request was successful.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/skin-contact-period'
+        '400':
+          description: Invalid request.
+        '401':
+          description: Unauthorized.
+        '204':
+          description: No data found.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/biosensing/ecg:
+    get:
+      tags:
+      - Elixir&trade; Biosensing
+      parameters:
+      - name: from
+        in: query
+        description: 'Inclusive start date of range as ISO-8601 date string, example: "2023-10-01"'
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: to
+        in: query
+        description: 'Inclusive end date of range as ISO-8601 date string, example: "2023-10-28"'
+        required: false
+        schema:
+          type: string
+          format: date
+      summary: Wrist ECG test result data
+      description: Get user's wrist ECG test result data for last 28 days or for given date range. Maximum date range between from and to cannot be more than 28 days.
+      responses:
+        '200':
+          description: Request was successful.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ecg-test-result'
+        '400':
+          description: Invalid request.
+        '401':
+          description: Unauthorized.
+        '204':
+          description: No data found.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+  /v3/users/biosensing/spo2:
+    get:
+      tags:
+      - Elixir&trade; Biosensing
+      parameters:
+      - name: from
+        in: query
+        description: 'Inclusive start date of range as ISO-8601 date string, example: "2023-10-01"'
+        required: false
+        schema:
+          type: string
+          format: date
+      - name: to
+        in: query
+        description: 'Inclusive end date of range as ISO-8601 date string, example: "2023-10-28"'
+        required: false
+        schema:
+          type: string
+          format: date
+      summary: SpO2 test result data
+      description: Get user's SpO2 test result data for last 28 days or for given date range. Maximum date range between from and to cannot be more than 28 days.
+      responses:
+        '200':
+          description: Request was successful.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/spo2-test-result'
+        '400':
+          description: Invalid request.
+        '401':
+          description: Unauthorized.
+        '204':
+          description: No data found.
+        '403':
+          description: User has not accepted all mandatory consents.
+      security:
+      - OAuth2:
+        - accesslink.read_all
+components:
+  schemas:
+    spo2-test-result:
+      type: object
+      properties:
+        source_device_id:
+          type: string
+          example: 1111AAAA
+        test_time:
+          type: integer
+          example: 1697787256
+          format: int64
+        time_zone_offset:
+          type: integer
+          example: 180
+          format: int32
+        test_status:
+          type: string
+          example: SPO2_TEST_PASSED
+          enum:
+          - SPO2_TEST_PASSED
+          - SPO2_TEST_INCONCLUSIVE_TOO_LOW_QUALITY_IN_SAMPLES
+          - SPO2_TEST_INCONCLUSIVE_TOO_LOW_OVERALL_QUALITY
+          - SPO2_TEST_INCONCLUSIVE_TOO_MANY_MISSING_SAMPLES
+        blood_oxygen_percent:
+          type: integer
+          example: 95
+          format: int32
+        spo2_class:
+          type: string
+          example: SPO2_CLASS_NORMAL
+          enum:
+          - SPO2_CLASS_UNKNOWN
+          - SPO2_CLASS_VERY_LOW
+          - SPO2_CLASS_LOW
+          - SPO2_CLASS_NORMAL
+        spo2_value_deviation_from_baseline:
+          type: string
+          example: DEVIATION_NO_BASELINE
+          enum:
+          - DEVIATION_NO_BASELINE
+          - DEVIATION_BELOW_USUAL
+          - DEVIATION_USUAL
+          - DEVIATION_ABOVE_USUAL
+        spo2_quality_average_percent:
+          type: number
+          example: 90.0
+          format: float
+        average_heart_rate_bpm:
+          type: integer
+          example: 60
+          format: int32
+        heart_rate_variability_ms:
+          type: number
+          example: 100.0
+          format: float
+        spo2_hrv_deviation_from_baseline:
+          type: string
+          example: DEVIATION_NO_BASELINE
+          enum:
+          - DEVIATION_NO_BASELINE
+          - DEVIATION_BELOW_USUAL
+          - DEVIATION_USUAL
+          - DEVIATION_ABOVE_USUAL
+        altitude_meters:
+          type: number
+          example: 50.0
+          format: float
+    body-temperature-sample:
+      type: object
+      properties:
+        temperature_celsius:
+          type: number
+          example: 36.5
+          format: float
+        recording_time_delta_milliseconds:
+          type: integer
+          example: 123
+          format: int64
+          pattern: '[0-9]+'
+    ecg-test-result:
+      type: object
+      properties:
+        source_device_id:
+          type: string
+          example: 1111AAAA
+        test_time:
+          type: integer
+          example: 1697787256
+          format: int64
+        time_zone_offset:
+          type: integer
+          example: 180
+          format: int32
+        average_heart_rate_bpm:
+          type: integer
+          example: 60
+          format: int32
+        heart_rate_variability_ms:
+          type: number
+          example: 0.0
+          format: float
+        heart_rate_variability_level:
+          type: string
+          example: ECG_HRV_LEVEL_NO_BASELINE
+          enum:
+          - ECG_HRV_LEVEL_NO_BASELINE
+          - ECG_HRV_LEVEL_BELOW_USUAL
+          - ECG_HRV_LEVEL_USUAL
+          - ECG_HRV_LEVEL_ABOVE_USUAL
+        rri_ms:
+          type: number
+          example: 100.0
+          format: float
+        pulse_transit_time_systolic_ms:
+          type: number
+          example: 100.0
+          format: float
+        pulse_transit_time_diastolic_ms:
+          type: number
+          example: 100.0
+          format: float
+        pulse_transit_time_quality_index:
+          type: number
+          example: 100.0
+          format: float
+        samples:
+          type: array
+          items:
+            $ref: '#/components/schemas/ecg-sample'
+        quality_measurements:
+          type: array
+          items:
+            $ref: '#/components/schemas/quality-measurement'
+    quality-measurement:
+      type: object
+      properties:
+        recording_time_delta_ms:
+          type: integer
+          example: 123
+          format: int32
+        quality_level:
+          type: string
+          example: ECG_QUALITY_HIGH
+          enum:
+          - ECG_QUALITY_UNKNOWN
+          - ECG_QUALITY_NO_CONTACT
+          - ECG_QUALITY_LOW
+          - ECG_QUALITY_HIGH
+    skin-temperature:
+      type: object
+      properties:
+        sleep_time_skin_temperature_celsius:
+          type: number
+          example: 36.5
+          format: float
+        deviation_from_baseline_celsius:
+          type: number
+          example: 0.5
+          format: float
+        sleep_date:
+          type: string
+          example: '2023-10-20'
+          format: date
+    skin-contact-period:
+      type: object
+      properties:
+        source_device_id:
+          type: string
+          example: 1111AAAA
+        start_time:
+          type: string
+          format: date-time
+          description: Measurement period start time (UTC)
+          example: '2023-10-20T04:00:00'
+        end_time:
+          type: string
+          format: date-time
+          description: Measurement period end time (UTC)
+          example: '2023-10-20T05:00:00'
+        modified_time:
+          type: string
+          format: date-time
+          description: Measurement period modified time (UTC)
+          example: '2023-10-20T04:00:00'
+        skin_contact_changes:
+          type: array
+          items:
+            $ref: '#/components/schemas/skin-contact-change'
+    ecg-sample:
+      type: object
+      properties:
+        recording_time_delta_ms:
+          type: integer
+          example: 123
+          format: int32
+        amplitude_mv:
+          type: number
+          example: 0.1
+          format: float
+    body-temperature-period:
+      type: object
+      properties:
+        source_device_id:
+          type: string
+          example: 1111AAAA
+        measurement_type:
+          type: string
+          example: TM_CORE_TEMPERATURE
+          description: Measurement type
+          enum:
+          - TM_UNKNOWN
+          - TM_SKIN_TEMPERATURE
+          - TM_CORE_TEMPERATURE
+        sensor_location:
+          type: string
+          example: SL_PROXIMAL
+          description: Sensor location
+          enum:
+          - SL_UNKNOWN
+          - SL_DISTAL
+          - SL_PROXIMAL
+        start_time:
+          type: string
+          example: '2023-10-20T04:00:00'
+          format: date-time
+          description: Measurement period start time (UTC)
+        end_time:
+          type: string
+          example: '2023-10-20T05:00:00'
+          format: date-time
+          description: Measurement period end time (UTC)
+        modified_time:
+          type: string
+          example: '2023-10-20T04:00:00'
+          format: date-time
+          description: Measurement period modified time (UTC)
+        samples:
+          type: array
+          items:
+            $ref: '#/components/schemas/body-temperature-sample'
+    skin-contact-change:
+      type: object
+      properties:
+        skin_contact:
+          type: boolean
+          example: true
+        recording_time_delta_milliseconds:
+          type: integer
+          example: 123
+          format: int64
+          pattern: '[0-9]+'
+  securitySchemes:
+    Basic:
+      type: http
+      scheme: basic
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://flow.polar.com/oauth2/authorization
+          tokenUrl: https://polarremote.com/v2/oauth2/token
+          scopes:
+            accesslink.read_all: Allows read access to user's data
