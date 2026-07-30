@@ -1,71 +1,6 @@
 aid: polar
 url: https://raw.githubusercontent.com/api-evangelist/polar/refs/heads/main/apis.yml
 apis:
-- aid: polar:polar-accesslink-api
-  name: Polar AccessLink API
-  tags:
-  - Fitness
-  - Health
-  - Heart Rate
-  - Wearables
-  - Training
-  - Activity
-  - Sleep
-  humanURL: https://www.polar.com/accesslink-api/
-  baseURL: https://www.polaraccesslink.com/
-  properties:
-  - url: https://www.polar.com/accesslink-api/
-    type: Documentation
-  - url: https://www.polar.com/accesslink-api/swagger.yaml
-    type: OpenAPI
-  - url: openapi/polar-accesslink-api-openapi.yml
-    type: OpenAPI
-  - url: openapi/polar-accesslink-webhooks-asyncapi.yml
-    type: AsyncAPI
-  - url: https://admin.polaraccesslink.com/
-    type: Portal
-  - url: https://github.com/polarofficial/accesslink-example-python
-    type: CodeExamples
-  - url: https://www.polar.com/en/legal/polar-api-agreement
-    type: TermsOfService
-  - url: graphql/polar-graphql.md
-    type: GraphQL
-  description: The Polar Open AccessLink API gives partners structured OAuth2-based
-    access to Polar Flow user data — training sessions, daily activity, continuous
-    heart rate, sleep, Nightly Recharge, Cardio Load, SleepWise alertness and circadian
-    bedtime, Elixir biosensing (ECG, SpO2, skin and body temperature, skin contacts),
-    exercise files in FIT/TCX/GPX format, and webhooks for real-time notifications
-    when new user data is available. Operates against https://www.polaraccesslink.com/
-    with both transactional (data discarded after retrieval) and non-transactional
-    endpoints.
-- aid: polar:polar-teampro-api
-  name: Polar TeamPro API
-  tags:
-  - Fitness
-  - Health
-  - Sports
-  - Teams
-  - Training
-  - Coaching
-  humanURL: https://www.polar.com/teampro-api/
-  baseURL: https://teampro.api.polar.com/
-  properties:
-  - url: https://www.polar.com/teampro-api/
-    type: Documentation
-  - url: https://www.polar.com/teampro-api/swagger.yaml
-    type: OpenAPI
-  - url: openapi/polar-teampro-api-openapi.yml
-    type: OpenAPI
-  - url: https://admin.polaraccesslink.com/
-    type: Portal
-  - url: https://www.polar.com/en/legal/polar-api-agreement
-    type: TermsOfService
-  description: The Polar TeamPro API exposes team and player training data captured
-    by the Polar Team Pro system. Endpoints return teams, sport profiles, team and
-    player training sessions with date-range filters, detailed per-session metrics
-    (heart rate, speed, power, acceleration), session summaries and phase summaries.
-    OAuth2 authorization-code flow with the team_read scope. Rate limited to 1 request/second
-    with a 100-request burst allowance.
 - aid: polar:polar-ble-sdk
   name: Polar BLE SDK
   tags:
@@ -88,12 +23,496 @@ apis:
   - url: https://github.com/polarofficial/create-mobile-app-for-polar-sensors
     name: Mobile App Starter for Polar Sensors
     type: CodeExamples
-  description: The Polar BLE SDK enables iOS and Android applications to stream live
-    data from Polar sensors over Bluetooth Low Energy. Supports H10, H9, Verity Sense,
-    OH1, Ignite 3, Polar 360/Loop, Vantage V3, Vantage M3, Grit X2 Pro, Grit X2, Pacer
-    Pro, and Pacer. Streams heart rate, ECG, accelerometer, PPG, gyroscope, magnetometer,
-    and PPI data. iOS 14.0+ (Swift) and Android minSdk 24 (Kotlin/Java) with RxJava/RxSwift
+  description: >-
+    The Polar BLE SDK enables iOS and Android applications to stream live data from Polar sensors over
+    Bluetooth Low Energy. Supports H10, H9, Verity Sense, OH1, Ignite 3, Polar 360/Loop, Vantage V3, Vantage
+    M3, Grit X2 Pro, Grit X2, Pacer Pro, and Pacer. Streams heart rate, ECG, accelerometer, PPG, gyroscope,
+    magnetometer, and PPI data. iOS 14.0+ (Swift) and Android minSdk 24 (Kotlin/Java) with RxJava/RxSwift
     for asynchronous operations.
+- aid: polar:polar-cardio-load-api
+  name: Polar Cardio load API
+  description: >-
+    Cardio load is based on training impulse calculation (TRIMP), a commonly accepted and scientifically
+    proven method to quantify training load. Your Cardio load value tells you how much strain your training
+    session put on your cardiovascular system.  The higher the Cardio load, the more strenuous the training
+    session was for the cardiovascular system.  Cardio load is calculated after every workout from your
+    heart rate data and session duration. For more detailed information please check [cardio load](https://support.polar.com/e_manuals/unite/polar-unite-user-manual-english/cardio-load.htm).
+  humanURL: https://www.polar.com/accesslink-api/
+  baseURL: https://www.polaraccesslink.com/
+  tags:
+  - Cardio load
+  properties:
+  - type: OpenAPI
+    url: openapi/polar-cardio-load-api-openapi.yml
+  - type: Documentation
+    url: https://www.polar.com/accesslink-api/
+  - type: AsyncAPI
+    url: openapi/polar-accesslink-webhooks-asyncapi.yml
+  - type: Portal
+    url: https://admin.polaraccesslink.com/
+  - type: CodeExamples
+    url: https://github.com/polarofficial/accesslink-example-python
+  - type: TermsOfService
+    url: https://www.polar.com/en/legal/polar-api-agreement
+  - type: GraphQL
+    url: graphql/polar-graphql.md
+  - type: Documentation
+    url: https://www.polar.com/teampro-api/
+- aid: polar:polar-continuous-heart-rate-api
+  name: Polar Continuous Heart Rate API
+  description: >-
+    This resource allows partners to access their users' continuous heart rate data. Continuous heart
+    rate is recorded with supported devices when the heart rate tracking is turned on in device settings.
+    Samples are recording in 5 minute intervals. Heart rate samples from training sessions are not available
+    through this resource. Training sessions samples have more precise sampling interval and they can
+    be accessed from the [training data resource](#exercises). <a href="https://support.polar.com/en/support/the_what_and_how_of_polars_continuous_heart_rate">Supported
+    devices</a>
+  humanURL: https://www.polar.com/accesslink-api/
+  baseURL: https://www.polaraccesslink.com/
+  tags:
+  - Continuous Heart Rate
+  properties:
+  - type: OpenAPI
+    url: openapi/polar-continuous-heart-rate-api-openapi.yml
+  - type: Documentation
+    url: https://www.polar.com/accesslink-api/
+  - type: AsyncAPI
+    url: openapi/polar-accesslink-webhooks-asyncapi.yml
+  - type: Portal
+    url: https://admin.polaraccesslink.com/
+  - type: CodeExamples
+    url: https://github.com/polarofficial/accesslink-example-python
+  - type: TermsOfService
+    url: https://www.polar.com/en/legal/polar-api-agreement
+  - type: GraphQL
+    url: graphql/polar-graphql.md
+  - type: Documentation
+    url: https://www.polar.com/teampro-api/
+- aid: polar:polar-daily-activity-api
+  name: Polar Daily activity API
+  description: >-
+    This resource allows partners to access their users' daily activity data. Webhooks are used to notify
+    partners when new data is available.
+  humanURL: https://www.polar.com/accesslink-api/
+  baseURL: https://www.polaraccesslink.com/
+  tags:
+  - Daily activity
+  properties:
+  - type: OpenAPI
+    url: openapi/polar-daily-activity-api-openapi.yml
+  - type: Documentation
+    url: https://www.polar.com/accesslink-api/
+  - type: AsyncAPI
+    url: openapi/polar-accesslink-webhooks-asyncapi.yml
+  - type: Portal
+    url: https://admin.polaraccesslink.com/
+  - type: CodeExamples
+    url: https://github.com/polarofficial/accesslink-example-python
+  - type: TermsOfService
+    url: https://www.polar.com/en/legal/polar-api-agreement
+  - type: GraphQL
+    url: graphql/polar-graphql.md
+  - type: Documentation
+    url: https://www.polar.com/teampro-api/
+- aid: polar:polar-daily-activity-deprecated-api
+  name: Polar Daily activity (deprecated) API
+  description: >-
+    This resource allows partners to access their users' daily activity data. During the transfer, the
+    activity data is copied also into the AccessLink database so the end-users cannot change the data
+    that is accessible via AccessLink afterwards. Begin and end of day are determined by the time set
+    on the device used. No timezone information is available. Each transaction will consist of at most
+    50 activity summaries. Available data presented in section [Schemas](#schemas). Only data that has
+    been uploaded to Flow after the user has been registered to your client will be available. Only data
+    that has been uploaded in the last 28 days will be available. <br/><br/> This resource is deprecated.
+    Please use non-transactional [Daily activity](#daily-activity) instead.
+  humanURL: https://www.polar.com/accesslink-api/
+  baseURL: https://www.polaraccesslink.com/
+  tags:
+  - Daily activity (deprecated)
+  properties:
+  - type: OpenAPI
+    url: openapi/polar-daily-activity-deprecated-api-openapi.yml
+  - type: Documentation
+    url: https://www.polar.com/accesslink-api/
+  - type: AsyncAPI
+    url: openapi/polar-accesslink-webhooks-asyncapi.yml
+  - type: Portal
+    url: https://admin.polaraccesslink.com/
+  - type: CodeExamples
+    url: https://github.com/polarofficial/accesslink-example-python
+  - type: TermsOfService
+    url: https://www.polar.com/en/legal/polar-api-agreement
+  - type: GraphQL
+    url: graphql/polar-graphql.md
+  - type: Documentation
+    url: https://www.polar.com/teampro-api/
+- aid: polar:polar-elixir-trade-biosensing-api
+  name: Polar Elixir&trade; Biosensing API
+  description: >-
+    This resource allows partners to access their users' Elixir&trade; Biosensing data. All time values
+    are UTC times. Elixir&trade; Biosensing data consists of body temperature data, sleep skin temperature
+    data, skin contacts data, wrist ECG test report data and SpO2 test report data.
+  humanURL: https://www.polar.com/accesslink-api/
+  baseURL: https://www.polaraccesslink.com/
+  tags:
+  - Elixir&trade; Biosensing
+  properties:
+  - type: OpenAPI
+    url: openapi/polar-elixir-trade-biosensing-api-openapi.yml
+  - type: Documentation
+    url: https://www.polar.com/accesslink-api/
+  - type: AsyncAPI
+    url: openapi/polar-accesslink-webhooks-asyncapi.yml
+  - type: Portal
+    url: https://admin.polaraccesslink.com/
+  - type: CodeExamples
+    url: https://github.com/polarofficial/accesslink-example-python
+  - type: TermsOfService
+    url: https://www.polar.com/en/legal/polar-api-agreement
+  - type: GraphQL
+    url: graphql/polar-graphql.md
+  - type: Documentation
+    url: https://www.polar.com/teampro-api/
+- aid: polar:polar-exercises-api
+  name: Polar Exercises API
+  description: >-
+    Resources for getting information about exercise. These endpoints do not require an active transaction,
+    but they use hashed id.
+  humanURL: https://www.polar.com/accesslink-api/
+  baseURL: https://www.polaraccesslink.com/
+  tags:
+  - Exercises
+  properties:
+  - type: OpenAPI
+    url: openapi/polar-exercises-api-openapi.yml
+  - type: Documentation
+    url: https://www.polar.com/accesslink-api/
+  - type: AsyncAPI
+    url: openapi/polar-accesslink-webhooks-asyncapi.yml
+  - type: Portal
+    url: https://admin.polaraccesslink.com/
+  - type: CodeExamples
+    url: https://github.com/polarofficial/accesslink-example-python
+  - type: TermsOfService
+    url: https://www.polar.com/en/legal/polar-api-agreement
+  - type: GraphQL
+    url: graphql/polar-graphql.md
+  - type: Documentation
+    url: https://www.polar.com/teampro-api/
+- aid: polar:polar-exercises-deprecated-api
+  name: Polar Exercises (deprecated) API
+  description: >-
+    This resource allows partners to access their users' training data. All time values are UTC except
+    start-time. Start-time is the time set on the training computer. Each transaction will consist of
+    at most 50 training sessions. Available data presented in section [Schemas](#schemas). Only data that
+    has been uploaded to Flow after the user has been registered to your client will be available. Only
+    data that has been uploaded in the last 28 days will be available. <br/><br/> This resource is deprecated.
+    Please use non-transactional [Exercises](#exercises) instead.
+  humanURL: https://www.polar.com/accesslink-api/
+  baseURL: https://www.polaraccesslink.com/
+  tags:
+  - Exercises (deprecated)
+  properties:
+  - type: OpenAPI
+    url: openapi/polar-exercises-deprecated-api-openapi.yml
+  - type: Documentation
+    url: https://www.polar.com/accesslink-api/
+  - type: AsyncAPI
+    url: openapi/polar-accesslink-webhooks-asyncapi.yml
+  - type: Portal
+    url: https://admin.polaraccesslink.com/
+  - type: CodeExamples
+    url: https://github.com/polarofficial/accesslink-example-python
+  - type: TermsOfService
+    url: https://www.polar.com/en/legal/polar-api-agreement
+  - type: GraphQL
+    url: graphql/polar-graphql.md
+  - type: Documentation
+    url: https://www.polar.com/teampro-api/
+- aid: polar:polar-nightly-recharge-api
+  name: Polar Nightly Recharge API
+  description: >-
+    Nightly Recharge&trade; is a recovery measurement that shows how well your body recovers from daily
+    training and stress. It is based on heart rate variability (HRV) and overnight heart rate data. The
+    higher the Nightly Recharge score, the better your body has recovered. For more detailed information
+    please check [Nightly Recharge](https://support.polar.com/e_manuals/unite/polar-unite-user-manual-english/nightly-recharge.htm).
+  humanURL: https://www.polar.com/accesslink-api/
+  baseURL: https://www.polaraccesslink.com/
+  tags:
+  - Nightly Recharge
+  properties:
+  - type: OpenAPI
+    url: openapi/polar-nightly-recharge-api-openapi.yml
+  - type: Documentation
+    url: https://www.polar.com/accesslink-api/
+  - type: AsyncAPI
+    url: openapi/polar-accesslink-webhooks-asyncapi.yml
+  - type: Portal
+    url: https://admin.polaraccesslink.com/
+  - type: CodeExamples
+    url: https://github.com/polarofficial/accesslink-example-python
+  - type: TermsOfService
+    url: https://www.polar.com/en/legal/polar-api-agreement
+  - type: GraphQL
+    url: graphql/polar-graphql.md
+  - type: Documentation
+    url: https://www.polar.com/teampro-api/
+- aid: polar:polar-physical-info-api
+  name: Polar Physical info API
+  description: This resource allows partners to access their users' physical information.
+  humanURL: https://www.polar.com/accesslink-api/
+  baseURL: https://www.polaraccesslink.com/
+  tags:
+  - Physical info
+  properties:
+  - type: OpenAPI
+    url: openapi/polar-physical-info-api-openapi.yml
+  - type: Documentation
+    url: https://www.polar.com/accesslink-api/
+  - type: AsyncAPI
+    url: openapi/polar-accesslink-webhooks-asyncapi.yml
+  - type: Portal
+    url: https://admin.polaraccesslink.com/
+  - type: CodeExamples
+    url: https://github.com/polarofficial/accesslink-example-python
+  - type: TermsOfService
+    url: https://www.polar.com/en/legal/polar-api-agreement
+  - type: GraphQL
+    url: graphql/polar-graphql.md
+  - type: Documentation
+    url: https://www.polar.com/teampro-api/
+- aid: polar:polar-physical-info-deprecated-api
+  name: Polar Physical info (deprecated) API
+  description: >-
+    This resource allows partners to access their users' physical information. Whenever some user's physical
+    information changes, new entry containing full physical info is stored to AccessLink. Pull notifications
+    can be used to check if user have new physical information available. Available data presented in
+    section [Schemas](#schemas). <br/><br/> This resource is deprecated. Please use non-transactional
+    [Physical info](#physical-info) instead.
+  humanURL: https://www.polar.com/accesslink-api/
+  baseURL: https://www.polaraccesslink.com/
+  tags:
+  - Physical info (deprecated)
+  properties:
+  - type: OpenAPI
+    url: openapi/polar-physical-info-deprecated-api-openapi.yml
+  - type: Documentation
+    url: https://www.polar.com/accesslink-api/
+  - type: AsyncAPI
+    url: openapi/polar-accesslink-webhooks-asyncapi.yml
+  - type: Portal
+    url: https://admin.polaraccesslink.com/
+  - type: CodeExamples
+    url: https://github.com/polarofficial/accesslink-example-python
+  - type: TermsOfService
+    url: https://www.polar.com/en/legal/polar-api-agreement
+  - type: GraphQL
+    url: graphql/polar-graphql.md
+  - type: Documentation
+    url: https://www.polar.com/teampro-api/
+- aid: polar:polar-player-training-sessions-api
+  name: Polar Player training sessions API
+  description: >-
+    Endpoints for getting players training session and details. <aside class='notice'> Only training sessions
+    that are done during time the player has been linked to team roster will be visible here. </aside>
+  humanURL: https://www.polar.com/accesslink-api/
+  baseURL: https://www.polaraccesslink.com/
+  tags:
+  - Player training sessions
+  properties:
+  - type: OpenAPI
+    url: openapi/polar-player-training-sessions-api-openapi.yml
+  - type: Documentation
+    url: https://www.polar.com/accesslink-api/
+  - type: AsyncAPI
+    url: openapi/polar-accesslink-webhooks-asyncapi.yml
+  - type: Portal
+    url: https://admin.polaraccesslink.com/
+  - type: CodeExamples
+    url: https://github.com/polarofficial/accesslink-example-python
+  - type: TermsOfService
+    url: https://www.polar.com/en/legal/polar-api-agreement
+  - type: GraphQL
+    url: graphql/polar-graphql.md
+  - type: Documentation
+    url: https://www.polar.com/teampro-api/
+- aid: polar:polar-pull-notifications-api
+  name: Polar Pull notifications API
+  description: >-
+    This resource allows partners to check if their users have available data for downloading. Use client
+    credentials authentication. Returns object holding list of available data objects.
+  humanURL: https://www.polar.com/accesslink-api/
+  baseURL: https://www.polaraccesslink.com/
+  tags:
+  - Pull notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/polar-pull-notifications-api-openapi.yml
+  - type: Documentation
+    url: https://www.polar.com/accesslink-api/
+  - type: AsyncAPI
+    url: openapi/polar-accesslink-webhooks-asyncapi.yml
+  - type: Portal
+    url: https://admin.polaraccesslink.com/
+  - type: CodeExamples
+    url: https://github.com/polarofficial/accesslink-example-python
+  - type: TermsOfService
+    url: https://www.polar.com/en/legal/polar-api-agreement
+  - type: GraphQL
+    url: graphql/polar-graphql.md
+  - type: Documentation
+    url: https://www.polar.com/teampro-api/
+- aid: polar:polar-sleep-api
+  name: Polar Sleep API
+  description: >-
+    Sleep endpoints support [Polar Sleep Plus&trade;](https://www.polar.com/en/smart-coaching/polar-sleep-plus)
+    and [Sleep Plus Stages&trade;](https://www.polar.com/en/smart-coaching/sleep-plus-stages). Available
+    data is presented in section [Schemas](#schemas).
+  humanURL: https://www.polar.com/accesslink-api/
+  baseURL: https://www.polaraccesslink.com/
+  tags:
+  - Sleep
+  properties:
+  - type: OpenAPI
+    url: openapi/polar-sleep-api-openapi.yml
+  - type: Documentation
+    url: https://www.polar.com/accesslink-api/
+  - type: AsyncAPI
+    url: openapi/polar-accesslink-webhooks-asyncapi.yml
+  - type: Portal
+    url: https://admin.polaraccesslink.com/
+  - type: CodeExamples
+    url: https://github.com/polarofficial/accesslink-example-python
+  - type: TermsOfService
+    url: https://www.polar.com/en/legal/polar-api-agreement
+  - type: GraphQL
+    url: graphql/polar-graphql.md
+  - type: Documentation
+    url: https://www.polar.com/teampro-api/
+- aid: polar:polar-sleepwise-trade-api
+  name: Polar SleepWise&trade; API
+  description: >-
+    This resource allows partners to access their users' SleepWise&trade; data. All time values are UTC
+    times. SleepWise&trade; data is calculated for [SleepWise&trade;](https://support.polar.com/en/polar-sleepwise)
+    supported devices when minimum of 5 days of sleep data is available. SleepWise&trade; data consists
+    of alertness periods and circadian bedtime periods.
+  humanURL: https://www.polar.com/accesslink-api/
+  baseURL: https://www.polaraccesslink.com/
+  tags:
+  - SleepWise&trade;
+  properties:
+  - type: OpenAPI
+    url: openapi/polar-sleepwise-trade-api-openapi.yml
+  - type: Documentation
+    url: https://www.polar.com/accesslink-api/
+  - type: AsyncAPI
+    url: openapi/polar-accesslink-webhooks-asyncapi.yml
+  - type: Portal
+    url: https://admin.polaraccesslink.com/
+  - type: CodeExamples
+    url: https://github.com/polarofficial/accesslink-example-python
+  - type: TermsOfService
+    url: https://www.polar.com/en/legal/polar-api-agreement
+  - type: GraphQL
+    url: graphql/polar-graphql.md
+  - type: Documentation
+    url: https://www.polar.com/teampro-api/
+- aid: polar:polar-team-api
+  name: Polar Team API
+  description: Endpoints for getting teams and team details.
+  humanURL: https://www.polar.com/accesslink-api/
+  baseURL: https://www.polaraccesslink.com/
+  tags:
+  - Team
+  properties:
+  - type: OpenAPI
+    url: openapi/polar-team-api-openapi.yml
+  - type: Documentation
+    url: https://www.polar.com/accesslink-api/
+  - type: AsyncAPI
+    url: openapi/polar-accesslink-webhooks-asyncapi.yml
+  - type: Portal
+    url: https://admin.polaraccesslink.com/
+  - type: CodeExamples
+    url: https://github.com/polarofficial/accesslink-example-python
+  - type: TermsOfService
+    url: https://www.polar.com/en/legal/polar-api-agreement
+  - type: GraphQL
+    url: graphql/polar-graphql.md
+  - type: Documentation
+    url: https://www.polar.com/teampro-api/
+- aid: polar:polar-team-training-sessions-api
+  name: Polar Team training sessions API
+  description: Endpoints for getting team training sessions and details.
+  humanURL: https://www.polar.com/accesslink-api/
+  baseURL: https://www.polaraccesslink.com/
+  tags:
+  - Team training sessions
+  properties:
+  - type: OpenAPI
+    url: openapi/polar-team-training-sessions-api-openapi.yml
+  - type: Documentation
+    url: https://www.polar.com/accesslink-api/
+  - type: AsyncAPI
+    url: openapi/polar-accesslink-webhooks-asyncapi.yml
+  - type: Portal
+    url: https://admin.polaraccesslink.com/
+  - type: CodeExamples
+    url: https://github.com/polarofficial/accesslink-example-python
+  - type: TermsOfService
+    url: https://www.polar.com/en/legal/polar-api-agreement
+  - type: GraphQL
+    url: graphql/polar-graphql.md
+  - type: Documentation
+    url: https://www.polar.com/teampro-api/
+- aid: polar:polar-users-api
+  name: Polar Users API
+  description: This resource provides all the necessary functions to manage users.
+  humanURL: https://www.polar.com/accesslink-api/
+  baseURL: https://www.polaraccesslink.com/
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/polar-users-api-openapi.yml
+  - type: Documentation
+    url: https://www.polar.com/accesslink-api/
+  - type: AsyncAPI
+    url: openapi/polar-accesslink-webhooks-asyncapi.yml
+  - type: Portal
+    url: https://admin.polaraccesslink.com/
+  - type: CodeExamples
+    url: https://github.com/polarofficial/accesslink-example-python
+  - type: TermsOfService
+    url: https://www.polar.com/en/legal/polar-api-agreement
+  - type: GraphQL
+    url: graphql/polar-graphql.md
+  - type: Documentation
+    url: https://www.polar.com/teampro-api/
+- aid: polar:polar-webhooks-api
+  name: Polar Webhooks API
+  description: Webhook resources provides endpoints for creating, modifying and deleting webhooks.
+  humanURL: https://www.polar.com/accesslink-api/
+  baseURL: https://www.polaraccesslink.com/
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/polar-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://www.polar.com/accesslink-api/
+  - type: AsyncAPI
+    url: openapi/polar-accesslink-webhooks-asyncapi.yml
+  - type: Portal
+    url: https://admin.polaraccesslink.com/
+  - type: CodeExamples
+    url: https://github.com/polarofficial/accesslink-example-python
+  - type: TermsOfService
+    url: https://www.polar.com/en/legal/polar-api-agreement
+  - type: GraphQL
+    url: graphql/polar-graphql.md
+  - type: Documentation
+    url: https://www.polar.com/teampro-api/
 name: Polar
 tags:
 - Fitness
@@ -107,7 +526,19 @@ tags:
 - Sensors
 - Bluetooth
 kind: contract
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/polar.png
 access: 3rd-Party
 common:
 - type: AgenticAccess
