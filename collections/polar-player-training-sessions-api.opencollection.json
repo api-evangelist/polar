@@ -1,0 +1,164 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Polar AccessLink Cardio load Player training sessions API",
+    "version": "v3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Player training sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get player training sessions.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v1/players/:player_id/training_sessions",
+            "params": [
+              {
+                "name": "player_id",
+                "value": "",
+                "type": "path",
+                "description": "Player id"
+              },
+              {
+                "name": "since",
+                "value": "2018-04-14T00:00:00",
+                "type": "query",
+                "description": "Return training sessions having start_time greater than [since]."
+              },
+              {
+                "name": "until",
+                "value": "2018-05-14T00:00:00",
+                "type": "query",
+                "description": "Return training sessions having start_time less than [until]."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Return all, individual or team training sessions."
+              },
+              {
+                "name": "pagination",
+                "value": "",
+                "type": "query",
+                "description": "Pagination parameters"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get player training sessions."
+        },
+        {
+          "info": {
+            "name": "Get player training session details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v1/training_sessions/:player_session_id",
+            "params": [
+              {
+                "name": "player_session_id",
+                "value": "",
+                "type": "path",
+                "description": "Players' training session id."
+              },
+              {
+                "name": "samples",
+                "value": "distance,location,hr",
+                "type": "query",
+                "description": "Include requested samples in response. Possible values are \"all\" or comma-separated list from \"distance\", \"location\", \"hr\", \"speed\", \"cadence\", \"altitude\", \"forward_acceleration\", \"rr\"."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get player training session details."
+        },
+        {
+          "info": {
+            "name": "Get player team training session trimmed values.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v1/training_sessions/:player_session_id/session_summary",
+            "params": [
+              {
+                "name": "player_session_id",
+                "value": "",
+                "type": "path",
+                "description": "Players' training session id."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get player team training session trimmed values."
+        },
+        {
+          "info": {
+            "name": "Get player team training session phase summaries.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v1/training_sessions/:player_session_id/phase_summaries",
+            "params": [
+              {
+                "name": "player_session_id",
+                "value": "",
+                "type": "path",
+                "description": "Players' training session id."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get player team training session phase summaries."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

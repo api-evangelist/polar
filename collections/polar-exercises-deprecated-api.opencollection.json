@@ -1,0 +1,416 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Polar AccessLink Cardio load Exercises (deprecated) API",
+    "version": "v3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Exercises (deprecated)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/exercise-transactions",
+            "params": [
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Check for new training data and create a new transaction if found. Only data uploaded to Flow in the last 30 days will be available. Only data that has been uploaded to Flow after the user is registered with your client will be available."
+        },
+        {
+          "info": {
+            "name": "List exercises",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/exercise-transactions/:transaction-id",
+            "params": [
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction identifier"
+              },
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "After successfully initiating a transaction, training sessions included within it can be retrieved with the provided transactionId."
+        },
+        {
+          "info": {
+            "name": "Commit transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/exercise-transactions/:transaction-id",
+            "params": [
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction identifier"
+              },
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "After successfully retrieving training session data within a transaction, partners are expected to commit the transaction."
+        },
+        {
+          "info": {
+            "name": "Get exercise summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/exercise-transactions/:transaction-id/exercises/:exercise-id",
+            "params": [
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              },
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction identifier"
+              },
+              {
+                "name": "exercise-id",
+                "value": "",
+                "type": "path",
+                "description": "Exercise identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve training session summary data"
+        },
+        {
+          "info": {
+            "name": "Get FIT",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/exercise-transactions/:transaction-id/exercises/:exercise-id/fit",
+            "params": [
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              },
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction identifier"
+              },
+              {
+                "name": "exercise-id",
+                "value": "",
+                "type": "path",
+                "description": "Exercise identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve exercise in FIT format. See [FIT sport mappings in appendix](#sport-type-mapping-in-fit-files)."
+        },
+        {
+          "info": {
+            "name": "Get GPX",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/exercise-transactions/:transaction-id/exercises/:exercise-id/gpx",
+            "params": [
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              },
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction identifier"
+              },
+              {
+                "name": "exercise-id",
+                "value": "",
+                "type": "path",
+                "description": "Exercise identifier"
+              },
+              {
+                "name": "includePauseTimes",
+                "value": "",
+                "type": "query",
+                "description": "Whether to add pauses as part of the route. Default is false."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve training session summary data in GPX format"
+        },
+        {
+          "info": {
+            "name": "Get heart rate zones",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/exercise-transactions/:transaction-id/exercises/:exercise-id/heart-rate-zones",
+            "params": [
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              },
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction identifier"
+              },
+              {
+                "name": "exercise-id",
+                "value": "",
+                "type": "path",
+                "description": "Exercise identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve heart rate zones in training session"
+        },
+        {
+          "info": {
+            "name": "Get available samples",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/exercise-transactions/:transaction-id/exercises/:exercise-id/samples",
+            "params": [
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              },
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction identifier"
+              },
+              {
+                "name": "exercise-id",
+                "value": "",
+                "type": "path",
+                "description": "Exercise identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve list of links to available samples in training session"
+        },
+        {
+          "info": {
+            "name": "Get samples",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/exercise-transactions/:transaction-id/exercises/:exercise-id/samples/:type-id",
+            "params": [
+              {
+                "name": "type-id",
+                "value": "",
+                "type": "path",
+                "description": "Sample type id"
+              },
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              },
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction identifier"
+              },
+              {
+                "name": "exercise-id",
+                "value": "",
+                "type": "path",
+                "description": "Exercise identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve sample data of given type"
+        },
+        {
+          "info": {
+            "name": "Get TCX",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/exercise-transactions/:transaction-id/exercises/:exercise-id/tcx",
+            "params": [
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              },
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction identifier"
+              },
+              {
+                "name": "exercise-id",
+                "value": "",
+                "type": "path",
+                "description": "Exercise identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve exercise in TCX format"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

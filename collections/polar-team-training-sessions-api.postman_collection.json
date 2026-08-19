@@ -1,0 +1,425 @@
+{
+  "item": [
+    {
+      "id": "cb51e6c2-bec4-4426-9d70-98af1d465ad4",
+      "name": "Team training sessions",
+      "description": {
+        "content": "Endpoints for getting team training sessions and details.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c5793d38-5339-4d0a-af28-2aa02247485f",
+          "name": "Get team training sessions.",
+          "request": {
+            "name": "Get team training sessions.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "teams",
+                ":team_id",
+                "training_sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<dateTime>",
+                  "description": "Return training sessions having record_start_time greater than <since>."
+                },
+                {
+                  "disabled": false,
+                  "key": "until",
+                  "value": "<dateTime>",
+                  "description": "Return training sessions having record_start_time less than <until>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Pagination parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>",
+                  "description": "Pagination parameters"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "team_id",
+                  "description": "(Required) Team whose training session are returned."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "accesslink.read_all"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://polarremote.com/v2/oauth2/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://flow.polar.com/oauth2/authorization"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ec75dd0c-2a8b-4e2a-89d5-1682fc7ffa4c",
+              "name": "Teams training sessions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    ":team_id",
+                    "training_sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "2018-04-14T00:00:00"
+                    },
+                    {
+                      "key": "until",
+                      "value": "2018-05-14T00:00:00"
+                    },
+                    {
+                      "key": "page",
+                      "value": "3"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "team_id",
+                      "description": "(Required) Team whose training session are returned."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"R8rMB4j7\",\n      \"team_id\": \"wMYz6L4w\",\n      \"name\": \"Match against Brazil national team\",\n      \"type\": \"MATCH\",\n      \"note\": \"Game started very well, but we lost 0-8\",\n      \"created\": \"2017-04-13T21:06:58Z\",\n      \"modified\": \"2017-04-13T21:06:58Z\",\n      \"record_start_time\": \"2017-04-14T09:17:22\",\n      \"record_end_time\": \"2017-04-14T09:56:47\",\n      \"start_time\": \"2017-04-14T09:20:06\",\n      \"end_time\": \"2017-04-14T09:50:06\",\n      \"latitude\": 55.67336654663086,\n      \"longitude\": 12.49395084381104,\n      \"sport\": \"SOCCER\"\n    },\n    {\n      \"id\": \"R8rMB4j7\",\n      \"team_id\": \"wMYz6L4w\",\n      \"name\": \"Match against Brazil national team\",\n      \"type\": \"MATCH\",\n      \"note\": \"Game started very well, but we lost 0-8\",\n      \"created\": \"2017-04-13T21:06:58Z\",\n      \"modified\": \"2017-04-13T21:06:58Z\",\n      \"record_start_time\": \"2017-04-14T09:17:22\",\n      \"record_end_time\": \"2017-04-14T09:56:47\",\n      \"start_time\": \"2017-04-14T09:20:06\",\n      \"end_time\": \"2017-04-14T09:50:06\",\n      \"latitude\": 55.67336654663086,\n      \"longitude\": 12.49395084381104,\n      \"sport\": \"SOCCER\"\n    }\n  ],\n  \"page\": {\n    \"per_page\": 20,\n    \"total_elements\": 2,\n    \"page_number\": 0,\n    \"total_pages\": 1\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a875c162-c127-4ef0-a129-d44649d40342",
+              "name": "Given team_id doesn't match any of users's teams.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    ":team_id",
+                    "training_sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "2018-04-14T00:00:00"
+                    },
+                    {
+                      "key": "until",
+                      "value": "2018-05-14T00:00:00"
+                    },
+                    {
+                      "key": "page",
+                      "value": "3"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "team_id",
+                      "description": "(Required) Team whose training session are returned."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d30f1cff-db04-45fd-af90-bf77636fe1d8",
+          "name": "Get team training session details.",
+          "request": {
+            "name": "Get team training session details.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "teams",
+                "training_sessions",
+                ":training_session_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "training_session_id",
+                  "description": "(Required) Training session id."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "accesslink.read_all"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://polarremote.com/v2/oauth2/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://flow.polar.com/oauth2/authorization"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d9ccf968-f0f8-41b1-a8d5-db84af134096",
+              "name": "Training session details as JSON.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    "training_sessions",
+                    ":training_session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "training_session_id",
+                      "description": "(Required) Training session id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"R8rMB4j7\",\n    \"team_id\": \"wMYz6L4w\",\n    \"name\": \"Match against Brazil national team\",\n    \"type\": \"MATCH\",\n    \"note\": \"Game started very well, but we lost 0-8\",\n    \"created\": \"2017-04-13T21:06:58Z\",\n    \"modified\": \"2017-04-13T21:06:58Z\",\n    \"record_start_time\": \"2017-04-14T09:17:22\",\n    \"record_end_time\": \"2017-04-14T09:56:47\",\n    \"start_time\": \"2017-04-14T09:20:06\",\n    \"end_time\": \"2017-04-14T09:50:06\",\n    \"latitude\": 55.67336654663086,\n    \"longitude\": 12.49395084381104,\n    \"sport\": \"SOCCER\",\n    \"arena\": \"Valby old stadium Denmark\",\n    \"distance\": 6566,\n    \"kilocalories\": 601,\n    \"training_load\": 78,\n    \"heart_rate_average\": 79,\n    \"cardio_load\": 27.2,\n    \"cardio_load_interpretation\": 3,\n    \"participants\": [\n      {\n        \"player_id\": \"ZmozZxkr\",\n        \"player_number\": 12,\n        \"role\": \"Midfielder\",\n        \"player_session_id\": \"wp9DQ9ln\"\n      },\n      {\n        \"player_id\": \"ZmozZxkr\",\n        \"player_number\": 12,\n        \"role\": \"Midfielder\",\n        \"player_session_id\": \"wp9DQ9ln\"\n      }\n    ],\n    \"markers\": [\n      {\n        \"start_time\": \"2017-04-14 09:20:06\",\n        \"end_time\": \"2017-04-14 09:50:06\",\n        \"marker_type\": \"PHASE\",\n        \"name\": \"Intervals\",\n        \"note\": \"Cooling down\"\n      },\n      {\n        \"start_time\": \"2017-04-14 09:20:06\",\n        \"end_time\": \"2017-04-14 09:50:06\",\n        \"marker_type\": \"PHASE\",\n        \"name\": \"Intervals\",\n        \"note\": \"Cooling down\"\n      }\n    ],\n    \"heart_rate_zones\": [\n      {\n        \"index\": 1,\n        \"lower_limit\": 110,\n        \"higher_limit\": 130,\n        \"in_zone\": \"PT4S\",\n        \"in_zone_meters\": 222\n      },\n      {\n        \"index\": 1,\n        \"lower_limit\": 110,\n        \"higher_limit\": 130,\n        \"in_zone\": \"PT4S\",\n        \"in_zone_meters\": 222\n      }\n    ],\n    \"speed_zones_kmh\": [\n      {\n        \"index\": 1,\n        \"lower_limit\": 3,\n        \"higher_limit\": 7,\n        \"in_zone\": \"PT4.2S\",\n        \"in_zone_meters\": 222\n      },\n      {\n        \"index\": 1,\n        \"lower_limit\": 3,\n        \"higher_limit\": 7,\n        \"in_zone\": \"PT4.2S\",\n        \"in_zone_meters\": 222\n      }\n    ],\n    \"power_zones\": [\n      {\n        \"index\": 1,\n        \"lower_limit\": 3,\n        \"higher_limit\": 7,\n        \"in_zone\": \"PT4.2S\",\n        \"in_zone_muscle_load\": 333\n      },\n      {\n        \"index\": 1,\n        \"lower_limit\": 3,\n        \"higher_limit\": 7,\n        \"in_zone\": \"PT4.2S\",\n        \"in_zone_muscle_load\": 333\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8dd32920-e546-41aa-9f0a-66ce96b478a6",
+              "name": "Given training_session_id doesn't match any of user's training sessions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    "training_sessions",
+                    ":training_session_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "training_session_id",
+                      "description": "(Required) Training session id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.polaraccesslink.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "49b649bf-23ce-48ba-b32c-fd18cdf2dab3",
+    "name": "Polar AccessLink Cardio load Team training sessions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Polar AccessLink API documentation\n\nContact Support:\n Name: Support\n Email: b2bhelpdesk@polar.com",
+      "type": "text/plain"
+    }
+  }
+}

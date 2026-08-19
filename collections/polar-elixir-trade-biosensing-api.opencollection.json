@@ -1,0 +1,193 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Polar AccessLink Cardio load Elixir&trade; Biosensing API",
+    "version": "v3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Elixir&trade; Biosensing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Body temperature data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/biosensing/bodytemperature",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive start date of range as ISO-8601 date string, example: \"2023-10-01\""
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive end date of range as ISO-8601 date string, example: \"2023-10-28\""
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get user's body temperature data for last 28 days or for given date range. Maximum date range between from and to cannot be more than 28 days."
+        },
+        {
+          "info": {
+            "name": "Sleep skin temperature data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/biosensing/skintemperature",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive start date of range as ISO-8601 date string, example: \"2023-10-01\""
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive end date of range as ISO-8601 date string, example: \"2023-10-28\""
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get user's sleep skin temperature data for last 28 days or for given date range. Maximum date range between from and to cannot be more than 28 days."
+        },
+        {
+          "info": {
+            "name": "Skin contacts data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/biosensing/skincontacts",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive start date of range as ISO-8601 date string, example: \"2023-10-01\""
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive end date of range as ISO-8601 date string, example: \"2023-10-28\""
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get user's skin contacts data for last 28 days or for given date range. Maximum date range between from and to cannot be more than 28 days."
+        },
+        {
+          "info": {
+            "name": "Wrist ECG test result data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/biosensing/ecg",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive start date of range as ISO-8601 date string, example: \"2023-10-01\""
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive end date of range as ISO-8601 date string, example: \"2023-10-28\""
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get user's wrist ECG test result data for last 28 days or for given date range. Maximum date range between from and to cannot be more than 28 days."
+        },
+        {
+          "info": {
+            "name": "SpO2 test result data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/biosensing/spo2",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive start date of range as ISO-8601 date string, example: \"2023-10-01\""
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive end date of range as ISO-8601 date string, example: \"2023-10-28\""
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get user's SpO2 test result data for last 28 days or for given date range. Maximum date range between from and to cannot be more than 28 days."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

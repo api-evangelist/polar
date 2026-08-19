@@ -1,0 +1,445 @@
+{
+  "item": [
+    {
+      "id": "1a8cb9af-2054-4c58-8137-4aca8e7596c0",
+      "name": "Nightly Recharge",
+      "description": {
+        "content": "Nightly Recharge&trade; is a recovery measurement that shows how well your body recovers from daily training and stress. It is based on heart rate variability (HRV) and overnight heart rate data. The higher the Nightly Recharge score, the better your body has recovered. For more detailed information please check [Nightly Recharge](https://support.polar.com/e_manuals/unite/polar-unite-user-manual-english/nightly-recharge.htm).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e3c7b028-f507-4bbe-8e31-ab705c88426a",
+          "name": "List Nightly Recharges",
+          "request": {
+            "name": "List Nightly Recharges",
+            "description": {
+              "content": "List Nightly Recharge data of user for the last 28 days.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "users",
+                "nightly-recharge"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "accesslink.read_all"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://polarremote.com/v2/oauth2/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://flow.polar.com/oauth2/authorization"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "10c25482-749b-494d-a840-32efa3651746",
+              "name": "Request was successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "nightly-recharge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"recharges\": [\n    {\n      \"polar_user\": \"https://www.polaraccesslink/v3/users/1\",\n      \"date\": \"2020-01-01\",\n      \"heart_rate_avg\": 70,\n      \"beat_to_beat_avg\": 816,\n      \"heart_rate_variability_avg\": 28,\n      \"breathing_rate_avg\": 14.1,\n      \"nightly_recharge_status\": 3,\n      \"ans_charge\": 0,\n      \"ans_charge_status\": 3,\n      \"hrv_samples\": {\n        \"00:41\": 14,\n        \"00:46\": 14,\n        \"00:51\": 15\n      },\n      \"breathing_samples\": {\n        \"00:39\": 13.4,\n        \"00:44\": 13.5,\n        \"00:49\": 13.5\n      }\n    },\n    {\n      \"polar_user\": \"https://www.polaraccesslink/v3/users/1\",\n      \"date\": \"2020-01-01\",\n      \"heart_rate_avg\": 70,\n      \"beat_to_beat_avg\": 816,\n      \"heart_rate_variability_avg\": 28,\n      \"breathing_rate_avg\": 14.1,\n      \"nightly_recharge_status\": 3,\n      \"ans_charge\": 0,\n      \"ans_charge_status\": 3,\n      \"hrv_samples\": {\n        \"00:41\": 14,\n        \"00:46\": 14,\n        \"00:51\": 15\n      },\n      \"breathing_samples\": {\n        \"00:39\": 13.4,\n        \"00:44\": 13.5,\n        \"00:49\": 13.5\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a32ba13-bddc-476f-b7be-ba08600e0fbc",
+              "name": "User has not accepted all mandatory consents.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "nightly-recharge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e161356-1c26-4297-af41-1aaa09f49f3c",
+          "name": "Get Nightly Recharge",
+          "request": {
+            "name": "Get Nightly Recharge",
+            "description": {
+              "content": "Get Users Nightly Recharge data for given date.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "users",
+                "nightly-recharge",
+                ":date"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "date",
+                  "description": "(Required) Date of Nightly Recharge as ISO-8601 date string, example: \"2020-01-01\""
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "accesslink.read_all"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://polarremote.com/v2/oauth2/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://flow.polar.com/oauth2/authorization"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "32b06487-c4e2-40dc-aefb-79ca1b959d04",
+              "name": "Request was successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "nightly-recharge",
+                    ":date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "date",
+                      "description": "(Required) Date of Nightly Recharge as ISO-8601 date string, example: \"2020-01-01\""
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"polar_user\": \"https://www.polaraccesslink/v3/users/1\",\n  \"date\": \"2020-01-01\",\n  \"heart_rate_avg\": 70,\n  \"beat_to_beat_avg\": 816,\n  \"heart_rate_variability_avg\": 28,\n  \"breathing_rate_avg\": 14.1,\n  \"nightly_recharge_status\": 3,\n  \"ans_charge\": 0,\n  \"ans_charge_status\": 3,\n  \"hrv_samples\": {\n    \"00:41\": 14,\n    \"00:46\": 14,\n    \"00:51\": 15\n  },\n  \"breathing_samples\": {\n    \"00:39\": 13.4,\n    \"00:44\": 13.5,\n    \"00:49\": 13.5\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3cd4ea2c-4d39-4d82-bc03-abdf0d7e8cf4",
+              "name": "Invalid date.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "nightly-recharge",
+                    ":date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "date",
+                      "description": "(Required) Date of Nightly Recharge as ISO-8601 date string, example: \"2020-01-01\""
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2811d2ab-f74f-4207-9eb4-376b62e3db4a",
+              "name": "User has not accepted all mandatory consents.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "nightly-recharge",
+                    ":date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "date",
+                      "description": "(Required) Date of Nightly Recharge as ISO-8601 date string, example: \"2020-01-01\""
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ad63f10c-a0e5-4115-ad5a-40ee52784695",
+              "name": "No data found for date.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "nightly-recharge",
+                    ":date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "date",
+                      "description": "(Required) Date of Nightly Recharge as ISO-8601 date string, example: \"2020-01-01\""
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.polaraccesslink.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "44b25f11-18d0-4641-80a6-ccc3de130331",
+    "name": "Polar AccessLink Cardio load Nightly Recharge API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Polar AccessLink API documentation\n\nContact Support:\n Name: Support\n Email: b2bhelpdesk@polar.com",
+      "type": "text/plain"
+    }
+  }
+}

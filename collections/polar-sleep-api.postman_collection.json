@@ -1,0 +1,591 @@
+{
+  "item": [
+    {
+      "id": "ff0dc038-e0fa-46cd-8190-0ac213f6f366",
+      "name": "Sleep",
+      "description": {
+        "content": "Sleep endpoints support [Polar Sleep Plus&trade;](https://www.polar.com/en/smart-coaching/polar-sleep-plus) and [Sleep Plus Stages&trade;](https://www.polar.com/en/smart-coaching/sleep-plus-stages). Available data is presented in section [Schemas](#schemas).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "873b8780-0597-42b2-819d-2a450f006a1b",
+          "name": "List nights",
+          "request": {
+            "name": "List nights",
+            "description": {
+              "content": "List sleep data of user for the last 28 days.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "users",
+                "sleep"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "accesslink.read_all"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://polarremote.com/v2/oauth2/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://flow.polar.com/oauth2/authorization"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "66d0dfbe-f8ab-4525-80ef-15d15aba2fea",
+              "name": "Request was successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "sleep"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"nights\": [\n    {\n      \"polar_user\": \"https://www.polaraccesslink/v3/users/1\",\n      \"date\": \"2020-01-01\",\n      \"sleep_start_time\": \"2020-01-01T00:39:07+03:00\",\n      \"sleep_end_time\": \"2020-01-01T09:19:37+03:00\",\n      \"device_id\": \"1111AAAA\",\n      \"continuity\": 2.1,\n      \"continuity_class\": 2,\n      \"light_sleep\": 1000,\n      \"deep_sleep\": 1000,\n      \"rem_sleep\": 1000,\n      \"unrecognized_sleep_stage\": 1000,\n      \"sleep_score\": 80,\n      \"total_interruption_duration\": 1000,\n      \"sleep_charge\": 3,\n      \"sleep_goal\": 28800,\n      \"sleep_rating\": 3,\n      \"short_interruption_duration\": 500,\n      \"long_interruption_duration\": 300,\n      \"sleep_cycles\": 6,\n      \"group_duration_score\": 100,\n      \"group_solidity_score\": 75,\n      \"group_regeneration_score\": 54.2,\n      \"hypnogram\": {\n        \"00:39\": 2,\n        \"00:50\": 3,\n        \"01:23\": 5\n      },\n      \"heart_rate_samples\": {\n        \"00:41\": 76,\n        \"00:46\": 77,\n        \"00:51\": 76\n      }\n    },\n    {\n      \"polar_user\": \"https://www.polaraccesslink/v3/users/1\",\n      \"date\": \"2020-01-01\",\n      \"sleep_start_time\": \"2020-01-01T00:39:07+03:00\",\n      \"sleep_end_time\": \"2020-01-01T09:19:37+03:00\",\n      \"device_id\": \"1111AAAA\",\n      \"continuity\": 2.1,\n      \"continuity_class\": 2,\n      \"light_sleep\": 1000,\n      \"deep_sleep\": 1000,\n      \"rem_sleep\": 1000,\n      \"unrecognized_sleep_stage\": 1000,\n      \"sleep_score\": 80,\n      \"total_interruption_duration\": 1000,\n      \"sleep_charge\": 3,\n      \"sleep_goal\": 28800,\n      \"sleep_rating\": 3,\n      \"short_interruption_duration\": 500,\n      \"long_interruption_duration\": 300,\n      \"sleep_cycles\": 6,\n      \"group_duration_score\": 100,\n      \"group_solidity_score\": 75,\n      \"group_regeneration_score\": 54.2,\n      \"hypnogram\": {\n        \"00:39\": 2,\n        \"00:50\": 3,\n        \"01:23\": 5\n      },\n      \"heart_rate_samples\": {\n        \"00:41\": 76,\n        \"00:46\": 77,\n        \"00:51\": 76\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6c779eb-7f8e-407e-8b9c-f4425ea8a0d5",
+              "name": "User has not accepted all mandatory consents.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "sleep"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1217da74-b04e-4e34-b4dc-f86331f9083c",
+          "name": "Get Sleep",
+          "request": {
+            "name": "Get Sleep",
+            "description": {
+              "content": "Get Users sleep data for given date.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "users",
+                "sleep",
+                ":date"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "date",
+                  "description": "(Required) Date of sleep as ISO-8601 date string, example: \"2020-01-01\""
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "accesslink.read_all"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://polarremote.com/v2/oauth2/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://flow.polar.com/oauth2/authorization"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "51053e49-d9f2-4c69-9ec4-f69a75d61564",
+              "name": "Request was successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "sleep",
+                    ":date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "date",
+                      "description": "(Required) Date of sleep as ISO-8601 date string, example: \"2020-01-01\""
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"polar_user\": \"https://www.polaraccesslink/v3/users/1\",\n  \"date\": \"2020-01-01\",\n  \"sleep_start_time\": \"2020-01-01T00:39:07+03:00\",\n  \"sleep_end_time\": \"2020-01-01T09:19:37+03:00\",\n  \"device_id\": \"1111AAAA\",\n  \"continuity\": 2.1,\n  \"continuity_class\": 2,\n  \"light_sleep\": 1000,\n  \"deep_sleep\": 1000,\n  \"rem_sleep\": 1000,\n  \"unrecognized_sleep_stage\": 1000,\n  \"sleep_score\": 80,\n  \"total_interruption_duration\": 1000,\n  \"sleep_charge\": 3,\n  \"sleep_goal\": 28800,\n  \"sleep_rating\": 3,\n  \"short_interruption_duration\": 500,\n  \"long_interruption_duration\": 300,\n  \"sleep_cycles\": 6,\n  \"group_duration_score\": 100,\n  \"group_solidity_score\": 75,\n  \"group_regeneration_score\": 54.2,\n  \"hypnogram\": {\n    \"00:39\": 2,\n    \"00:50\": 3,\n    \"01:23\": 5\n  },\n  \"heart_rate_samples\": {\n    \"00:41\": 76,\n    \"00:46\": 77,\n    \"00:51\": 76\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b02ed5c-aedd-4bac-b2e8-bc1d8439d562",
+              "name": "Invalid date.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "sleep",
+                    ":date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "date",
+                      "description": "(Required) Date of sleep as ISO-8601 date string, example: \"2020-01-01\""
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "32226dd3-e5f7-42e8-aaa6-a2c1b3d6d242",
+              "name": "User has not accepted all mandatory consents.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "sleep",
+                    ":date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "date",
+                      "description": "(Required) Date of sleep as ISO-8601 date string, example: \"2020-01-01\""
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ab51b414-c4e8-4f4d-b878-c79fda57e468",
+              "name": "No data found for date.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "sleep",
+                    ":date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "date",
+                      "description": "(Required) Date of sleep as ISO-8601 date string, example: \"2020-01-01\""
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "169129ca-8c9a-483e-a0c3-c9ea8c49d5d4",
+          "name": "Get available sleep times",
+          "request": {
+            "name": "Get available sleep times",
+            "description": {
+              "content": "Get the dates with sleep start and end times, where user has sleep data available in the last 28 days.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "users",
+                "sleep",
+                "available"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "accesslink.read_all"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://polarremote.com/v2/oauth2/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://flow.polar.com/oauth2/authorization"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ab1a4db7-2b07-4047-8001-ea770569188c",
+              "name": "Request was successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "sleep",
+                    "available"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"available\": [\n    {\n      \"date\": \"2020-01-01\",\n      \"start_time\": \"2020-01-01T00:39:07+03:00\",\n      \"end_time\": \"2020-01-01T09:39:07+03:00\"\n    },\n    {\n      \"date\": \"2020-01-01\",\n      \"start_time\": \"2020-01-01T00:39:07+03:00\",\n      \"end_time\": \"2020-01-01T09:39:07+03:00\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8aeebf64-a26a-4ef0-be2b-0ed094e8bb2e",
+              "name": "User has not accepted all mandatory consents.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "sleep",
+                    "available"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.polaraccesslink.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c95cfe79-2998-49f9-8577-c8ba5d6df7d3",
+    "name": "Polar AccessLink Cardio load Sleep API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Polar AccessLink API documentation\n\nContact Support:\n Name: Support\n Email: b2bhelpdesk@polar.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,1381 @@
+{
+  "item": [
+    {
+      "id": "ebe8d493-ab36-4a0e-a59e-d3212389b4b1",
+      "name": "Daily activity",
+      "description": {
+        "content": "This resource allows partners to access their users' daily activity data. Webhooks are used to notify partners when new data is available.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d1cfdb43-e397-4cc0-ba04-d37377f17497",
+          "name": "List activities",
+          "request": {
+            "name": "List activities",
+            "description": {
+              "content": "List users activities available in AccessLink. When no date range is given, activities from the last 28 days are returned. When `from` is given, activities for the specified date range are returned. From date cannot be older than 365 days from today and the maximum range between from and to is 28 days.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "users",
+                "activities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<date>",
+                  "description": "Start date in format YYYY-MM-DD. If not given, defaults to 28 days ago."
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<date>",
+                  "description": "End date in format YYYY-MM-DD. If not given, defaults to today."
+                },
+                {
+                  "disabled": false,
+                  "key": "steps",
+                  "value": "<boolean>",
+                  "description": "include steps samples for activity summary."
+                },
+                {
+                  "disabled": false,
+                  "key": "activity_zones",
+                  "value": "<boolean>",
+                  "description": "include activity zones samples for activity summary."
+                },
+                {
+                  "disabled": false,
+                  "key": "inactivity_stamps",
+                  "value": "<boolean>",
+                  "description": "include inactivity stamps for activity summary."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "accesslink.read_all"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://polarremote.com/v2/oauth2/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://flow.polar.com/oauth2/authorization"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "23326cab-7580-4ffb-b939-c9461f3a0fb0",
+              "name": "List of extended daily activities with all samples.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "activities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "to",
+                      "value": "2023-01-28"
+                    },
+                    {
+                      "key": "steps",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "activity_zones",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "inactivity_stamps",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"start_time\": \"2025-08-13T08:15:30\",\n    \"end_time\": \"2025-08-13T23:59:59\",\n    \"active_duration\": \"PT3H11M\",\n    \"inactive_duration\": \"PT18H23M30S\",\n    \"daily_activity\": 89.1,\n    \"calories\": 2500,\n    \"active_calories\": 1500,\n    \"steps\": 8823,\n    \"inactivity_alert_count\": 1,\n    \"distance_from_steps\": 4590.53,\n    \"samples\": {\n      \"date\": \"2022-02-10\",\n      \"steps\": {\n        \"interval_ms\": 3475,\n        \"total_steps\": 3876,\n        \"samples\": [\n          {\n            \"steps\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"timestamp\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"steps\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"timestamp\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"activity_zones\": {\n        \"samples\": [\n          {\n            \"zone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"timestamp\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"zone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"timestamp\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"inactivity_stamps\": [\n        {\n          \"stamp\": \"2022-02-10T16:04\"\n        },\n        {\n          \"stamp\": \"2022-02-10T16:04\"\n        }\n      ]\n    }\n  },\n  {\n    \"start_time\": \"2025-08-13T08:15:30\",\n    \"end_time\": \"2025-08-13T23:59:59\",\n    \"active_duration\": \"PT3H11M\",\n    \"inactive_duration\": \"PT18H23M30S\",\n    \"daily_activity\": 89.1,\n    \"calories\": 2500,\n    \"active_calories\": 1500,\n    \"steps\": 8823,\n    \"inactivity_alert_count\": 1,\n    \"distance_from_steps\": 4590.53,\n    \"samples\": {\n      \"date\": \"2022-02-10\",\n      \"steps\": {\n        \"interval_ms\": 1879,\n        \"total_steps\": 3530,\n        \"samples\": [\n          {\n            \"steps\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"timestamp\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"steps\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"timestamp\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"activity_zones\": {\n        \"samples\": [\n          {\n            \"zone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"timestamp\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"zone\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"timestamp\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"inactivity_stamps\": [\n        {\n          \"stamp\": \"2022-02-10T16:04\"\n        },\n        {\n          \"stamp\": \"2022-02-10T16:04\"\n        }\n      ]\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14f70b74-e479-401c-96c1-ec3125c40a82",
+              "name": "Invalid or too old date. Cannot be older than 365 days.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "activities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "to",
+                      "value": "2023-01-28"
+                    },
+                    {
+                      "key": "steps",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "activity_zones",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "inactivity_stamps",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "07d577d7-6d31-4b95-b4b2-7d30e1fc7127",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "activities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "to",
+                      "value": "2023-01-28"
+                    },
+                    {
+                      "key": "steps",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "activity_zones",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "inactivity_stamps",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a91e3cbc-d2e9-455c-b55c-56a7ef69b5e7",
+              "name": "User has not accepted all mandatory consents.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "activities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "to",
+                      "value": "2023-01-28"
+                    },
+                    {
+                      "key": "steps",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "activity_zones",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "inactivity_stamps",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bd26c026-478f-4ae5-80fc-3dc1a57b267d",
+          "name": "Get activity for given date",
+          "request": {
+            "name": "Get activity for given date",
+            "description": {
+              "content": "Get users activity for given date. Date cannot be older than 365 days from today.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "users",
+                "activities",
+                ":date"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "steps",
+                  "value": "<boolean>",
+                  "description": "include steps samples for activity summary."
+                },
+                {
+                  "disabled": false,
+                  "key": "activity_zones",
+                  "value": "<boolean>",
+                  "description": "include activity zones samples for activity summary."
+                },
+                {
+                  "disabled": false,
+                  "key": "inactivity_stamps",
+                  "value": "<boolean>",
+                  "description": "include inactivity stamps for activity summary."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "date",
+                  "description": "(Required) Date in format YYYY-MM-DD."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "accesslink.read_all"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://polarremote.com/v2/oauth2/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://flow.polar.com/oauth2/authorization"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6547d288-721b-4f06-b445-ad48b751ed2e",
+              "name": "Extended activity summaries with all samples.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "activities",
+                    ":date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "steps",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "activity_zones",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "inactivity_stamps",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Date in format YYYY-MM-DD."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"start_time\": \"2025-08-13T08:15:30\",\n  \"end_time\": \"2025-08-13T23:59:59\",\n  \"active_duration\": \"PT3H11M\",\n  \"inactive_duration\": \"PT18H23M30S\",\n  \"daily_activity\": 89.1,\n  \"calories\": 2500,\n  \"active_calories\": 1500,\n  \"steps\": 8823,\n  \"inactivity_alert_count\": 1,\n  \"distance_from_steps\": 4590.53,\n  \"samples\": {\n    \"date\": \"2022-02-10\",\n    \"steps\": {\n      \"interval_ms\": 9393,\n      \"total_steps\": 2491,\n      \"samples\": [\n        {\n          \"steps\": 5020,\n          \"timestamp\": \"2025-08-14T00:02\"\n        },\n        {\n          \"steps\": 7547,\n          \"timestamp\": \"2025-08-14T00:02\"\n        }\n      ]\n    },\n    \"activity_zones\": {\n      \"samples\": [\n        {\n          \"zone\": \"SEDENTARY\",\n          \"timestamp\": \"2025-08-14T00:08:30\"\n        },\n        {\n          \"zone\": \"SEDENTARY\",\n          \"timestamp\": \"2025-08-14T00:08:30\"\n        }\n      ]\n    },\n    \"inactivity_stamps\": [\n      {\n        \"stamp\": \"2022-02-10T16:04\"\n      },\n      {\n        \"stamp\": \"2022-02-10T16:04\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a92506bf-7a0f-4e0d-ad26-64b8724b24c8",
+              "name": "No content when no activity found for given date.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "activities",
+                    ":date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "steps",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "activity_zones",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "inactivity_stamps",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Date in format YYYY-MM-DD."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c598ffc6-947f-4b31-a05f-ae1bccb57103",
+              "name": "Invalid or too old date. Cannot be older than 365 days.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "activities",
+                    ":date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "steps",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "activity_zones",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "inactivity_stamps",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Date in format YYYY-MM-DD."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a4fe91a6-0fac-4412-a8af-5e59cf198ddf",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "activities",
+                    ":date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "steps",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "activity_zones",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "inactivity_stamps",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Date in format YYYY-MM-DD."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d7935e4a-702b-43b0-8b17-071308ed50d9",
+              "name": "User has not accepted all mandatory consents.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "activities",
+                    ":date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "steps",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "activity_zones",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "inactivity_stamps",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Date in format YYYY-MM-DD."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2300cb85-0f78-4618-aead-d29c14fbb40c",
+          "name": "List activity samples",
+          "request": {
+            "name": "List activity samples",
+            "description": {
+              "content": "List users activity samples available in AccessLink. When no date range is given, activity samples from the last 28 days are returned. When `from` is given, activity samples for the specified date range are returned. From date cannot be older than 365 days from today and the maximum range between from and to is 28 days.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "users",
+                "activities",
+                "samples"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<date>",
+                  "description": "Start date in format YYYY-MM-DD. If not given, defaults to 28 days ago."
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<date>",
+                  "description": "End date in format YYYY-MM-DD. If not given, defaults to today."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "accesslink.read_all"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://polarremote.com/v2/oauth2/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://flow.polar.com/oauth2/authorization"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3deb17ce-0554-4e0e-a901-7d46d26fd59b",
+              "name": "List of users activity samples.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "activities",
+                    "samples"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "to",
+                      "value": "2023-01-31"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"date\": \"2022-02-10\",\n    \"steps\": {\n      \"interval_ms\": 8130,\n      \"total_steps\": 9711,\n      \"samples\": [\n        {\n          \"steps\": 3302,\n          \"timestamp\": \"2025-08-14T00:02\"\n        },\n        {\n          \"steps\": 7747,\n          \"timestamp\": \"2025-08-14T00:02\"\n        }\n      ]\n    },\n    \"activity_zones\": {\n      \"samples\": [\n        {\n          \"zone\": \"LIGHT\",\n          \"timestamp\": \"2025-08-14T00:08:30\"\n        },\n        {\n          \"zone\": \"VIGOROUS\",\n          \"timestamp\": \"2025-08-14T00:08:30\"\n        }\n      ]\n    },\n    \"inactivity_stamps\": [\n      {\n        \"stamp\": \"2022-02-10T16:04\"\n      },\n      {\n        \"stamp\": \"2022-02-10T16:04\"\n      }\n    ]\n  },\n  {\n    \"date\": \"2022-02-10\",\n    \"steps\": {\n      \"interval_ms\": 6977,\n      \"total_steps\": 5395,\n      \"samples\": [\n        {\n          \"steps\": 5941,\n          \"timestamp\": \"2025-08-14T00:02\"\n        },\n        {\n          \"steps\": 3008,\n          \"timestamp\": \"2025-08-14T00:02\"\n        }\n      ]\n    },\n    \"activity_zones\": {\n      \"samples\": [\n        {\n          \"zone\": \"VIGOROUS\",\n          \"timestamp\": \"2025-08-14T00:08:30\"\n        },\n        {\n          \"zone\": \"MODERATE\",\n          \"timestamp\": \"2025-08-14T00:08:30\"\n        }\n      ]\n    },\n    \"inactivity_stamps\": [\n      {\n        \"stamp\": \"2022-02-10T16:04\"\n      },\n      {\n        \"stamp\": \"2022-02-10T16:04\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80fac300-cc3d-43e2-98b4-6d93e62a493c",
+              "name": "Invalid or too old date. Cannot be older than 365 days.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "activities",
+                    "samples"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "to",
+                      "value": "2023-01-31"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5b3d46eb-55e9-43e8-a014-4650a1badc82",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "activities",
+                    "samples"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "to",
+                      "value": "2023-01-31"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d659f2c3-2814-423f-aa73-57855a55b438",
+              "name": "User has not accepted all mandatory consents.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "activities",
+                    "samples"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "2023-01-01"
+                    },
+                    {
+                      "key": "to",
+                      "value": "2023-01-31"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e634a038-a3dd-4a41-875e-c75096652f05",
+          "name": "Get activity samples for given date",
+          "request": {
+            "name": "Get activity samples for given date",
+            "description": {
+              "content": "Get users activity samples for given date. Date cannot be older than 365 days from today.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "users",
+                "activities",
+                "samples",
+                ":date"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<date>",
+                  "key": "date",
+                  "description": "(Required) Date in format YYYY-MM-DD."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "accesslink.read_all"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://polarremote.com/v2/oauth2/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://flow.polar.com/oauth2/authorization"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "abba489e-001c-4a4f-aa5f-58810929ad50",
+              "name": "Activity samples for given date.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "activities",
+                    "samples",
+                    ":date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Date in format YYYY-MM-DD."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"date\": \"2022-02-10\",\n  \"steps\": {\n    \"interval_ms\": 2430,\n    \"total_steps\": 9110,\n    \"samples\": [\n      {\n        \"steps\": 1495,\n        \"timestamp\": \"2025-08-14T00:02\"\n      },\n      {\n        \"steps\": 9627,\n        \"timestamp\": \"2025-08-14T00:02\"\n      }\n    ]\n  },\n  \"activity_zones\": {\n    \"samples\": [\n      {\n        \"zone\": \"LIGHT\",\n        \"timestamp\": \"2025-08-14T00:08:30\"\n      },\n      {\n        \"zone\": \"SEDENTARY\",\n        \"timestamp\": \"2025-08-14T00:08:30\"\n      }\n    ]\n  },\n  \"inactivity_stamps\": [\n    {\n      \"stamp\": \"2022-02-10T16:04\"\n    },\n    {\n      \"stamp\": \"2022-02-10T16:04\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42cd85b4-37e3-441c-b827-ad955b0fb2bf",
+              "name": "No content when no activity samples found for given date.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "activities",
+                    "samples",
+                    ":date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Date in format YYYY-MM-DD."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3f914e93-9833-45ad-a3c2-66cf94dc24d3",
+              "name": "Invalid or too old date. Cannot be older than 365 days.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "activities",
+                    "samples",
+                    ":date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Date in format YYYY-MM-DD."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c7b293a0-6b3d-4af6-9fa7-0f7747b14da4",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "activities",
+                    "samples",
+                    ":date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Date in format YYYY-MM-DD."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ffc24957-fffd-43d1-8e7c-1048f195c096",
+              "name": "User has not accepted all mandatory consents.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "activities",
+                    "samples",
+                    ":date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<date>",
+                      "key": "date",
+                      "description": "(Required) Date in format YYYY-MM-DD."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.polaraccesslink.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "dc36a399-2094-4552-b3f4-f66e1eacaaf4",
+    "name": "Polar AccessLink Cardio load Daily activity API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Polar AccessLink API documentation\n\nContact Support:\n Name: Support\n Email: b2bhelpdesk@polar.com",
+      "type": "text/plain"
+    }
+  }
+}

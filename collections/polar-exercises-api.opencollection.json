@@ -1,0 +1,193 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Polar AccessLink Cardio load Exercises API",
+    "version": "v3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Exercises",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List exercises",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/exercises",
+            "params": [
+              {
+                "name": "samples",
+                "value": "",
+                "type": "query",
+                "description": "Return all sample data for this exercise."
+              },
+              {
+                "name": "zones",
+                "value": "",
+                "type": "query",
+                "description": "Return all zones data for this exercise."
+              },
+              {
+                "name": "route",
+                "value": "",
+                "type": "query",
+                "description": "Return all route data for this exercise."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List users exercises available in AccessLink. Only Exercises uploaded to Flow in the last 30 days are returned. Only exercises that have been uploaded to Flow after the user is registered with your client will be returned. Use samples and zones query parameters to return optional samples and zone information of the exercises.\nTraining Load Pro data will be included in the exercise object if the exercise is recorded with a specific wrist unit model,  please check [compatible devices](https://www."
+        },
+        {
+          "info": {
+            "name": "Get exercise",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/exercises/:exerciseId",
+            "params": [
+              {
+                "name": "exerciseId",
+                "value": "",
+                "type": "path",
+                "description": "Hashed exercise id."
+              },
+              {
+                "name": "samples",
+                "value": "",
+                "type": "query",
+                "description": "Return all sample data for this exercise."
+              },
+              {
+                "name": "zones",
+                "value": "",
+                "type": "query",
+                "description": "Return all zones data for this exercise."
+              },
+              {
+                "name": "route",
+                "value": "",
+                "type": "query",
+                "description": "Return all route data for this exercise."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get users exercise using hashed id. Only Exercises uploaded to Flow in the last 30 days are available. Only exercises that have been uploaded to Flow after the user is registered with your client will be available. Use samples and zones query parameters to return optional samples and zone information of the exercise."
+        },
+        {
+          "info": {
+            "name": "Get exercise FIT",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/exercises/:exerciseId/fit",
+            "params": [
+              {
+                "name": "exerciseId",
+                "value": "",
+                "type": "path",
+                "description": "Hashed exercise id."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "FIT file for users exercise. Only Exercises uploaded to Flow in the last 30 days are available. Only exercises that have been uploaded to Flow after the user is registered with your client will be available. See [FIT sport mappings in appendix](#sport-type-mapping-in-fit-files)."
+        },
+        {
+          "info": {
+            "name": "Get exercise TCX",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/exercises/:exerciseId/tcx",
+            "params": [
+              {
+                "name": "exerciseId",
+                "value": "",
+                "type": "path",
+                "description": "Hashed exercise id."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "TCX file for users exercise without an AccessLink \"transaction\". Only Exercises uploaded to Flow in the last 30 days are available. Only exercises that have been uploaded to Flow after the user is registered with your client will be available."
+        },
+        {
+          "info": {
+            "name": "Get exercise GPX",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/exercises/:exerciseId/gpx",
+            "params": [
+              {
+                "name": "exerciseId",
+                "value": "",
+                "type": "path",
+                "description": "Hashed exercise id."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "GPX file for users exercise without an AccessLink \"transaction\". Only Exercises uploaded to Flow in the last 30 days are available. Only exercises that have been uploaded to Flow after the user is registered with your client will be available."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,240 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Polar AccessLink Cardio load Daily activity (deprecated) API",
+    "version": "v3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Daily activity (deprecated)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/activity-transactions",
+            "params": [
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Initiate activity transaction.\nCheck for new activity summaries and create a new transaction if found.\nOnly data uploaded to Flow in the last 30 days will be available.\nOnly data that has been uploaded to Flow after the user is registered with your client will be available."
+        },
+        {
+          "info": {
+            "name": "List activities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/activity-transactions/:transaction-id",
+            "params": [
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction identifier"
+              },
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List new activity data.\nAfter successfully initiating a transaction, activity summaries included within it can be retrieved with the provided transactionId."
+        },
+        {
+          "info": {
+            "name": "Commit transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/activity-transactions/:transaction-id",
+            "params": [
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction identifier"
+              },
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "After successfully retrieving activity summary data within a transaction, partners are expected to commit the transaction."
+        },
+        {
+          "info": {
+            "name": "Get activity summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/activity-transactions/:transaction-id/activities/:activity-id",
+            "params": [
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              },
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction identifier"
+              },
+              {
+                "name": "activity-id",
+                "value": "",
+                "type": "path",
+                "description": "Activity summary identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get activity summary"
+        },
+        {
+          "info": {
+            "name": "Get step samples",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/activity-transactions/:transaction-id/activities/:activity-id/step-samples",
+            "params": [
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              },
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction identifier"
+              },
+              {
+                "name": "activity-id",
+                "value": "",
+                "type": "path",
+                "description": "Activity summary identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get activity step samples. Example data can be seen from [appendix](#activity-step-time-series)."
+        },
+        {
+          "info": {
+            "name": "Get zone samples",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/:user-id/activity-transactions/:transaction-id/activities/:activity-id/zone-samples",
+            "params": [
+              {
+                "name": "user-id",
+                "value": "",
+                "type": "path",
+                "description": "User identifier"
+              },
+              {
+                "name": "transaction-id",
+                "value": "",
+                "type": "path",
+                "description": "Transaction identifier"
+              },
+              {
+                "name": "activity-id",
+                "value": "",
+                "type": "path",
+                "description": "Activity summary identifier"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get activity zone samples. Example data can be seen from [appendix](#activity-zone-time-series)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

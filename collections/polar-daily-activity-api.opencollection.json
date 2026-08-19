@@ -1,0 +1,182 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Polar AccessLink Cardio load Daily activity API",
+    "version": "v3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Daily activity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List activities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/activities",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start date in format YYYY-MM-DD. If not given, defaults to 28 days ago."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End date in format YYYY-MM-DD. If not given, defaults to today."
+              },
+              {
+                "name": "steps",
+                "value": "",
+                "type": "query",
+                "description": "include steps samples for activity summary."
+              },
+              {
+                "name": "activity_zones",
+                "value": "",
+                "type": "query",
+                "description": "include activity zones samples for activity summary."
+              },
+              {
+                "name": "inactivity_stamps",
+                "value": "",
+                "type": "query",
+                "description": "include inactivity stamps for activity summary."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List users activities available in AccessLink. When no date range is given, activities from the last 28 days are returned. When `from` is given, activities for the specified date range are returned. From date cannot be older than 365 days from today and the maximum range between from and to is 28 days."
+        },
+        {
+          "info": {
+            "name": "Get activity for given date",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/activities/:date",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Date in format YYYY-MM-DD."
+              },
+              {
+                "name": "steps",
+                "value": "",
+                "type": "query",
+                "description": "include steps samples for activity summary."
+              },
+              {
+                "name": "activity_zones",
+                "value": "",
+                "type": "query",
+                "description": "include activity zones samples for activity summary."
+              },
+              {
+                "name": "inactivity_stamps",
+                "value": "",
+                "type": "query",
+                "description": "include inactivity stamps for activity summary."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get users activity for given date. Date cannot be older than 365 days from today."
+        },
+        {
+          "info": {
+            "name": "List activity samples",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/activities/samples",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Start date in format YYYY-MM-DD. If not given, defaults to 28 days ago."
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "End date in format YYYY-MM-DD. If not given, defaults to today."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "List users activity samples available in AccessLink. When no date range is given, activity samples from the last 28 days are returned. When `from` is given, activity samples for the specified date range are returned. From date cannot be older than 365 days from today and the maximum range between from and to is 28 days."
+        },
+        {
+          "info": {
+            "name": "Get activity samples for given date",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/activities/samples/:date",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Date in format YYYY-MM-DD."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get users activity samples for given date. Date cannot be older than 365 days from today."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

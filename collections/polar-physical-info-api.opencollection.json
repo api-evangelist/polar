@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Polar AccessLink Cardio load Physical info API",
+    "version": "v3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Physical info",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get user's physical info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/physical-info",
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve user's physical information."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

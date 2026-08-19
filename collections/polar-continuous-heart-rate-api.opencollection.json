@@ -1,0 +1,82 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Polar AccessLink Cardio load Continuous Heart Rate API",
+    "version": "v3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Continuous Heart Rate",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Continuous Heart rate samples",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/continuous-heart-rate/:date",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "path",
+                "description": "Date of Continuous Heart Rate as ISO-8601 date string, example: \"2022-01-01\""
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get users continuous heart rate values for given date. <a href=\"https://support.polar.com/en/support/the_what_and_how_of_polars_continuous_heart_rate\"> Supported devices </a>"
+        },
+        {
+          "info": {
+            "name": "Get Continuous Heart rate samples with range",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/continuous-heart-rate",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive start date of range as ISO-8601 date string, example: \"2022-01-01\""
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive end date of range as ISO-8601 date string, example: \"2022-01-28\""
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get users continuous heart rate values for given date range. <a href=\"https://support.polar.com/en/support/the_what_and_how_of_polars_continuous_heart_rate\"> Supported devices </a>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

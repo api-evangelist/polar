@@ -1,0 +1,34 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Polar AccessLink Cardio load Pull notifications API",
+    "version": "v3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pull notifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/notifications",
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Get list of available exercises and activities for users"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

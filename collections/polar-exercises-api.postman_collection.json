@@ -1,0 +1,1151 @@
+{
+  "item": [
+    {
+      "id": "b207a4c4-1695-4efc-8821-b76e680ba797",
+      "name": "Exercises",
+      "description": {
+        "content": "Resources for getting information about exercise. These endpoints do not require an active transaction, but they use hashed id.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "03229f50-b0ca-46e8-b927-43c9e50ed1ca",
+          "name": "List exercises",
+          "request": {
+            "name": "List exercises",
+            "description": {
+              "content": "List users exercises available in AccessLink. Only Exercises uploaded to Flow in the last 30 days are returned. Only exercises that have been uploaded to Flow after the user is registered with your client will be returned. Use samples and zones query parameters to return optional samples and zone information of the exercises.\nTraining Load Pro data will be included in the exercise object if the exercise is recorded with a specific wrist unit model,  please check [compatible devices](https://www.polar.com/en/smart-coaching/training-load-pro) for more information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "exercises"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "samples",
+                  "value": "<boolean>",
+                  "description": "Return all sample data for this exercise."
+                },
+                {
+                  "disabled": false,
+                  "key": "zones",
+                  "value": "<boolean>",
+                  "description": "Return all zones data for this exercise."
+                },
+                {
+                  "disabled": false,
+                  "key": "route",
+                  "value": "<boolean>",
+                  "description": "Return all route data for this exercise."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "accesslink.read_all"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://polarremote.com/v2/oauth2/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://flow.polar.com/oauth2/authorization"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7cafc167-84d3-4d41-a9ef-9efe6997f128",
+              "name": "List of users exercises.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "exercises"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "samples",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "zones",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "route",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"2AC312F\",\n    \"upload_time\": \"2008-10-13T10:40:02.000Z\",\n    \"polar_user\": \"https://www.polaraccesslink/v3/users/1\",\n    \"device\": \"Polar M400\",\n    \"device_id\": \"1111AAAA\",\n    \"start_time\": \"2008-10-13T10:40:02\",\n    \"start_time_utc_offset\": 180,\n    \"duration\": \"PT2H44M\",\n    \"calories\": 530,\n    \"distance\": 1600,\n    \"heart_rate\": {\n      \"average\": 129,\n      \"maximum\": 147\n    },\n    \"training_load\": 143.22,\n    \"sport\": \"OTHER\",\n    \"has_route\": true,\n    \"club_id\": 999,\n    \"club_name\": \"Polar Club\",\n    \"detailed_sport_info\": \"WATERSPORTS_WATERSKI\",\n    \"fat_percentage\": 60,\n    \"carbohydrate_percentage\": 38,\n    \"protein_percentage\": 2,\n    \"running-index\": 51,\n    \"heart_rate_zones\": [\n      {\n        \"index\": 1,\n        \"lower-limit\": 110,\n        \"upper-limit\": 130,\n        \"in-zone\": \"PT4S\"\n      },\n      {\n        \"index\": 1,\n        \"lower-limit\": 110,\n        \"upper-limit\": 130,\n        \"in-zone\": \"PT4S\"\n      }\n    ],\n    \"samples\": [\n      {\n        \"recording-rate\": 5,\n        \"sample-type\": \"1\",\n        \"data\": \"0,100,102,97,97,101,103,106,96,89,88,87,98,108,113,112,114,115,118,121,121,121,121,123,117,119,122\"\n      },\n      {\n        \"recording-rate\": 5,\n        \"sample-type\": \"1\",\n        \"data\": \"0,100,102,97,97,101,103,106,96,89,88,87,98,108,113,112,114,115,118,121,121,121,121,123,117,119,122\"\n      }\n    ],\n    \"route\": [\n      {\n        \"latitude\": 60.21982833,\n        \"longitude\": 25.13925,\n        \"time\": \"PT210.026S\",\n        \"satellites\": 4,\n        \"fix\": 1\n      },\n      {\n        \"latitude\": 60.21982833,\n        \"longitude\": 25.13925,\n        \"time\": \"PT210.026S\",\n        \"satellites\": 4,\n        \"fix\": 1\n      }\n    ],\n    \"training_load_pro\": {\n      \"date\": \"2023-01-01\",\n      \"cardio-load\": 1,\n      \"muscle-load\": 1,\n      \"perceived-load\": 1,\n      \"cardio-load-interpretation\": \"VERY_LOW\",\n      \"muscle-load-interpretation\": \"NOT_AVAILABLE\",\n      \"perceived-load-interpretation\": \"VERY_LOW\",\n      \"user-rpe\": \"RPE_BRISK\"\n    }\n  },\n  {\n    \"id\": \"2AC312F\",\n    \"upload_time\": \"2008-10-13T10:40:02.000Z\",\n    \"polar_user\": \"https://www.polaraccesslink/v3/users/1\",\n    \"device\": \"Polar M400\",\n    \"device_id\": \"1111AAAA\",\n    \"start_time\": \"2008-10-13T10:40:02\",\n    \"start_time_utc_offset\": 180,\n    \"duration\": \"PT2H44M\",\n    \"calories\": 530,\n    \"distance\": 1600,\n    \"heart_rate\": {\n      \"average\": 129,\n      \"maximum\": 147\n    },\n    \"training_load\": 143.22,\n    \"sport\": \"OTHER\",\n    \"has_route\": true,\n    \"club_id\": 999,\n    \"club_name\": \"Polar Club\",\n    \"detailed_sport_info\": \"WATERSPORTS_WATERSKI\",\n    \"fat_percentage\": 60,\n    \"carbohydrate_percentage\": 38,\n    \"protein_percentage\": 2,\n    \"running-index\": 51,\n    \"heart_rate_zones\": [\n      {\n        \"index\": 1,\n        \"lower-limit\": 110,\n        \"upper-limit\": 130,\n        \"in-zone\": \"PT4S\"\n      },\n      {\n        \"index\": 1,\n        \"lower-limit\": 110,\n        \"upper-limit\": 130,\n        \"in-zone\": \"PT4S\"\n      }\n    ],\n    \"samples\": [\n      {\n        \"recording-rate\": 5,\n        \"sample-type\": \"1\",\n        \"data\": \"0,100,102,97,97,101,103,106,96,89,88,87,98,108,113,112,114,115,118,121,121,121,121,123,117,119,122\"\n      },\n      {\n        \"recording-rate\": 5,\n        \"sample-type\": \"1\",\n        \"data\": \"0,100,102,97,97,101,103,106,96,89,88,87,98,108,113,112,114,115,118,121,121,121,121,123,117,119,122\"\n      }\n    ],\n    \"route\": [\n      {\n        \"latitude\": 60.21982833,\n        \"longitude\": 25.13925,\n        \"time\": \"PT210.026S\",\n        \"satellites\": 4,\n        \"fix\": 1\n      },\n      {\n        \"latitude\": 60.21982833,\n        \"longitude\": 25.13925,\n        \"time\": \"PT210.026S\",\n        \"satellites\": 4,\n        \"fix\": 1\n      }\n    ],\n    \"training_load_pro\": {\n      \"date\": \"2023-01-01\",\n      \"cardio-load\": 1,\n      \"muscle-load\": 1,\n      \"perceived-load\": 1,\n      \"cardio-load-interpretation\": \"MEDIUM\",\n      \"muscle-load-interpretation\": \"MEDIUM\",\n      \"perceived-load-interpretation\": \"MEDIUM\",\n      \"user-rpe\": \"RPE_FAIRLY_HARD\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22958f12-dd48-41c1-84b5-8e0192c872c9",
+              "name": "User has not accepted all mandatory consents.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "exercises"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "samples",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "zones",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "route",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ea9bc318-485b-47a0-a911-506d514a1c77",
+          "name": "Get exercise",
+          "request": {
+            "name": "Get exercise",
+            "description": {
+              "content": "Get users exercise using hashed id. Only Exercises uploaded to Flow in the last 30 days are available. Only exercises that have been uploaded to Flow after the user is registered with your client will be available. Use samples and zones query parameters to return optional samples and zone information of the exercise.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "exercises",
+                ":exerciseId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "samples",
+                  "value": "<boolean>",
+                  "description": "Return all sample data for this exercise."
+                },
+                {
+                  "disabled": false,
+                  "key": "zones",
+                  "value": "<boolean>",
+                  "description": "Return all zones data for this exercise."
+                },
+                {
+                  "disabled": false,
+                  "key": "route",
+                  "value": "<boolean>",
+                  "description": "Return all route data for this exercise."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "exerciseId",
+                  "description": "(Required) Hashed exercise id."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "accesslink.read_all"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://polarremote.com/v2/oauth2/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://flow.polar.com/oauth2/authorization"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1186c3c3-b442-4cee-93a3-f3fa2ca88018",
+              "name": "Exercise information.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "exercises",
+                    ":exerciseId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "samples",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "zones",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "route",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "exerciseId",
+                      "description": "(Required) Hashed exercise id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"2AC312F\",\n  \"upload_time\": \"2008-10-13T10:40:02.000Z\",\n  \"polar_user\": \"https://www.polaraccesslink/v3/users/1\",\n  \"device\": \"Polar M400\",\n  \"device_id\": \"1111AAAA\",\n  \"start_time\": \"2008-10-13T10:40:02\",\n  \"start_time_utc_offset\": 180,\n  \"duration\": \"PT2H44M\",\n  \"calories\": 530,\n  \"distance\": 1600,\n  \"heart_rate\": {\n    \"average\": 129,\n    \"maximum\": 147\n  },\n  \"training_load\": 143.22,\n  \"sport\": \"OTHER\",\n  \"has_route\": true,\n  \"club_id\": 999,\n  \"club_name\": \"Polar Club\",\n  \"detailed_sport_info\": \"WATERSPORTS_WATERSKI\",\n  \"fat_percentage\": 60,\n  \"carbohydrate_percentage\": 38,\n  \"protein_percentage\": 2,\n  \"running-index\": 51,\n  \"heart_rate_zones\": [\n    {\n      \"index\": 1,\n      \"lower-limit\": 110,\n      \"upper-limit\": 130,\n      \"in-zone\": \"PT4S\"\n    },\n    {\n      \"index\": 1,\n      \"lower-limit\": 110,\n      \"upper-limit\": 130,\n      \"in-zone\": \"PT4S\"\n    }\n  ],\n  \"samples\": [\n    {\n      \"recording-rate\": 5,\n      \"sample-type\": \"1\",\n      \"data\": \"0,100,102,97,97,101,103,106,96,89,88,87,98,108,113,112,114,115,118,121,121,121,121,123,117,119,122\"\n    },\n    {\n      \"recording-rate\": 5,\n      \"sample-type\": \"1\",\n      \"data\": \"0,100,102,97,97,101,103,106,96,89,88,87,98,108,113,112,114,115,118,121,121,121,121,123,117,119,122\"\n    }\n  ],\n  \"route\": [\n    {\n      \"latitude\": 60.21982833,\n      \"longitude\": 25.13925,\n      \"time\": \"PT210.026S\",\n      \"satellites\": 4,\n      \"fix\": 1\n    },\n    {\n      \"latitude\": 60.21982833,\n      \"longitude\": 25.13925,\n      \"time\": \"PT210.026S\",\n      \"satellites\": 4,\n      \"fix\": 1\n    }\n  ],\n  \"training_load_pro\": {\n    \"date\": \"2023-01-01\",\n    \"cardio-load\": 1,\n    \"muscle-load\": 1,\n    \"perceived-load\": 1,\n    \"cardio-load-interpretation\": \"NOT_AVAILABLE\",\n    \"muscle-load-interpretation\": \"MEDIUM\",\n    \"perceived-load-interpretation\": \"UNKNOWN\",\n    \"user-rpe\": \"RPE_EASY\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91d91c6f-5ecd-43fe-bee9-418c6448a584",
+              "name": "User has not accepted all mandatory consents.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "exercises",
+                    ":exerciseId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "samples",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "zones",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "route",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "exerciseId",
+                      "description": "(Required) Hashed exercise id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7b211cd4-c08a-4a56-8822-23ef86d5ac58",
+              "name": "Exercise not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "exercises",
+                    ":exerciseId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "samples",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "zones",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "route",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "exerciseId",
+                      "description": "(Required) Hashed exercise id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b221c1d7-778d-407d-b507-442fdbdc08f4",
+          "name": "Get exercise FIT",
+          "request": {
+            "name": "Get exercise FIT",
+            "description": {
+              "content": "FIT file for users exercise. Only Exercises uploaded to Flow in the last 30 days are available. Only exercises that have been uploaded to Flow after the user is registered with your client will be available. See [FIT sport mappings in appendix](#sport-type-mapping-in-fit-files).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "exercises",
+                ":exerciseId",
+                "fit"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "exerciseId",
+                  "description": "(Required) Hashed exercise id."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "*/*"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "accesslink.read_all"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://polarremote.com/v2/oauth2/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://flow.polar.com/oauth2/authorization"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ede7ef28-fee1-419b-8287-2af397d60e09",
+              "name": "Return FIT file.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "exercises",
+                    ":exerciseId",
+                    "fit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "exerciseId",
+                      "description": "(Required) Hashed exercise id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "*/*"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d137fdde-b78a-4c72-b592-5e8bf49ebf87",
+              "name": "User has not accepted all mandatory consents.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "exercises",
+                    ":exerciseId",
+                    "fit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "exerciseId",
+                      "description": "(Required) Hashed exercise id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b27a4f63-26e9-423e-bd72-b4d31810dd15",
+              "name": "Exercise not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "exercises",
+                    ":exerciseId",
+                    "fit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "exerciseId",
+                      "description": "(Required) Hashed exercise id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "54e5b9fc-a1f9-4223-893b-cf1d6ade1338",
+          "name": "Get exercise TCX",
+          "request": {
+            "name": "Get exercise TCX",
+            "description": {
+              "content": "TCX file for users exercise without an AccessLink \"transaction\". Only Exercises uploaded to Flow in the last 30 days are available. Only exercises that have been uploaded to Flow after the user is registered with your client will be available.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "exercises",
+                ":exerciseId",
+                "tcx"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "exerciseId",
+                  "description": "(Required) Hashed exercise id."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/vnd.garmin.tcx+xml"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "accesslink.read_all"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://polarremote.com/v2/oauth2/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://flow.polar.com/oauth2/authorization"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7177c13a-1fe3-4628-a183-40198cff1109",
+              "name": "Return gzipped TCX.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "exercises",
+                    ":exerciseId",
+                    "tcx"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "exerciseId",
+                      "description": "(Required) Hashed exercise id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.garmin.tcx+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/vnd.garmin.tcx+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "2b7f0fea-b72b-48ad-a6bd-72905847b3dd",
+              "name": "User has not accepted all mandatory consents.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "exercises",
+                    ":exerciseId",
+                    "tcx"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "exerciseId",
+                      "description": "(Required) Hashed exercise id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2ccfda80-7fae-43c6-87db-3fabd1f77f10",
+              "name": "Exercise not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "exercises",
+                    ":exerciseId",
+                    "tcx"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "exerciseId",
+                      "description": "(Required) Hashed exercise id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "60295aa3-e8a9-4404-a3ac-13ea2c493dc4",
+          "name": "Get exercise GPX",
+          "request": {
+            "name": "Get exercise GPX",
+            "description": {
+              "content": "GPX file for users exercise without an AccessLink \"transaction\". Only Exercises uploaded to Flow in the last 30 days are available. Only exercises that have been uploaded to Flow after the user is registered with your client will be available.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "exercises",
+                ":exerciseId",
+                "gpx"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "exerciseId",
+                  "description": "(Required) Hashed exercise id."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/gpx+xml"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "accesslink.read_all"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://polarremote.com/v2/oauth2/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://flow.polar.com/oauth2/authorization"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "31b3d972-812e-4123-b4c4-485aee39f382",
+              "name": "Return exercise in GPX (GPS Exchange format).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "exercises",
+                    ":exerciseId",
+                    "gpx"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "exerciseId",
+                      "description": "(Required) Hashed exercise id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/gpx+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/gpx+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>(string)</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "d8b2412c-77d5-449f-83fc-b687aded7237",
+              "name": "User has not accepted all mandatory consents.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "exercises",
+                    ":exerciseId",
+                    "gpx"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "exerciseId",
+                      "description": "(Required) Hashed exercise id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bacb9bfe-5262-49db-930a-139906577aa8",
+              "name": "Exercise not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "exercises",
+                    ":exerciseId",
+                    "gpx"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "exerciseId",
+                      "description": "(Required) Hashed exercise id."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.polaraccesslink.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7ca0dd8c-75a6-4e5e-9d4a-8b0b9a6088ff",
+    "name": "Polar AccessLink Cardio load Exercises API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Polar AccessLink API documentation\n\nContact Support:\n Name: Support\n Email: b2bhelpdesk@polar.com",
+      "type": "text/plain"
+    }
+  }
+}

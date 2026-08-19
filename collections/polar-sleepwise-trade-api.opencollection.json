@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Polar AccessLink Cardio load SleepWise&trade; API",
+    "version": "v3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SleepWise&trade;",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Alertness period data (last 28 days)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/sleepwise/alertness",
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get user's alertness period data for the last 28 days. <a href=\"https://support.polar.com/en/polar-sleepwise\"> Supported devices </a>"
+        },
+        {
+          "info": {
+            "name": "Alertness period data (date range)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/sleepwise/alertness/date",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive start date of range as ISO-8601 date string, example: \"2022-01-01\""
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive end date of range as ISO-8601 date string, example: \"2022-01-28\""
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get user's alertness period data for given date range. Maximum date range between from and to cannot be more than 28 days. <a href=\"https://support.polar.com/en/polar-sleepwise\"> Supported devices </a>"
+        },
+        {
+          "info": {
+            "name": "Circadian bedtime period data (last 28 days)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/sleepwise/circadian-bedtime",
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get user's circadian bedtime period data for the last 28 days. <a href=\"https://support.polar.com/en/polar-sleepwise\"> Supported devices </a>"
+        },
+        {
+          "info": {
+            "name": "Circadian bedtime period data (date range)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v3/users/sleepwise/circadian-bedtime/date",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive start date of range as ISO-8601 date string, example: \"2022-01-01\""
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "Inclusive end date of range as ISO-8601 date string, example: \"2022-01-28\""
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get user's circadian bedtime period data for given date range. Maximum date range between from and to cannot be more than 28 days. <a href=\"https://support.polar.com/en/polar-sleepwise\"> Supported devices </a>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

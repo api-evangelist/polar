@@ -1,0 +1,1248 @@
+{
+  "item": [
+    {
+      "id": "dfc5d367-8370-408d-bfce-e8a3a49dfc06",
+      "name": "SleepWise&trade;",
+      "description": {
+        "content": "This resource allows partners to access their users' SleepWise&trade; data. All time values are UTC times. SleepWise&trade; data is calculated for [SleepWise&trade;](https://support.polar.com/en/polar-sleepwise) supported devices when minimum of 5 days of sleep data is available. SleepWise&trade; data consists of alertness periods and circadian bedtime periods.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "aa4cb722-d412-4c6b-8064-3172d67109ae",
+          "name": "Alertness period data (last 28 days)",
+          "request": {
+            "name": "Alertness period data (last 28 days)",
+            "description": {
+              "content": "Get user's alertness period data for the last 28 days. <a href=\"https://support.polar.com/en/polar-sleepwise\"> Supported devices </a>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "users",
+                "sleepwise",
+                "alertness"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "accesslink.read_all"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://polarremote.com/v2/oauth2/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://flow.polar.com/oauth2/authorization"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c974e950-c415-4c61-a8c2-196673f578e7",
+              "name": "Request was successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "sleepwise",
+                    "alertness"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"grade\": 9.9,\n    \"grade_validity_seconds\": 57600,\n    \"grade_type\": \"GRADE_TYPE_PRIMARY\",\n    \"grade_classification\": \"GRADE_CLASSIFICATION_STRONG\",\n    \"validity\": \"VALIDITY_ESTIMATE\",\n    \"sleep_inertia\": \"SLEEP_INERTIA_MILD\",\n    \"sleep_type\": \"SLEEP_TYPE_PRIMARY\",\n    \"result_type\": \"ALERTNESS_TYPE_HISTORY\",\n    \"period_start_time\": \"2022-11-20T20:52:20\",\n    \"period_end_time\": \"2022-11-21T19:15:52\",\n    \"sleep_period_start_time\": \"2022-11-20T20:52:20.57\",\n    \"sleep_period_end_time\": \"2022-11-21T04:11:20.57\",\n    \"sleep_timezone_offset_minutes\": 120,\n    \"hourly_data\": [\n      {\n        \"validity\": \"VALIDITY_ESTIMATE\",\n        \"alertness_level\": \"ALERTNESS_LEVEL_LOW\",\n        \"start_time\": \"2022-11-21T04:12:00\",\n        \"end_time\": \"2022-11-21T05:00:00\"\n      }\n    ]\n  },\n  {\n    \"grade\": 9.9,\n    \"grade_validity_seconds\": 57600,\n    \"grade_type\": \"GRADE_TYPE_PRIMARY\",\n    \"grade_classification\": \"GRADE_CLASSIFICATION_STRONG\",\n    \"validity\": \"VALIDITY_ESTIMATE\",\n    \"sleep_inertia\": \"SLEEP_INERTIA_MILD\",\n    \"sleep_type\": \"SLEEP_TYPE_PRIMARY\",\n    \"result_type\": \"ALERTNESS_TYPE_HISTORY\",\n    \"period_start_time\": \"2022-11-20T20:52:20\",\n    \"period_end_time\": \"2022-11-21T19:15:52\",\n    \"sleep_period_start_time\": \"2022-11-20T20:52:20.57\",\n    \"sleep_period_end_time\": \"2022-11-21T04:11:20.57\",\n    \"sleep_timezone_offset_minutes\": 120,\n    \"hourly_data\": [\n      {\n        \"validity\": \"VALIDITY_ESTIMATE\",\n        \"alertness_level\": \"ALERTNESS_LEVEL_LOW\",\n        \"start_time\": \"2022-11-21T04:12:00\",\n        \"end_time\": \"2022-11-21T05:00:00\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9484bddd-98d2-412b-9264-1de35d45c7a1",
+              "name": "No data found for last 28 days.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "sleepwise",
+                    "alertness"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8202696d-060f-498d-9a08-e61468d95259",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "sleepwise",
+                    "alertness"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9ceec839-3caa-4a7b-a0bc-9759bda49fc0",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "sleepwise",
+                    "alertness"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3c788141-a4f8-4ca4-8235-7a21914b12c8",
+              "name": "User has not accepted all mandatory consents.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "sleepwise",
+                    "alertness"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9d094938-2176-4e89-875c-3a4cba630cd1",
+          "name": "Alertness period data (date range)",
+          "request": {
+            "name": "Alertness period data (date range)",
+            "description": {
+              "content": "Get user's alertness period data for given date range. Maximum date range between from and to cannot be more than 28 days. <a href=\"https://support.polar.com/en/polar-sleepwise\"> Supported devices </a>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "users",
+                "sleepwise",
+                "alertness",
+                "date"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<date>",
+                  "description": "(Required) Inclusive start date of range as ISO-8601 date string, example: \"2022-01-01\""
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<date>",
+                  "description": "(Required) Inclusive end date of range as ISO-8601 date string, example: \"2022-01-28\""
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "accesslink.read_all"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://polarremote.com/v2/oauth2/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://flow.polar.com/oauth2/authorization"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "688f411c-28a3-4e13-9d92-68c01b8ac330",
+              "name": "Request was successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "sleepwise",
+                    "alertness",
+                    "date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"grade\": 9.9,\n    \"grade_validity_seconds\": 57600,\n    \"grade_type\": \"GRADE_TYPE_PRIMARY\",\n    \"grade_classification\": \"GRADE_CLASSIFICATION_STRONG\",\n    \"validity\": \"VALIDITY_ESTIMATE\",\n    \"sleep_inertia\": \"SLEEP_INERTIA_MILD\",\n    \"sleep_type\": \"SLEEP_TYPE_PRIMARY\",\n    \"result_type\": \"ALERTNESS_TYPE_HISTORY\",\n    \"period_start_time\": \"2022-11-20T20:52:20\",\n    \"period_end_time\": \"2022-11-21T19:15:52\",\n    \"sleep_period_start_time\": \"2022-11-20T20:52:20.57\",\n    \"sleep_period_end_time\": \"2022-11-21T04:11:20.57\",\n    \"sleep_timezone_offset_minutes\": 120,\n    \"hourly_data\": [\n      {\n        \"validity\": \"VALIDITY_ESTIMATE\",\n        \"alertness_level\": \"ALERTNESS_LEVEL_VERY_HIGH\",\n        \"start_time\": \"2022-11-21T04:00:00\",\n        \"end_time\": \"2022-11-21T05:00:00\"\n      },\n      {\n        \"validity\": \"VALIDITY_ESTIMATE\",\n        \"alertness_level\": \"ALERTNESS_LEVEL_VERY_HIGH\",\n        \"start_time\": \"2022-11-21T04:00:00\",\n        \"end_time\": \"2022-11-21T05:00:00\"\n      }\n    ]\n  },\n  {\n    \"grade\": 9.9,\n    \"grade_validity_seconds\": 57600,\n    \"grade_type\": \"GRADE_TYPE_PRIMARY\",\n    \"grade_classification\": \"GRADE_CLASSIFICATION_STRONG\",\n    \"validity\": \"VALIDITY_ESTIMATE\",\n    \"sleep_inertia\": \"SLEEP_INERTIA_MILD\",\n    \"sleep_type\": \"SLEEP_TYPE_PRIMARY\",\n    \"result_type\": \"ALERTNESS_TYPE_HISTORY\",\n    \"period_start_time\": \"2022-11-20T20:52:20\",\n    \"period_end_time\": \"2022-11-21T19:15:52\",\n    \"sleep_period_start_time\": \"2022-11-20T20:52:20.57\",\n    \"sleep_period_end_time\": \"2022-11-21T04:11:20.57\",\n    \"sleep_timezone_offset_minutes\": 120,\n    \"hourly_data\": [\n      {\n        \"validity\": \"VALIDITY_ESTIMATE\",\n        \"alertness_level\": \"ALERTNESS_LEVEL_VERY_HIGH\",\n        \"start_time\": \"2022-11-21T04:00:00\",\n        \"end_time\": \"2022-11-21T05:00:00\"\n      },\n      {\n        \"validity\": \"VALIDITY_ESTIMATE\",\n        \"alertness_level\": \"ALERTNESS_LEVEL_VERY_HIGH\",\n        \"start_time\": \"2022-11-21T04:00:00\",\n        \"end_time\": \"2022-11-21T05:00:00\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b985ef1c-9f1c-471f-9278-1711c72416f3",
+              "name": "No data found for date range.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "sleepwise",
+                    "alertness",
+                    "date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "44c22f55-4560-4259-b483-c4d5fc741620",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "sleepwise",
+                    "alertness",
+                    "date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6f780084-e89e-4f08-957d-6485abe9dbc5",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "sleepwise",
+                    "alertness",
+                    "date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "178cd299-9e5f-4b62-bb12-fb8f671e65b5",
+              "name": "User has not accepted all mandatory consents.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "sleepwise",
+                    "alertness",
+                    "date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ad2cb461-5cea-4c22-8039-698a8f99c591",
+          "name": "Circadian bedtime period data (last 28 days)",
+          "request": {
+            "name": "Circadian bedtime period data (last 28 days)",
+            "description": {
+              "content": "Get user's circadian bedtime period data for the last 28 days. <a href=\"https://support.polar.com/en/polar-sleepwise\"> Supported devices </a>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "users",
+                "sleepwise",
+                "circadian-bedtime"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "accesslink.read_all"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://polarremote.com/v2/oauth2/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://flow.polar.com/oauth2/authorization"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "82b4732a-f5bd-40b4-8af1-97306f5da0d2",
+              "name": "Request was successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "sleepwise",
+                    "circadian-bedtime"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"validity\": \"VALIDITY_ESTIMATE\",\n    \"quality\": \"CIRCADIAN_BEDTIME_QUALITY_COMPROMISED\",\n    \"result_type\": \"CIRCADIAN_BEDTIME_TYPE_HISTORY\",\n    \"period_start_time\": \"2022-11-20T21:18:30\",\n    \"period_end_time\": \"2022-11-21T05:18:30\",\n    \"preferred_sleep_period_start_time\": \"2022-11-20T21:18:30\",\n    \"preferred_sleep_period_end_time\": \"2022-11-21T05:18:30\",\n    \"sleep_gate_start_time\": \"2022-11-20T21:03:30\",\n    \"sleep_gate_end_time\": \"2022-11-20T21:33:30\",\n    \"sleep_timezone_offset_minutes\": 120\n  },\n  {\n    \"validity\": \"VALIDITY_ESTIMATE\",\n    \"quality\": \"CIRCADIAN_BEDTIME_QUALITY_COMPROMISED\",\n    \"result_type\": \"CIRCADIAN_BEDTIME_TYPE_HISTORY\",\n    \"period_start_time\": \"2022-11-20T21:18:30\",\n    \"period_end_time\": \"2022-11-21T05:18:30\",\n    \"preferred_sleep_period_start_time\": \"2022-11-20T21:18:30\",\n    \"preferred_sleep_period_end_time\": \"2022-11-21T05:18:30\",\n    \"sleep_gate_start_time\": \"2022-11-20T21:03:30\",\n    \"sleep_gate_end_time\": \"2022-11-20T21:33:30\",\n    \"sleep_timezone_offset_minutes\": 120\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "11a79a30-6ef0-4449-a1de-6e2d90ebe447",
+              "name": "No data found for last 28 days.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "sleepwise",
+                    "circadian-bedtime"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5d86df9f-44bc-439e-8162-ac6a57ad85ea",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "sleepwise",
+                    "circadian-bedtime"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0cdc05f4-0c4c-4147-b391-86f16b801f74",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "sleepwise",
+                    "circadian-bedtime"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a94b7b03-61b5-40c8-8dca-297572710846",
+              "name": "User has not accepted all mandatory consents.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "sleepwise",
+                    "circadian-bedtime"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5faf7a07-f78d-4be9-a975-493ee0685a9d",
+          "name": "Circadian bedtime period data (date range)",
+          "request": {
+            "name": "Circadian bedtime period data (date range)",
+            "description": {
+              "content": "Get user's circadian bedtime period data for given date range. Maximum date range between from and to cannot be more than 28 days. <a href=\"https://support.polar.com/en/polar-sleepwise\"> Supported devices </a>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "users",
+                "sleepwise",
+                "circadian-bedtime",
+                "date"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "from",
+                  "value": "<date>",
+                  "description": "(Required) Inclusive start date of range as ISO-8601 date string, example: \"2022-01-01\""
+                },
+                {
+                  "disabled": false,
+                  "key": "to",
+                  "value": "<date>",
+                  "description": "(Required) Inclusive end date of range as ISO-8601 date string, example: \"2022-01-28\""
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "accesslink.read_all"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://polarremote.com/v2/oauth2/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://flow.polar.com/oauth2/authorization"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "857c9a68-ebe0-4605-b90c-308ee3c22a80",
+              "name": "Request was successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "sleepwise",
+                    "circadian-bedtime",
+                    "date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"validity\": \"VALIDITY_ESTIMATE\",\n    \"quality\": \"CIRCADIAN_BEDTIME_QUALITY_COMPROMISED\",\n    \"result_type\": \"CIRCADIAN_BEDTIME_TYPE_HISTORY\",\n    \"period_start_time\": \"2022-11-20T21:18:30\",\n    \"period_end_time\": \"2022-11-21T05:18:30\",\n    \"preferred_sleep_period_start_time\": \"2022-11-20T21:18:30\",\n    \"preferred_sleep_period_end_time\": \"2022-11-21T05:18:30\",\n    \"sleep_gate_start_time\": \"2022-11-20T21:03:30\",\n    \"sleep_gate_end_time\": \"2022-11-20T21:33:30\",\n    \"sleep_timezone_offset_minutes\": 120\n  },\n  {\n    \"validity\": \"VALIDITY_ESTIMATE\",\n    \"quality\": \"CIRCADIAN_BEDTIME_QUALITY_COMPROMISED\",\n    \"result_type\": \"CIRCADIAN_BEDTIME_TYPE_HISTORY\",\n    \"period_start_time\": \"2022-11-20T21:18:30\",\n    \"period_end_time\": \"2022-11-21T05:18:30\",\n    \"preferred_sleep_period_start_time\": \"2022-11-20T21:18:30\",\n    \"preferred_sleep_period_end_time\": \"2022-11-21T05:18:30\",\n    \"sleep_gate_start_time\": \"2022-11-20T21:03:30\",\n    \"sleep_gate_end_time\": \"2022-11-20T21:33:30\",\n    \"sleep_timezone_offset_minutes\": 120\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9f7d53d-d1da-4635-addf-3a02a50361c8",
+              "name": "No data found for date range.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "sleepwise",
+                    "circadian-bedtime",
+                    "date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0a9c6561-79a2-4112-86ce-3d051b7b526a",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "sleepwise",
+                    "circadian-bedtime",
+                    "date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f0475d09-3705-4680-94c5-6b288f4bb4ee",
+              "name": "Unauthorized.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "sleepwise",
+                    "circadian-bedtime",
+                    "date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "75d30d71-68a3-4091-8551-3c4b8d049124",
+              "name": "User has not accepted all mandatory consents.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "users",
+                    "sleepwise",
+                    "circadian-bedtime",
+                    "date"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "from",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "to",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.polaraccesslink.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "751606bb-c88a-4e8c-af87-5a6e7e465959",
+    "name": "Polar AccessLink Cardio load SleepWise&trade; API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Polar AccessLink API documentation\n\nContact Support:\n Name: Support\n Email: b2bhelpdesk@polar.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "item": [
+    {
+      "id": "f53e0525-271c-4ef9-8e30-7148a2a7860b",
+      "name": "Pull notifications",
+      "description": {
+        "content": "This resource allows partners to check if their users have available data for downloading. Use client credentials authentication. Returns object holding list of available data objects.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5c0d0264-e61f-4adb-aa4e-c5e0639371e4",
+          "name": "List",
+          "request": {
+            "name": "List",
+            "description": {
+              "content": "Get list of available exercises and activities for users",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v3",
+                "notifications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0e784a66-5ee0-4b58-98e7-f15e1d823d0b",
+              "name": "List of available data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"available-user-data\": [\n    {\n      \"user-id\": 475,\n      \"data-type\": \"ACTIVITY_SUMMARY\",\n      \"url\": \"https://www.polaraccesslink.com/v3/users/475/activity-transactions\"\n    },\n    {\n      \"user-id\": 475,\n      \"data-type\": \"ACTIVITY_SUMMARY\",\n      \"url\": \"https://www.polaraccesslink.com/v3/users/475/activity-transactions\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ed5a58e-e4f7-4310-87d2-7f778be86f16",
+              "name": "No content when no available data found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v3",
+                    "notifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.polaraccesslink.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b86dce97-db9c-4ce9-b347-62ec0044349d",
+    "name": "Polar AccessLink Cardio load Pull notifications API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Polar AccessLink API documentation\n\nContact Support:\n Name: Support\n Email: b2bhelpdesk@polar.com",
+      "type": "text/plain"
+    }
+  }
+}

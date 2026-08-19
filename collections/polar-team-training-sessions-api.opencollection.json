@@ -1,0 +1,94 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Polar AccessLink Cardio load Team training sessions API",
+    "version": "v3"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Team training sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get team training sessions.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v1/teams/:team_id/training_sessions",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "path",
+                "description": "Team whose training session are returned."
+              },
+              {
+                "name": "since",
+                "value": "2018-04-14T00:00:00",
+                "type": "query",
+                "description": "Return training sessions having record_start_time greater than <since>."
+              },
+              {
+                "name": "until",
+                "value": "2018-05-14T00:00:00",
+                "type": "query",
+                "description": "Return training sessions having record_start_time less than <until>"
+              },
+              {
+                "name": "pagination",
+                "value": "",
+                "type": "query",
+                "description": "Pagination parameters"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get team training sessions."
+        },
+        {
+          "info": {
+            "name": "Get team training session details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.polaraccesslink.com/v1/teams/training_sessions/:training_session_id",
+            "params": [
+              {
+                "name": "training_session_id",
+                "value": "",
+                "type": "path",
+                "description": "Training session id."
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "authorization_code",
+              "authorizationUrl": "https://flow.polar.com/oauth2/authorization",
+              "accessTokenUrl": "https://polarremote.com/v2/oauth2/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Get team training session details."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,482 @@
+{
+  "item": [
+    {
+      "id": "c82e4662-8437-44a3-8dfa-999723176c36",
+      "name": "Team",
+      "description": {
+        "content": "Endpoints for getting teams and team details.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f5a54635-f531-4cfa-8066-82b1aded20a3",
+          "name": "Get teams.",
+          "request": {
+            "name": "Get teams.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "teams"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Pagination parameters"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "<integer>",
+                  "description": "Pagination parameters"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "accesslink.read_all"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://polarremote.com/v2/oauth2/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://flow.polar.com/oauth2/authorization"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c1b81a71-ce25-415f-b27a-e48e6ed4e9ee",
+              "name": "List of teams.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "3"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"wMYz6L4w\",\n      \"name\": \"Team1\",\n      \"organisation\": \"Organisation1\",\n      \"created\": \"2017-04-13T21:06:58Z\",\n      \"modified\": \"2017-04-13T21:06:58Z\"\n    },\n    {\n      \"id\": \"wMYz6L4w\",\n      \"name\": \"Team1\",\n      \"organisation\": \"Organisation1\",\n      \"created\": \"2017-04-13T21:06:58Z\",\n      \"modified\": \"2017-04-13T21:06:58Z\"\n    }\n  ],\n  \"page\": {\n    \"per_page\": 20,\n    \"total_elements\": 2,\n    \"page_number\": 0,\n    \"total_pages\": 1\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1447a8bf-e38e-466e-9f5f-f80b8a9263ff",
+          "name": "Get team details.",
+          "request": {
+            "name": "Get team details.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "teams",
+                ":team_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "team_id",
+                  "description": "(Required) Team id to get."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "accesslink.read_all"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://polarremote.com/v2/oauth2/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://flow.polar.com/oauth2/authorization"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ff6746fb-e454-4487-8288-89fd74924bdf",
+              "name": "Response containing team details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    ":team_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "team_id",
+                      "description": "(Required) Team id to get."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"wMYz6L4w\",\n    \"name\": \"Team1\",\n    \"organisation\": \"Organisation1\",\n    \"created\": \"2017-04-13T21:06:58Z\",\n    \"modified\": \"2017-04-13T21:06:58Z\",\n    \"players\": [\n      {\n        \"player_id\": \"ZmozZxkr\",\n        \"player_number\": 12,\n        \"role\": \"Midfielder\",\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\"\n      },\n      {\n        \"player_id\": \"ZmozZxkr\",\n        \"player_number\": 12,\n        \"role\": \"Midfielder\",\n        \"first_name\": \"John\",\n        \"last_name\": \"Doe\"\n      }\n    ],\n    \"sport_profiles\": [\n      {\n        \"sport\": \"SOCCER\",\n        \"created\": \"2025-05-16T11:52:54Z\",\n        \"modified\": \"2025-05-16T11:52:54Z\",\n        \"sprint_threshold_type\": \"ACCELERATION\",\n        \"sprint_threshold\": 2.8,\n        \"gps_state\": \"ON_NORMAL\",\n        \"muscle_load_setting\": \"true\",\n        \"heart_rate_zone_type\": \"THRESHOLD\",\n        \"speed_zone_type\": \"FREE\",\n        \"power_zone_type\": \"DEFAULT\",\n        \"zones\": {\n          \"heart_rate\": [\n            {\n              \"lower_limit\": 100,\n              \"higher_limit\": 120\n            },\n            {\n              \"lower_limit\": 120,\n              \"higher_limit\": 140\n            },\n            {\n              \"lower_limit\": 140,\n              \"higher_limit\": 160\n            },\n            {\n              \"lower_limit\": 160,\n              \"higher_limit\": 180\n            },\n            {\n              \"lower_limit\": 180,\n              \"higher_limit\": 200\n            }\n          ],\n          \"speed\": [\n            {\n              \"lower_limit\": 10,\n              \"higher_limit\": 12\n            },\n            {\n              \"lower_limit\": 12,\n              \"higher_limit\": 15\n            },\n            {\n              \"lower_limit\": 15,\n              \"higher_limit\": 17.1\n            },\n            {\n              \"lower_limit\": 17.1,\n              \"higher_limit\": 20\n            },\n            {\n              \"lower_limit\": 20,\n              \"higher_limit\": 399\n            }\n          ],\n          \"power\": [\n            {\n              \"lower_limit\": 70,\n              \"higher_limit\": 85\n            },\n            {\n              \"lower_limit\": 85,\n              \"higher_limit\": 100\n            },\n            {\n              \"lower_limit\": 100,\n              \"higher_limit\": 130\n            },\n            {\n              \"lower_limit\": 130,\n              \"higher_limit\": 180\n            },\n            {\n              \"lower_limit\": 180,\n              \"higher_limit\": 400\n            }\n          ]\n        },\n        \"acceleration_zones\": {\n          \"free_acceleration_zones\": true,\n          \"acceleration_zones\": [\n            0.5,\n            1,\n            2,\n            3\n          ],\n          \"deceleration_zones\": [\n            -0.5,\n            -1,\n            -2,\n            -3\n          ]\n        }\n      },\n      {\n        \"sport\": \"SOCCER\",\n        \"created\": \"2025-05-16T11:52:54Z\",\n        \"modified\": \"2025-05-16T11:52:54Z\",\n        \"sprint_threshold_type\": \"ACCELERATION\",\n        \"sprint_threshold\": 2.8,\n        \"gps_state\": \"ON_NORMAL\",\n        \"muscle_load_setting\": \"true\",\n        \"heart_rate_zone_type\": \"THRESHOLD\",\n        \"speed_zone_type\": \"FREE\",\n        \"power_zone_type\": \"DEFAULT\",\n        \"zones\": {\n          \"heart_rate\": [\n            {\n              \"lower_limit\": 100,\n              \"higher_limit\": 120\n            },\n            {\n              \"lower_limit\": 120,\n              \"higher_limit\": 140\n            },\n            {\n              \"lower_limit\": 140,\n              \"higher_limit\": 160\n            },\n            {\n              \"lower_limit\": 160,\n              \"higher_limit\": 180\n            },\n            {\n              \"lower_limit\": 180,\n              \"higher_limit\": 200\n            }\n          ],\n          \"speed\": [\n            {\n              \"lower_limit\": 10,\n              \"higher_limit\": 12\n            },\n            {\n              \"lower_limit\": 12,\n              \"higher_limit\": 15\n            },\n            {\n              \"lower_limit\": 15,\n              \"higher_limit\": 17.1\n            },\n            {\n              \"lower_limit\": 17.1,\n              \"higher_limit\": 20\n            },\n            {\n              \"lower_limit\": 20,\n              \"higher_limit\": 399\n            }\n          ],\n          \"power\": [\n            {\n              \"lower_limit\": 70,\n              \"higher_limit\": 85\n            },\n            {\n              \"lower_limit\": 85,\n              \"higher_limit\": 100\n            },\n            {\n              \"lower_limit\": 100,\n              \"higher_limit\": 130\n            },\n            {\n              \"lower_limit\": 130,\n              \"higher_limit\": 180\n            },\n            {\n              \"lower_limit\": 180,\n              \"higher_limit\": 400\n            }\n          ]\n        },\n        \"acceleration_zones\": {\n          \"free_acceleration_zones\": true,\n          \"acceleration_zones\": [\n            0.5,\n            1,\n            2,\n            3\n          ],\n          \"deceleration_zones\": [\n            -0.5,\n            -1,\n            -2,\n            -3\n          ]\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f87aea60-df55-4cc9-bcd3-cbdcf1f583f6",
+              "name": "Given team_id doesn't match any of user's teams.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    ":team_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "team_id",
+                      "description": "(Required) Team id to get."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6dc57b5a-b31d-486a-a82e-aa6829bb81b3",
+          "name": "Get team sport profiles.",
+          "request": {
+            "name": "Get team sport profiles.",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "teams",
+                ":team_id",
+                "sport-profiles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "team_id",
+                  "description": "(Required) Team ID for retrieving the team's sport profiles."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "accesslink.read_all"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://polarremote.com/v2/oauth2/token"
+                },
+                {
+                  "key": "authUrl",
+                  "value": "https://flow.polar.com/oauth2/authorization"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1c68ec4f-2554-4b3b-8dfe-bec519919aad",
+              "name": "Response containing team sport profiles.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    ":team_id",
+                    "sport-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "team_id",
+                      "description": "(Required) Team ID for retrieving the team's sport profiles."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"sport\": \"SOCCER\",\n      \"created\": \"2025-05-16T11:52:54Z\",\n      \"modified\": \"2025-05-16T11:52:54Z\",\n      \"sprint_threshold_type\": \"ACCELERATION\",\n      \"sprint_threshold\": 2.8,\n      \"gps_state\": \"ON_NORMAL\",\n      \"muscle_load_setting\": \"true\",\n      \"heart_rate_zone_type\": \"THRESHOLD\",\n      \"speed_zone_type\": \"FREE\",\n      \"power_zone_type\": \"DEFAULT\",\n      \"zones\": {\n        \"heart_rate\": [\n          {\n            \"lower_limit\": 100,\n            \"higher_limit\": 120\n          },\n          {\n            \"lower_limit\": 120,\n            \"higher_limit\": 140\n          },\n          {\n            \"lower_limit\": 140,\n            \"higher_limit\": 160\n          },\n          {\n            \"lower_limit\": 160,\n            \"higher_limit\": 180\n          },\n          {\n            \"lower_limit\": 180,\n            \"higher_limit\": 200\n          }\n        ],\n        \"speed\": [\n          {\n            \"lower_limit\": 10,\n            \"higher_limit\": 12\n          },\n          {\n            \"lower_limit\": 12,\n            \"higher_limit\": 15\n          },\n          {\n            \"lower_limit\": 15,\n            \"higher_limit\": 17.1\n          },\n          {\n            \"lower_limit\": 17.1,\n            \"higher_limit\": 20\n          },\n          {\n            \"lower_limit\": 20,\n            \"higher_limit\": 399\n          }\n        ],\n        \"power\": [\n          {\n            \"lower_limit\": 70,\n            \"higher_limit\": 85\n          },\n          {\n            \"lower_limit\": 85,\n            \"higher_limit\": 100\n          },\n          {\n            \"lower_limit\": 100,\n            \"higher_limit\": 130\n          },\n          {\n            \"lower_limit\": 130,\n            \"higher_limit\": 180\n          },\n          {\n            \"lower_limit\": 180,\n            \"higher_limit\": 400\n          }\n        ]\n      },\n      \"acceleration_zones\": {\n        \"free_acceleration_zones\": true,\n        \"acceleration_zones\": [\n          0.5,\n          1,\n          2,\n          3\n        ],\n        \"deceleration_zones\": [\n          -0.5,\n          -1,\n          -2,\n          -3\n        ]\n      }\n    },\n    {\n      \"sport\": \"SOCCER\",\n      \"created\": \"2025-05-16T11:52:54Z\",\n      \"modified\": \"2025-05-16T11:52:54Z\",\n      \"sprint_threshold_type\": \"ACCELERATION\",\n      \"sprint_threshold\": 2.8,\n      \"gps_state\": \"ON_NORMAL\",\n      \"muscle_load_setting\": \"false\",\n      \"heart_rate_zone_type\": \"THRESHOLD\",\n      \"speed_zone_type\": \"FREE\",\n      \"power_zone_type\": \"DEFAULT\",\n      \"zones\": {\n        \"heart_rate\": [\n          {\n            \"lower_limit\": 100,\n            \"higher_limit\": 120\n          },\n          {\n            \"lower_limit\": 120,\n            \"higher_limit\": 140\n          },\n          {\n            \"lower_limit\": 140,\n            \"higher_limit\": 160\n          },\n          {\n            \"lower_limit\": 160,\n            \"higher_limit\": 180\n          },\n          {\n            \"lower_limit\": 180,\n            \"higher_limit\": 200\n          }\n        ],\n        \"speed\": [\n          {\n            \"lower_limit\": 10,\n            \"higher_limit\": 12\n          },\n          {\n            \"lower_limit\": 12,\n            \"higher_limit\": 15\n          },\n          {\n            \"lower_limit\": 15,\n            \"higher_limit\": 17.1\n          },\n          {\n            \"lower_limit\": 17.1,\n            \"higher_limit\": 20\n          },\n          {\n            \"lower_limit\": 20,\n            \"higher_limit\": 399\n          }\n        ],\n        \"power\": [\n          {\n            \"lower_limit\": 70,\n            \"higher_limit\": 85\n          },\n          {\n            \"lower_limit\": 85,\n            \"higher_limit\": 100\n          },\n          {\n            \"lower_limit\": 100,\n            \"higher_limit\": 130\n          },\n          {\n            \"lower_limit\": 130,\n            \"higher_limit\": 180\n          },\n          {\n            \"lower_limit\": 180,\n            \"higher_limit\": 400\n          }\n        ]\n      },\n      \"acceleration_zones\": {\n        \"free_acceleration_zones\": true,\n        \"acceleration_zones\": [\n          0.5,\n          1,\n          2,\n          3\n        ],\n        \"deceleration_zones\": [\n          -0.5,\n          -1,\n          -2,\n          -3\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "acfcc9c4-069b-46c7-ab9d-003c29299567",
+              "name": "Given team_id doesn't match any of user's teams.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    ":team_id",
+                    "sport-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "team_id",
+                      "description": "(Required) Team ID for retrieving the team's sport profiles."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.polaraccesslink.com/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "df75f8e2-2fc5-4bc4-b924-927539200607",
+    "name": "Polar AccessLink Cardio load Team API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Polar AccessLink API documentation\n\nContact Support:\n Name: Support\n Email: b2bhelpdesk@polar.com",
+      "type": "text/plain"
+    }
+  }
+}
