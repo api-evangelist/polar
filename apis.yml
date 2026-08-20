@@ -471,6 +471,8 @@ apis:
   humanURL: https://www.polar.com/accesslink-api/
   baseURL: https://www.polaraccesslink.com/
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
@@ -495,6 +497,8 @@ apis:
   humanURL: https://www.polar.com/accesslink-api/
   baseURL: https://www.polaraccesslink.com/
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
