@@ -1,0 +1,25 @@
+slug: polar
+provider: Polar
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Education
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Webhooks
+  spec_file: polar-webhooks-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.7
+  evidence: POST /v3/webhooks  createWebhook  Create webhook; POST /v3/webhooks/activate    Activate webhook
+  reason: The surface is the lifecycle of outbound webhook subscriptions (create, activate, deactivate,
+    update, delete, webhookType), which is exactly Webhook & Event Subscription Management within the
+    developer platform / API ecosystem capability. Confidence moderated because webhooks are generic plumbing.
