@@ -1,8 +1,8 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   description: Polar AccessLink API documentation
   version: v3
-  title: Polar AccessLink Cardio load Nightly Recharge API
+  title: Polar AccessLink Nightly Recharge API
   contact:
     name: Support
     url: https://www.polar.com/accesslink
@@ -66,6 +66,15 @@ paths:
         - accesslink.read_all
 components:
   schemas:
+    recharges:
+      type: object
+      properties:
+        recharges:
+          type: array
+          description: List of Nightly Recharge objects
+          items:
+            $ref: '#/components/schemas/nightly-recharge'
+      description: Nightly Recharge list
     nightly-recharge:
       type: object
       properties:
@@ -127,15 +136,6 @@ components:
             00:44: 13.5
             00:49: 13.5
           description: 5-minute average samples of breathing rate. Unit of samples is breaths per minute (bpm).
-    recharges:
-      type: object
-      properties:
-        recharges:
-          type: array
-          description: List of Nightly Recharge objects
-          items:
-            $ref: '#/components/schemas/nightly-recharge'
-      description: Nightly Recharge list
   securitySchemes:
     Basic:
       type: http

@@ -1,8 +1,8 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   description: Polar AccessLink API documentation
   version: v3
-  title: Polar AccessLink Cardio load Physical info API
+  title: Polar AccessLink Physical info API
   contact:
     name: Support
     url: https://www.polar.com/accesslink

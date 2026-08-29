@@ -1,8 +1,8 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   description: Polar AccessLink API documentation
   version: v3
-  title: Polar AccessLink Cardio load Elixir&trade; Biosensing API
+  title: Polar AccessLink Elixir&trade; Biosensing API
   contact:
     name: Support
     url: https://www.polar.com/accesslink
@@ -223,6 +223,95 @@ paths:
         - accesslink.read_all
 components:
   schemas:
+    skin-contact-change:
+      type: object
+      properties:
+        skin_contact:
+          type: boolean
+          example: true
+        recording_time_delta_milliseconds:
+          type: integer
+          example: 123
+          format: int64
+          pattern: '[0-9]+'
+    quality-measurement:
+      type: object
+      properties:
+        recording_time_delta_ms:
+          type: integer
+          example: 123
+          format: int32
+        quality_level:
+          type: string
+          example: ECG_QUALITY_HIGH
+          enum:
+          - ECG_QUALITY_UNKNOWN
+          - ECG_QUALITY_NO_CONTACT
+          - ECG_QUALITY_LOW
+          - ECG_QUALITY_HIGH
+    body-temperature-sample:
+      type: object
+      properties:
+        temperature_celsius:
+          type: number
+          example: 36.5
+          format: float
+        recording_time_delta_milliseconds:
+          type: integer
+          example: 123
+          format: int64
+          pattern: '[0-9]+'
+    skin-contact-period:
+      type: object
+      properties:
+        source_device_id:
+          type: string
+          example: 1111AAAA
+        start_time:
+          type: string
+          format: date-time
+          description: Measurement period start time (UTC)
+          example: '2023-10-20T04:00:00'
+        end_time:
+          type: string
+          format: date-time
+          description: Measurement period end time (UTC)
+          example: '2023-10-20T05:00:00'
+        modified_time:
+          type: string
+          format: date-time
+          description: Measurement period modified time (UTC)
+          example: '2023-10-20T04:00:00'
+        skin_contact_changes:
+          type: array
+          items:
+            $ref: '#/components/schemas/skin-contact-change'
+    skin-temperature:
+      type: object
+      properties:
+        sleep_time_skin_temperature_celsius:
+          type: number
+          example: 36.5
+          format: float
+        deviation_from_baseline_celsius:
+          type: number
+          example: 0.5
+          format: float
+        sleep_date:
+          type: string
+          example: '2023-10-20'
+          format: date
+    ecg-sample:
+      type: object
+      properties:
+        recording_time_delta_ms:
+          type: integer
+          example: 123
+          format: int32
+        amplitude_mv:
+          type: number
+          example: 0.1
+          format: float
     spo2-test-result:
       type: object
       properties:
@@ -289,18 +378,47 @@ components:
           type: number
           example: 50.0
           format: float
-    body-temperature-sample:
+    body-temperature-period:
       type: object
       properties:
-        temperature_celsius:
-          type: number
-          example: 36.5
-          format: float
-        recording_time_delta_milliseconds:
-          type: integer
-          example: 123
-          format: int64
-          pattern: '[0-9]+'
+        source_device_id:
+          type: string
+          example: 1111AAAA
+        measurement_type:
+          type: string
+          example: TM_CORE_TEMPERATURE
+          description: Measurement type
+          enum:
+          - TM_UNKNOWN
+          - TM_SKIN_TEMPERATURE
+          - TM_CORE_TEMPERATURE
+        sensor_location:
+          type: string
+          example: SL_PROXIMAL
+          description: Sensor location
+          enum:
+          - SL_UNKNOWN
+          - SL_DISTAL
+          - SL_PROXIMAL
+        start_time:
+          type: string
+          example: '2023-10-20T04:00:00'
+          format: date-time
+          description: Measurement period start time (UTC)
+        end_time:
+          type: string
+          example: '2023-10-20T05:00:00'
+          format: date-time
+          description: Measurement period end time (UTC)
+        modified_time:
+          type: string
+          example: '2023-10-20T04:00:00'
+          format: date-time
+          description: Measurement period modified time (UTC)
+        samples:
+          type: array
+          items:
+            $ref: '#/components/schemas/body-temperature-sample'
     ecg-test-result:
       type: object
       properties:
@@ -355,124 +473,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/quality-measurement'
-    quality-measurement:
-      type: object
-      properties:
-        recording_time_delta_ms:
-          type: integer
-          example: 123
-          format: int32
-        quality_level:
-          type: string
-          example: ECG_QUALITY_HIGH
-          enum:
-          - ECG_QUALITY_UNKNOWN
-          - ECG_QUALITY_NO_CONTACT
-          - ECG_QUALITY_LOW
-          - ECG_QUALITY_HIGH
-    skin-temperature:
-      type: object
-      properties:
-        sleep_time_skin_temperature_celsius:
-          type: number
-          example: 36.5
-          format: float
-        deviation_from_baseline_celsius:
-          type: number
-          example: 0.5
-          format: float
-        sleep_date:
-          type: string
-          example: '2023-10-20'
-          format: date
-    skin-contact-period:
-      type: object
-      properties:
-        source_device_id:
-          type: string
-          example: 1111AAAA
-        start_time:
-          type: string
-          format: date-time
-          description: Measurement period start time (UTC)
-          example: '2023-10-20T04:00:00'
-        end_time:
-          type: string
-          format: date-time
-          description: Measurement period end time (UTC)
-          example: '2023-10-20T05:00:00'
-        modified_time:
-          type: string
-          format: date-time
-          description: Measurement period modified time (UTC)
-          example: '2023-10-20T04:00:00'
-        skin_contact_changes:
-          type: array
-          items:
-            $ref: '#/components/schemas/skin-contact-change'
-    ecg-sample:
-      type: object
-      properties:
-        recording_time_delta_ms:
-          type: integer
-          example: 123
-          format: int32
-        amplitude_mv:
-          type: number
-          example: 0.1
-          format: float
-    body-temperature-period:
-      type: object
-      properties:
-        source_device_id:
-          type: string
-          example: 1111AAAA
-        measurement_type:
-          type: string
-          example: TM_CORE_TEMPERATURE
-          description: Measurement type
-          enum:
-          - TM_UNKNOWN
-          - TM_SKIN_TEMPERATURE
-          - TM_CORE_TEMPERATURE
-        sensor_location:
-          type: string
-          example: SL_PROXIMAL
-          description: Sensor location
-          enum:
-          - SL_UNKNOWN
-          - SL_DISTAL
-          - SL_PROXIMAL
-        start_time:
-          type: string
-          example: '2023-10-20T04:00:00'
-          format: date-time
-          description: Measurement period start time (UTC)
-        end_time:
-          type: string
-          example: '2023-10-20T05:00:00'
-          format: date-time
-          description: Measurement period end time (UTC)
-        modified_time:
-          type: string
-          example: '2023-10-20T04:00:00'
-          format: date-time
-          description: Measurement period modified time (UTC)
-        samples:
-          type: array
-          items:
-            $ref: '#/components/schemas/body-temperature-sample'
-    skin-contact-change:
-      type: object
-      properties:
-        skin_contact:
-          type: boolean
-          example: true
-        recording_time_delta_milliseconds:
-          type: integer
-          example: 123
-          format: int64
-          pattern: '[0-9]+'
   securitySchemes:
     Basic:
       type: http

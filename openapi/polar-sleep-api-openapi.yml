@@ -1,8 +1,8 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   description: Polar AccessLink API documentation
   version: v3
-  title: Polar AccessLink Cardio load Sleep API
+  title: Polar AccessLink Sleep API
   contact:
     name: Support
     url: https://www.polar.com/accesslink
@@ -84,41 +84,6 @@ paths:
         - accesslink.read_all
 components:
   schemas:
-    available-sleeps:
-      type: object
-      properties:
-        available:
-          type: array
-          description: List of available sleep data
-          items:
-            $ref: '#/components/schemas/available-sleep'
-    available-sleep:
-      type: object
-      properties:
-        date:
-          type: string
-          format: date
-          description: Result date of the sleep
-          example: '2020-01-01'
-        start_time:
-          type: string
-          format: date-time
-          description: Start timestamp of the sleep as ISO-8601 datetime string
-          example: '2020-01-01T00:39:07+03:00'
-        end_time:
-          type: string
-          format: date-time
-          description: End timestamp of the sleep as ISO-8601 datetime string
-          example: '2020-01-01T09:39:07+03:00'
-    nights:
-      type: object
-      properties:
-        nights:
-          type: array
-          description: List of sleep objects
-          items:
-            $ref: '#/components/schemas/sleep'
-      description: Sleep list
     sleep:
       type: object
       properties:
@@ -247,6 +212,41 @@ components:
             00:46: 77
             00:51: 76
           description: 5 min average samples of heart rate from the duration of the sleep. Default time between samples is 5 minutes. There may be periods with samples more often than every 5 minutes. Unit of samples is beats per minute (bpm).
+    available-sleep:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+          description: Result date of the sleep
+          example: '2020-01-01'
+        start_time:
+          type: string
+          format: date-time
+          description: Start timestamp of the sleep as ISO-8601 datetime string
+          example: '2020-01-01T00:39:07+03:00'
+        end_time:
+          type: string
+          format: date-time
+          description: End timestamp of the sleep as ISO-8601 datetime string
+          example: '2020-01-01T09:39:07+03:00'
+    available-sleeps:
+      type: object
+      properties:
+        available:
+          type: array
+          description: List of available sleep data
+          items:
+            $ref: '#/components/schemas/available-sleep'
+    nights:
+      type: object
+      properties:
+        nights:
+          type: array
+          description: List of sleep objects
+          items:
+            $ref: '#/components/schemas/sleep'
+      description: Sleep list
   securitySchemes:
     Basic:
       type: http

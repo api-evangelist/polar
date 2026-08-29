@@ -1,8 +1,8 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   description: Polar AccessLink API documentation
   version: v3
-  title: Polar AccessLink Cardio load SleepWise&trade; API
+  title: Polar AccessLink Sleep Wise&trade; API
   contact:
     name: Support
     url: https://www.polar.com/accesslink
@@ -152,6 +152,83 @@ paths:
         - accesslink.read_all
 components:
   schemas:
+    circadian-bedtime:
+      type: object
+      properties:
+        validity:
+          type: string
+          example: VALIDITY_ESTIMATE
+          description: Validity
+          enum:
+          - VALIDITY_UNKNOWN
+          - VALIDITY_RESET
+          - VALIDITY_NOT_VALID
+          - VALIDITY_ESTIMATE
+          - VALIDITY_VALID
+        quality:
+          type: string
+          example: CIRCADIAN_BEDTIME_QUALITY_COMPROMISED
+          description: Quality
+          enum:
+          - CIRCADIAN_BEDTIME_QUALITY_UNKNOWN
+          - CIRCADIAN_BEDTIME_QUALITY_WEAK
+          - CIRCADIAN_BEDTIME_QUALITY_COMPROMISED
+          - CIRCADIAN_BEDTIME_QUALITY_CLEARLY_RECOGNIZABLE
+        result_type:
+          type: string
+          example: CIRCADIAN_BEDTIME_TYPE_HISTORY
+          description: Result type
+          enum:
+          - CIRCADIAN_BEDTIME_TYPE_UNKNOWN
+          - CIRCADIAN_BEDTIME_TYPE_PREDICTION
+          - CIRCADIAN_BEDTIME_TYPE_HISTORY
+        period_start_time:
+          type: string
+          format: date-time
+          description: Circadian bedtime period start time (UTC)
+          example: '2022-11-20T21:18:30'
+        period_end_time:
+          type: string
+          format: date-time
+          description: Circadian bedtime period end time (UTC)
+          example: '2022-11-21T05:18:30'
+        preferred_sleep_period_start_time:
+          type: string
+          format: date-time
+          description: Circadian bedtime preferred sleep period start time (UTC)
+          example: '2022-11-20T21:18:30'
+        preferred_sleep_period_end_time:
+          type: string
+          format: date-time
+          description: Circadian bedtime preferred sleep period end time (UTC)
+          example: '2022-11-21T05:18:30'
+        sleep_gate_start_time:
+          type: string
+          format: date-time
+          description: Circadian bedtime sleep gate (suggested fall a sleep window) start time (UTC)
+          example: '2022-11-20T21:18:30'
+        sleep_gate_end_time:
+          type: string
+          format: date-time
+          description: Circadian bedtime sleep gate (suggested fall a sleep window) end time (UTC)
+          example: '2022-11-21T05:18:30'
+        sleep_timezone_offset_minutes:
+          type: integer
+          format: int32
+          example: 120
+          description: Sleep timezone offset minutes
+      description: Circadian bedtime period data
+      example:
+        validity: VALIDITY_ESTIMATE
+        quality: CIRCADIAN_BEDTIME_QUALITY_COMPROMISED
+        result_type: CIRCADIAN_BEDTIME_TYPE_HISTORY
+        period_start_time: '2022-11-20T21:18:30'
+        period_end_time: '2022-11-21T05:18:30'
+        preferred_sleep_period_start_time: '2022-11-20T21:18:30'
+        preferred_sleep_period_end_time: '2022-11-21T05:18:30'
+        sleep_gate_start_time: '2022-11-20T21:03:30'
+        sleep_gate_end_time: '2022-11-20T21:33:30'
+        sleep_timezone_offset_minutes: 120
     alertness:
       type: object
       properties:
@@ -270,83 +347,6 @@ components:
           alertness_level: ALERTNESS_LEVEL_LOW
           start_time: '2022-11-21T04:12:00'
           end_time: '2022-11-21T05:00:00'
-    circadian-bedtime:
-      type: object
-      properties:
-        validity:
-          type: string
-          example: VALIDITY_ESTIMATE
-          description: Validity
-          enum:
-          - VALIDITY_UNKNOWN
-          - VALIDITY_RESET
-          - VALIDITY_NOT_VALID
-          - VALIDITY_ESTIMATE
-          - VALIDITY_VALID
-        quality:
-          type: string
-          example: CIRCADIAN_BEDTIME_QUALITY_COMPROMISED
-          description: Quality
-          enum:
-          - CIRCADIAN_BEDTIME_QUALITY_UNKNOWN
-          - CIRCADIAN_BEDTIME_QUALITY_WEAK
-          - CIRCADIAN_BEDTIME_QUALITY_COMPROMISED
-          - CIRCADIAN_BEDTIME_QUALITY_CLEARLY_RECOGNIZABLE
-        result_type:
-          type: string
-          example: CIRCADIAN_BEDTIME_TYPE_HISTORY
-          description: Result type
-          enum:
-          - CIRCADIAN_BEDTIME_TYPE_UNKNOWN
-          - CIRCADIAN_BEDTIME_TYPE_PREDICTION
-          - CIRCADIAN_BEDTIME_TYPE_HISTORY
-        period_start_time:
-          type: string
-          format: date-time
-          description: Circadian bedtime period start time (UTC)
-          example: '2022-11-20T21:18:30'
-        period_end_time:
-          type: string
-          format: date-time
-          description: Circadian bedtime period end time (UTC)
-          example: '2022-11-21T05:18:30'
-        preferred_sleep_period_start_time:
-          type: string
-          format: date-time
-          description: Circadian bedtime preferred sleep period start time (UTC)
-          example: '2022-11-20T21:18:30'
-        preferred_sleep_period_end_time:
-          type: string
-          format: date-time
-          description: Circadian bedtime preferred sleep period end time (UTC)
-          example: '2022-11-21T05:18:30'
-        sleep_gate_start_time:
-          type: string
-          format: date-time
-          description: Circadian bedtime sleep gate (suggested fall a sleep window) start time (UTC)
-          example: '2022-11-20T21:18:30'
-        sleep_gate_end_time:
-          type: string
-          format: date-time
-          description: Circadian bedtime sleep gate (suggested fall a sleep window) end time (UTC)
-          example: '2022-11-21T05:18:30'
-        sleep_timezone_offset_minutes:
-          type: integer
-          format: int32
-          example: 120
-          description: Sleep timezone offset minutes
-      description: Circadian bedtime period data
-      example:
-        validity: VALIDITY_ESTIMATE
-        quality: CIRCADIAN_BEDTIME_QUALITY_COMPROMISED
-        result_type: CIRCADIAN_BEDTIME_TYPE_HISTORY
-        period_start_time: '2022-11-20T21:18:30'
-        period_end_time: '2022-11-21T05:18:30'
-        preferred_sleep_period_start_time: '2022-11-20T21:18:30'
-        preferred_sleep_period_end_time: '2022-11-21T05:18:30'
-        sleep_gate_start_time: '2022-11-20T21:03:30'
-        sleep_gate_end_time: '2022-11-20T21:33:30'
-        sleep_timezone_offset_minutes: 120
     alertness-hourly-data:
       type: object
       properties:

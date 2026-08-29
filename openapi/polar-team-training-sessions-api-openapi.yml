@@ -1,17 +1,17 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  description: Polar AccessLink API documentation
-  version: v3
-  title: Polar AccessLink Cardio load Team training sessions API
+  title: TeamPro Team training sessions API
+  description: Polar TeamPro API documentation
+  version: 1.1.0
   contact:
     name: Support
-    url: https://www.polar.com/accesslink
+    url: https://www.polar.com/en/developers
     email: b2bhelpdesk@polar.com
   license:
-    name: Polar Electro AccessLink Limited License Agreement
+    name: License Agreement
     url: https://www.polar.com/en/legal/polar-api-agreement
 servers:
-- url: https://www.polaraccesslink.com/
+- url: https://teampro.api.polar.com/
 tags:
 - name: Team training sessions
   description: Endpoints for getting team training sessions and details.
@@ -99,30 +99,6 @@ paths:
         - team_read
 components:
   schemas:
-    team_training_heart_rate_zone:
-      type: object
-      properties:
-        index:
-          type: integer
-          example: 1
-          description: Zone list index
-        lower_limit:
-          type: integer
-          example: 110
-          description: Lower heart-rate boundary of the zone
-        higher_limit:
-          type: integer
-          example: 130
-          description: Upper heart-rate boundary of the zone
-        in_zone:
-          type: string
-          example: PT4S
-          description: Time duration spent in the zone ISO 8601
-        in_zone_meters:
-          type: number
-          example: 222
-          description: Distance in meters in the zone
-      description: Heart-rate zone information
     team_training_power_zone:
       type: object
       properties:
@@ -147,6 +123,80 @@ components:
           example: 333
           description: Muscle load in the zone
       description: Power zone information
+    trainingSession:
+      type: object
+      description: Team training session data used in [team training session listing](#get-team-training-sessions).
+      properties:
+        id:
+          type: string
+          example: R8rMB4j7
+          description: Training session id
+        team_id:
+          type: string
+          example: wMYz6L4w
+          description: Team id
+        name:
+          type: string
+          description: Training session name
+          example: Match against Brazil national team
+        type:
+          type: string
+          description: Training session type
+          example: MATCH
+          enum:
+          - TRAINING
+          - DRILL
+          - TEST
+          - GAME
+          - MATCH
+          - STRENGTH AND CONDITION
+          - OTHER
+        note:
+          type: string
+          description: Notes from training session
+          example: Game started very well, but we lost 0-8
+        created:
+          type: string
+          description: Time when the training session is created
+          format: date-time
+          example: '2017-04-13T21:06:58Z'
+        modified:
+          type: string
+          description: Last time modified
+          format: date-time
+          example: '2017-04-13T21:06:58Z'
+        record_start_time:
+          type: string
+          description: Training session record start time
+          format: date-time
+          example: '2017-04-14T09:17:22'
+        record_end_time:
+          type: string
+          description: Training session record end time
+          format: date-time
+          example: '2017-04-14T09:56:47'
+        start_time:
+          type: string
+          description: Training session start time
+          format: date-time
+          example: '2017-04-14T09:20:06'
+        end_time:
+          type: string
+          description: Training session end time
+          format: date-time
+          example: '2017-04-14T09:50:06'
+        latitude:
+          type: number
+          description: Start latitude of the training session
+          example: 55.67336654663086
+        longitude:
+          type: number
+          description: Start longitude of the training session
+          example: 12.49395084381104
+        sport:
+          type: string
+          description: Sport type
+          example: SOCCER
     participant:
       type: object
       description: Training session participant.
@@ -298,6 +348,30 @@ components:
           description: List of power zones.
           items:
             $ref: '#/components/schemas/team_training_power_zone'
+    team_training_heart_rate_zone:
+      type: object
+      properties:
+        index:
+          type: integer
+          example: 1
+          description: Zone list index
+        lower_limit:
+          type: integer
+          example: 110
+          description: Lower heart-rate boundary of the zone
+        higher_limit:
+          type: integer
+          example: 130
+          description: Upper heart-rate boundary of the zone
+        in_zone:
+          type: string
+          example: PT4S
+          description: Time duration spent in the zone ISO 8601
+        in_zone_meters:
+          type: number
+          example: 222
+          description: Distance in meters in the zone
+      description: Heart-rate zone information
     paginationResponse:
       type: object
       description: Pagination info in response. Model contains info about response element count and paging.
@@ -348,80 +422,6 @@ components:
           type: string
           example: Cooling down
           description: Marker note
-    trainingSession:
-      type: object
-      description: Team training session data used in [team training session listing](#get-team-training-sessions).
-      properties:
-        id:
-          type: string
-          example: R8rMB4j7
-          description: Training session id
-        team_id:
-          type: string
-          example: wMYz6L4w
-          description: Team id
-        name:
-          type: string
-          description: Training session name
-          example: Match against Brazil national team
-        type:
-          type: string
-          description: Training session type
-          example: MATCH
-          enum:
-          - TRAINING
-          - DRILL
-          - TEST
-          - GAME
-          - MATCH
-          - STRENGTH AND CONDITION
-          - OTHER
-        note:
-          type: string
-          description: Notes from training session
-          example: Game started very well, but we lost 0-8
-        created:
-          type: string
-          description: Time when the training session is created
-          format: date-time
-          example: '2017-04-13T21:06:58Z'
-        modified:
-          type: string
-          description: Last time modified
-          format: date-time
-          example: '2017-04-13T21:06:58Z'
-        record_start_time:
-          type: string
-          description: Training session record start time
-          format: date-time
-          example: '2017-04-14T09:17:22'
-        record_end_time:
-          type: string
-          description: Training session record end time
-          format: date-time
-          example: '2017-04-14T09:56:47'
-        start_time:
-          type: string
-          description: Training session start time
-          format: date-time
-          example: '2017-04-14T09:20:06'
-        end_time:
-          type: string
-          description: Training session end time
-          format: date-time
-          example: '2017-04-14T09:50:06'
-        latitude:
-          type: number
-          description: Start latitude of the training session
-          example: 55.67336654663086
-        longitude:
-          type: number
-          description: Start longitude of the training session
-          example: 12.49395084381104
-        sport:
-          type: string
-          description: Sport type
-          example: SOCCER
     team_training_speed_zone_kmh:
       type: object
       properties:
@@ -447,14 +447,11 @@ components:
           description: Distance in meters in the zone
       description: Speed zone information
   securitySchemes:
-    Basic:
-      type: http
-      scheme: basic
     OAuth2:
       type: oauth2
       flows:
         authorizationCode:
-          authorizationUrl: https://flow.polar.com/oauth2/authorization
-          tokenUrl: https://polarremote.com/v2/oauth2/token
+          authorizationUrl: https://auth.polar.com/oauth/authorize
+          tokenUrl: https://auth.polar.com/oauth/token
           scopes:
-            accesslink.read_all: Allows read access to user's data
+            team_read: Allows read access to user's data

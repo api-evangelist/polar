@@ -1,24 +1,8 @@
 {
   "provider": "polar",
   "sources": [
-    "polar-cardio-load-api-openapi.yml",
-    "polar-continuous-heart-rate-api-openapi.yml",
-    "polar-daily-activity-api-openapi.yml",
-    "polar-daily-activity-deprecated-api-openapi.yml",
-    "polar-elixir-trade-biosensing-api-openapi.yml",
-    "polar-exercises-api-openapi.yml",
-    "polar-exercises-deprecated-api-openapi.yml",
-    "polar-nightly-recharge-api-openapi.yml",
-    "polar-physical-info-api-openapi.yml",
-    "polar-physical-info-deprecated-api-openapi.yml",
-    "polar-player-training-sessions-api-openapi.yml",
-    "polar-pull-notifications-api-openapi.yml",
-    "polar-sleep-api-openapi.yml",
-    "polar-sleepwise-trade-api-openapi.yml",
-    "polar-team-api-openapi.yml",
-    "polar-team-training-sessions-api-openapi.yml",
-    "polar-users-api-openapi.yml",
-    "polar-webhooks-api-openapi.yml"
+    "_original/polar-accesslink-api-openapi.yml",
+    "_original/polar-teampro-api-openapi.yml"
   ],
   "outputs": [
     "polar-cardio-load-api-openapi.yml",
@@ -31,18 +15,41 @@
     "polar-nightly-recharge-api-openapi.yml",
     "polar-physical-info-api-openapi.yml",
     "polar-physical-info-deprecated-api-openapi.yml",
-    "polar-player-training-sessions-api-openapi.yml",
     "polar-pull-notifications-api-openapi.yml",
     "polar-sleep-api-openapi.yml",
     "polar-sleepwise-trade-api-openapi.yml",
-    "polar-team-api-openapi.yml",
-    "polar-team-training-sessions-api-openapi.yml",
     "polar-users-api-openapi.yml",
-    "polar-webhooks-api-openapi.yml"
+    "polar-webhooks-api-openapi.yml",
+    "polar-player-training-sessions-api-openapi.yml",
+    "polar-team-api-openapi.yml",
+    "polar-team-training-sessions-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "polar-accesslink-api-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "polar-teampro-api-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0"
+  ],
+  "skipped": [
+    "polar-cardio-load-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "polar-continuous-heart-rate-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "polar-daily-activity-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "polar-daily-activity-deprecated-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "polar-elixir-trade-biosensing-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "polar-exercises-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "polar-exercises-deprecated-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "polar-nightly-recharge-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "polar-physical-info-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "polar-physical-info-deprecated-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "polar-player-training-sessions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "polar-pull-notifications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "polar-sleep-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "polar-sleepwise-trade-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "polar-team-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "polar-team-training-sessions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "polar-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "polar-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

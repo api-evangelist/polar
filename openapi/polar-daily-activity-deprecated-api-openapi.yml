@@ -1,8 +1,8 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   description: Polar AccessLink API documentation
   version: v3
-  title: Polar AccessLink Cardio load Daily activity (deprecated) API
+  title: Polar AccessLink Daily activity (deprecated) API
   contact:
     name: Support
     url: https://www.polar.com/accesslink
@@ -261,57 +261,6 @@ paths:
         - accesslink.read_all
 components:
   schemas:
-    transaction-location:
-      type: object
-      properties:
-        transaction-id:
-          type: integer
-          format: int64
-          example: 122
-          description: Id of the created transaction
-        resource-uri:
-          type: string
-          format: uri
-          example: https://polaraccesslink.com/v3/users/21/physical-information-transactions/32
-          description: Absolute links to the created transaction
-      description: Contains absolute link to the created transaction.
-      xml:
-        name: transaction-location
-    activity-step-samples:
-      type: object
-      properties:
-        date:
-          type: string
-          example: '2022-02-10'
-          description: Activity step sample date
-        interval:
-          type: integer
-          format: int32
-          description: Sample interval in minutes.
-        samples:
-          type: array
-          xml:
-            wrapped: true
-          description: List of individual step sample objects.
-          items:
-            $ref: '#/components/schemas/activity-step-sample'
-      description: Wrapper model for partner step samples.
-      xml:
-        name: activity-step-samples
-    activity-zone-sample:
-      type: object
-      properties:
-        activity-zones:
-          type: array
-          description: List of heart rate zones with duration.
-          items:
-            $ref: '#/components/schemas/DurationZone'
-        time:
-          type: string
-          description: Start time of sample segment.
-      description: Model contains number of steps in certain time period.
-      xml:
-        name: sample
     activity-log:
       type: object
       properties:
@@ -379,6 +328,23 @@ components:
       description: Summary of user's daily activity
       xml:
         name: activity
+    DurationZone:
+      type: object
+      xml:
+        name: activity-zones
+      properties:
+        index:
+          type: integer
+          format: int32
+          example: 1
+          xml:
+            attribute: true
+          description: Activity zone index
+        inzone:
+          type: string
+          example: PT51M5S
+          description: Time duration spent in the zone ISO 8601
+      description: Model contains the time spent in certain activity zone.
     activity-zone-samples:
       type: object
       properties:
@@ -400,23 +366,22 @@ components:
       description: List containing the times (in zone) in different heart rate zones (i.e. Heart rate between lower and upper values). Zone is null if no zone information available.
       xml:
         name: activity-zone-samples
-    DurationZone:
+    transaction-location:
       type: object
-      xml:
-        name: activity-zones
       properties:
-        index:
+        transaction-id:
           type: integer
-          format: int32
-          example: 1
-          xml:
-            attribute: true
-          description: Activity zone index
-        inzone:
+          format: int64
+          example: 122
+          description: Id of the created transaction
+        resource-uri:
           type: string
-          example: PT51M5S
-          description: Time duration spent in the zone ISO 8601
-      description: Model contains the time spent in certain activity zone.
+          format: uri
+          example: https://polaraccesslink.com/v3/users/21/physical-information-transactions/32
+          description: Absolute links to the created transaction
+      description: Contains absolute link to the created transaction.
+      xml:
+        name: transaction-location
     activity-step-sample:
       type: object
       properties:
@@ -431,6 +396,41 @@ components:
       description: Model contains number of steps in certain time period.
       xml:
         name: sample
+    activity-zone-sample:
+      type: object
+      properties:
+        activity-zones:
+          type: array
+          description: List of heart rate zones with duration.
+          items:
+            $ref: '#/components/schemas/DurationZone'
+        time:
+          type: string
+          description: Start time of sample segment.
+      description: Model contains number of steps in certain time period.
+      xml:
+        name: sample
+    activity-step-samples:
+      type: object
+      properties:
+        date:
+          type: string
+          example: '2022-02-10'
+          description: Activity step sample date
+        interval:
+          type: integer
+          format: int32
+          description: Sample interval in minutes.
+        samples:
+          type: array
+          xml:
+            wrapped: true
+          description: List of individual step sample objects.
+          items:
+            $ref: '#/components/schemas/activity-step-sample'
+      description: Wrapper model for partner step samples.
+      xml:
+        name: activity-step-samples
   securitySchemes:
     Basic:
       type: http

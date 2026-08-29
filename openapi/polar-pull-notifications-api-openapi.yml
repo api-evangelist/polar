@@ -1,8 +1,8 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   description: Polar AccessLink API documentation
   version: v3
-  title: Polar AccessLink Cardio load Pull notifications API
+  title: Polar AccessLink Pull notifications API
   contact:
     name: Support
     url: https://www.polar.com/accesslink
@@ -39,17 +39,6 @@ paths:
       - Basic: []
 components:
   schemas:
-    available-user-datas:
-      type: object
-      properties:
-        available-user-data:
-          type: array
-          description: List of available user datas.
-          items:
-            $ref: '#/components/schemas/AvailableUserData'
-      description: 'AvailableUserDatas is a container model for AvailableUserData. '
-      xml:
-        name: available-user-datas
     AvailableUserData:
       type: object
       xml:
@@ -73,6 +62,17 @@ components:
           example: https://www.polaraccesslink.com/v3/users/475/activity-transactions
           description: URI pointing to transaction initiation endpoint for user
       description: Model contains information of the data available.
+    available-user-datas:
+      type: object
+      properties:
+        available-user-data:
+          type: array
+          description: List of available user datas.
+          items:
+            $ref: '#/components/schemas/AvailableUserData'
+      description: 'AvailableUserDatas is a container model for AvailableUserData. '
+      xml:
+        name: available-user-datas
   securitySchemes:
     Basic:
       type: http

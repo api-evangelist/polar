@@ -1,8 +1,8 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   description: Polar AccessLink API documentation
   version: v3
-  title: Polar AccessLink Cardio load Daily activity API
+  title: Polar AccessLink Daily activity API
   contact:
     name: Support
     url: https://www.polar.com/accesslink
@@ -197,6 +197,87 @@ paths:
         - accesslink.read_all
 components:
   schemas:
+    activity-day-with-samples:
+      type: object
+      properties:
+        date:
+          type: string
+          example: '2022-02-10'
+          description: Activity day date
+        steps:
+          $ref: '#/components/schemas/activity-steps2'
+        activity_zones:
+          $ref: '#/components/schemas/activity-zone-samples2'
+        inactivity_stamps:
+          type: array
+          items:
+            type: object
+            properties:
+              stamp:
+                type: string
+                example: 2022-02-10T16:04
+                description: time of inactivity stamp
+      description: Activity day samples.
+      xml:
+        name: activity-day-with-samples
+    activity-steps2:
+      type: object
+      properties:
+        interval_ms:
+          type: integer
+          format: int32
+          description: Sample interval in milliseconds.
+        total_steps:
+          type: integer
+          format: int32
+          description: Total number of steps in activity day.
+        samples:
+          type: array
+          items:
+            $ref: '#/components/schemas/activity-step-sample2'
+          description: List of individual step sample objects.
+      description: Activity step samples for a day. Contains total number of steps and list of individual step samples with time and number of steps in that time period. Note that consecutive repeated (same steps count) samples are filtered out from the list to reduce the payload size. If time between two consecutive samples is larger than interval_ms, one or more samples have been filtered out.
+    array-of-activity-day-with-samples:
+      type: array
+      items:
+        $ref: '#/components/schemas/activity-day-with-samples'
+      description: Array of activity days with samples. Each item in the array contains a summary of the activity for a specific day, including all samples.
+      xml:
+        name: activity-day-with-samples
+    activity-zone-sample2:
+      type: object
+      properties:
+        zone:
+          type: string
+          description: Activity zone type.
+          enum:
+          - SEDENTARY
+          - LIGHT
+          - SLEEP
+          - MODERATE
+          - VIGOROUS
+        timestamp:
+          type: string
+          example: '2025-08-14T00:08:30'
+    array-of-activity-summary-with-all-samples:
+      type: array
+      items:
+        $ref: '#/components/schemas/activity-summary-with-all-samples'
+      description: Array of activity summaries with all samples. Each item in the array contains a summary of the activity for a specific day, including all samples.
+      xml:
+        name: activity-summary-with-all-samples
+    activity-step-sample2:
+      type: object
+      properties:
+        steps:
+          type: integer
+          format: int32
+          description: Number of steps in sample segment.
+        timestamp:
+          type: string
+          example: 2025-08-14T00:02
+          description: Start time of sample segment.
+      description: Model contains number of steps in certain time period.
     activity-zone-samples2:
       type: object
       properties:
@@ -205,13 +286,6 @@ components:
           description: List of activity zones samples.
           items:
             $ref: '#/components/schemas/activity-zone-sample2'
-    array-of-activity-day-with-samples:
-      type: array
-      items:
-        $ref: '#/components/schemas/activity-day-with-samples'
-      description: Array of activity days with samples. Each item in the array contains a summary of the activity for a specific day, including all samples.
-      xml:
-        name: activity-day-with-samples
     activity-summary-with-all-samples:
       type: object
       properties:
@@ -266,80 +340,6 @@ components:
       description: Activity days with all samples.
       xml:
         name: activity-summary-with-all-samples
-    activity-step-sample2:
-      type: object
-      properties:
-        steps:
-          type: integer
-          format: int32
-          description: Number of steps in sample segment.
-        timestamp:
-          type: string
-          example: 2025-08-14T00:02
-          description: Start time of sample segment.
-      description: Model contains number of steps in certain time period.
-    activity-steps2:
-      type: object
-      properties:
-        interval_ms:
-          type: integer
-          format: int32
-          description: Sample interval in milliseconds.
-        total_steps:
-          type: integer
-          format: int32
-          description: Total number of steps in activity day.
-        samples:
-          type: array
-          items:
-            $ref: '#/components/schemas/activity-step-sample2'
-          description: List of individual step sample objects.
-      description: Activity step samples for a day. Contains total number of steps and list of individual step samples with time and number of steps in that time period. Note that consecutive repeated (same steps count) samples are filtered out from the list to reduce the payload size. If time between two consecutive samples is larger than interval_ms, one or more samples have been filtered out.
-    array-of-activity-summary-with-all-samples:
-      type: array
-      items:
-        $ref: '#/components/schemas/activity-summary-with-all-samples'
-      description: Array of activity summaries with all samples. Each item in the array contains a summary of the activity for a specific day, including all samples.
-      xml:
-        name: activity-summary-with-all-samples
-    activity-zone-sample2:
-      type: object
-      properties:
-        zone:
-          type: string
-          description: Activity zone type.
-          enum:
-          - SEDENTARY
-          - LIGHT
-          - SLEEP
-          - MODERATE
-          - VIGOROUS
-        timestamp:
-          type: string
-          example: '2025-08-14T00:08:30'
-    activity-day-with-samples:
-      type: object
-      properties:
-        date:
-          type: string
-          example: '2022-02-10'
-          description: Activity day date
-        steps:
-          $ref: '#/components/schemas/activity-steps2'
-        activity_zones:
-          $ref: '#/components/schemas/activity-zone-samples2'
-        inactivity_stamps:
-          type: array
-          items:
-            type: object
-            properties:
-              stamp:
-                type: string
-                example: 2022-02-10T16:04
-                description: time of inactivity stamp
-      description: Activity day samples.
-      xml:
-        name: activity-day-with-samples
   securitySchemes:
     Basic:
       type: http

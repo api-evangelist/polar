@@ -1,8 +1,8 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   description: Polar AccessLink API documentation
   version: v3
-  title: Polar AccessLink Cardio load Physical info (deprecated) API
+  title: Polar AccessLink Physical info (deprecated) API
   contact:
     name: Support
     url: https://www.polar.com/accesslink
@@ -245,6 +245,20 @@ components:
       description: User's physical information
       xml:
         name: physical-information
+    physical-informations:
+      type: object
+      properties:
+        physical-informations:
+          type: array
+          description: Absolute links to individual physical information within the transaction
+          items:
+            type: string
+          example:
+          - https://www.polaraccesslink.com/v3/users/12/physical-information-transactions/12/physical-informations/56
+          - https://www.polaraccesslink.com/v3/users/12/physical-information-transactions/12/physical-informations/120
+      description: Physical information transaction container
+      xml:
+        name: physical-informations
     transaction-location:
       type: object
       properties:
@@ -261,20 +275,6 @@ components:
       description: Contains absolute link to the created transaction.
       xml:
         name: transaction-location
-    physical-informations:
-      type: object
-      properties:
-        physical-informations:
-          type: array
-          description: Absolute links to individual physical information within the transaction
-          items:
-            type: string
-          example:
-          - https://www.polaraccesslink.com/v3/users/12/physical-information-transactions/12/physical-informations/56
-          - https://www.polaraccesslink.com/v3/users/12/physical-information-transactions/12/physical-informations/120
-      description: Physical information transaction container
-      xml:
-        name: physical-informations
   securitySchemes:
     Basic:
       type: http
