@@ -14,7 +14,7 @@ servers:
 - url: https://www.polaraccesslink.com/
 tags:
 - name: Nightly Recharge
-  description: Nightly Recharge&trade; is a recovery measurement that shows how well your body recovers from daily training and stress. It is based on heart rate variability (HRV) and overnight heart rate data. The higher the Nightly Recharge score, the better your body has recovered. For more detailed information please check [Nightly Recharge](https://support.polar.com/e_manuals/unite/polar-unite-user-manual-english/nightly-recharge.htm).
+  description: Nightly Recharge™ is a recovery measurement that shows how well your body recovers from daily training and stress. It is based on heart rate variability (HRV) and overnight heart rate data. The higher the Nightly Recharge score, the better your body has recovered. For more detailed information please check Nightly Recharge.
 paths:
   /v3/users/nightly-recharge:
     get:
@@ -64,17 +64,10 @@ paths:
       security:
       - OAuth2:
         - accesslink.read_all
+      operationId: getV3UsersNightlyRechargeByDate
+      x-operation-id-source: derived
 components:
   schemas:
-    recharges:
-      type: object
-      properties:
-        recharges:
-          type: array
-          description: List of Nightly Recharge objects
-          items:
-            $ref: '#/components/schemas/nightly-recharge'
-      description: Nightly Recharge list
     nightly-recharge:
       type: object
       properties:
@@ -136,6 +129,15 @@ components:
             00:44: 13.5
             00:49: 13.5
           description: 5-minute average samples of breathing rate. Unit of samples is breaths per minute (bpm).
+    recharges:
+      type: object
+      properties:
+        recharges:
+          type: array
+          description: List of Nightly Recharge objects
+          items:
+            $ref: '#/components/schemas/nightly-recharge'
+      description: Nightly Recharge list
   securitySchemes:
     Basic:
       type: http

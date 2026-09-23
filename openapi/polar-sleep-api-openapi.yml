@@ -14,7 +14,7 @@ servers:
 - url: https://www.polaraccesslink.com/
 tags:
 - name: Sleep
-  description: Sleep endpoints support [Polar Sleep Plus&trade;](https://www.polar.com/en/smart-coaching/polar-sleep-plus) and [Sleep Plus Stages&trade;](https://www.polar.com/en/smart-coaching/sleep-plus-stages). Available data is presented in section [Schemas](#schemas).
+  description: Sleep endpoints support Polar Sleep Plus™ and Sleep Plus Stages™. Available data is presented in section Schemas.
 paths:
   /v3/users/sleep:
     get:
@@ -64,6 +64,8 @@ paths:
       security:
       - OAuth2:
         - accesslink.read_all
+      operationId: getV3UsersSleepByDate
+      x-operation-id-source: derived
   /v3/users/sleep/available:
     get:
       tags:
@@ -82,8 +84,45 @@ paths:
       security:
       - OAuth2:
         - accesslink.read_all
+      operationId: getV3UsersSleepAvailable
+      x-operation-id-source: derived
 components:
   schemas:
+    nights:
+      type: object
+      properties:
+        nights:
+          type: array
+          description: List of sleep objects
+          items:
+            $ref: '#/components/schemas/sleep'
+      description: Sleep list
+    available-sleep:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+          description: Result date of the sleep
+          example: '2020-01-01'
+        start_time:
+          type: string
+          format: date-time
+          description: Start timestamp of the sleep as ISO-8601 datetime string
+          example: '2020-01-01T00:39:07+03:00'
+        end_time:
+          type: string
+          format: date-time
+          description: End timestamp of the sleep as ISO-8601 datetime string
+          example: '2020-01-01T09:39:07+03:00'
+    available-sleeps:
+      type: object
+      properties:
+        available:
+          type: array
+          description: List of available sleep data
+          items:
+            $ref: '#/components/schemas/available-sleep'
     sleep:
       type: object
       properties:
@@ -212,41 +251,6 @@ components:
             00:46: 77
             00:51: 76
           description: 5 min average samples of heart rate from the duration of the sleep. Default time between samples is 5 minutes. There may be periods with samples more often than every 5 minutes. Unit of samples is beats per minute (bpm).
-    available-sleep:
-      type: object
-      properties:
-        date:
-          type: string
-          format: date
-          description: Result date of the sleep
-          example: '2020-01-01'
-        start_time:
-          type: string
-          format: date-time
-          description: Start timestamp of the sleep as ISO-8601 datetime string
-          example: '2020-01-01T00:39:07+03:00'
-        end_time:
-          type: string
-          format: date-time
-          description: End timestamp of the sleep as ISO-8601 datetime string
-          example: '2020-01-01T09:39:07+03:00'
-    available-sleeps:
-      type: object
-      properties:
-        available:
-          type: array
-          description: List of available sleep data
-          items:
-            $ref: '#/components/schemas/available-sleep'
-    nights:
-      type: object
-      properties:
-        nights:
-          type: array
-          description: List of sleep objects
-          items:
-            $ref: '#/components/schemas/sleep'
-      description: Sleep list
   securitySchemes:
     Basic:
       type: http

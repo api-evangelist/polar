@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   description: Polar AccessLink API documentation
   version: v3
-  title: Polar AccessLink Sleep Wise&trade; API
+  title: Polar AccessLink Sleep Wise™ API
   contact:
     name: Support
     url: https://www.polar.com/accesslink
@@ -14,14 +14,14 @@ servers:
 - url: https://www.polaraccesslink.com/
 tags:
 - name: SleepWise&trade;
-  description: This resource allows partners to access their users' SleepWise&trade; data. All time values are UTC times. SleepWise&trade; data is calculated for [SleepWise&trade;](https://support.polar.com/en/polar-sleepwise) supported devices when minimum of 5 days of sleep data is available. SleepWise&trade; data consists of alertness periods and circadian bedtime periods.
+  description: This resource allows partners to access their users' SleepWise™ data. All time values are UTC times. SleepWise™ data is calculated for SleepWise™ supported devices when minimum of 5 days of sleep data is available. SleepWise™ data consists of alertness periods and circadian bedtime periods.
 paths:
   /v3/users/sleepwise/alertness:
     get:
       tags:
       - SleepWise&trade;
       summary: Alertness period data (last 28 days)
-      description: Get user's alertness period data for the last 28 days. <a href="https://support.polar.com/en/polar-sleepwise"> Supported devices </a>
+      description: Get user's alertness period data for the last 28 days. Supported devices
       responses:
         '200':
           description: Request was successful.
@@ -42,6 +42,8 @@ paths:
       security:
       - OAuth2:
         - accesslink.read_all
+      operationId: getV3UsersSleepwiseAlertness
+      x-operation-id-source: derived
   /v3/users/sleepwise/alertness/date:
     get:
       tags:
@@ -62,7 +64,7 @@ paths:
           type: string
           format: date
       summary: Alertness period data (date range)
-      description: Get user's alertness period data for given date range. Maximum date range between from and to cannot be more than 28 days. <a href="https://support.polar.com/en/polar-sleepwise"> Supported devices </a>
+      description: Get user's alertness period data for given date range. Maximum date range between from and to cannot be more than 28 days. Supported devices
       responses:
         '200':
           description: Request was successful.
@@ -83,12 +85,14 @@ paths:
       security:
       - OAuth2:
         - accesslink.read_all
+      operationId: getV3UsersSleepwiseAlertnessDate
+      x-operation-id-source: derived
   /v3/users/sleepwise/circadian-bedtime:
     get:
       tags:
       - SleepWise&trade;
       summary: Circadian bedtime period data (last 28 days)
-      description: Get user's circadian bedtime period data for the last 28 days. <a href="https://support.polar.com/en/polar-sleepwise"> Supported devices </a>
+      description: Get user's circadian bedtime period data for the last 28 days. Supported devices
       responses:
         '200':
           description: Request was successful.
@@ -109,6 +113,8 @@ paths:
       security:
       - OAuth2:
         - accesslink.read_all
+      operationId: getV3UsersSleepwiseCircadianBedtime
+      x-operation-id-source: derived
   /v3/users/sleepwise/circadian-bedtime/date:
     get:
       tags:
@@ -129,7 +135,7 @@ paths:
           type: string
           format: date
       summary: Circadian bedtime period data (date range)
-      description: Get user's circadian bedtime period data for given date range. Maximum date range between from and to cannot be more than 28 days. <a href="https://support.polar.com/en/polar-sleepwise"> Supported devices </a>
+      description: Get user's circadian bedtime period data for given date range. Maximum date range between from and to cannot be more than 28 days. Supported devices
       responses:
         '200':
           description: Request was successful.
@@ -150,8 +156,45 @@ paths:
       security:
       - OAuth2:
         - accesslink.read_all
+      operationId: getV3UsersSleepwiseCircadianBedtimeDate
+      x-operation-id-source: derived
 components:
   schemas:
+    alertness-hourly-data:
+      type: object
+      properties:
+        validity:
+          type: string
+          example: VALIDITY_ESTIMATE
+          description: Validity
+          enum:
+          - VALIDITY_UNKNOWN
+          - VALIDITY_RESET
+          - VALIDITY_NOT_VALID
+          - VALIDITY_ESTIMATE
+          - VALIDITY_VALID
+        alertness_level:
+          type: string
+          example: ALERTNESS_LEVEL_VERY_HIGH
+          description: Alertness level
+          enum:
+          - ALERTNESS_LEVEL_UNKNOWN
+          - ALERTNESS_LEVEL_MINIMAL
+          - ALERTNESS_LEVEL_VERY_LOW
+          - ALERTNESS_LEVEL_LOW
+          - ALERTNESS_LEVEL_HIGH
+          - ALERTNESS_LEVEL_VERY_HIGH
+        start_time:
+          type: string
+          format: date-time
+          description: Alertness period start time (UTC)
+          example: '2022-11-21T04:00:00'
+        end_time:
+          type: string
+          format: date-time
+          description: Alertness period end time (UTC)
+          example: '2022-11-21T05:00:00'
+      description: Hourly data for the alertness period
     circadian-bedtime:
       type: object
       properties:
@@ -347,41 +390,6 @@ components:
           alertness_level: ALERTNESS_LEVEL_LOW
           start_time: '2022-11-21T04:12:00'
           end_time: '2022-11-21T05:00:00'
-    alertness-hourly-data:
-      type: object
-      properties:
-        validity:
-          type: string
-          example: VALIDITY_ESTIMATE
-          description: Validity
-          enum:
-          - VALIDITY_UNKNOWN
-          - VALIDITY_RESET
-          - VALIDITY_NOT_VALID
-          - VALIDITY_ESTIMATE
-          - VALIDITY_VALID
-        alertness_level:
-          type: string
-          example: ALERTNESS_LEVEL_VERY_HIGH
-          description: Alertness level
-          enum:
-          - ALERTNESS_LEVEL_UNKNOWN
-          - ALERTNESS_LEVEL_MINIMAL
-          - ALERTNESS_LEVEL_VERY_LOW
-          - ALERTNESS_LEVEL_LOW
-          - ALERTNESS_LEVEL_HIGH
-          - ALERTNESS_LEVEL_VERY_HIGH
-        start_time:
-          type: string
-          format: date-time
-          description: Alertness period start time (UTC)
-          example: '2022-11-21T04:00:00'
-        end_time:
-          type: string
-          format: date-time
-          description: Alertness period end time (UTC)
-          example: '2022-11-21T05:00:00'
-      description: Hourly data for the alertness period
   securitySchemes:
     Basic:
       type: http

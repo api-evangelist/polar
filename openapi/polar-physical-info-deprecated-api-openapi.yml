@@ -14,7 +14,10 @@ servers:
 - url: https://www.polaraccesslink.com/
 tags:
 - name: Physical info (deprecated)
-  description: This resource allows partners to access their users' physical information. Whenever some user's physical information changes, new entry containing full physical info is stored to AccessLink. Pull notifications can be used to check if user have new physical information available. Available data presented in section [Schemas](#schemas). <br/><br/> This resource is deprecated. Please use non-transactional [Physical info](#physical-info) instead.
+  description: 'This resource allows partners to access their users'' physical information. Whenever some user''s physical information changes, new entry containing full physical info is stored to AccessLink. Pull notifications can be used to check if user have new physical information available. Available data presented in section Schemas.
+
+
+    This resource is deprecated. Please use non-transactional Physical info instead.'
 paths:
   /v3/users/{user-id}/physical-information-transactions:
     post:
@@ -245,20 +248,6 @@ components:
       description: User's physical information
       xml:
         name: physical-information
-    physical-informations:
-      type: object
-      properties:
-        physical-informations:
-          type: array
-          description: Absolute links to individual physical information within the transaction
-          items:
-            type: string
-          example:
-          - https://www.polaraccesslink.com/v3/users/12/physical-information-transactions/12/physical-informations/56
-          - https://www.polaraccesslink.com/v3/users/12/physical-information-transactions/12/physical-informations/120
-      description: Physical information transaction container
-      xml:
-        name: physical-informations
     transaction-location:
       type: object
       properties:
@@ -275,6 +264,20 @@ components:
       description: Contains absolute link to the created transaction.
       xml:
         name: transaction-location
+    physical-informations:
+      type: object
+      properties:
+        physical-informations:
+          type: array
+          description: Absolute links to individual physical information within the transaction
+          items:
+            type: string
+          example:
+          - https://www.polaraccesslink.com/v3/users/12/physical-information-transactions/12/physical-informations/56
+          - https://www.polaraccesslink.com/v3/users/12/physical-information-transactions/12/physical-informations/120
+      description: Physical information transaction container
+      xml:
+        name: physical-informations
   securitySchemes:
     Basic:
       type: http

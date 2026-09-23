@@ -58,7 +58,7 @@ paths:
       summary: Get user information
       description: 'List user basic information.
 
-        Note: Although it is possible to get users weight and height from this resource, the [get physical info](#get-physical-info) should be used instead.'
+        Note: Although it is possible to get users weight and height from this resource, the get physical info should be used instead.'
       operationId: getUserInformation
       parameters:
       - name: user-id

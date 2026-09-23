@@ -14,7 +14,7 @@ servers:
 - url: https://www.polaraccesslink.com/
 tags:
 - name: Cardio load
-  description: Cardio load is based on training impulse calculation (TRIMP), a commonly accepted and scientifically proven method to quantify training load. Your Cardio load value tells you how much strain your training session put on your cardiovascular system.  The higher the Cardio load, the more strenuous the training session was for the cardiovascular system.  Cardio load is calculated after every workout from your heart rate data and session duration. For more detailed information please check [cardio load](https://support.polar.com/e_manuals/unite/polar-unite-user-manual-english/cardio-load.htm).
+  description: Cardio load is based on training impulse calculation (TRIMP), a commonly accepted and scientifically proven method to quantify training load. Your Cardio load value tells you how much strain your training session put on your cardiovascular system. The higher the Cardio load, the more strenuous the training session was for the cardiovascular system. Cardio load is calculated after every workout from your heart rate data and session duration. For more detailed information please check cardio load.
 paths:
   /v3/users/cardio-load:
     get:
@@ -36,6 +36,8 @@ paths:
       security:
       - OAuth2:
         - accesslink.read_all
+      operationId: getV3UsersCardioLoad
+      x-operation-id-source: derived
   /v3/users/cardio-load/{date}:
     get:
       tags:
@@ -66,6 +68,8 @@ paths:
       security:
       - OAuth2:
         - accesslink.read_all
+      operationId: getV3UsersCardioLoadByDate
+      x-operation-id-source: derived
   /v3/users/cardio-load/date:
     get:
       tags:
@@ -103,6 +107,8 @@ paths:
       security:
       - OAuth2:
         - accesslink.read_all
+      operationId: getV3UsersCardioLoadDate
+      x-operation-id-source: derived
   /v3/users/cardio-load/period/days/{days}:
     get:
       tags:
@@ -134,6 +140,8 @@ paths:
       security:
       - OAuth2:
         - accesslink.read_all
+      operationId: getV3UsersCardioLoadPeriodDaysByDays
+      x-operation-id-source: derived
   /v3/users/cardio-load/period/months/{months}:
     get:
       tags:
@@ -165,6 +173,8 @@ paths:
       security:
       - OAuth2:
         - accesslink.read_all
+      operationId: getV3UsersCardioLoadPeriodMonthsByMonths
+      x-operation-id-source: derived
 components:
   schemas:
     cardio-load-status-enum:
@@ -180,11 +190,6 @@ components:
       - PRODUCTIVE_DROPPED_FROM_OVERREACHING
       - PRODUCTIVE_ALMOST_OVERREACHING
       - UNRECOGNIZED
-    cardio-load-schema:
-      description: List of cardio loads.
-      type: array
-      items:
-        $ref: '#/components/schemas/cardio-load'
     cardio-load:
       description: Cardio load model.
       properties:
@@ -241,6 +246,11 @@ components:
           type: number
           format: float
           example: 0.1
+    cardio-load-schema:
+      description: List of cardio loads.
+      type: array
+      items:
+        $ref: '#/components/schemas/cardio-load'
   securitySchemes:
     Basic:
       type: http

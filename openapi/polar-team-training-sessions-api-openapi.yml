@@ -20,7 +20,7 @@ paths:
     get:
       tags:
       - Team training sessions
-      summary: Get team training sessions.
+      summary: Get team training sessions
       parameters:
       - name: team_id
         in: path
@@ -70,11 +70,13 @@ paths:
       security:
       - OAuth2:
         - team_read
+      operationId: getV1TeamsByTeamIdTrainingSessions
+      x-operation-id-source: derived
   /v1/teams/training_sessions/{training_session_id}:
     get:
       tags:
       - Team training sessions
-      summary: Get team training session details.
+      summary: Get team training session details
       parameters:
       - name: training_session_id
         in: path
@@ -97,32 +99,44 @@ paths:
       security:
       - OAuth2:
         - team_read
+      operationId: getV1TeamsTrainingSessionsByTrainingSessionId
+      x-operation-id-source: derived
 components:
   schemas:
-    team_training_power_zone:
+    participant:
       type: object
+      description: Training session participant.
       properties:
-        index:
+        player_id:
+          type: string
+          example: ZmozZxkr
+          description: Player id
+        player_number:
           type: integer
-          example: 1
-          description: Zone list index
-        lower_limit:
+          format: int32
+          example: 12
+          description: Player number
+        role:
+          type: string
+          example: Midfielder
+          description: Player role
+        player_session_id:
+          type: string
+          example: wp9DQ9ln
+          description: Player training session id
+    paginationQuery:
+      type: object
+      description: Endpoints that return multiple items are paginated to 20 items by default. To request next page, use page parameter in request. Total number of elements and pages are returned in response in `page` property, see [paginationResponse](#tocSpaginationresponse).
+      properties:
+        page:
           type: integer
           example: 3
-          description: Lower power boundary of the zone
-        higher_limit:
+          description: Page number, starting from 0
+        per_page:
           type: integer
-          example: 7
-          description: Upper power boundary of the zone
-        in_zone:
-          type: string
-          example: PT4.2S
-          description: Time duration spent in the zone ISO 8601
-        in_zone_muscle_load:
-          type: number
-          example: 333
-          description: Muscle load in the zone
-      description: Power zone information
+          example: 20
+          description: Number of elements to be returned per page. Value must be between 1 and 100.
+      example: ?page=3&per_page=20
     trainingSession:
       type: object
       description: Team training session data used in [team training session listing](#get-team-training-sessions).
@@ -197,40 +211,6 @@ components:
           type: string
           description: Sport type
           example: SOCCER
-    participant:
-      type: object
-      description: Training session participant.
-      properties:
-        player_id:
-          type: string
-          example: ZmozZxkr
-          description: Player id
-        player_number:
-          type: integer
-          format: int32
-          example: 12
-          description: Player number
-        role:
-          type: string
-          example: Midfielder
-          description: Player role
-        player_session_id:
-          type: string
-          example: wp9DQ9ln
-          description: Player training session id
-    paginationQuery:
-      type: object
-      description: Endpoints that return multiple items are paginated to 20 items by default. To request next page, use page parameter in request. Total number of elements and pages are returned in response in `page` property, see [paginationResponse](#tocSpaginationresponse).
-      properties:
-        page:
-          type: integer
-          example: 3
-          description: Page number, starting from 0
-        per_page:
-          type: integer
-          example: 20
-          description: Number of elements to be returned per page. Value must be between 1 and 100.
-      example: ?page=3&per_page=20
     trainingSessionDetails:
       type: object
       description: Team training session details.
@@ -372,6 +352,30 @@ components:
           example: 222
           description: Distance in meters in the zone
       description: Heart-rate zone information
+    team_training_power_zone:
+      type: object
+      properties:
+        index:
+          type: integer
+          example: 1
+          description: Zone list index
+        lower_limit:
+          type: integer
+          example: 3
+          description: Lower power boundary of the zone
+        higher_limit:
+          type: integer
+          example: 7
+          description: Upper power boundary of the zone
+        in_zone:
+          type: string
+          example: PT4.2S
+          description: Time duration spent in the zone ISO 8601
+        in_zone_muscle_load:
+          type: number
+          example: 333
+          description: Muscle load in the zone
+      description: Power zone information
     paginationResponse:
       type: object
       description: Pagination info in response. Model contains info about response element count and paging.

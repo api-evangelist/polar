@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   description: Polar AccessLink API documentation
   version: v3
-  title: Polar AccessLink Elixir&trade; Biosensing API
+  title: Polar AccessLink Elixir™ Biosensing API
   contact:
     name: Support
     url: https://www.polar.com/accesslink
@@ -14,7 +14,7 @@ servers:
 - url: https://www.polaraccesslink.com/
 tags:
 - name: Elixir&trade; Biosensing
-  description: This resource allows partners to access their users' Elixir&trade; Biosensing data. All time values are UTC times. Elixir&trade; Biosensing data consists of body temperature data, sleep skin temperature data, skin contacts data, wrist ECG test report data and SpO2 test report data.
+  description: This resource allows partners to access their users' Elixir™ Biosensing data. All time values are UTC times. Elixir™ Biosensing data consists of body temperature data, sleep skin temperature data, skin contacts data, wrist ECG test report data and SpO2 test report data.
 paths:
   /v3/users/biosensing/bodytemperature:
     get:
@@ -57,6 +57,8 @@ paths:
       security:
       - OAuth2:
         - accesslink.read_all
+      operationId: getV3UsersBiosensingBodytemperature
+      x-operation-id-source: derived
   /v3/users/biosensing/skintemperature:
     get:
       tags:
@@ -98,6 +100,8 @@ paths:
       security:
       - OAuth2:
         - accesslink.read_all
+      operationId: getV3UsersBiosensingSkintemperature
+      x-operation-id-source: derived
   /v3/users/biosensing/skincontacts:
     get:
       tags:
@@ -139,6 +143,8 @@ paths:
       security:
       - OAuth2:
         - accesslink.read_all
+      operationId: getV3UsersBiosensingSkincontacts
+      x-operation-id-source: derived
   /v3/users/biosensing/ecg:
     get:
       tags:
@@ -180,6 +186,8 @@ paths:
       security:
       - OAuth2:
         - accesslink.read_all
+      operationId: getV3UsersBiosensingEcg
+      x-operation-id-source: derived
   /v3/users/biosensing/spo2:
     get:
       tags:
@@ -221,6 +229,8 @@ paths:
       security:
       - OAuth2:
         - accesslink.read_all
+      operationId: getV3UsersBiosensingSpo2
+      x-operation-id-source: derived
 components:
   schemas:
     skin-contact-change:
@@ -234,84 +244,60 @@ components:
           example: 123
           format: int64
           pattern: '[0-9]+'
-    quality-measurement:
-      type: object
-      properties:
-        recording_time_delta_ms:
-          type: integer
-          example: 123
-          format: int32
-        quality_level:
-          type: string
-          example: ECG_QUALITY_HIGH
-          enum:
-          - ECG_QUALITY_UNKNOWN
-          - ECG_QUALITY_NO_CONTACT
-          - ECG_QUALITY_LOW
-          - ECG_QUALITY_HIGH
-    body-temperature-sample:
-      type: object
-      properties:
-        temperature_celsius:
-          type: number
-          example: 36.5
-          format: float
-        recording_time_delta_milliseconds:
-          type: integer
-          example: 123
-          format: int64
-          pattern: '[0-9]+'
-    skin-contact-period:
+    ecg-test-result:
       type: object
       properties:
         source_device_id:
           type: string
           example: 1111AAAA
-        start_time:
+        test_time:
+          type: integer
+          example: 1697787256
+          format: int64
+        time_zone_offset:
+          type: integer
+          example: 180
+          format: int32
+        average_heart_rate_bpm:
+          type: integer
+          example: 60
+          format: int32
+        heart_rate_variability_ms:
+          type: number
+          example: 0.0
+          format: float
+        heart_rate_variability_level:
           type: string
-          format: date-time
-          description: Measurement period start time (UTC)
-          example: '2023-10-20T04:00:00'
-        end_time:
-          type: string
-          format: date-time
-          description: Measurement period end time (UTC)
-          example: '2023-10-20T05:00:00'
-        modified_time:
-          type: string
-          format: date-time
-          description: Measurement period modified time (UTC)
-          example: '2023-10-20T04:00:00'
-        skin_contact_changes:
+          example: ECG_HRV_LEVEL_NO_BASELINE
+          enum:
+          - ECG_HRV_LEVEL_NO_BASELINE
+          - ECG_HRV_LEVEL_BELOW_USUAL
+          - ECG_HRV_LEVEL_USUAL
+          - ECG_HRV_LEVEL_ABOVE_USUAL
+        rri_ms:
+          type: number
+          example: 100.0
+          format: float
+        pulse_transit_time_systolic_ms:
+          type: number
+          example: 100.0
+          format: float
+        pulse_transit_time_diastolic_ms:
+          type: number
+          example: 100.0
+          format: float
+        pulse_transit_time_quality_index:
+          type: number
+          example: 100.0
+          format: float
+        samples:
           type: array
           items:
-            $ref: '#/components/schemas/skin-contact-change'
-    skin-temperature:
-      type: object
-      properties:
-        sleep_time_skin_temperature_celsius:
-          type: number
-          example: 36.5
-          format: float
-        deviation_from_baseline_celsius:
-          type: number
-          example: 0.5
-          format: float
-        sleep_date:
-          type: string
-          example: '2023-10-20'
-          format: date
-    ecg-sample:
-      type: object
-      properties:
-        recording_time_delta_ms:
-          type: integer
-          example: 123
-          format: int32
-        amplitude_mv:
-          type: number
-          example: 0.1
-          format: float
+            $ref: '#/components/schemas/ecg-sample'
+        quality_measurements:
+          type: array
+          items:
+            $ref: '#/components/schemas/quality-measurement'
     spo2-test-result:
       type: object
       properties:
@@ -378,6 +364,32 @@ components:
           type: number
           example: 50.0
           format: float
+    ecg-sample:
+      type: object
+      properties:
+        recording_time_delta_ms:
+          type: integer
+          example: 123
+          format: int32
+        amplitude_mv:
+          type: number
+          example: 0.1
+          format: float
+    skin-temperature:
+      type: object
+      properties:
+        sleep_time_skin_temperature_celsius:
+          type: number
+          example: 36.5
+          format: float
+        deviation_from_baseline_celsius:
+          type: number
+          example: 0.5
+          format: float
+        sleep_date:
+          type: string
+          example: '2023-10-20'
+          format: date
     body-temperature-period:
       type: object
       properties:
@@ -419,60 +431,58 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/body-temperature-sample'
-    ecg-test-result:
+    quality-measurement:
+      type: object
+      properties:
+        recording_time_delta_ms:
+          type: integer
+          example: 123
+          format: int32
+        quality_level:
+          type: string
+          example: ECG_QUALITY_HIGH
+          enum:
+          - ECG_QUALITY_UNKNOWN
+          - ECG_QUALITY_NO_CONTACT
+          - ECG_QUALITY_LOW
+          - ECG_QUALITY_HIGH
+    body-temperature-sample:
+      type: object
+      properties:
+        temperature_celsius:
+          type: number
+          example: 36.5
+          format: float
+        recording_time_delta_milliseconds:
+          type: integer
+          example: 123
+          format: int64
+          pattern: '[0-9]+'
+    skin-contact-period:
       type: object
       properties:
         source_device_id:
           type: string
           example: 1111AAAA
-        test_time:
-          type: integer
-          example: 1697787256
-          format: int64
-        time_zone_offset:
-          type: integer
-          example: 180
-          format: int32
-        average_heart_rate_bpm:
-          type: integer
-          example: 60
-          format: int32
-        heart_rate_variability_ms:
-          type: number
-          example: 0.0
-          format: float
-        heart_rate_variability_level:
+        start_time:
           type: string
-          example: ECG_HRV_LEVEL_NO_BASELINE
-          enum:
-          - ECG_HRV_LEVEL_NO_BASELINE
-          - ECG_HRV_LEVEL_BELOW_USUAL
-          - ECG_HRV_LEVEL_USUAL
-          - ECG_HRV_LEVEL_ABOVE_USUAL
-        rri_ms:
-          type: number
-          example: 100.0
-          format: float
-        pulse_transit_time_systolic_ms:
-          type: number
-          example: 100.0
-          format: float
-        pulse_transit_time_diastolic_ms:
-          type: number
-          example: 100.0
-          format: float
-        pulse_transit_time_quality_index:
-          type: number
-          example: 100.0
-          format: float
-        samples:
+          format: date-time
+          description: Measurement period start time (UTC)
+          example: '2023-10-20T04:00:00'
+        end_time:
+          type: string
+          format: date-time
+          description: Measurement period end time (UTC)
+          example: '2023-10-20T05:00:00'
+        modified_time:
+          type: string
+          format: date-time
+          description: Measurement period modified time (UTC)
+          example: '2023-10-20T04:00:00'
+        skin_contact_changes:
           type: array
           items:
-            $ref: '#/components/schemas/ecg-sample'
-        quality_measurements:
-          type: array
-          items:
-            $ref: '#/components/schemas/quality-measurement'
+            $ref: '#/components/schemas/skin-contact-change'
   securitySchemes:
     Basic:
       type: http

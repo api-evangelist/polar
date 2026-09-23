@@ -14,7 +14,7 @@ servers:
 - url: https://www.polaraccesslink.com/
 tags:
 - name: Daily activity (deprecated)
-  description: This resource allows partners to access their users' daily activity data. During the transfer, the activity data is copied also into the AccessLink database so the end-users cannot change the data that is accessible via AccessLink afterwards. Begin and end of day are determined by the time set on the device used. No timezone information is available. Each transaction will consist of at most 50 activity summaries. Available data presented in section [Schemas](#schemas). Only data that has been uploaded to Flow after the user has been registered to your client will be available. Only data that has been uploaded in the last 28 days will be available. <br/><br/> This resource is deprecated. Please use non-transactional [Daily activity](#daily-activity) instead.
+  description: This resource allows partners to access their users' daily activity data.
 paths:
   /v3/users/{user-id}/activity-transactions:
     post:
@@ -178,7 +178,7 @@ paths:
       tags:
       - Daily activity (deprecated)
       summary: Get step samples
-      description: Get activity step samples. Example data can be seen from [appendix](#activity-step-time-series).
+      description: Get activity step samples. Example data can be seen from appendix.
       operationId: getStepSamples
       parameters:
       - name: user-id
@@ -221,7 +221,7 @@ paths:
       tags:
       - Daily activity (deprecated)
       summary: Get zone samples
-      description: Get activity zone samples. Example data can be seen from [appendix](#activity-zone-time-series).
+      description: Get activity zone samples. Example data can be seen from appendix.
       operationId: getZoneSamples
       parameters:
       - name: user-id
@@ -261,20 +261,6 @@ paths:
         - accesslink.read_all
 components:
   schemas:
-    activity-log:
-      type: object
-      properties:
-        activity-log:
-          type: array
-          description: Absolute links to individual activity summaries within the transaction
-          items:
-            type: string
-          example:
-          - https://www.polaraccesslink.com/v3/users/12/activity-transactions/34/activities/56
-          - https://www.polaraccesslink.com/v3/users/12/activity-transactions/34/activities/120
-      description: Activity transaction container
-      xml:
-        name: activity-logs
     activity:
       type: object
       properties:
@@ -328,23 +314,6 @@ components:
       description: Summary of user's daily activity
       xml:
         name: activity
-    DurationZone:
-      type: object
-      xml:
-        name: activity-zones
-      properties:
-        index:
-          type: integer
-          format: int32
-          example: 1
-          xml:
-            attribute: true
-          description: Activity zone index
-        inzone:
-          type: string
-          example: PT51M5S
-          description: Time duration spent in the zone ISO 8601
-      description: Model contains the time spent in certain activity zone.
     activity-zone-samples:
       type: object
       properties:
@@ -366,22 +335,6 @@ components:
       description: List containing the times (in zone) in different heart rate zones (i.e. Heart rate between lower and upper values). Zone is null if no zone information available.
       xml:
         name: activity-zone-samples
-    transaction-location:
-      type: object
-      properties:
-        transaction-id:
-          type: integer
-          format: int64
-          example: 122
-          description: Id of the created transaction
-        resource-uri:
-          type: string
-          format: uri
-          example: https://polaraccesslink.com/v3/users/21/physical-information-transactions/32
-          description: Absolute links to the created transaction
-      description: Contains absolute link to the created transaction.
-      xml:
-        name: transaction-location
     activity-step-sample:
       type: object
       properties:
@@ -392,20 +345,6 @@ components:
         time:
           type: string
           example: '12:37:33.000'
-          description: Start time of sample segment.
-      description: Model contains number of steps in certain time period.
-      xml:
-        name: sample
-    activity-zone-sample:
-      type: object
-      properties:
-        activity-zones:
-          type: array
-          description: List of heart rate zones with duration.
-          items:
-            $ref: '#/components/schemas/DurationZone'
-        time:
-          type: string
           description: Start time of sample segment.
       description: Model contains number of steps in certain time period.
       xml:
@@ -431,6 +370,67 @@ components:
       description: Wrapper model for partner step samples.
       xml:
         name: activity-step-samples
+    activity-zone-sample:
+      type: object
+      properties:
+        activity-zones:
+          type: array
+          description: List of heart rate zones with duration.
+          items:
+            $ref: '#/components/schemas/DurationZone'
+        time:
+          type: string
+          description: Start time of sample segment.
+      description: Model contains number of steps in certain time period.
+      xml:
+        name: sample
+    DurationZone:
+      type: object
+      xml:
+        name: activity-zones
+      properties:
+        index:
+          type: integer
+          format: int32
+          example: 1
+          xml:
+            attribute: true
+          description: Activity zone index
+        inzone:
+          type: string
+          example: PT51M5S
+          description: Time duration spent in the zone ISO 8601
+      description: Model contains the time spent in certain activity zone.
+    transaction-location:
+      type: object
+      properties:
+        transaction-id:
+          type: integer
+          format: int64
+          example: 122
+          description: Id of the created transaction
+        resource-uri:
+          type: string
+          format: uri
+          example: https://polaraccesslink.com/v3/users/21/physical-information-transactions/32
+          description: Absolute links to the created transaction
+      description: Contains absolute link to the created transaction.
+      xml:
+        name: transaction-location
+    activity-log:
+      type: object
+      properties:
+        activity-log:
+          type: array
+          description: Absolute links to individual activity summaries within the transaction
+          items:
+            type: string
+          example:
+          - https://www.polaraccesslink.com/v3/users/12/activity-transactions/34/activities/56
+          - https://www.polaraccesslink.com/v3/users/12/activity-transactions/34/activities/120
+      description: Activity transaction container
+      xml:
+        name: activity-logs
   securitySchemes:
     Basic:
       type: http

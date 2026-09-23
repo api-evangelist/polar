@@ -87,6 +87,8 @@ paths:
           description: Webhook does not exist and it cannot be activated.
       security:
       - Basic: []
+      operationId: postV3WebhooksActivate
+      x-operation-id-source: derived
   /v3/webhooks/deactivate:
     post:
       tags:
@@ -100,6 +102,8 @@ paths:
           description: Webhook does not exist and it cannot be deactivated.
       security:
       - Basic: []
+      operationId: postV3WebhooksDeactivate
+      x-operation-id-source: derived
   /v3/webhooks/{webhook-id}:
     patch:
       tags:
@@ -171,24 +175,26 @@ paths:
       - Basic: []
 components:
   schemas:
-    webhookRequest:
+    error:
       type: object
+      description: Error model which contains useful info about the error occurred.
       properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/webhookType'
-          description: Type of events to subscribe.
-          example:
-          - EXERCISE
-        url:
+        timestamp:
           type: string
-          format: uri
-          example: https://myapp.example.com/acl_webhook
-          description: Url where the webhook notification is sent.
-      required:
-      - events
-      - url
+          format: date-time
+          description: Timestamp of the error.
+        status:
+          type: integer
+          description: Http status code
+        errorType:
+          type: string
+          description: Error type.
+        message:
+          type: string
+          description: Human readable error message.
+        corrId:
+          type: string
+          description: Correlation id of the response for problem solving and debugging use.
     createdWebhook:
       type: object
       properties:
@@ -215,26 +221,6 @@ components:
               type: string
               example: abe1f3ae-fd33-11e8-8eb2-f2801f1b9fd1
               description: Signing key for verifying that sender is actually Polar.
-    error:
-      type: object
-      description: Error model which contains useful info about the error occurred.
-      properties:
-        timestamp:
-          type: string
-          format: date-time
-          description: Timestamp of the error.
-        status:
-          type: integer
-          description: Http status code
-        errorType:
-          type: string
-          description: Error type.
-        message:
-          type: string
-          description: Human readable error message.
-        corrId:
-          type: string
-          description: Correlation id of the response for problem solving and debugging use.
     webhookType:
       type: string
       enum:
@@ -274,6 +260,24 @@ components:
                 type: boolean
                 example: true
                 description: Is the webhook active.
+    webhookRequest:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/webhookType'
+          description: Type of events to subscribe.
+          example:
+          - EXERCISE
+        url:
+          type: string
+          format: uri
+          example: https://myapp.example.com/acl_webhook
+          description: Url where the webhook notification is sent.
+      required:
+      - events
+      - url
     webhookPatch:
       type: object
       properties:

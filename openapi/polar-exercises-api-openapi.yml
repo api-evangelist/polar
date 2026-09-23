@@ -23,7 +23,7 @@ paths:
       summary: List exercises
       description: 'List users exercises available in AccessLink. Only Exercises uploaded to Flow in the last 30 days are returned. Only exercises that have been uploaded to Flow after the user is registered with your client will be returned. Use samples and zones query parameters to return optional samples and zone information of the exercises.
 
-        Training Load Pro data will be included in the exercise object if the exercise is recorded with a specific wrist unit model,  please check [compatible devices](https://www.polar.com/en/smart-coaching/training-load-pro) for more information.'
+        Training Load Pro data will be included in the exercise object if the exercise is recorded with a specific wrist unit model, please check compatible devices for more information.'
       operationId: listExercisesWithoutTransaction
       parameters:
       - name: samples
@@ -107,7 +107,7 @@ paths:
       tags:
       - Exercises
       summary: Get exercise FIT
-      description: FIT file for users exercise. Only Exercises uploaded to Flow in the last 30 days are available. Only exercises that have been uploaded to Flow after the user is registered with your client will be available. See [FIT sport mappings in appendix](#sport-type-mapping-in-fit-files).
+      description: FIT file for users exercise. Only Exercises uploaded to Flow in the last 30 days are available. Only exercises that have been uploaded to Flow after the user is registered with your client will be available. See FIT sport mappings in appendix.
       parameters:
       - name: exerciseId
         in: path
@@ -191,6 +191,20 @@ paths:
         - accesslink.read_all
 components:
   schemas:
+    HeartRate:
+      type: object
+      properties:
+        average:
+          type: integer
+          format: int32
+          example: 129
+          description: Average heart-rate
+        maximum:
+          type: integer
+          format: int32
+          example: 147
+          description: Maximum heart-rate
+      description: Heart-rate statistics information
     training-load-pro-rpe-enum:
       description: Quantifies internal training load of a session.
       type: string
@@ -206,80 +220,6 @@ components:
       - RPE_HARD
       - RPE_EXHAUSTING
       - RPE_EXTREME
-    HeartRate:
-      type: object
-      properties:
-        average:
-          type: integer
-          format: int32
-          example: 129
-          description: Average heart-rate
-        maximum:
-          type: integer
-          format: int32
-          example: 147
-          description: Maximum heart-rate
-      description: Heart-rate statistics information
-    exercisesHashId:
-      type: array
-      description: List of exercises.
-      items:
-        $ref: '#/components/schemas/exerciseHashId'
-    location:
-      type: object
-      properties:
-        latitude:
-          type: number
-          format: double
-          example: 60.21982833
-          description: The latitude, expressed in degrees.
-        longitude:
-          type: number
-          format: double
-          example: 25.13925
-          description: The longitude, expressed in degrees.
-        time:
-          type: string
-          example: PT210.026S
-          description: The time, expressed as a duration.
-        satellites:
-          type: integer
-          format: int64
-          example: 4
-          description: Satellites. A byte-sized value with a maximum of 63.
-        fix:
-          type: integer
-          format: int64
-          example: 1
-          description: Fix. A byte-sized value with a maximum of three.
-      description: Exercise route point/location.
-      xml:
-        name: location
-    zone:
-      type: object
-      properties:
-        index:
-          type: integer
-          format: int32
-          example: 1
-          description: Zone list index
-        lower-limit:
-          type: integer
-          format: int32
-          example: 110
-          description: Lower heart-rate boundary of the zone
-        upper-limit:
-          type: integer
-          format: int32
-          example: 130
-          description: Upper heart-rate boundary of the zone
-        in-zone:
-          type: string
-          example: PT4S
-          description: Time duration spent in the zone ISO 8601
-      description: Heart-rate zone information
-      xml:
-        name: zone
     exerciseHashId:
       type: object
       properties:
@@ -398,6 +338,61 @@ components:
         training_load_pro:
           $ref: '#/components/schemas/training-load-pro-sample'
       description: Training session summary data
+    zone:
+      type: object
+      properties:
+        index:
+          type: integer
+          format: int32
+          example: 1
+          description: Zone list index
+        lower-limit:
+          type: integer
+          format: int32
+          example: 110
+          description: Lower heart-rate boundary of the zone
+        upper-limit:
+          type: integer
+          format: int32
+          example: 130
+          description: Upper heart-rate boundary of the zone
+        in-zone:
+          type: string
+          example: PT4S
+          description: Time duration spent in the zone ISO 8601
+      description: Heart-rate zone information
+      xml:
+        name: zone
+    location:
+      type: object
+      properties:
+        latitude:
+          type: number
+          format: double
+          example: 60.21982833
+          description: The latitude, expressed in degrees.
+        longitude:
+          type: number
+          format: double
+          example: 25.13925
+          description: The longitude, expressed in degrees.
+        time:
+          type: string
+          example: PT210.026S
+          description: The time, expressed as a duration.
+        satellites:
+          type: integer
+          format: int64
+          example: 4
+          description: Satellites. A byte-sized value with a maximum of 63.
+        fix:
+          type: integer
+          format: int64
+          example: 1
+          description: Fix. A byte-sized value with a maximum of three.
+      description: Exercise route point/location.
+      xml:
+        name: location
     training-load-pro-sample:
       type: object
       properties:
@@ -439,6 +434,11 @@ components:
       - HIGH
       - VERY_HIGH
       - NOT_AVAILABLE
+    exercisesHashId:
+      type: array
+      description: List of exercises.
+      items:
+        $ref: '#/components/schemas/exerciseHashId'
     sample:
       type: object
       properties:

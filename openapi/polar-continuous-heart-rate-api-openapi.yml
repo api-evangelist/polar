@@ -14,7 +14,7 @@ servers:
 - url: https://www.polaraccesslink.com/
 tags:
 - name: Continuous Heart Rate
-  description: This resource allows partners to access their users' continuous heart rate data. Continuous heart rate is recorded with supported devices when the heart rate tracking is turned on in device settings. Samples are recording in 5 minute intervals. Heart rate samples from training sessions are not available through this resource. Training sessions samples have more precise sampling interval and they can be accessed from the [training data resource](#exercises). <a href="https://support.polar.com/en/support/the_what_and_how_of_polars_continuous_heart_rate">Supported devices</a>
+  description: This resource allows partners to access their users' continuous heart rate data. Continuous heart rate is recorded with supported devices when the heart rate tracking is turned on in device settings. Samples are recording in 5 minute intervals. Heart rate samples from training sessions are not available through this resource. Training sessions samples have more precise sampling interval and they can be accessed from the training data resource. Supported devices
 paths:
   /v3/users/continuous-heart-rate/{date}:
     get:
@@ -29,7 +29,7 @@ paths:
           type: string
           format: date
       summary: Get Continuous Heart rate samples
-      description: Get users continuous heart rate values for given date. <a href="https://support.polar.com/en/support/the_what_and_how_of_polars_continuous_heart_rate"> Supported devices </a>
+      description: Get users continuous heart rate values for given date. Supported devices
       responses:
         '200':
           description: Request was successful.
@@ -48,6 +48,8 @@ paths:
       security:
       - OAuth2:
         - accesslink.read_all
+      operationId: getV3UsersContinuousHeartRateByDate
+      x-operation-id-source: derived
   /v3/users/continuous-heart-rate:
     get:
       tags:
@@ -68,7 +70,7 @@ paths:
           type: string
           format: date
       summary: Get Continuous Heart rate samples with range
-      description: Get users continuous heart rate values for given date range. <a href="https://support.polar.com/en/support/the_what_and_how_of_polars_continuous_heart_rate"> Supported devices </a>
+      description: Get users continuous heart rate values for given date range. Supported devices
       responses:
         '200':
           description: Request was successful.
@@ -85,6 +87,8 @@ paths:
       security:
       - OAuth2:
         - accesslink.read_all
+      operationId: getV3UsersContinuousHeartRate
+      x-operation-id-source: derived
 components:
   schemas:
     continuous-heartrate:
