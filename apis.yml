@@ -54,8 +54,6 @@ apis:
     url: https://github.com/polarofficial/accesslink-example-python
   - type: TermsOfService
     url: https://www.polar.com/en/legal/polar-api-agreement
-  - type: GraphQL
-    url: graphql/polar-graphql.md
   - type: Documentation
     url: https://www.polar.com/teampro-api/
 - aid: polar:polar-continuous-heart-rate-api
@@ -84,8 +82,6 @@ apis:
     url: https://github.com/polarofficial/accesslink-example-python
   - type: TermsOfService
     url: https://www.polar.com/en/legal/polar-api-agreement
-  - type: GraphQL
-    url: graphql/polar-graphql.md
   - type: Documentation
     url: https://www.polar.com/teampro-api/
 - aid: polar:polar-daily-activity-api
@@ -110,8 +106,6 @@ apis:
     url: https://github.com/polarofficial/accesslink-example-python
   - type: TermsOfService
     url: https://www.polar.com/en/legal/polar-api-agreement
-  - type: GraphQL
-    url: graphql/polar-graphql.md
   - type: Documentation
     url: https://www.polar.com/teampro-api/
 - aid: polar:polar-daily-activity-deprecated-api
@@ -142,8 +136,6 @@ apis:
     url: https://github.com/polarofficial/accesslink-example-python
   - type: TermsOfService
     url: https://www.polar.com/en/legal/polar-api-agreement
-  - type: GraphQL
-    url: graphql/polar-graphql.md
   - type: Documentation
     url: https://www.polar.com/teampro-api/
 - aid: polar:polar-elixir-trade-biosensing-api
@@ -169,8 +161,6 @@ apis:
     url: https://github.com/polarofficial/accesslink-example-python
   - type: TermsOfService
     url: https://www.polar.com/en/legal/polar-api-agreement
-  - type: GraphQL
-    url: graphql/polar-graphql.md
   - type: Documentation
     url: https://www.polar.com/teampro-api/
 - aid: polar:polar-exercises-api
@@ -195,8 +185,6 @@ apis:
     url: https://github.com/polarofficial/accesslink-example-python
   - type: TermsOfService
     url: https://www.polar.com/en/legal/polar-api-agreement
-  - type: GraphQL
-    url: graphql/polar-graphql.md
   - type: Documentation
     url: https://www.polar.com/teampro-api/
 - aid: polar:polar-exercises-deprecated-api
@@ -225,8 +213,6 @@ apis:
     url: https://github.com/polarofficial/accesslink-example-python
   - type: TermsOfService
     url: https://www.polar.com/en/legal/polar-api-agreement
-  - type: GraphQL
-    url: graphql/polar-graphql.md
   - type: Documentation
     url: https://www.polar.com/teampro-api/
 - aid: polar:polar-nightly-recharge-api
@@ -253,8 +239,6 @@ apis:
     url: https://github.com/polarofficial/accesslink-example-python
   - type: TermsOfService
     url: https://www.polar.com/en/legal/polar-api-agreement
-  - type: GraphQL
-    url: graphql/polar-graphql.md
   - type: Documentation
     url: https://www.polar.com/teampro-api/
 - aid: polar:polar-physical-info-api
@@ -277,8 +261,6 @@ apis:
     url: https://github.com/polarofficial/accesslink-example-python
   - type: TermsOfService
     url: https://www.polar.com/en/legal/polar-api-agreement
-  - type: GraphQL
-    url: graphql/polar-graphql.md
   - type: Documentation
     url: https://www.polar.com/teampro-api/
 - aid: polar:polar-physical-info-deprecated-api
@@ -306,8 +288,6 @@ apis:
     url: https://github.com/polarofficial/accesslink-example-python
   - type: TermsOfService
     url: https://www.polar.com/en/legal/polar-api-agreement
-  - type: GraphQL
-    url: graphql/polar-graphql.md
   - type: Documentation
     url: https://www.polar.com/teampro-api/
 - aid: polar:polar-player-training-sessions-api
@@ -332,8 +312,6 @@ apis:
     url: https://github.com/polarofficial/accesslink-example-python
   - type: TermsOfService
     url: https://www.polar.com/en/legal/polar-api-agreement
-  - type: GraphQL
-    url: graphql/polar-graphql.md
   - type: Documentation
     url: https://www.polar.com/teampro-api/
 - aid: polar:polar-pull-notifications-api
@@ -358,8 +336,6 @@ apis:
     url: https://github.com/polarofficial/accesslink-example-python
   - type: TermsOfService
     url: https://www.polar.com/en/legal/polar-api-agreement
-  - type: GraphQL
-    url: graphql/polar-graphql.md
   - type: Documentation
     url: https://www.polar.com/teampro-api/
 - aid: polar:polar-sleep-api
@@ -385,8 +361,6 @@ apis:
     url: https://github.com/polarofficial/accesslink-example-python
   - type: TermsOfService
     url: https://www.polar.com/en/legal/polar-api-agreement
-  - type: GraphQL
-    url: graphql/polar-graphql.md
   - type: Documentation
     url: https://www.polar.com/teampro-api/
 - aid: polar:polar-sleepwise-trade-api
@@ -413,8 +387,6 @@ apis:
     url: https://github.com/polarofficial/accesslink-example-python
   - type: TermsOfService
     url: https://www.polar.com/en/legal/polar-api-agreement
-  - type: GraphQL
-    url: graphql/polar-graphql.md
   - type: Documentation
     url: https://www.polar.com/teampro-api/
 - aid: polar:polar-team-api
@@ -437,8 +409,6 @@ apis:
     url: https://github.com/polarofficial/accesslink-example-python
   - type: TermsOfService
     url: https://www.polar.com/en/legal/polar-api-agreement
-  - type: GraphQL
-    url: graphql/polar-graphql.md
   - type: Documentation
     url: https://www.polar.com/teampro-api/
 - aid: polar:polar-team-training-sessions-api
@@ -461,8 +431,6 @@ apis:
     url: https://github.com/polarofficial/accesslink-example-python
   - type: TermsOfService
     url: https://www.polar.com/en/legal/polar-api-agreement
-  - type: GraphQL
-    url: graphql/polar-graphql.md
   - type: Documentation
     url: https://www.polar.com/teampro-api/
 - aid: polar:polar-users-api
@@ -487,8 +455,6 @@ apis:
     url: https://github.com/polarofficial/accesslink-example-python
   - type: TermsOfService
     url: https://www.polar.com/en/legal/polar-api-agreement
-  - type: GraphQL
-    url: graphql/polar-graphql.md
   - type: Documentation
     url: https://www.polar.com/teampro-api/
 - aid: polar:polar-webhooks-api
@@ -513,8 +479,6 @@ apis:
     url: https://github.com/polarofficial/accesslink-example-python
   - type: TermsOfService
     url: https://www.polar.com/en/legal/polar-api-agreement
-  - type: GraphQL
-    url: graphql/polar-graphql.md
   - type: Documentation
     url: https://www.polar.com/teampro-api/
 name: Polar
@@ -529,6 +493,7 @@ tags:
 - Activity Tracking
 - Sensors
 - Bluetooth
+- Wellness
 kind: contract
 deliveryModel:
   model: unknown
