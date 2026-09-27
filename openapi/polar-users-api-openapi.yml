@@ -110,6 +110,41 @@ paths:
         - accesslink.read_all
 components:
   schemas:
+    UserExtraInfo:
+      type: object
+      xml:
+        name: extra-info
+      properties:
+        value:
+          type: string
+          example: '2'
+          description: Value provided by the customer
+        index:
+          type: integer
+          format: int32
+          example: 0
+          xml:
+            attribute: true
+          description: Item index
+        name:
+          type: string
+          example: number-of-children
+          xml:
+            attribute: true
+          description: Name of the extra info asked from customer
+      description: User's answers to the custom extra-info fields requested by partners
+    register:
+      type: object
+      required:
+      - member-id
+      properties:
+        member-id:
+          type: string
+          example: User_id_999
+          description: Partner's custom identifier for user.
+      description: Model for registering user to partner.
+      xml:
+        name: register
     user:
       type: object
       properties:
@@ -169,41 +204,6 @@ components:
       description: User's basic information
       xml:
         name: user
-    UserExtraInfo:
-      type: object
-      xml:
-        name: extra-info
-      properties:
-        value:
-          type: string
-          example: '2'
-          description: Value provided by the customer
-        index:
-          type: integer
-          format: int32
-          example: 0
-          xml:
-            attribute: true
-          description: Item index
-        name:
-          type: string
-          example: number-of-children
-          xml:
-            attribute: true
-          description: Name of the extra info asked from customer
-      description: User's answers to the custom extra-info fields requested by partners
-    register:
-      type: object
-      required:
-      - member-id
-      properties:
-        member-id:
-          type: string
-          example: User_id_999
-          description: Partner's custom identifier for user.
-      description: Model for registering user to partner.
-      xml:
-        name: register
   securitySchemes:
     Basic:
       type: http

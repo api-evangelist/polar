@@ -191,6 +191,82 @@ paths:
         - accesslink.read_all
 components:
   schemas:
+    exercisesHashId:
+      type: array
+      description: List of exercises.
+      items:
+        $ref: '#/components/schemas/exerciseHashId'
+    location:
+      type: object
+      properties:
+        latitude:
+          type: number
+          format: double
+          example: 60.21982833
+          description: The latitude, expressed in degrees.
+        longitude:
+          type: number
+          format: double
+          example: 25.13925
+          description: The longitude, expressed in degrees.
+        time:
+          type: string
+          example: PT210.026S
+          description: The time, expressed as a duration.
+        satellites:
+          type: integer
+          format: int64
+          example: 4
+          description: Satellites. A byte-sized value with a maximum of 63.
+        fix:
+          type: integer
+          format: int64
+          example: 1
+          description: Fix. A byte-sized value with a maximum of three.
+      description: Exercise route point/location.
+      xml:
+        name: location
+    training-load-pro-sample:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+          description: Date in format YYYY-MM-DD.
+          example: '2023-01-01'
+        cardio-load:
+          type: number
+          format: float
+          description: User cardio load value.
+          example: 1.0
+        muscle-load:
+          type: number
+          format: float
+          description: User muscle load value.
+          example: 1.0
+        perceived-load:
+          type: number
+          format: float
+          description: User perceived load value.
+          example: 1.0
+        cardio-load-interpretation:
+          $ref: '#/components/schemas/training-load-pro-load-enum'
+        muscle-load-interpretation:
+          $ref: '#/components/schemas/training-load-pro-load-enum'
+        perceived-load-interpretation:
+          $ref: '#/components/schemas/training-load-pro-load-enum'
+        user-rpe:
+          $ref: '#/components/schemas/training-load-pro-rpe-enum'
+    training-load-pro-load-enum:
+      type: string
+      enum:
+      - UNKNOWN
+      - VERY_LOW
+      - LOW
+      - MEDIUM
+      - HIGH
+      - VERY_HIGH
+      - NOT_AVAILABLE
     HeartRate:
       type: object
       properties:
@@ -363,82 +439,6 @@ components:
       description: Heart-rate zone information
       xml:
         name: zone
-    location:
-      type: object
-      properties:
-        latitude:
-          type: number
-          format: double
-          example: 60.21982833
-          description: The latitude, expressed in degrees.
-        longitude:
-          type: number
-          format: double
-          example: 25.13925
-          description: The longitude, expressed in degrees.
-        time:
-          type: string
-          example: PT210.026S
-          description: The time, expressed as a duration.
-        satellites:
-          type: integer
-          format: int64
-          example: 4
-          description: Satellites. A byte-sized value with a maximum of 63.
-        fix:
-          type: integer
-          format: int64
-          example: 1
-          description: Fix. A byte-sized value with a maximum of three.
-      description: Exercise route point/location.
-      xml:
-        name: location
-    training-load-pro-sample:
-      type: object
-      properties:
-        date:
-          type: string
-          format: date
-          description: Date in format YYYY-MM-DD.
-          example: '2023-01-01'
-        cardio-load:
-          type: number
-          format: float
-          description: User cardio load value.
-          example: 1.0
-        muscle-load:
-          type: number
-          format: float
-          description: User muscle load value.
-          example: 1.0
-        perceived-load:
-          type: number
-          format: float
-          description: User perceived load value.
-          example: 1.0
-        cardio-load-interpretation:
-          $ref: '#/components/schemas/training-load-pro-load-enum'
-        muscle-load-interpretation:
-          $ref: '#/components/schemas/training-load-pro-load-enum'
-        perceived-load-interpretation:
-          $ref: '#/components/schemas/training-load-pro-load-enum'
-        user-rpe:
-          $ref: '#/components/schemas/training-load-pro-rpe-enum'
-    training-load-pro-load-enum:
-      type: string
-      enum:
-      - UNKNOWN
-      - VERY_LOW
-      - LOW
-      - MEDIUM
-      - HIGH
-      - VERY_HIGH
-      - NOT_AVAILABLE
-    exercisesHashId:
-      type: array
-      description: List of exercises.
-      items:
-        $ref: '#/components/schemas/exerciseHashId'
     sample:
       type: object
       properties:

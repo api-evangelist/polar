@@ -176,6 +176,20 @@ paths:
         - accesslink.read_all
 components:
   schemas:
+    physical-informations:
+      type: object
+      properties:
+        physical-informations:
+          type: array
+          description: Absolute links to individual physical information within the transaction
+          items:
+            type: string
+          example:
+          - https://www.polaraccesslink.com/v3/users/12/physical-information-transactions/12/physical-informations/56
+          - https://www.polaraccesslink.com/v3/users/12/physical-information-transactions/12/physical-informations/120
+      description: Physical information transaction container
+      xml:
+        name: physical-informations
     physical-information:
       type: object
       properties:
@@ -264,20 +278,6 @@ components:
       description: Contains absolute link to the created transaction.
       xml:
         name: transaction-location
-    physical-informations:
-      type: object
-      properties:
-        physical-informations:
-          type: array
-          description: Absolute links to individual physical information within the transaction
-          items:
-            type: string
-          example:
-          - https://www.polaraccesslink.com/v3/users/12/physical-information-transactions/12/physical-informations/56
-          - https://www.polaraccesslink.com/v3/users/12/physical-information-transactions/12/physical-informations/120
-      description: Physical information transaction container
-      xml:
-        name: physical-informations
   securitySchemes:
     Basic:
       type: http

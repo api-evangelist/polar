@@ -88,15 +88,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    nights:
-      type: object
-      properties:
-        nights:
-          type: array
-          description: List of sleep objects
-          items:
-            $ref: '#/components/schemas/sleep'
-      description: Sleep list
     available-sleep:
       type: object
       properties:
@@ -115,6 +106,15 @@ components:
           format: date-time
           description: End timestamp of the sleep as ISO-8601 datetime string
           example: '2020-01-01T09:39:07+03:00'
+    nights:
+      type: object
+      properties:
+        nights:
+          type: array
+          description: List of sleep objects
+          items:
+            $ref: '#/components/schemas/sleep'
+      description: Sleep list
     available-sleeps:
       type: object
       properties:

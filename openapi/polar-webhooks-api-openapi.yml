@@ -175,6 +175,21 @@ paths:
       - Basic: []
 components:
   schemas:
+    webhookPatch:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/webhookType'
+          description: Type of events to subscribe.
+          example:
+          - EXERCISE
+        url:
+          type: string
+          format: uri
+          example: https://myapp.example.com/acl_webhook
+          description: Url where the webhook notification is sent.
     error:
       type: object
       description: Error model which contains useful info about the error occurred.
@@ -195,43 +210,6 @@ components:
         corrId:
           type: string
           description: Correlation id of the response for problem solving and debugging use.
-    createdWebhook:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-              example: abdf33
-              description: Id of the new webhook.
-            events:
-              type: array
-              items:
-                $ref: '#/components/schemas/webhookType'
-              description: Subscribed event types.
-              example:
-              - EXERCISE
-            url:
-              type: string
-              format: uri
-              example: https://myapp.example.com/acl_webhook
-              description: Url where the webhook notification is sent.
-            signature_secret_key:
-              type: string
-              example: abe1f3ae-fd33-11e8-8eb2-f2801f1b9fd1
-              description: Signing key for verifying that sender is actually Polar.
-    webhookType:
-      type: string
-      enum:
-      - EXERCISE
-      - SLEEP
-      - CONTINUOUS_HEART_RATE
-      - SLEEP_WISE_CIRCADIAN_BEDTIME
-      - SLEEP_WISE_ALERTNESS
-      - ACTIVITY_SUMMARY
-      - PHYSICAL_INFORMATION
-      description: Event type to subscribe. Currently EXERCISE, SLEEP, CONTINUOUS_HEART_RATE, SLEEP_WISE_CIRCADIAN_BEDTIME, SLEEP_WISE_ALERTNESS, ACTIVITY_SUMMARY and PHYSICAL_INFORMATION are supported.
     webhookInfo:
       type: object
       properties:
@@ -260,6 +238,32 @@ components:
                 type: boolean
                 example: true
                 description: Is the webhook active.
+    createdWebhook:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+              example: abdf33
+              description: Id of the new webhook.
+            events:
+              type: array
+              items:
+                $ref: '#/components/schemas/webhookType'
+              description: Subscribed event types.
+              example:
+              - EXERCISE
+            url:
+              type: string
+              format: uri
+              example: https://myapp.example.com/acl_webhook
+              description: Url where the webhook notification is sent.
+            signature_secret_key:
+              type: string
+              example: abe1f3ae-fd33-11e8-8eb2-f2801f1b9fd1
+              description: Signing key for verifying that sender is actually Polar.
     webhookRequest:
       type: object
       properties:
@@ -278,21 +282,17 @@ components:
       required:
       - events
       - url
-    webhookPatch:
-      type: object
-      properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/webhookType'
-          description: Type of events to subscribe.
-          example:
-          - EXERCISE
-        url:
-          type: string
-          format: uri
-          example: https://myapp.example.com/acl_webhook
-          description: Url where the webhook notification is sent.
+    webhookType:
+      type: string
+      enum:
+      - EXERCISE
+      - SLEEP
+      - CONTINUOUS_HEART_RATE
+      - SLEEP_WISE_CIRCADIAN_BEDTIME
+      - SLEEP_WISE_ALERTNESS
+      - ACTIVITY_SUMMARY
+      - PHYSICAL_INFORMATION
+      description: Event type to subscribe. Currently EXERCISE, SLEEP, CONTINUOUS_HEART_RATE, SLEEP_WISE_CIRCADIAN_BEDTIME, SLEEP_WISE_ALERTNESS, ACTIVITY_SUMMARY and PHYSICAL_INFORMATION are supported.
   securitySchemes:
     Basic:
       type: http
