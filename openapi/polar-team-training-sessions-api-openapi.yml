@@ -103,7 +103,7 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    team_training_heart_rate_zone:
+    team_training_power_zone:
       type: object
       properties:
         index:
@@ -112,21 +112,92 @@ components:
           description: Zone list index
         lower_limit:
           type: integer
-          example: 110
-          description: Lower heart-rate boundary of the zone
+          example: 3
+          description: Lower power boundary of the zone
         higher_limit:
           type: integer
-          example: 130
-          description: Upper heart-rate boundary of the zone
+          example: 7
+          description: Upper power boundary of the zone
         in_zone:
           type: string
-          example: PT4S
+          example: PT4.2S
           description: Time duration spent in the zone ISO 8601
-        in_zone_meters:
+        in_zone_muscle_load:
           type: number
-          example: 222
-          description: Distance in meters in the zone
-      description: Heart-rate zone information
+          example: 333
+          description: Muscle load in the zone
+      description: Power zone information
+    paginationResponse:
+      type: object
+      description: Pagination info in response. Model contains info about response element count and paging.
+      properties:
+        per_page:
+          type: integer
+          example: 20
+          description: Items per page
+        total_elements:
+          type: integer
+          example: 2
+          description: Total number of items
+        page_number:
+          type: integer
+          example: 0
+          description: Number of the current page
+        total_pages:
+          type: integer
+          example: 1
+          description: Total number of pages
+    marker:
+      type: object
+      description: Training session marker.i
+      properties:
+        start_time:
+          type: string
+          description: Start time of the marker
+          format: date-time
+          example: 2017-04-14 09:20:06
+        end_time:
+          type: string
+          description: End time of the marker
+          format: date-time
+          example: 2017-04-14 09:50:06
+        marker_type:
+          type: string
+          description: Marker type
+          example: PHASE
+          enum:
+          - PHASE
+          - NOTE
+          - RECOVERY
+        name:
+          type: string
+          example: Intervals
+          description: Marker name
+        note:
+          type: string
+          example: Cooling down
+          description: Marker note
+    participant:
+      type: object
+      description: Training session participant.
+      properties:
+        player_id:
+          type: string
+          example: ZmozZxkr
+          description: Player id
+        player_number:
+          type: integer
+          format: int32
+          example: 12
+          description: Player number
+        role:
+          type: string
+          example: Midfielder
+          description: Player role
+        player_session_id:
+          type: string
+          example: wp9DQ9ln
+          description: Player training session id
     trainingSessionDetails:
       type: object
       description: Team training session details.
@@ -244,81 +315,6 @@ components:
           description: List of power zones.
           items:
             $ref: '#/components/schemas/team_training_power_zone'
-    participant:
-      type: object
-      description: Training session participant.
-      properties:
-        player_id:
-          type: string
-          example: ZmozZxkr
-          description: Player id
-        player_number:
-          type: integer
-          format: int32
-          example: 12
-          description: Player number
-        role:
-          type: string
-          example: Midfielder
-          description: Player role
-        player_session_id:
-          type: string
-          example: wp9DQ9ln
-          description: Player training session id
-    team_training_power_zone:
-      type: object
-      properties:
-        index:
-          type: integer
-          example: 1
-          description: Zone list index
-        lower_limit:
-          type: integer
-          example: 3
-          description: Lower power boundary of the zone
-        higher_limit:
-          type: integer
-          example: 7
-          description: Upper power boundary of the zone
-        in_zone:
-          type: string
-          example: PT4.2S
-          description: Time duration spent in the zone ISO 8601
-        in_zone_muscle_load:
-          type: number
-          example: 333
-          description: Muscle load in the zone
-      description: Power zone information
-    marker:
-      type: object
-      description: Training session marker.i
-      properties:
-        start_time:
-          type: string
-          description: Start time of the marker
-          format: date-time
-          example: 2017-04-14 09:20:06
-        end_time:
-          type: string
-          description: End time of the marker
-          format: date-time
-          example: 2017-04-14 09:50:06
-        marker_type:
-          type: string
-          description: Marker type
-          example: PHASE
-          enum:
-          - PHASE
-          - NOTE
-          - RECOVERY
-        name:
-          type: string
-          example: Intervals
-          description: Marker name
-        note:
-          type: string
-          example: Cooling down
-          description: Marker note
     trainingSession:
       type: object
       description: Team training session data used in [team training session listing](#get-team-training-sessions).
@@ -393,6 +389,43 @@ components:
           type: string
           description: Sport type
           example: SOCCER
+    paginationQuery:
+      type: object
+      description: Endpoints that return multiple items are paginated to 20 items by default. To request next page, use page parameter in request. Total number of elements and pages are returned in response in `page` property, see [paginationResponse](#tocSpaginationresponse).
+      properties:
+        page:
+          type: integer
+          example: 3
+          description: Page number, starting from 0
+        per_page:
+          type: integer
+          example: 20
+          description: Number of elements to be returned per page. Value must be between 1 and 100.
+      example: ?page=3&per_page=20
+    team_training_heart_rate_zone:
+      type: object
+      properties:
+        index:
+          type: integer
+          example: 1
+          description: Zone list index
+        lower_limit:
+          type: integer
+          example: 110
+          description: Lower heart-rate boundary of the zone
+        higher_limit:
+          type: integer
+          example: 130
+          description: Upper heart-rate boundary of the zone
+        in_zone:
+          type: string
+          example: PT4S
+          description: Time duration spent in the zone ISO 8601
+        in_zone_meters:
+          type: number
+          example: 222
+          description: Distance in meters in the zone
+      description: Heart-rate zone information
     team_training_speed_zone_kmh:
       type: object
       properties:
@@ -417,39 +450,6 @@ components:
           example: 222
           description: Distance in meters in the zone
       description: Speed zone information
-    paginationQuery:
-      type: object
-      description: Endpoints that return multiple items are paginated to 20 items by default. To request next page, use page parameter in request. Total number of elements and pages are returned in response in `page` property, see [paginationResponse](#tocSpaginationresponse).
-      properties:
-        page:
-          type: integer
-          example: 3
-          description: Page number, starting from 0
-        per_page:
-          type: integer
-          example: 20
-          description: Number of elements to be returned per page. Value must be between 1 and 100.
-      example: ?page=3&per_page=20
-    paginationResponse:
-      type: object
-      description: Pagination info in response. Model contains info about response element count and paging.
-      properties:
-        per_page:
-          type: integer
-          example: 20
-          description: Items per page
-        total_elements:
-          type: integer
-          example: 2
-          description: Total number of items
-        page_number:
-          type: integer
-          example: 0
-          description: Number of the current page
-        total_pages:
-          type: integer
-          example: 1
-          description: Total number of pages
   securitySchemes:
     OAuth2:
       type: oauth2

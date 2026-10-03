@@ -261,6 +261,20 @@ paths:
         - accesslink.read_all
 components:
   schemas:
+    activity-log:
+      type: object
+      properties:
+        activity-log:
+          type: array
+          description: Absolute links to individual activity summaries within the transaction
+          items:
+            type: string
+          example:
+          - https://www.polaraccesslink.com/v3/users/12/activity-transactions/34/activities/56
+          - https://www.polaraccesslink.com/v3/users/12/activity-transactions/34/activities/120
+      description: Activity transaction container
+      xml:
+        name: activity-logs
     transaction-location:
       type: object
       properties:
@@ -277,23 +291,6 @@ components:
       description: Contains absolute link to the created transaction.
       xml:
         name: transaction-location
-    DurationZone:
-      type: object
-      xml:
-        name: activity-zones
-      properties:
-        index:
-          type: integer
-          format: int32
-          example: 1
-          xml:
-            attribute: true
-          description: Activity zone index
-        inzone:
-          type: string
-          example: PT51M5S
-          description: Time duration spent in the zone ISO 8601
-      description: Model contains the time spent in certain activity zone.
     activity-step-samples:
       type: object
       properties:
@@ -315,48 +312,44 @@ components:
       description: Wrapper model for partner step samples.
       xml:
         name: activity-step-samples
-    activity-step-sample:
+    activity-zone-samples:
       type: object
       properties:
-        steps:
+        date:
+          type: string
+          example: '2022-02-10'
+          description: Activity zone sample date
+        interval:
           type: integer
           format: int32
-          description: Number of steps in sample segment. If element is null, step samples are not available for current segment.
-        time:
-          type: string
-          example: '12:37:33.000'
-          description: Start time of sample segment.
-      description: Model contains number of steps in certain time period.
-      xml:
-        name: sample
-    activity-log:
-      type: object
-      properties:
-        activity-log:
+          description: Sample interval in minutes.
+        samples:
           type: array
-          description: Absolute links to individual activity summaries within the transaction
+          xml:
+            wrapped: true
+          description: List of individual zone sample objects.
           items:
-            type: string
-          example:
-          - https://www.polaraccesslink.com/v3/users/12/activity-transactions/34/activities/56
-          - https://www.polaraccesslink.com/v3/users/12/activity-transactions/34/activities/120
-      description: Activity transaction container
+            $ref: '#/components/schemas/activity-zone-sample'
+      description: List containing the times (in zone) in different heart rate zones (i.e. Heart rate between lower and upper values). Zone is null if no zone information available.
       xml:
-        name: activity-logs
-    activity-zone-sample:
+        name: activity-zone-samples
+    DurationZone:
       type: object
-      properties:
-        activity-zones:
-          type: array
-          description: List of heart rate zones with duration.
-          items:
-            $ref: '#/components/schemas/DurationZone'
-        time:
-          type: string
-          description: Start time of sample segment.
-      description: Model contains number of steps in certain time period.
       xml:
-        name: sample
+        name: activity-zones
+      properties:
+        index:
+          type: integer
+          format: int32
+          example: 1
+          xml:
+            attribute: true
+          description: Activity zone index
+        inzone:
+          type: string
+          example: PT51M5S
+          description: Time duration spent in the zone ISO 8601
+      description: Model contains the time spent in certain activity zone.
     activity:
       type: object
       properties:
@@ -410,27 +403,34 @@ components:
       description: Summary of user's daily activity
       xml:
         name: activity
-    activity-zone-samples:
+    activity-zone-sample:
       type: object
       properties:
-        date:
+        activity-zones:
+          type: array
+          description: List of heart rate zones with duration.
+          items:
+            $ref: '#/components/schemas/DurationZone'
+        time:
           type: string
-          example: '2022-02-10'
-          description: Activity zone sample date
-        interval:
+          description: Start time of sample segment.
+      description: Model contains number of steps in certain time period.
+      xml:
+        name: sample
+    activity-step-sample:
+      type: object
+      properties:
+        steps:
           type: integer
           format: int32
-          description: Sample interval in minutes.
-        samples:
-          type: array
-          xml:
-            wrapped: true
-          description: List of individual zone sample objects.
-          items:
-            $ref: '#/components/schemas/activity-zone-sample'
-      description: List containing the times (in zone) in different heart rate zones (i.e. Heart rate between lower and upper values). Zone is null if no zone information available.
+          description: Number of steps in sample segment. If element is null, step samples are not available for current segment.
+        time:
+          type: string
+          example: '12:37:33.000'
+          description: Start time of sample segment.
+      description: Model contains number of steps in certain time period.
       xml:
-        name: activity-zone-samples
+        name: sample
   securitySchemes:
     Basic:
       type: http

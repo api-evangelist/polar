@@ -206,19 +206,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/cardio-load'
-    cardio-load-status-enum:
-      description: Text representation of cardio load status.
-      type: string
-      enum:
-      - LOAD_STATUS_NOT_AVAILABLE
-      - DETRAINING
-      - MAINTAINING
-      - PRODUCTIVE
-      - OVERREACHING
-      - RECOVERY_AFTER_OVERREACHING
-      - PRODUCTIVE_DROPPED_FROM_OVERREACHING
-      - PRODUCTIVE_ALMOST_OVERREACHING
-      - UNRECOGNIZED
     cardio-load:
       description: Cardio load model.
       properties:
@@ -251,6 +238,19 @@ components:
           description: Ratio between strain and tolerance.
         cardio_load_level:
           $ref: '#/components/schemas/cardio-load-levels'
+    cardio-load-status-enum:
+      description: Text representation of cardio load status.
+      type: string
+      enum:
+      - LOAD_STATUS_NOT_AVAILABLE
+      - DETRAINING
+      - MAINTAINING
+      - PRODUCTIVE
+      - OVERREACHING
+      - RECOVERY_AFTER_OVERREACHING
+      - PRODUCTIVE_DROPPED_FROM_OVERREACHING
+      - PRODUCTIVE_ALMOST_OVERREACHING
+      - UNRECOGNIZED
   securitySchemes:
     Basic:
       type: http

@@ -175,7 +175,7 @@ paths:
       - Basic: []
 components:
   schemas:
-    webhookPatch:
+    webhookRequest:
       type: object
       properties:
         events:
@@ -190,26 +190,20 @@ components:
           format: uri
           example: https://myapp.example.com/acl_webhook
           description: Url where the webhook notification is sent.
-    error:
-      type: object
-      description: Error model which contains useful info about the error occurred.
-      properties:
-        timestamp:
-          type: string
-          format: date-time
-          description: Timestamp of the error.
-        status:
-          type: integer
-          description: Http status code
-        errorType:
-          type: string
-          description: Error type.
-        message:
-          type: string
-          description: Human readable error message.
-        corrId:
-          type: string
-          description: Correlation id of the response for problem solving and debugging use.
+      required:
+      - events
+      - url
+    webhookType:
+      type: string
+      enum:
+      - EXERCISE
+      - SLEEP
+      - CONTINUOUS_HEART_RATE
+      - SLEEP_WISE_CIRCADIAN_BEDTIME
+      - SLEEP_WISE_ALERTNESS
+      - ACTIVITY_SUMMARY
+      - PHYSICAL_INFORMATION
+      description: Event type to subscribe. Currently EXERCISE, SLEEP, CONTINUOUS_HEART_RATE, SLEEP_WISE_CIRCADIAN_BEDTIME, SLEEP_WISE_ALERTNESS, ACTIVITY_SUMMARY and PHYSICAL_INFORMATION are supported.
     webhookInfo:
       type: object
       properties:
@@ -264,7 +258,7 @@ components:
               type: string
               example: abe1f3ae-fd33-11e8-8eb2-f2801f1b9fd1
               description: Signing key for verifying that sender is actually Polar.
-    webhookRequest:
+    webhookPatch:
       type: object
       properties:
         events:
@@ -279,20 +273,26 @@ components:
           format: uri
           example: https://myapp.example.com/acl_webhook
           description: Url where the webhook notification is sent.
-      required:
-      - events
-      - url
-    webhookType:
-      type: string
-      enum:
-      - EXERCISE
-      - SLEEP
-      - CONTINUOUS_HEART_RATE
-      - SLEEP_WISE_CIRCADIAN_BEDTIME
-      - SLEEP_WISE_ALERTNESS
-      - ACTIVITY_SUMMARY
-      - PHYSICAL_INFORMATION
-      description: Event type to subscribe. Currently EXERCISE, SLEEP, CONTINUOUS_HEART_RATE, SLEEP_WISE_CIRCADIAN_BEDTIME, SLEEP_WISE_ALERTNESS, ACTIVITY_SUMMARY and PHYSICAL_INFORMATION are supported.
+    error:
+      type: object
+      description: Error model which contains useful info about the error occurred.
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp of the error.
+        status:
+          type: integer
+          description: Http status code
+        errorType:
+          type: string
+          description: Error type.
+        message:
+          type: string
+          description: Human readable error message.
+        corrId:
+          type: string
+          description: Correlation id of the response for problem solving and debugging use.
   securitySchemes:
     Basic:
       type: http
