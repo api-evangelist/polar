@@ -68,6 +68,15 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    recharges:
+      type: object
+      properties:
+        recharges:
+          type: array
+          description: List of Nightly Recharge objects
+          items:
+            $ref: '#/components/schemas/nightly-recharge'
+      description: Nightly Recharge list
     nightly-recharge:
       type: object
       properties:
@@ -129,15 +138,6 @@ components:
             00:44: 13.5
             00:49: 13.5
           description: 5-minute average samples of breathing rate. Unit of samples is breaths per minute (bpm).
-    recharges:
-      type: object
-      properties:
-        recharges:
-          type: array
-          description: List of Nightly Recharge objects
-          items:
-            $ref: '#/components/schemas/nightly-recharge'
-      description: Nightly Recharge list
   securitySchemes:
     Basic:
       type: http

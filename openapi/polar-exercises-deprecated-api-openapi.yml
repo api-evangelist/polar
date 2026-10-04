@@ -436,57 +436,6 @@ paths:
         - accesslink.read_all
 components:
   schemas:
-    sample:
-      type: object
-      properties:
-        recording-rate:
-          type: integer
-          format: int32
-          example: 5
-          description: Sample recording rate in seconds. Null when recording rate is not applicable - currently only with RR-data.
-        sample-type:
-          type: string
-          format: byte
-          example: '1'
-          description: Sample type
-        data:
-          type: string
-          example: 0,100,102,97,97,101,103,106,96,89,88,87,98,108,113,112,114,115,118,121,121,121,121,123,117,119,122
-          description: Sample values as a comma-separated list of strings. Can contain null -values which indicate a situation where sensor was offline.
-      description: Training session sample data
-      xml:
-        name: sample
-    training-load-pro-sample:
-      type: object
-      properties:
-        date:
-          type: string
-          format: date
-          description: Date in format YYYY-MM-DD.
-          example: '2023-01-01'
-        cardio-load:
-          type: number
-          format: float
-          description: User cardio load value.
-          example: 1.0
-        muscle-load:
-          type: number
-          format: float
-          description: User muscle load value.
-          example: 1.0
-        perceived-load:
-          type: number
-          format: float
-          description: User perceived load value.
-          example: 1.0
-        cardio-load-interpretation:
-          $ref: '#/components/schemas/training-load-pro-load-enum'
-        muscle-load-interpretation:
-          $ref: '#/components/schemas/training-load-pro-load-enum'
-        perceived-load-interpretation:
-          $ref: '#/components/schemas/training-load-pro-load-enum'
-        user-rpe:
-          $ref: '#/components/schemas/training-load-pro-rpe-enum'
     zone:
       type: object
       properties:
@@ -512,6 +461,51 @@ components:
       description: Heart-rate zone information
       xml:
         name: zone
+    samples:
+      type: object
+      properties:
+        samples:
+          type: array
+          description: List of URIs pointing to single sample type data.
+          items:
+            type: string
+            xml:
+              name: sample
+          example:
+          - https://www.polaraccesslink.com/v3/users/12/exercise-transactions/34/exercises/56/samples/0
+          - https://www.polaraccesslink.com/v3/users/12/exercise-transactions/34/exercises/56/samples/3
+      description: List of URIs pointing to single sample type data.
+      xml:
+        name: samples
+    training-load-pro-rpe-enum:
+      description: Quantifies internal training load of a session.
+      type: string
+      enum:
+      - UNKNOWN
+      - RPE_NONE
+      - RPE_EASY
+      - RPE_LIGHT
+      - RPE_FAIRLY_BRISK
+      - RPE_BRISK
+      - RPE_MODERATE
+      - RPE_FAIRLY_HARD
+      - RPE_HARD
+      - RPE_EXHAUSTING
+      - RPE_EXTREME
+    HeartRate:
+      type: object
+      properties:
+        average:
+          type: integer
+          format: int32
+          example: 129
+          description: Average heart-rate
+        maximum:
+          type: integer
+          format: int32
+          example: 147
+          description: Maximum heart-rate
+      description: Heart-rate statistics information
     exercise:
       type: object
       properties:
@@ -625,16 +619,40 @@ components:
       description: Training session summary data
       xml:
         name: exercise
-    training-load-pro-load-enum:
-      type: string
-      enum:
-      - UNKNOWN
-      - VERY_LOW
-      - LOW
-      - MEDIUM
-      - HIGH
-      - VERY_HIGH
-      - NOT_AVAILABLE
+    exercises:
+      type: object
+      properties:
+        exercises:
+          type: array
+          description: Absolute links to individual exercises within the transaction
+          items:
+            type: string
+          example:
+          - https://www.polaraccesslink.com/v3/users/12/exercise-transactions/34/exercises/56
+          - https://www.polaraccesslink.com/v3/users/12/exercise-transactions/34/exercises/120
+      description: Exercise transaction container
+      xml:
+        name: exercises
+    sample:
+      type: object
+      properties:
+        recording-rate:
+          type: integer
+          format: int32
+          example: 5
+          description: Sample recording rate in seconds. Null when recording rate is not applicable - currently only with RR-data.
+        sample-type:
+          type: string
+          format: byte
+          example: '1'
+          description: Sample type
+        data:
+          type: string
+          example: 0,100,102,97,97,101,103,106,96,89,88,87,98,108,113,112,114,115,118,121,121,121,121,123,117,119,122
+          description: Sample values as a comma-separated list of strings. Can contain null -values which indicate a situation where sensor was offline.
+      description: Training session sample data
+      xml:
+        name: sample
     transaction-location:
       type: object
       properties:
@@ -651,35 +669,6 @@ components:
       description: Contains absolute link to the created transaction.
       xml:
         name: transaction-location
-    training-load-pro-rpe-enum:
-      description: Quantifies internal training load of a session.
-      type: string
-      enum:
-      - UNKNOWN
-      - RPE_NONE
-      - RPE_EASY
-      - RPE_LIGHT
-      - RPE_FAIRLY_BRISK
-      - RPE_BRISK
-      - RPE_MODERATE
-      - RPE_FAIRLY_HARD
-      - RPE_HARD
-      - RPE_EXHAUSTING
-      - RPE_EXTREME
-    HeartRate:
-      type: object
-      properties:
-        average:
-          type: integer
-          format: int32
-          example: 129
-          description: Average heart-rate
-        maximum:
-          type: integer
-          format: int32
-          example: 147
-          description: Maximum heart-rate
-      description: Heart-rate statistics information
     zones:
       type: object
       properties:
@@ -691,36 +680,47 @@ components:
       description: List containing the times (in zone) in different heart rate zones (i.e. Heart rate between lower and upper values). Zone is null if no zone information available.
       xml:
         name: zones
-    exercises:
+    training-load-pro-sample:
       type: object
       properties:
-        exercises:
-          type: array
-          description: Absolute links to individual exercises within the transaction
-          items:
-            type: string
-          example:
-          - https://www.polaraccesslink.com/v3/users/12/exercise-transactions/34/exercises/56
-          - https://www.polaraccesslink.com/v3/users/12/exercise-transactions/34/exercises/120
-      description: Exercise transaction container
-      xml:
-        name: exercises
-    samples:
-      type: object
-      properties:
-        samples:
-          type: array
-          description: List of URIs pointing to single sample type data.
-          items:
-            type: string
-            xml:
-              name: sample
-          example:
-          - https://www.polaraccesslink.com/v3/users/12/exercise-transactions/34/exercises/56/samples/0
-          - https://www.polaraccesslink.com/v3/users/12/exercise-transactions/34/exercises/56/samples/3
-      description: List of URIs pointing to single sample type data.
-      xml:
-        name: samples
+        date:
+          type: string
+          format: date
+          description: Date in format YYYY-MM-DD.
+          example: '2023-01-01'
+        cardio-load:
+          type: number
+          format: float
+          description: User cardio load value.
+          example: 1.0
+        muscle-load:
+          type: number
+          format: float
+          description: User muscle load value.
+          example: 1.0
+        perceived-load:
+          type: number
+          format: float
+          description: User perceived load value.
+          example: 1.0
+        cardio-load-interpretation:
+          $ref: '#/components/schemas/training-load-pro-load-enum'
+        muscle-load-interpretation:
+          $ref: '#/components/schemas/training-load-pro-load-enum'
+        perceived-load-interpretation:
+          $ref: '#/components/schemas/training-load-pro-load-enum'
+        user-rpe:
+          $ref: '#/components/schemas/training-load-pro-rpe-enum'
+    training-load-pro-load-enum:
+      type: string
+      enum:
+      - UNKNOWN
+      - VERY_LOW
+      - LOW
+      - MEDIUM
+      - HIGH
+      - VERY_HIGH
+      - NOT_AVAILABLE
   securitySchemes:
     Basic:
       type: http

@@ -110,29 +110,9 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    paginationResponse:
+    teamDetails:
       type: object
-      description: Pagination info in response. Model contains info about response element count and paging.
-      properties:
-        per_page:
-          type: integer
-          example: 20
-          description: Items per page
-        total_elements:
-          type: integer
-          example: 2
-          description: Total number of items
-        page_number:
-          type: integer
-          example: 0
-          description: Number of the current page
-        total_pages:
-          type: integer
-          example: 1
-          description: Total number of pages
-    team:
-      type: object
-      description: Basic info of team used in listing.
+      description: Detailed team data.
       properties:
         id:
           type: string
@@ -156,15 +136,29 @@ components:
           description: Last time modified
           format: date-time
           example: '2017-04-13T21:06:58Z'
-    sportProfileZone:
-      description: Single sport profile zone
+        players:
+          type: array
+          description: Team players
+          items:
+            $ref: '#/components/schemas/player'
+        sport_profiles:
+          type: array
+          description: Team sport profiles
+          items:
+            $ref: '#/components/schemas/teamSportProfile'
+    paginationQuery:
+      type: object
+      description: Endpoints that return multiple items are paginated to 20 items by default. To request next page, use page parameter in request. Total number of elements and pages are returned in response in `page` property, see [paginationResponse](#tocSpaginationresponse).
       properties:
-        lower_limit:
-          type: number
-          description: Lower limit of the zone (inclusive)
-        higher_limit:
-          type: number
-          description: Higher limit of the zone (exclusive)
+        page:
+          type: integer
+          example: 3
+          description: Page number, starting from 0
+        per_page:
+          type: integer
+          example: 20
+          description: Number of elements to be returned per page. Value must be between 1 and 100.
+      example: ?page=3&per_page=20
     sportProfileZones:
       description: Sport zones created for the sport profile
       properties:
@@ -288,80 +282,26 @@ components:
           $ref: '#/components/schemas/sportProfileZones'
         acceleration_zones:
           $ref: '#/components/schemas/sportProfileAccelerationZones'
-    paginationQuery:
+    paginationResponse:
       type: object
-      description: Endpoints that return multiple items are paginated to 20 items by default. To request next page, use page parameter in request. Total number of elements and pages are returned in response in `page` property, see [paginationResponse](#tocSpaginationresponse).
+      description: Pagination info in response. Model contains info about response element count and paging.
       properties:
-        page:
-          type: integer
-          example: 3
-          description: Page number, starting from 0
         per_page:
           type: integer
           example: 20
-          description: Number of elements to be returned per page. Value must be between 1 and 100.
-      example: ?page=3&per_page=20
-    teamDetails:
-      type: object
-      description: Detailed team data.
-      properties:
-        id:
-          type: string
-          example: wMYz6L4w
-          description: Team id
-        name:
-          type: string
-          example: Team1
-          description: Team name
-        organisation:
-          type: string
-          example: Organisation1
-          description: Organisation name
-        created:
-          type: string
-          description: Time when the team is created
-          format: date-time
-          example: '2017-04-13T21:06:58Z'
-        modified:
-          type: string
-          description: Last time modified
-          format: date-time
-          example: '2017-04-13T21:06:58Z'
-        players:
-          type: array
-          description: Team players
-          items:
-            $ref: '#/components/schemas/player'
-        sport_profiles:
-          type: array
-          description: Team sport profiles
-          items:
-            $ref: '#/components/schemas/teamSportProfile'
-    player:
-      type: object
-      description: Player data.
-      properties:
-        player_id:
-          type: string
-          example: ZmozZxkr
-          description: Player id
-        player_number:
+          description: Items per page
+        total_elements:
           type: integer
-          format: int32
-          example: 12
-          description: Player number
-        role:
-          type: string
-          example: Midfielder
-          description: Player role
-        first_name:
-          type: string
-          example: John
-          description: Player first name
-        last_name:
-          type: string
-          example: Doe
-          description: Player last name
+          example: 2
+          description: Total number of items
+        page_number:
+          type: integer
+          example: 0
+          description: Number of the current page
+        total_pages:
+          type: integer
+          example: 1
+          description: Total number of pages
     sportProfileAccelerationZones:
       description: Acceleration zones for the sport profile
       properties:
@@ -389,6 +329,66 @@ components:
           - -3.0
           items:
             type: number
+    player:
+      type: object
+      description: Player data.
+      properties:
+        player_id:
+          type: string
+          example: ZmozZxkr
+          description: Player id
+        player_number:
+          type: integer
+          format: int32
+          example: 12
+          description: Player number
+        role:
+          type: string
+          example: Midfielder
+          description: Player role
+        first_name:
+          type: string
+          example: John
+          description: Player first name
+        last_name:
+          type: string
+          example: Doe
+          description: Player last name
+    team:
+      type: object
+      description: Basic info of team used in listing.
+      properties:
+        id:
+          type: string
+          example: wMYz6L4w
+          description: Team id
+        name:
+          type: string
+          example: Team1
+          description: Team name
+        organisation:
+          type: string
+          example: Organisation1
+          description: Organisation name
+        created:
+          type: string
+          description: Time when the team is created
+          format: date-time
+          example: '2017-04-13T21:06:58Z'
+        modified:
+          type: string
+          description: Last time modified
+          format: date-time
+          example: '2017-04-13T21:06:58Z'
+    sportProfileZone:
+      description: Single sport profile zone
+      properties:
+        lower_limit:
+          type: number
+          description: Lower limit of the zone (inclusive)
+        higher_limit:
+          type: number
+          description: Higher limit of the zone (exclusive)
   securitySchemes:
     OAuth2:
       type: oauth2

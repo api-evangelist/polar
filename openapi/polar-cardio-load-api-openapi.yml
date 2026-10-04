@@ -201,11 +201,6 @@ components:
           type: number
           format: float
           example: 0.1
-    cardio-load-schema:
-      description: List of cardio loads.
-      type: array
-      items:
-        $ref: '#/components/schemas/cardio-load'
     cardio-load:
       description: Cardio load model.
       properties:
@@ -251,6 +246,11 @@ components:
       - PRODUCTIVE_DROPPED_FROM_OVERREACHING
       - PRODUCTIVE_ALMOST_OVERREACHING
       - UNRECOGNIZED
+    cardio-load-schema:
+      description: List of cardio loads.
+      type: array
+      items:
+        $ref: '#/components/schemas/cardio-load'
   securitySchemes:
     Basic:
       type: http

@@ -88,15 +88,14 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    nights:
+    available-sleeps:
       type: object
       properties:
-        nights:
+        available:
           type: array
-          description: List of sleep objects
+          description: List of available sleep data
           items:
-            $ref: '#/components/schemas/sleep'
-      description: Sleep list
+            $ref: '#/components/schemas/available-sleep'
     sleep:
       type: object
       properties:
@@ -225,6 +224,15 @@ components:
             00:46: 77
             00:51: 76
           description: 5 min average samples of heart rate from the duration of the sleep. Default time between samples is 5 minutes. There may be periods with samples more often than every 5 minutes. Unit of samples is beats per minute (bpm).
+    nights:
+      type: object
+      properties:
+        nights:
+          type: array
+          description: List of sleep objects
+          items:
+            $ref: '#/components/schemas/sleep'
+      description: Sleep list
     available-sleep:
       type: object
       properties:
@@ -243,14 +251,6 @@ components:
           format: date-time
           description: End timestamp of the sleep as ISO-8601 datetime string
           example: '2020-01-01T09:39:07+03:00'
-    available-sleeps:
-      type: object
-      properties:
-        available:
-          type: array
-          description: List of available sleep data
-          items:
-            $ref: '#/components/schemas/available-sleep'
   securitySchemes:
     Basic:
       type: http

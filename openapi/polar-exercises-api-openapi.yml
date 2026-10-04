@@ -191,6 +191,90 @@ paths:
         - accesslink.read_all
 components:
   schemas:
+    zone:
+      type: object
+      properties:
+        index:
+          type: integer
+          format: int32
+          example: 1
+          description: Zone list index
+        lower-limit:
+          type: integer
+          format: int32
+          example: 110
+          description: Lower heart-rate boundary of the zone
+        upper-limit:
+          type: integer
+          format: int32
+          example: 130
+          description: Upper heart-rate boundary of the zone
+        in-zone:
+          type: string
+          example: PT4S
+          description: Time duration spent in the zone ISO 8601
+      description: Heart-rate zone information
+      xml:
+        name: zone
+    training-load-pro-rpe-enum:
+      description: Quantifies internal training load of a session.
+      type: string
+      enum:
+      - UNKNOWN
+      - RPE_NONE
+      - RPE_EASY
+      - RPE_LIGHT
+      - RPE_FAIRLY_BRISK
+      - RPE_BRISK
+      - RPE_MODERATE
+      - RPE_FAIRLY_HARD
+      - RPE_HARD
+      - RPE_EXHAUSTING
+      - RPE_EXTREME
+    location:
+      type: object
+      properties:
+        latitude:
+          type: number
+          format: double
+          example: 60.21982833
+          description: The latitude, expressed in degrees.
+        longitude:
+          type: number
+          format: double
+          example: 25.13925
+          description: The longitude, expressed in degrees.
+        time:
+          type: string
+          example: PT210.026S
+          description: The time, expressed as a duration.
+        satellites:
+          type: integer
+          format: int64
+          example: 4
+          description: Satellites. A byte-sized value with a maximum of 63.
+        fix:
+          type: integer
+          format: int64
+          example: 1
+          description: Fix. A byte-sized value with a maximum of three.
+      description: Exercise route point/location.
+      xml:
+        name: location
+    HeartRate:
+      type: object
+      properties:
+        average:
+          type: integer
+          format: int32
+          example: 129
+          description: Average heart-rate
+        maximum:
+          type: integer
+          format: int32
+          example: 147
+          description: Maximum heart-rate
+      description: Heart-rate statistics information
     sample:
       type: object
       properties:
@@ -211,6 +295,16 @@ components:
       description: Training session sample data
       xml:
         name: sample
+    training-load-pro-load-enum:
+      type: string
+      enum:
+      - UNKNOWN
+      - VERY_LOW
+      - LOW
+      - MEDIUM
+      - HIGH
+      - VERY_HIGH
+      - NOT_AVAILABLE
     training-load-pro-sample:
       type: object
       properties:
@@ -242,100 +336,6 @@ components:
           $ref: '#/components/schemas/training-load-pro-load-enum'
         user-rpe:
           $ref: '#/components/schemas/training-load-pro-rpe-enum'
-    zone:
-      type: object
-      properties:
-        index:
-          type: integer
-          format: int32
-          example: 1
-          description: Zone list index
-        lower-limit:
-          type: integer
-          format: int32
-          example: 110
-          description: Lower heart-rate boundary of the zone
-        upper-limit:
-          type: integer
-          format: int32
-          example: 130
-          description: Upper heart-rate boundary of the zone
-        in-zone:
-          type: string
-          example: PT4S
-          description: Time duration spent in the zone ISO 8601
-      description: Heart-rate zone information
-      xml:
-        name: zone
-    training-load-pro-load-enum:
-      type: string
-      enum:
-      - UNKNOWN
-      - VERY_LOW
-      - LOW
-      - MEDIUM
-      - HIGH
-      - VERY_HIGH
-      - NOT_AVAILABLE
-    training-load-pro-rpe-enum:
-      description: Quantifies internal training load of a session.
-      type: string
-      enum:
-      - UNKNOWN
-      - RPE_NONE
-      - RPE_EASY
-      - RPE_LIGHT
-      - RPE_FAIRLY_BRISK
-      - RPE_BRISK
-      - RPE_MODERATE
-      - RPE_FAIRLY_HARD
-      - RPE_HARD
-      - RPE_EXHAUSTING
-      - RPE_EXTREME
-    HeartRate:
-      type: object
-      properties:
-        average:
-          type: integer
-          format: int32
-          example: 129
-          description: Average heart-rate
-        maximum:
-          type: integer
-          format: int32
-          example: 147
-          description: Maximum heart-rate
-      description: Heart-rate statistics information
-    location:
-      type: object
-      properties:
-        latitude:
-          type: number
-          format: double
-          example: 60.21982833
-          description: The latitude, expressed in degrees.
-        longitude:
-          type: number
-          format: double
-          example: 25.13925
-          description: The longitude, expressed in degrees.
-        time:
-          type: string
-          example: PT210.026S
-          description: The time, expressed as a duration.
-        satellites:
-          type: integer
-          format: int64
-          example: 4
-          description: Satellites. A byte-sized value with a maximum of 63.
-        fix:
-          type: integer
-          format: int64
-          example: 1
-          description: Fix. A byte-sized value with a maximum of three.
-      description: Exercise route point/location.
-      xml:
-        name: location
     exerciseHashId:
       type: object
       properties:

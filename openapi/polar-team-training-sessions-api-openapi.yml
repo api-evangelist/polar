@@ -103,50 +103,19 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    team_training_power_zone:
+    paginationQuery:
       type: object
+      description: Endpoints that return multiple items are paginated to 20 items by default. To request next page, use page parameter in request. Total number of elements and pages are returned in response in `page` property, see [paginationResponse](#tocSpaginationresponse).
       properties:
-        index:
-          type: integer
-          example: 1
-          description: Zone list index
-        lower_limit:
+        page:
           type: integer
           example: 3
-          description: Lower power boundary of the zone
-        higher_limit:
-          type: integer
-          example: 7
-          description: Upper power boundary of the zone
-        in_zone:
-          type: string
-          example: PT4.2S
-          description: Time duration spent in the zone ISO 8601
-        in_zone_muscle_load:
-          type: number
-          example: 333
-          description: Muscle load in the zone
-      description: Power zone information
-    paginationResponse:
-      type: object
-      description: Pagination info in response. Model contains info about response element count and paging.
-      properties:
+          description: Page number, starting from 0
         per_page:
           type: integer
           example: 20
-          description: Items per page
-        total_elements:
-          type: integer
-          example: 2
-          description: Total number of items
-        page_number:
-          type: integer
-          example: 0
-          description: Number of the current page
-        total_pages:
-          type: integer
-          example: 1
-          description: Total number of pages
+          description: Number of elements to be returned per page. Value must be between 1 and 100.
+      example: ?page=3&per_page=20
     marker:
       type: object
       description: Training session marker.i
@@ -177,27 +146,172 @@ components:
           type: string
           example: Cooling down
           description: Marker note
-    participant:
+    paginationResponse:
       type: object
-      description: Training session participant.
+      description: Pagination info in response. Model contains info about response element count and paging.
       properties:
-        player_id:
-          type: string
-          example: ZmozZxkr
-          description: Player id
-        player_number:
+        per_page:
           type: integer
-          format: int32
-          example: 12
-          description: Player number
-        role:
+          example: 20
+          description: Items per page
+        total_elements:
+          type: integer
+          example: 2
+          description: Total number of items
+        page_number:
+          type: integer
+          example: 0
+          description: Number of the current page
+        total_pages:
+          type: integer
+          example: 1
+          description: Total number of pages
+    team_training_heart_rate_zone:
+      type: object
+      properties:
+        index:
+          type: integer
+          example: 1
+          description: Zone list index
+        lower_limit:
+          type: integer
+          example: 110
+          description: Lower heart-rate boundary of the zone
+        higher_limit:
+          type: integer
+          example: 130
+          description: Upper heart-rate boundary of the zone
+        in_zone:
           type: string
-          example: Midfielder
-          description: Player role
-        player_session_id:
+          example: PT4S
+          description: Time duration spent in the zone ISO 8601
+        in_zone_meters:
+          type: number
+          example: 222
+          description: Distance in meters in the zone
+      description: Heart-rate zone information
+    team_training_speed_zone_kmh:
+      type: object
+      properties:
+        index:
+          type: integer
+          example: 1
+          description: Zone list index
+        lower_limit:
+          type: integer
+          example: 3
+          description: Lower speed boundary of the zone
+        higher_limit:
+          type: integer
+          example: 7
+          description: Upper speed boundary of the zone
+        in_zone:
           type: string
-          example: wp9DQ9ln
-          description: Player training session id
+          example: PT4.2S
+          description: Time duration spent in the zone ISO 8601
+        in_zone_meters:
+          type: number
+          example: 222
+          description: Distance in meters in the zone
+      description: Speed zone information
+    trainingSession:
+      type: object
+      description: Team training session data used in [team training session listing](#get-team-training-sessions).
+      properties:
+        id:
+          type: string
+          example: R8rMB4j7
+          description: Training session id
+        team_id:
+          type: string
+          example: wMYz6L4w
+          description: Team id
+        name:
+          type: string
+          description: Training session name
+          example: Match against Brazil national team
+        type:
+          type: string
+          description: Training session type
+          example: MATCH
+          enum:
+          - TRAINING
+          - DRILL
+          - TEST
+          - GAME
+          - MATCH
+          - STRENGTH AND CONDITION
+          - OTHER
+        note:
+          type: string
+          description: Notes from training session
+          example: Game started very well, but we lost 0-8
+        created:
+          type: string
+          description: Time when the training session is created
+          format: date-time
+          example: '2017-04-13T21:06:58Z'
+        modified:
+          type: string
+          description: Last time modified
+          format: date-time
+          example: '2017-04-13T21:06:58Z'
+        record_start_time:
+          type: string
+          description: Training session record start time
+          format: date-time
+          example: '2017-04-14T09:17:22'
+        record_end_time:
+          type: string
+          description: Training session record end time
+          format: date-time
+          example: '2017-04-14T09:56:47'
+        start_time:
+          type: string
+          description: Training session start time
+          format: date-time
+          example: '2017-04-14T09:20:06'
+        end_time:
+          type: string
+          description: Training session end time
+          format: date-time
+          example: '2017-04-14T09:50:06'
+        latitude:
+          type: number
+          description: Start latitude of the training session
+          example: 55.67336654663086
+        longitude:
+          type: number
+          description: Start longitude of the training session
+          example: 12.49395084381104
+        sport:
+          type: string
+          description: Sport type
+          example: SOCCER
+    team_training_power_zone:
+      type: object
+      properties:
+        index:
+          type: integer
+          example: 1
+          description: Zone list index
+        lower_limit:
+          type: integer
+          example: 3
+          description: Lower power boundary of the zone
+        higher_limit:
+          type: integer
+          example: 7
+          description: Upper power boundary of the zone
+        in_zone:
+          type: string
+          example: PT4.2S
+          description: Time duration spent in the zone ISO 8601
+        in_zone_muscle_load:
+          type: number
+          example: 333
+          description: Muscle load in the zone
+      description: Power zone information
     trainingSessionDetails:
       type: object
       description: Team training session details.
@@ -315,141 +429,27 @@ components:
           description: List of power zones.
           items:
             $ref: '#/components/schemas/team_training_power_zone'
-    trainingSession:
+    participant:
       type: object
-      description: Team training session data used in [team training session listing](#get-team-training-sessions).
+      description: Training session participant.
       properties:
-        id:
+        player_id:
           type: string
-          example: R8rMB4j7
-          description: Training session id
-        team_id:
-          type: string
-          example: wMYz6L4w
-          description: Team id
-        name:
-          type: string
-          description: Training session name
-          example: Match against Brazil national team
-        type:
-          type: string
-          description: Training session type
-          example: MATCH
-          enum:
-          - TRAINING
-          - DRILL
-          - TEST
-          - GAME
-          - MATCH
-          - STRENGTH AND CONDITION
-          - OTHER
-        note:
-          type: string
-          description: Notes from training session
-          example: Game started very well, but we lost 0-8
-        created:
-          type: string
-          description: Time when the training session is created
-          format: date-time
-          example: '2017-04-13T21:06:58Z'
-        modified:
-          type: string
-          description: Last time modified
-          format: date-time
-          example: '2017-04-13T21:06:58Z'
-        record_start_time:
-          type: string
-          description: Training session record start time
-          format: date-time
-          example: '2017-04-14T09:17:22'
-        record_end_time:
-          type: string
-          description: Training session record end time
-          format: date-time
-          example: '2017-04-14T09:56:47'
-        start_time:
-          type: string
-          description: Training session start time
-          format: date-time
-          example: '2017-04-14T09:20:06'
-        end_time:
-          type: string
-          description: Training session end time
-          format: date-time
-          example: '2017-04-14T09:50:06'
-        latitude:
-          type: number
-          description: Start latitude of the training session
-          example: 55.67336654663086
-        longitude:
-          type: number
-          description: Start longitude of the training session
-          example: 12.49395084381104
-        sport:
-          type: string
-          description: Sport type
-          example: SOCCER
-    paginationQuery:
-      type: object
-      description: Endpoints that return multiple items are paginated to 20 items by default. To request next page, use page parameter in request. Total number of elements and pages are returned in response in `page` property, see [paginationResponse](#tocSpaginationresponse).
-      properties:
-        page:
+          example: ZmozZxkr
+          description: Player id
+        player_number:
           type: integer
-          example: 3
-          description: Page number, starting from 0
-        per_page:
-          type: integer
-          example: 20
-          description: Number of elements to be returned per page. Value must be between 1 and 100.
-      example: ?page=3&per_page=20
-    team_training_heart_rate_zone:
-      type: object
-      properties:
-        index:
-          type: integer
-          example: 1
-          description: Zone list index
-        lower_limit:
-          type: integer
-          example: 110
-          description: Lower heart-rate boundary of the zone
-        higher_limit:
-          type: integer
-          example: 130
-          description: Upper heart-rate boundary of the zone
-        in_zone:
+          format: int32
+          example: 12
+          description: Player number
+        role:
           type: string
-          example: PT4S
-          description: Time duration spent in the zone ISO 8601
-        in_zone_meters:
-          type: number
-          example: 222
-          description: Distance in meters in the zone
-      description: Heart-rate zone information
-    team_training_speed_zone_kmh:
-      type: object
-      properties:
-        index:
-          type: integer
-          example: 1
-          description: Zone list index
-        lower_limit:
-          type: integer
-          example: 3
-          description: Lower speed boundary of the zone
-        higher_limit:
-          type: integer
-          example: 7
-          description: Upper speed boundary of the zone
-        in_zone:
+          example: Midfielder
+          description: Player role
+        player_session_id:
           type: string
-          example: PT4.2S
-          description: Time duration spent in the zone ISO 8601
-        in_zone_meters:
-          type: number
-          example: 222
-          description: Distance in meters in the zone
-      description: Speed zone information
+          example: wp9DQ9ln
+          description: Player training session id
   securitySchemes:
     OAuth2:
       type: oauth2
