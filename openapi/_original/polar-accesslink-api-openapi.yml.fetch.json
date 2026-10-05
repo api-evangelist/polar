@@ -1,0 +1,12 @@
+{
+ "url": "https://www.polar.com/accesslink-api/swagger.yaml",
+ "requested_url": "https://www.polar.com/accesslink-api/swagger.yaml",
+ "status": 200,
+ "content_type": "binary/octet-stream",
+ "bytes": 160007,
+ "sha256": "d778d116fde9aab7c3376a00f307e3a6ee87dd0c536058f45384e34d7757a412",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}
