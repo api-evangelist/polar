@@ -14,6 +14,189 @@ edges:
     property: components.schemas.OAuthProviders
     detected_by: detect-payment-method-edges.py
     detected: '2026-10-12'
+- partner_name: Terra
+  partner: terra-api
+  partner_match: aggregator
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: system-coverage
+  evidence: https://docs.tryterra.co/reference/health-and-fitness-api/supported-integrations
+  category: health data source
+  contract_reference:
+    list: Terra supported integrations (docs.tryterra.co)
+    spec_file: null
+    listed_name: Polar
+    listed_id: POLAR
+    listed_names:
+    - Polar
+    matched_domain: polaraccesslink.com
+    matched_by: domain+verified
+    signal_note: delivery mode / access model / table section are context, never counted
+    detected_by: sweep-health-wellness.py
+    detected: '2026-10-15'
+    delivery_mode:
+    - Event-Driven
+    developer_access:
+    - Managed
+  detected_by: sweep-health-wellness.py
+  first_seen: '2026-10-15'
+- partner_name: Junction (Vital)
+  partner: vital-io
+  partner_match: aggregator
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: system-coverage
+  evidence: https://docs.junction.com/wearables/providers/introduction
+  category: health data source
+  contract_reference:
+    list: Junction (Vital) supported providers (docs.junction.com)
+    spec_file: null
+    listed_name: Polar
+    listed_id: polar
+    listed_names:
+    - Polar
+    matched_domain: polar.com
+    matched_by: domain
+    signal_note: delivery mode / access model / table section are context, never counted
+    detected_by: sweep-health-wellness.py
+    detected: '2026-10-15'
+    table_section:
+    - oauth
+  detected_by: sweep-health-wellness.py
+  first_seen: '2026-10-15'
+- partner_name: MyFitnessPal
+  app: MyFitnessPal
+  partner: myfitnesspal
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.polar.com/en/compatible-apps
+  category: Polar AccessLink compatible app
+  partner_url: https://www.myfitnesspal.com/
+  contract_reference:
+    register: Polar compatible apps (polar.com/en/compatible-apps; AccessLink clients)
+    spec_file: null
+    role: accesslink-partner-app
+    registered_name: MyFitnessPal
+    matched_domain: myfitnesspal.com
+    matched_by: domain
+    detected_by: sweep-health-wellness.py
+    detected: '2026-10-15'
+  detected_by: sweep-health-wellness.py
+  detected: '2026-10-15'
+- partner_name: Strava
+  app: Strava
+  partner: strava
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.polar.com/en/compatible-apps
+  category: Polar AccessLink compatible app
+  partner_url: https://www.strava.com/
+  contract_reference:
+    register: Polar compatible apps (polar.com/en/compatible-apps; AccessLink clients)
+    spec_file: null
+    role: accesslink-partner-app
+    registered_name: Strava
+    matched_domain: strava.com
+    matched_by: domain
+    detected_by: sweep-health-wellness.py
+    detected: '2026-10-15'
+  detected_by: sweep-health-wellness.py
+  detected: '2026-10-15'
+- partner_name: TrainingPeaks
+  app: TrainingPeaks
+  partner: trainingpeaks
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.polar.com/en/compatible-apps
+  category: Polar AccessLink compatible app
+  partner_url: https://www.trainingpeaks.com/
+  contract_reference:
+    register: Polar compatible apps (polar.com/en/compatible-apps; AccessLink clients)
+    spec_file: null
+    role: accesslink-partner-app
+    registered_name: TrainingPeaks
+    matched_domain: trainingpeaks.com
+    matched_by: domain
+    detected_by: sweep-health-wellness.py
+    detected: '2026-10-15'
+  detected_by: sweep-health-wellness.py
+  detected: '2026-10-15'
+- partner_name: Tredict
+  app: Tredict
+  partner: tredict
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.polar.com/en/compatible-apps
+  category: Polar AccessLink compatible app
+  partner_url: https://www.tredict.com
+  contract_reference:
+    register: Polar compatible apps (polar.com/en/compatible-apps; AccessLink clients)
+    spec_file: null
+    role: accesslink-partner-app
+    registered_name: Tredict
+    matched_domain: tredict.com
+    matched_by: domain
+    detected_by: sweep-health-wellness.py
+    detected: '2026-10-15'
+  detected_by: sweep-health-wellness.py
+  detected: '2026-10-15'
+- partner_name: YAZIO - Calorie Counter
+  app: YAZIO - Calorie Counter
+  partner: yazio
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://www.polar.com/en/compatible-apps
+  category: Polar AccessLink compatible app
+  partner_url: https://www.yazio.com
+  contract_reference:
+    register: Polar compatible apps (polar.com/en/compatible-apps; AccessLink clients)
+    spec_file: null
+    role: accesslink-partner-app
+    registered_name: YAZIO - Calorie Counter
+    matched_domain: yazio.com
+    matched_by: domain
+    detected_by: sweep-health-wellness.py
+    detected: '2026-10-15'
+  detected_by: sweep-health-wellness.py
+  detected: '2026-10-15'
 generated: '2026-10-12'
 method: searched
-checked: []
+checked:
+- https://docs.junction.com/wearables/providers/introduction
+- https://docs.tryterra.co/reference/health-and-fitness-api/supported-integrations
+- https://www.polar.com/en/compatible-apps
+marketplace_apps:
+- marketplace: own
+  channel: partner-built
+  app: polar
+  url: https://www.polar.com/en/compatible-apps
+  app_count: 69
+  adapter: sweep-health-wellness.py:polar
+  listed: 5
+  note: only domain-linked publishers are written
+source:
+- https://docs.junction.com/wearables/providers/introduction
+- https://docs.tryterra.co/reference/health-and-fitness-api/supported-integrations
+- https://www.polar.com/en/compatible-apps
