@@ -177,30 +177,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    cardio-load-levels:
-      description: Cardio load levels indicate how hard a training session was compared to your session average from the past 90 days.
-      type: object
-      properties:
-        very_low:
-          type: number
-          format: float
-          example: 0.1
-        low:
-          type: number
-          format: float
-          example: 0.1
-        medium:
-          type: number
-          format: float
-          example: 0.1
-        high:
-          type: number
-          format: float
-          example: 0.1
-        very-high:
-          type: number
-          format: float
-          example: 0.1
     cardio-load:
       description: Cardio load model.
       properties:
@@ -233,6 +209,30 @@ components:
           description: Ratio between strain and tolerance.
         cardio_load_level:
           $ref: '#/components/schemas/cardio-load-levels'
+    cardio-load-levels:
+      description: Cardio load levels indicate how hard a training session was compared to your session average from the past 90 days.
+      type: object
+      properties:
+        very_low:
+          type: number
+          format: float
+          example: 0.1
+        low:
+          type: number
+          format: float
+          example: 0.1
+        medium:
+          type: number
+          format: float
+          example: 0.1
+        high:
+          type: number
+          format: float
+          example: 0.1
+        very-high:
+          type: number
+          format: float
+          example: 0.1
     cardio-load-status-enum:
       description: Text representation of cardio load status.
       type: string

@@ -160,41 +160,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    alertness-hourly-data:
-      type: object
-      properties:
-        validity:
-          type: string
-          example: VALIDITY_ESTIMATE
-          description: Validity
-          enum:
-          - VALIDITY_UNKNOWN
-          - VALIDITY_RESET
-          - VALIDITY_NOT_VALID
-          - VALIDITY_ESTIMATE
-          - VALIDITY_VALID
-        alertness_level:
-          type: string
-          example: ALERTNESS_LEVEL_VERY_HIGH
-          description: Alertness level
-          enum:
-          - ALERTNESS_LEVEL_UNKNOWN
-          - ALERTNESS_LEVEL_MINIMAL
-          - ALERTNESS_LEVEL_VERY_LOW
-          - ALERTNESS_LEVEL_LOW
-          - ALERTNESS_LEVEL_HIGH
-          - ALERTNESS_LEVEL_VERY_HIGH
-        start_time:
-          type: string
-          format: date-time
-          description: Alertness period start time (UTC)
-          example: '2022-11-21T04:00:00'
-        end_time:
-          type: string
-          format: date-time
-          description: Alertness period end time (UTC)
-          example: '2022-11-21T05:00:00'
-      description: Hourly data for the alertness period
     alertness:
       type: object
       properties:
@@ -313,6 +278,41 @@ components:
           alertness_level: ALERTNESS_LEVEL_LOW
           start_time: '2022-11-21T04:12:00'
           end_time: '2022-11-21T05:00:00'
+    alertness-hourly-data:
+      type: object
+      properties:
+        validity:
+          type: string
+          example: VALIDITY_ESTIMATE
+          description: Validity
+          enum:
+          - VALIDITY_UNKNOWN
+          - VALIDITY_RESET
+          - VALIDITY_NOT_VALID
+          - VALIDITY_ESTIMATE
+          - VALIDITY_VALID
+        alertness_level:
+          type: string
+          example: ALERTNESS_LEVEL_VERY_HIGH
+          description: Alertness level
+          enum:
+          - ALERTNESS_LEVEL_UNKNOWN
+          - ALERTNESS_LEVEL_MINIMAL
+          - ALERTNESS_LEVEL_VERY_LOW
+          - ALERTNESS_LEVEL_LOW
+          - ALERTNESS_LEVEL_HIGH
+          - ALERTNESS_LEVEL_VERY_HIGH
+        start_time:
+          type: string
+          format: date-time
+          description: Alertness period start time (UTC)
+          example: '2022-11-21T04:00:00'
+        end_time:
+          type: string
+          format: date-time
+          description: Alertness period end time (UTC)
+          example: '2022-11-21T05:00:00'
+      description: Hourly data for the alertness period
     circadian-bedtime:
       type: object
       properties:

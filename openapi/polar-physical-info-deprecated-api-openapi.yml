@@ -190,6 +190,22 @@ components:
       description: Physical information transaction container
       xml:
         name: physical-informations
+    transaction-location:
+      type: object
+      properties:
+        transaction-id:
+          type: integer
+          format: int64
+          example: 122
+          description: Id of the created transaction
+        resource-uri:
+          type: string
+          format: uri
+          example: https://polaraccesslink.com/v3/users/21/physical-information-transactions/32
+          description: Absolute links to the created transaction
+      description: Contains absolute link to the created transaction.
+      xml:
+        name: transaction-location
     physical-information:
       type: object
       properties:
@@ -262,22 +278,6 @@ components:
       description: User's physical information
       xml:
         name: physical-information
-    transaction-location:
-      type: object
-      properties:
-        transaction-id:
-          type: integer
-          format: int64
-          example: 122
-          description: Id of the created transaction
-        resource-uri:
-          type: string
-          format: uri
-          example: https://polaraccesslink.com/v3/users/21/physical-information-transactions/32
-          description: Absolute links to the created transaction
-      description: Contains absolute link to the created transaction.
-      xml:
-        name: transaction-location
   securitySchemes:
     Basic:
       type: http

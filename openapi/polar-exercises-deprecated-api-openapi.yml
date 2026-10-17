@@ -436,31 +436,17 @@ paths:
         - accesslink.read_all
 components:
   schemas:
-    zone:
+    zones:
       type: object
       properties:
-        index:
-          type: integer
-          format: int32
-          example: 1
-          description: Zone list index
-        lower-limit:
-          type: integer
-          format: int32
-          example: 110
-          description: Lower heart-rate boundary of the zone
-        upper-limit:
-          type: integer
-          format: int32
-          example: 130
-          description: Upper heart-rate boundary of the zone
-        in-zone:
-          type: string
-          example: PT4S
-          description: Time duration spent in the zone ISO 8601
-      description: Heart-rate zone information
+        zone:
+          type: array
+          description: List of heart rate zones.
+          items:
+            $ref: '#/components/schemas/zone'
+      description: List containing the times (in zone) in different heart rate zones (i.e. Heart rate between lower and upper values). Zone is null if no zone information available.
       xml:
-        name: zone
+        name: zones
     samples:
       type: object
       properties:
@@ -477,35 +463,42 @@ components:
       description: List of URIs pointing to single sample type data.
       xml:
         name: samples
-    training-load-pro-rpe-enum:
-      description: Quantifies internal training load of a session.
-      type: string
-      enum:
-      - UNKNOWN
-      - RPE_NONE
-      - RPE_EASY
-      - RPE_LIGHT
-      - RPE_FAIRLY_BRISK
-      - RPE_BRISK
-      - RPE_MODERATE
-      - RPE_FAIRLY_HARD
-      - RPE_HARD
-      - RPE_EXHAUSTING
-      - RPE_EXTREME
-    HeartRate:
+    sample:
       type: object
       properties:
-        average:
+        recording-rate:
           type: integer
           format: int32
-          example: 129
-          description: Average heart-rate
-        maximum:
+          example: 5
+          description: Sample recording rate in seconds. Null when recording rate is not applicable - currently only with RR-data.
+        sample-type:
+          type: string
+          format: byte
+          example: '1'
+          description: Sample type
+        data:
+          type: string
+          example: 0,100,102,97,97,101,103,106,96,89,88,87,98,108,113,112,114,115,118,121,121,121,121,123,117,119,122
+          description: Sample values as a comma-separated list of strings. Can contain null -values which indicate a situation where sensor was offline.
+      description: Training session sample data
+      xml:
+        name: sample
+    transaction-location:
+      type: object
+      properties:
+        transaction-id:
           type: integer
-          format: int32
-          example: 147
-          description: Maximum heart-rate
-      description: Heart-rate statistics information
+          format: int64
+          example: 122
+          description: Id of the created transaction
+        resource-uri:
+          type: string
+          format: uri
+          example: https://polaraccesslink.com/v3/users/21/physical-information-transactions/32
+          description: Absolute links to the created transaction
+      description: Contains absolute link to the created transaction.
+      xml:
+        name: transaction-location
     exercise:
       type: object
       properties:
@@ -619,67 +612,35 @@ components:
       description: Training session summary data
       xml:
         name: exercise
-    exercises:
+    training-load-pro-rpe-enum:
+      description: Quantifies internal training load of a session.
+      type: string
+      enum:
+      - UNKNOWN
+      - RPE_NONE
+      - RPE_EASY
+      - RPE_LIGHT
+      - RPE_FAIRLY_BRISK
+      - RPE_BRISK
+      - RPE_MODERATE
+      - RPE_FAIRLY_HARD
+      - RPE_HARD
+      - RPE_EXHAUSTING
+      - RPE_EXTREME
+    HeartRate:
       type: object
       properties:
-        exercises:
-          type: array
-          description: Absolute links to individual exercises within the transaction
-          items:
-            type: string
-          example:
-          - https://www.polaraccesslink.com/v3/users/12/exercise-transactions/34/exercises/56
-          - https://www.polaraccesslink.com/v3/users/12/exercise-transactions/34/exercises/120
-      description: Exercise transaction container
-      xml:
-        name: exercises
-    sample:
-      type: object
-      properties:
-        recording-rate:
+        average:
           type: integer
           format: int32
-          example: 5
-          description: Sample recording rate in seconds. Null when recording rate is not applicable - currently only with RR-data.
-        sample-type:
-          type: string
-          format: byte
-          example: '1'
-          description: Sample type
-        data:
-          type: string
-          example: 0,100,102,97,97,101,103,106,96,89,88,87,98,108,113,112,114,115,118,121,121,121,121,123,117,119,122
-          description: Sample values as a comma-separated list of strings. Can contain null -values which indicate a situation where sensor was offline.
-      description: Training session sample data
-      xml:
-        name: sample
-    transaction-location:
-      type: object
-      properties:
-        transaction-id:
+          example: 129
+          description: Average heart-rate
+        maximum:
           type: integer
-          format: int64
-          example: 122
-          description: Id of the created transaction
-        resource-uri:
-          type: string
-          format: uri
-          example: https://polaraccesslink.com/v3/users/21/physical-information-transactions/32
-          description: Absolute links to the created transaction
-      description: Contains absolute link to the created transaction.
-      xml:
-        name: transaction-location
-    zones:
-      type: object
-      properties:
-        zone:
-          type: array
-          description: List of heart rate zones.
-          items:
-            $ref: '#/components/schemas/zone'
-      description: List containing the times (in zone) in different heart rate zones (i.e. Heart rate between lower and upper values). Zone is null if no zone information available.
-      xml:
-        name: zones
+          format: int32
+          example: 147
+          description: Maximum heart-rate
+      description: Heart-rate statistics information
     training-load-pro-sample:
       type: object
       properties:
@@ -711,6 +672,31 @@ components:
           $ref: '#/components/schemas/training-load-pro-load-enum'
         user-rpe:
           $ref: '#/components/schemas/training-load-pro-rpe-enum'
+    zone:
+      type: object
+      properties:
+        index:
+          type: integer
+          format: int32
+          example: 1
+          description: Zone list index
+        lower-limit:
+          type: integer
+          format: int32
+          example: 110
+          description: Lower heart-rate boundary of the zone
+        upper-limit:
+          type: integer
+          format: int32
+          example: 130
+          description: Upper heart-rate boundary of the zone
+        in-zone:
+          type: string
+          example: PT4S
+          description: Time duration spent in the zone ISO 8601
+      description: Heart-rate zone information
+      xml:
+        name: zone
     training-load-pro-load-enum:
       type: string
       enum:
@@ -721,6 +707,20 @@ components:
       - HIGH
       - VERY_HIGH
       - NOT_AVAILABLE
+    exercises:
+      type: object
+      properties:
+        exercises:
+          type: array
+          description: Absolute links to individual exercises within the transaction
+          items:
+            type: string
+          example:
+          - https://www.polaraccesslink.com/v3/users/12/exercise-transactions/34/exercises/56
+          - https://www.polaraccesslink.com/v3/users/12/exercise-transactions/34/exercises/120
+      description: Exercise transaction container
+      xml:
+        name: exercises
   securitySchemes:
     Basic:
       type: http

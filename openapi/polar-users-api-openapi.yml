@@ -133,18 +133,6 @@ components:
             attribute: true
           description: Name of the extra info asked from customer
       description: User's answers to the custom extra-info fields requested by partners
-    register:
-      type: object
-      required:
-      - member-id
-      properties:
-        member-id:
-          type: string
-          example: User_id_999
-          description: Partner's custom identifier for user.
-      description: Model for registering user to partner.
-      xml:
-        name: register
     user:
       type: object
       properties:
@@ -204,6 +192,18 @@ components:
       description: User's basic information
       xml:
         name: user
+    register:
+      type: object
+      required:
+      - member-id
+      properties:
+        member-id:
+          type: string
+          example: User_id_999
+          description: Partner's custom identifier for user.
+      description: Model for registering user to partner.
+      xml:
+        name: register
   securitySchemes:
     Basic:
       type: http
