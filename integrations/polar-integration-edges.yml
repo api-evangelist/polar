@@ -181,12 +181,63 @@ edges:
     detected: '2026-10-15'
   detected_by: sweep-health-wellness.py
   detected: '2026-10-15'
+- partner_name: FIFA Quality Programme
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://inside.fifa.com/innovation/standards/epts
+  category: FIFA Quality Programme certification (football technology and equipment)
+  contract_reference:
+    register: 'FIFA Quality Programme resource hub (inside.fifa.com/innovation/standards: certified products + licensed
+      providers, the page''s own /api/resource-hub endpoints)'
+    standard: FIFA Quality Programme
+    spec_file: null
+    role: fifa-certified-provider
+    registered_name: Polar Electro Oy
+    register_country: Finland
+    matched_domain: polar.com
+    matched_by: domain
+    licences: []
+    signal_note: certified_products = one entry per FIFA product type (tested by an accredited institute against
+      a FIFA test manual), never per product or ball model; quality levels, test manuals and authorisation numbers
+      are context, never counted
+    detected_by: sweep-football-sports-data-fifa.py
+    detected: '2026-10-21'
+    certified_products:
+    - product: EPTS wearable system
+      product_type: EPTS wearable system
+      programme: Electronic Performance and Tracking Systems (EPTS)
+      lapsed: false
+      certified_until: '2027-10-22'
+      quality_levels:
+      - FIFA Basic
+      test_manuals:
+      - TM EPTS Impact test | 2018
+      test_institutes:
+      - Sports Labs Ltd.
+      authorisation_numbers:
+      - '1003769'
+    identity: wikidata Q1500857 'Polar Electro' P856 https://www.polar.com/
+    identity_source: wikidata P856 (labelled provenance step; Kin 2026-10-15 decision 1)
+  detected_by: sweep-football-sports-data-fifa.py
+  first_seen: '2026-10-21'
 generated: '2026-10-12'
 method: searched
 checked:
 - https://docs.junction.com/wearables/providers/introduction
 - https://docs.tryterra.co/reference/health-and-fitness-api/supported-integrations
 - https://www.polar.com/en/compatible-apps
+- https://imgarena.com/partners/
+- https://inside.fifa.com/innovation/standards/epts
+- https://inside.fifa.com/innovation/standards/football-turf
+- https://inside.fifa.com/innovation/standards/footballs
+- https://inside.fifa.com/innovation/standards/goal-line-technology
+- https://inside.fifa.com/innovation/standards/video-assistant-referee
+- https://inside.fifa.com/innovation/standards/virtual-offside-lines
+- https://sportradar.com/partners/
 marketplace_apps:
 - marketplace: own
   channel: partner-built
