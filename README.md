@@ -1,4 +1,4 @@
-# Polar (polar)
+# Polar
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,146 +66,153 @@
 
 Polar Electro Oy (operating as Polar Global) is a Finnish sports and fitness technology company founded in 1977 and headquartered in Kempele, Finland. Polar invented the first wireless wearable heart rate monitor — the Sport Tester PE 2000 in 1982 — and remains one of the longest-standing brands in consumer heart rate sensing, GPS sports watches, and fitness wearables. The Polar device portfolio includes the H10 and H9 chest straps, the Verity Sense and OH1 optical sensors, the Polar 360 and Loop fitness bands, and the Vantage, Grit X, Pacer, Ignite, and Unite watch lines, along with a dedicated equine sensor line. Developers access Polar data through the Polar AccessLink API for consumer Polar Flow data, the Polar TeamPro API for team and player training sessions, and the open-source Polar BLE SDK for iOS and Android applications that stream live sensor data over Bluetooth Low Energy.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/polar/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/polar/refs/heads/main/apis.yml)
+**Areas:** Fitness · Health · Wearables · Heart Rate · Sports · Training · Sleep · Activity Tracking · Sensors · Bluetooth · Wellness
 
-## Scope
+## Polar on APIs.io
 
-- **Position:** Providing
-- **Access:** 3rd-Party
+Everything profiled for Polar is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/polar/](https://apis.io/providers/polar/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (19)
 
-- Fitness
-- Health
-- Wearables
-- Heart Rate
-- Sports
-- Training
-- Sleep
-- Activity Tracking
-- Sensors
-- Bluetooth
+- [Polar BLE SDK](https://apis.io/apis/polar/polar-ble-sdk/) — The Polar BLE SDK enables iOS and Android applications to stream live data from Polar sensors over Bluetooth Low Energy. Supports H10, H9, Verity Sense,…
+- [Polar Cardio load API](https://apis.io/apis/polar/polar-cardio-load-api/) — Cardio load is based on training impulse calculation (TRIMP), a commonly accepted and scientifically proven method to quantify training load. Your Cardio…
+- [Polar Continuous Heart Rate API](https://apis.io/apis/polar/polar-continuous-heart-rate-api/) — This resource allows partners to access their users' continuous heart rate data. Continuous heart rate is recorded with supported devices when the heart…
+- [Polar Daily activity API](https://apis.io/apis/polar/polar-daily-activity-api/) — This resource allows partners to access their users' daily activity data. Webhooks are used to notify partners when new data is available.
+- [Polar Daily activity (deprecated) API](https://apis.io/apis/polar/polar-daily-activity-deprecated-api/) — This resource allows partners to access their users' daily activity data. During the transfer, the activity data is copied also into the AccessLink database…
+- [Polar Elixir&trade; Biosensing API](https://apis.io/apis/polar/polar-elixir-trade-biosensing-api/) — This resource allows partners to access their users' Elixir&trade; Biosensing data. All time values are UTC times. Elixir&trade; Biosensing data consists of…
+- [Polar Exercises API](https://apis.io/apis/polar/polar-exercises-api/) — Resources for getting information about exercise. These endpoints do not require an active transaction, but they use hashed id.
+- [Polar Exercises (deprecated) API](https://apis.io/apis/polar/polar-exercises-deprecated-api/) — This resource allows partners to access their users' training data. All time values are UTC except start-time. Start-time is the time set on the training…
+- [Polar Nightly Recharge API](https://apis.io/apis/polar/polar-nightly-recharge-api/) — Nightly Recharge&trade; is a recovery measurement that shows how well your body recovers from daily training and stress. It is based on heart rate…
+- [Polar Physical info API](https://apis.io/apis/polar/polar-physical-info-api/) — This resource allows partners to access their users' physical information.
+- [Polar Physical info (deprecated) API](https://apis.io/apis/polar/polar-physical-info-deprecated-api/) — This resource allows partners to access their users' physical information. Whenever some user's physical information changes, new entry containing full…
+- [Polar Player training sessions API](https://apis.io/apis/polar/polar-player-training-sessions-api/) — Endpoints for getting players training session and details. <aside class='notice'> Only training sessions that are done during time the player has been…
+- [Polar Pull notifications API](https://apis.io/apis/polar/polar-pull-notifications-api/) — This resource allows partners to check if their users have available data for downloading. Use client credentials authentication. Returns object holding…
+- [Polar Sleep API](https://apis.io/apis/polar/polar-sleep-api/) — Sleep endpoints support [Polar Sleep Plus&trade;](https://www.polar.com/en/smart-coaching/polar-sleep-plus) and [Sleep Plus…
+- [Polar SleepWise&trade; API](https://apis.io/apis/polar/polar-sleepwise-trade-api/) — This resource allows partners to access their users' SleepWise&trade; data. All time values are UTC times. SleepWise&trade; data is calculated for…
+- [Polar Team API](https://apis.io/apis/polar/polar-team-api/) — Endpoints for getting teams and team details.
+- [Polar Team training sessions API](https://apis.io/apis/polar/polar-team-training-sessions-api/) — Endpoints for getting team training sessions and details.
+- [Polar Users API](https://apis.io/apis/polar/polar-users-api/) — This resource provides all the necessary functions to manage users.
+- [Polar Webhooks API](https://apis.io/apis/polar/polar-webhooks-api/) — Webhook resources provides endpoints for creating, modifying and deleting webhooks.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-25T00:00:00.000Z
-- **Modified:** 2026-05-30
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### GraphQL (1)
 
-### Polar AccessLink API
+GraphQL schemas.
 
-The Polar Open AccessLink API gives partners structured OAuth2-based access to Polar Flow user data — training sessions, daily activity, continuous heart rate, sleep, Nightly Recharge, Cardio Load, SleepWise alertness and circadian bedtime, Elixir biosensing (ECG, SpO2, skin and body temperature, skin contacts), exercise files in FIT/TCX/GPX format, and webhooks for real-time notifications when new user data is available. Operates against https://www.polaraccesslink.com/ with both transactional (data discarded after retrieval) and non-transactional endpoints.
+- [Moved to /providers/polar/](https://apis.io/graphqls/polar/polar-graphql/)
 
-- **Human URL:** [https://www.polar.com/accesslink-api/](https://www.polar.com/accesslink-api/)
-- **Base URL:** `https://www.polaraccesslink.com/`
+#### Agentic access (1)
 
-#### Tags
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- Fitness
-- Health
-- Heart Rate
-- Wearables
-- Training
-- Activity
-- Sleep
+- [Polar Agentic Access](https://apis.io/agentic-access/polar/polar-agentic-access/)
 
-#### Properties
+#### Collections (21)
 
+Postman and Open Collection request collections.
+
+- [Polar AccessLink API](https://apis.io/collections/polar/open-polar-accesslink-api/)
+- [Polar AccessLink Webhooks](https://apis.io/collections/polar/open-polar-accesslink-webhooks-asyncapi/)
+- [Polar AccessLink Cardio load API](https://apis.io/collections/polar/open-polar-cardio-load-api/)
+- [Polar AccessLink Cardio load Continuous Heart Rate API](https://apis.io/collections/polar/open-polar-continuous-heart-rate-api/)
+- [Polar AccessLink Cardio load Daily activity API](https://apis.io/collections/polar/open-polar-daily-activity-api/)
+- [Polar AccessLink Cardio load Daily activity (deprecated) API](https://apis.io/collections/polar/open-polar-daily-activity-deprecated-api/)
+- [Polar AccessLink Cardio load Elixir&trade; Biosensing API](https://apis.io/collections/polar/open-polar-elixir-trade-biosensing-api/)
+- [Polar AccessLink Cardio load Exercises API](https://apis.io/collections/polar/open-polar-exercises-api/)
+- [Polar AccessLink Cardio load Exercises (deprecated) API](https://apis.io/collections/polar/open-polar-exercises-deprecated-api/)
+- [Polar AccessLink Cardio load Nightly Recharge API](https://apis.io/collections/polar/open-polar-nightly-recharge-api/)
+- [Polar AccessLink Cardio load Physical info API](https://apis.io/collections/polar/open-polar-physical-info-api/)
+- [Polar AccessLink Cardio load Physical info (deprecated) API](https://apis.io/collections/polar/open-polar-physical-info-deprecated-api/)
+- [Polar AccessLink Cardio load Player training sessions API](https://apis.io/collections/polar/open-polar-player-training-sessions-api/)
+- [Polar AccessLink Cardio load Pull notifications API](https://apis.io/collections/polar/open-polar-pull-notifications-api/)
+- [Polar AccessLink Cardio load Sleep API](https://apis.io/collections/polar/open-polar-sleep-api/)
+- [Polar AccessLink Cardio load SleepWise&trade; API](https://apis.io/collections/polar/open-polar-sleepwise-trade-api/)
+- [Polar AccessLink Cardio load Team API](https://apis.io/collections/polar/open-polar-team-api/)
+- [Polar AccessLink Cardio load Team training sessions API](https://apis.io/collections/polar/open-polar-team-training-sessions-api/)
+- [TeamPro API](https://apis.io/collections/polar/open-polar-teampro-api/)
+- [Polar AccessLink Cardio load Users API](https://apis.io/collections/polar/open-polar-users-api/)
+- [Polar AccessLink Cardio load Webhooks API](https://apis.io/collections/polar/open-polar-webhooks-api/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Polar Authentication](https://apis.io/security/polar/polar-authentication/)
+- [Polar Domain Security](https://apis.io/security/polar/polar-domain-security/)
+- [Polar Vulnerability Disclosure](https://apis.io/security/polar/polar-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Polar Scopes](https://apis.io/scopes/polar/polar-scopes/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.polar.com/)
 - [Documentation](https://www.polar.com/accesslink-api/)
-- [OpenAPI](https://www.polar.com/accesslink-api/swagger.yaml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/polar-accesslink-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/polar-accesslink-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/polar-accesslink-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [AsyncAPI](openapi/polar-accesslink-webhooks-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [Portal](https://admin.polaraccesslink.com/)
-- [Code Examples](https://github.com/polarofficial/accesslink-example-python)
-- [Terms of Service](https://www.polar.com/en/legal/polar-api-agreement)
-
-### Polar TeamPro API
-
-The Polar TeamPro API exposes team and player training data captured by the Polar Team Pro system. Endpoints return teams, sport profiles, team and player training sessions with date-range filters, detailed per-session metrics (heart rate, speed, power, acceleration), session summaries and phase summaries. OAuth2 authorization-code flow with the team_read scope. Rate limited to 1 request/second with a 100-request burst allowance.
-
-- **Human URL:** [https://www.polar.com/teampro-api/](https://www.polar.com/teampro-api/)
-- **Base URL:** `https://teampro.api.polar.com/`
-
-#### Tags
-
-- Fitness
-- Health
-- Sports
-- Teams
-- Training
-- Coaching
-
-#### Properties
-
-- [Documentation](https://www.polar.com/teampro-api/)
-- [OpenAPI](https://www.polar.com/teampro-api/swagger.yaml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [OpenAPI](openapi/polar-teampro-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/polar-teampro-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/polar-teampro-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Portal](https://admin.polaraccesslink.com/)
-- [Terms of Service](https://www.polar.com/en/legal/polar-api-agreement)
-
-### Polar BLE SDK
-
-The Polar BLE SDK enables iOS and Android applications to stream live data from Polar sensors over Bluetooth Low Energy. Supports H10, H9, Verity Sense, OH1, Ignite 3, Polar 360/Loop, Vantage V3, Vantage M3, Grit X2 Pro, Grit X2, Pacer Pro, and Pacer. Streams heart rate, ECG, accelerometer, PPG, gyroscope, magnetometer, and PPI data. iOS 14.0+ (Swift) and Android minSdk 24 (Kotlin/Java) with RxJava/RxSwift for asynchronous operations.
-
-- **Human URL:** [https://github.com/polarofficial/polar-ble-sdk](https://github.com/polarofficial/polar-ble-sdk)
-
-#### Tags
-
-- BLE
-- Bluetooth
-- SDK
-- Heart Rate
-- ECG
-- Sensors
-- Wearables
-
-#### Properties
-
-- [Repository](https://github.com/polarofficial/polar-ble-sdk)
-- [Documentation](https://www.polar.com/en/business/sdk)
-- [SDK](https://github.com/polarofficial/polar-ble-sdk)
-- [Code Examples](https://github.com/polarofficial/create-mobile-app-for-polar-sensors)
-- [Postman Collection](collections/polar-accesslink-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/polar-accesslink-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/polar-teampro-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/polar-teampro-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [Portal](https://www.polar.com/en)
-- [Portal](https://www.polar.com/en/developers)
-- [Portal](https://www.polar.com/en/business/api)
-- [Documentation](https://www.polar.com/accesslink-api/)
-- [Documentation](https://www.polar.com/teampro-api/)
-- [Sign Up](https://admin.polaraccesslink.com/)
-- [SDK](https://www.polar.com/en/business/sdk)
-- [GitHub Organization](https://github.com/polarofficial)
-- [SDK](https://github.com/polarofficial/polar-ble-sdk)
-- [Code Examples](https://github.com/polarofficial/accesslink-example-python)
-- [Code Examples](https://github.com/polarofficial/create-mobile-app-for-polar-sensors)
-- [Portal](https://flow.polar.com/)
 - [Support](https://support.polar.com/en)
-- [Documentation](https://www.polar.com/en/compatible-apps)
-- [Partners](https://www.polar.com/en/science/collaborate-with-us)
-- [Terms of Service](https://www.polar.com/en/legal/polar-api-agreement)
-- [Privacy Policy](https://www.polar.com/en/legal/privacy-notice)
-- [Terms of Service](https://www.polar.com/en/legal)
-- [LinkedIn](https://www.linkedin.com/company/polar-electro)
-- [Twitter](https://twitter.com/PolarGlobal)
-- [YouTube](https://www.youtube.com/user/PolarGlobalOfficial)
-- [Facebook](https://www.facebook.com/polarglobal)
-- [Instagram](https://www.instagram.com/polarglobal/)
 - [Blog](https://www.polar.com/blog/)
-- [Documentation](https://www.polar.com/en/products)
-- [Features](undefined)
+- [Terms of service](https://www.polar.com/en/legal/polar-api-agreement)
+- [Privacy policy](https://www.polar.com/en/legal/privacy-notice)
+- [GitHub](https://github.com/polarofficial)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** info@apievangelist.com
-**URL:** https://apievangelist.com
+**Kin Score 39.7** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 57.1 |
+| Contract quality | 54.3 |
+| Contract governance | 0.0 |
+| Operational transparency | 15.8 |
+| Developer ergonomics | 45.2 |
+| Access clarity | 34.2 |
+
+**Agent readiness 31.0** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | negotiable (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | documented (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 33.6** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/polar/](https://apis.io/providers/polar/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Polar: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/polar/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
